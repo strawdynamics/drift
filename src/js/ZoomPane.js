@@ -15,9 +15,12 @@ export default class ZoomPane {
       inline = throwIfMissing(),
       namespace = null,
       contain = throwIfMissing(),
+      containInline = throwIfMissing(),
+      inlineOffsetX = 0,
+      inlineOffsetY = 0,
     } = options;
 
-    this.settings = { container, zoomFactor, inline, namespace, contain };
+    this.settings = { container, zoomFactor, inline, namespace, contain, containInline, inlineOffsetX, inlineOffsetY };
     this.settings.inlineContainer = document.body;
 
     this.openClasses = this._buildClasses('open');
@@ -65,8 +68,26 @@ export default class ZoomPane {
     let maxTop = -(this.imgEl.clientHeight - this.el.clientHeight);
 
     if (this.el.parentElement === this.settings.inlineContainer) {
-      let inlineLeft = triggerRect.left + (percentageOffsetX * triggerWidth) - (this.el.clientWidth / 2);
-      let inlineTop = triggerRect.top + (percentageOffsetY * triggerHeight) - (this.el.clientHeight / 2);
+      let inlineLeft = triggerRect.left + (percentageOffsetX * triggerWidth)
+        - (this.el.clientWidth / 2) + this.settings.inlineOffsetX;
+      let inlineTop = triggerRect.top + (percentageOffsetY * triggerHeight)
+        - (this.el.clientHeight / 2) + this.settings.inlineOffsetY;
+
+      if (this.settings.containInline) {
+        let elRect = this.el.getBoundingClientRect();
+
+        if (inlineLeft < triggerRect.left) {
+          inlineLeft = triggerRect.left;
+        } else if (inlineLeft + this.el.clientWidth > triggerRect.left + triggerWidth) {
+          inlineLeft = triggerRect.left + triggerWidth - this.el.clientWidth;
+        }
+
+        if (inlineTop < triggerRect.top) {
+          inlineTop = triggerRect.top;
+        } else if (inlineTop + this.el.clientHeight > triggerRect.top + triggerHeight) {
+          inlineTop = triggerRect.top + triggerHeight - this.el.clientHeight;
+        }
+      }
 
       this.el.style.left = `${inlineLeft}px`;
       this.el.style.top = `${inlineTop}px`;

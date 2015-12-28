@@ -60,6 +60,18 @@ var Drift = (function () {
     var
     // Whether the ZoomPane should show whitespace when near the edges.
     contain = _options$contain === undefined ? true : _options$contain;
+    var _options$containInlin = options.containInline;
+    var
+    // Whether the inline ZoomPane should stay inside
+    // the bounds of its image.
+    containInline = _options$containInlin === undefined ? false : _options$containInlin;
+    var _options$inlineOffset = options.inlineOffsetX;
+    var
+    // How much to offset the ZoomPane from the
+    // interaction point when inline.
+    inlineOffsetX = _options$inlineOffset === undefined ? 0 : _options$inlineOffset;
+    var _options$inlineOffset2 = options.inlineOffsetY;
+    var inlineOffsetY = _options$inlineOffset2 === undefined ? 0 : _options$inlineOffset2;
     var _options$sourceAttrib = options.sourceAttribute;
     var
     // Which trigger attribute to pull the ZoomPane image source from.
@@ -105,7 +117,7 @@ var Drift = (function () {
       throw new TypeError('`paneContainer` must be a DOM element when `inlinePane !== true`');
     }
 
-    this.settings = { namespace: namespace, contain: contain, sourceAttribute: sourceAttribute, zoomFactor: zoomFactor, paneContainer: paneContainer, inlinePane: inlinePane, handleTouch: handleTouch, onShow: onShow, onHide: onHide, injectBaseStyles: injectBaseStyles };
+    this.settings = { namespace: namespace, contain: contain, containInline: containInline, inlineOffsetX: inlineOffsetX, inlineOffsetY: inlineOffsetY, sourceAttribute: sourceAttribute, zoomFactor: zoomFactor, paneContainer: paneContainer, inlinePane: inlinePane, handleTouch: handleTouch, onShow: onShow, onHide: onHide, injectBaseStyles: injectBaseStyles };
 
     if (this.settings.injectBaseStyles) {
       (0, _injectBaseStylesheet2.default)();
@@ -123,8 +135,11 @@ var Drift = (function () {
         container: this.settings.paneContainer,
         zoomFactor: this.settings.zoomFactor,
         contain: this.settings.contain,
+        containInline: this.settings.containInline,
         inline: this.settings.inlinePane,
-        namespace: this.settings.namespace
+        namespace: this.settings.namespace,
+        inlineOffsetX: this.settings.inlineOffsetX,
+        inlineOffsetY: this.settings.inlineOffsetY
       });
     }
   }, {
@@ -370,8 +385,14 @@ var ZoomPane = (function () {
     var namespace = _options$namespace === undefined ? null : _options$namespace;
     var _options$contain = options.contain;
     var contain = _options$contain === undefined ? (0, _throwIfMissing2.default)() : _options$contain;
+    var _options$containInlin = options.containInline;
+    var containInline = _options$containInlin === undefined ? (0, _throwIfMissing2.default)() : _options$containInlin;
+    var _options$inlineOffset = options.inlineOffsetX;
+    var inlineOffsetX = _options$inlineOffset === undefined ? 0 : _options$inlineOffset;
+    var _options$inlineOffset2 = options.inlineOffsetY;
+    var inlineOffsetY = _options$inlineOffset2 === undefined ? 0 : _options$inlineOffset2;
 
-    this.settings = { container: container, zoomFactor: zoomFactor, inline: inline, namespace: namespace, contain: contain };
+    this.settings = { container: container, zoomFactor: zoomFactor, inline: inline, namespace: namespace, contain: contain, containInline: containInline, inlineOffsetX: inlineOffsetX, inlineOffsetY: inlineOffsetY };
     this.settings.inlineContainer = document.body;
 
     this.openClasses = this._buildClasses('open');
@@ -426,8 +447,24 @@ var ZoomPane = (function () {
       var maxTop = -(this.imgEl.clientHeight - this.el.clientHeight);
 
       if (this.el.parentElement === this.settings.inlineContainer) {
-        var inlineLeft = triggerRect.left + percentageOffsetX * triggerWidth - this.el.clientWidth / 2;
-        var inlineTop = triggerRect.top + percentageOffsetY * triggerHeight - this.el.clientHeight / 2;
+        var inlineLeft = triggerRect.left + percentageOffsetX * triggerWidth - this.el.clientWidth / 2 + this.settings.inlineOffsetX;
+        var inlineTop = triggerRect.top + percentageOffsetY * triggerHeight - this.el.clientHeight / 2 + this.settings.inlineOffsetY;
+
+        if (this.settings.containInline) {
+          var elRect = this.el.getBoundingClientRect();
+
+          if (inlineLeft < triggerRect.left) {
+            inlineLeft = triggerRect.left;
+          } else if (inlineLeft + this.el.clientWidth > triggerRect.left + triggerWidth) {
+            inlineLeft = triggerRect.left + triggerWidth - this.el.clientWidth;
+          }
+
+          if (inlineTop < triggerRect.top) {
+            inlineTop = triggerRect.top;
+          } else if (inlineTop + this.el.clientHeight > triggerRect.top + triggerHeight) {
+            inlineTop = triggerRect.top + triggerHeight - this.el.clientHeight;
+          }
+        }
 
         this.el.style.left = inlineLeft + 'px';
         this.el.style.top = inlineTop + 'px';

@@ -24,6 +24,13 @@ export default class Drift {
       namespace = null,
       // Whether the ZoomPane should show whitespace when near the edges.
       contain = true,
+      // Whether the inline ZoomPane should stay inside
+      // the bounds of its image.
+      containInline = false,
+      // How much to offset the ZoomPane from the
+      // interaction point when inline.
+      inlineOffsetX = 0,
+      inlineOffsetY = 0,
       // Which trigger attribute to pull the ZoomPane image source from.
       sourceAttribute = 'data-zoom',
       // How much to magnify the trigger by in the ZoomPane.
@@ -54,7 +61,7 @@ export default class Drift {
       throw new TypeError('`paneContainer` must be a DOM element when `inlinePane !== true`');
     }
 
-    this.settings = { namespace, contain, sourceAttribute, zoomFactor, paneContainer, inlinePane, handleTouch, onShow, onHide, injectBaseStyles };
+    this.settings = { namespace, contain, containInline, inlineOffsetX, inlineOffsetY, sourceAttribute, zoomFactor, paneContainer, inlinePane, handleTouch, onShow, onHide, injectBaseStyles };
 
     if (this.settings.injectBaseStyles) {
       injectBaseStylesheet();
@@ -83,8 +90,11 @@ export default class Drift {
       container: this.settings.paneContainer,
       zoomFactor: this.settings.zoomFactor,
       contain: this.settings.contain,
+      containInline: this.settings.containInline,
       inline: this.settings.inlinePane,
       namespace: this.settings.namespace,
+      inlineOffsetX: this.settings.inlineOffsetX,
+      inlineOffsetY: this.settings.inlineOffsetY,
     });
   }
 
