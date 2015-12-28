@@ -85,6 +85,10 @@ var Drift = (function () {
     var
     // The element to attach the inline ZoomPane to.
     inlineContainer = _options$inlineContai === undefined ? document.body : _options$inlineContai;
+    var _options$handleTouch = options.handleTouch;
+    var
+    // If `true`, touch events will trigger the zoom, like mouse events.
+    handleTouch = _options$handleTouch === undefined ? true : _options$handleTouch;
     var _options$onShow = options.onShow;
     var
     // If present (and a function), this will be called
@@ -105,7 +109,7 @@ var Drift = (function () {
       throw new TypeError('`paneContainer` must be a DOM element when `inlinePane !== true`');
     }
 
-    this.settings = { namespace: namespace, contain: contain, sourceAttribute: sourceAttribute, zoomFactor: zoomFactor, paneContainer: paneContainer, inlinePane: inlinePane, inlineContainer: inlineContainer, onShow: onShow, onHide: onHide, injectBaseStyles: injectBaseStyles };
+    this.settings = { namespace: namespace, contain: contain, sourceAttribute: sourceAttribute, zoomFactor: zoomFactor, paneContainer: paneContainer, inlinePane: inlinePane, inlineContainer: inlineContainer, handleTouch: handleTouch, onShow: onShow, onHide: onHide, injectBaseStyles: injectBaseStyles };
 
     if (this.settings.injectBaseStyles) {
       (0, _injectBaseStylesheet2.default)();
@@ -134,6 +138,7 @@ var Drift = (function () {
       this.trigger = new _Trigger2.default({
         el: this.triggerEl,
         zoomPane: this.zoomPane,
+        handleTouch: this.settings.handleTouch,
         onShow: this.settings.onShow,
         onHide: this.settings.onHide,
         sourceAttribute: this.settings.sourceAttribute
@@ -194,12 +199,14 @@ var Trigger = (function () {
     var zoomPane = _options$zoomPane === undefined ? (0, _throwIfMissing2.default)() : _options$zoomPane;
     var _options$sourceAttrib = options.sourceAttribute;
     var sourceAttribute = _options$sourceAttrib === undefined ? (0, _throwIfMissing2.default)() : _options$sourceAttrib;
+    var _options$handleTouch = options.handleTouch;
+    var handleTouch = _options$handleTouch === undefined ? (0, _throwIfMissing2.default)() : _options$handleTouch;
     var _options$onShow = options.onShow;
     var onShow = _options$onShow === undefined ? null : _options$onShow;
     var _options$onHide = options.onHide;
     var onHide = _options$onHide === undefined ? null : _options$onHide;
 
-    this.settings = { el: el, zoomPane: zoomPane, sourceAttribute: sourceAttribute, onShow: onShow, onHide: onHide };
+    this.settings = { el: el, zoomPane: zoomPane, sourceAttribute: sourceAttribute, handleTouch: handleTouch, onShow: onShow, onHide: onHide };
 
     this._bindEvents();
   }
@@ -209,14 +216,26 @@ var Trigger = (function () {
     value: function _bindEvents() {
       this.settings.el.addEventListener('mouseenter', this._show, false);
       this.settings.el.addEventListener('mouseleave', this._hide, false);
-
       this.settings.el.addEventListener('mousemove', this._handleMovement, false);
+
+      if (this.settings.handleTouch) {
+        this.settings.el.addEventListener('touchstart', this._show, false);
+        this.settings.el.addEventListener('touchend', this._hide, false);
+        this.settings.el.addEventListener('touchmove', this._handleMovement, false);
+      }
     }
   }, {
     key: '_unbindEvents',
     value: function _unbindEvents() {
       this.settings.el.removeEventListener('mouseenter', this._show, false);
       this.settings.el.removeEventListener('mouseleave', this._hide, false);
+      this.settings.el.removeEventListener('mousemove', this._handleMovement, false);
+
+      if (this.settings.handleTouch) {
+        this.settings.el.removeEventListener('touchstart', this._show, false);
+        this.settings.el.removeEventListener('touchend', this._hide, false);
+        this.settings.el.removeEventListener('touchmove', this._handleMovement, false);
+      }
     }
   }, {
     key: 'isShowing',
@@ -254,14 +273,28 @@ var _initialiseProps = function _initialiseProps() {
   };
 
   this._handleMovement = function (e) {
+    e.preventDefault();
+
     if (!_this.isShowing) {
       return;
     }
 
+    var movementX = undefined,
+        movementY = undefined;
+
+    if (e.touches) {
+      var firstTouch = e.touches[0];
+      movementX = firstTouch.clientX;
+      movementY = firstTouch.clientY;
+    } else {
+      movementX = e.clientX;
+      movementY = e.clientY;
+    }
+
     var el = _this.settings.el;
     var rect = el.getBoundingClientRect();
-    var offsetX = e.clientX - rect.left;
-    var offsetY = e.clientY - rect.top;
+    var offsetX = movementX - rect.left;
+    var offsetY = movementY - rect.top;
 
     var percentageOffsetX = offsetX / _this.settings.el.clientWidth;
     var percentageOffsetY = offsetY / _this.settings.el.clientHeight;
@@ -408,7 +441,7 @@ var ZoomPane = (function () {
         }
       }
 
-      this.imgEl.style.translate = left + 'px ' + top + 'px';
+      this.imgEl.style.transform = 'translate(' + left + 'px, ' + top + 'px)';
     }
   }, {
     key: 'show',

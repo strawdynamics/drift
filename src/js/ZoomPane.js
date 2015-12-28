@@ -77,9 +77,7 @@ export default class ZoomPane {
       }
     }
 
-    // console.log(left, top);
-
-    this.imgEl.style.translate = `${left}px ${top}px`;
+    this.imgEl.style.transform = `translate(${left}px, ${top}px)`;
   }
 
   get _isInline() {
