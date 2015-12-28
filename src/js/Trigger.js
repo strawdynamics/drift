@@ -5,18 +5,25 @@ export default class Trigger {
     let {
       el = throwIfMissing(),
       zoomPane = throwIfMissing(),
+      sourceAttribute = throwIfMissing(),
       onShow = null,
       onHide = null,
     } = options;
 
-    this.settings = { el, zoomPane, onShow, onHide };
+    this.settings = { el, zoomPane, sourceAttribute, onShow, onHide };
 
     this._bindEvents();
+  }
+
+  get isShowing() {
+    return this.settings.zoomPane.isShowing;
   }
 
   _bindEvents() {
     this.settings.el.addEventListener('mouseenter', this._show, false);
     this.settings.el.addEventListener('mouseleave', this._hide, false);
+
+    this.settings.el.addEventListener('mousemove', this._handleMovement, false);
   }
 
   _unbindEvents() {
@@ -25,7 +32,6 @@ export default class Trigger {
   }
 
   _show = (e) => {
-    console.log('triggershow');
     e.preventDefault();
 
     let onShow = this.settings.onShow
@@ -33,11 +39,12 @@ export default class Trigger {
       onShow();
     }
 
-    this.settings.zoomPane.show()
+    this.settings.zoomPane.show(
+      this.settings.el.getAttribute(this.settings.sourceAttribute)
+    );
   }
 
   _hide = (e) => {
-    console.log('triggerhide');
     e.preventDefault();
 
     let onHide = this.settings.onHide
@@ -46,5 +53,21 @@ export default class Trigger {
     }
 
     this.settings.zoomPane.hide()
+  }
+
+  _handleMovement = (e) => {
+    if (!this.isShowing) {
+      return;
+    }
+
+    let el = this.settings.el;
+    let rect = el.getBoundingClientRect()
+    let offsetX = e.clientX - rect.left;
+    let offsetY = e.clientY - rect.top;
+
+    let percentageOffsetX = offsetX / this.settings.el.clientWidth;
+    let percentageOffsetY = offsetY / this.settings.el.clientHeight;
+
+    this.settings.zoomPane.setImagePosition(percentageOffsetX, percentageOffsetY);
   }
 }

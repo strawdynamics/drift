@@ -56,10 +56,20 @@ var Drift = (function () {
     // result in classes such as `my-ns-pane`. Default `drift-`
     // prefixed classes will always be added as well.
     namespace = _options$namespace === undefined ? null : _options$namespace;
+    var _options$contain = options.contain;
+    var
+    // Whether the ZoomPane should allow whitespace when near the edges.
+    contain = _options$contain === undefined ? true : _options$contain;
     var _options$sourceAttrib = options.sourceAttribute;
     var
-    // Which attribute to pull the ZoomPane image source from.
+    // Which trigger attribute to pull the ZoomPane image source from.
     sourceAttribute = _options$sourceAttrib === undefined ? 'data-zoom' : _options$sourceAttrib;
+    var _options$zoomFactor = options.zoomFactor;
+    var
+    // How much to magnify the trigger by in the ZoomPane.
+    // (e.g., `zoomFactor = 3` will result in a 900 px wide ZoomPane image
+    // if the trigger is displayed at 300 px wide)
+    zoomFactor = _options$zoomFactor === undefined ? 3 : _options$zoomFactor;
     var _options$paneContaine = options.paneContainer;
     var
     // A DOM element to append the non-inline ZoomPane to.
@@ -95,7 +105,7 @@ var Drift = (function () {
       throw new TypeError('`paneContainer` must be a DOM element when `inlinePane !== true`');
     }
 
-    this.settings = { namespace: namespace, sourceAttribute: sourceAttribute, paneContainer: paneContainer, inlinePane: inlinePane, inlineContainer: inlineContainer, onShow: onShow, onHide: onHide, injectBaseStyles: injectBaseStyles };
+    this.settings = { namespace: namespace, contain: contain, sourceAttribute: sourceAttribute, zoomFactor: zoomFactor, paneContainer: paneContainer, inlinePane: inlinePane, inlineContainer: inlineContainer, onShow: onShow, onHide: onHide, injectBaseStyles: injectBaseStyles };
 
     if (this.settings.injectBaseStyles) {
       (0, _injectBaseStylesheet2.default)();
@@ -111,6 +121,8 @@ var Drift = (function () {
     value: function _buildZoomPane() {
       this.zoomPane = new _ZoomPane2.default({
         container: this.settings.paneContainer,
+        zoomFactor: this.settings.zoomFactor,
+        contain: this.settings.contain,
         inlineContainer: this.settings.inlineContainer,
         inline: this.settings.inlinePane,
         namespace: this.settings.namespace
@@ -123,13 +135,23 @@ var Drift = (function () {
         el: this.triggerEl,
         zoomPane: this.zoomPane,
         onShow: this.settings.onShow,
-        onHide: this.settings.onHide
+        onHide: this.settings.onHide,
+        sourceAttribute: this.settings.sourceAttribute
       });
     }
   }, {
     key: 'isShowing',
     get: function get() {
       return this.zoomPane.isShowing;
+    }
+  }, {
+    key: 'zoomFactor',
+    get: function get() {
+      return this.settings.zoomFactor;
+    },
+    set: function set(zf) {
+      this.settings.zoomFactor = zf;
+      this.zoomPane.settings.zoomFactor = zf;
     }
   }]);
 
@@ -170,12 +192,14 @@ var Trigger = (function () {
     var el = _options$el === undefined ? (0, _throwIfMissing2.default)() : _options$el;
     var _options$zoomPane = options.zoomPane;
     var zoomPane = _options$zoomPane === undefined ? (0, _throwIfMissing2.default)() : _options$zoomPane;
+    var _options$sourceAttrib = options.sourceAttribute;
+    var sourceAttribute = _options$sourceAttrib === undefined ? (0, _throwIfMissing2.default)() : _options$sourceAttrib;
     var _options$onShow = options.onShow;
     var onShow = _options$onShow === undefined ? null : _options$onShow;
     var _options$onHide = options.onHide;
     var onHide = _options$onHide === undefined ? null : _options$onHide;
 
-    this.settings = { el: el, zoomPane: zoomPane, onShow: onShow, onHide: onHide };
+    this.settings = { el: el, zoomPane: zoomPane, sourceAttribute: sourceAttribute, onShow: onShow, onHide: onHide };
 
     this._bindEvents();
   }
@@ -185,12 +209,19 @@ var Trigger = (function () {
     value: function _bindEvents() {
       this.settings.el.addEventListener('mouseenter', this._show, false);
       this.settings.el.addEventListener('mouseleave', this._hide, false);
+
+      this.settings.el.addEventListener('mousemove', this._handleMovement, false);
     }
   }, {
     key: '_unbindEvents',
     value: function _unbindEvents() {
       this.settings.el.removeEventListener('mouseenter', this._show, false);
       this.settings.el.removeEventListener('mouseleave', this._hide, false);
+    }
+  }, {
+    key: 'isShowing',
+    get: function get() {
+      return this.settings.zoomPane.isShowing;
     }
   }]);
 
@@ -201,7 +232,6 @@ var _initialiseProps = function _initialiseProps() {
   var _this = this;
 
   this._show = function (e) {
-    console.log('triggershow');
     e.preventDefault();
 
     var onShow = _this.settings.onShow;
@@ -209,11 +239,10 @@ var _initialiseProps = function _initialiseProps() {
       onShow();
     }
 
-    _this.settings.zoomPane.show();
+    _this.settings.zoomPane.show(_this.settings.el.getAttribute(_this.settings.sourceAttribute));
   };
 
   this._hide = function (e) {
-    console.log('triggerhide');
     e.preventDefault();
 
     var onHide = _this.settings.onHide;
@@ -222,6 +251,22 @@ var _initialiseProps = function _initialiseProps() {
     }
 
     _this.settings.zoomPane.hide();
+  };
+
+  this._handleMovement = function (e) {
+    if (!_this.isShowing) {
+      return;
+    }
+
+    var el = _this.settings.el;
+    var rect = el.getBoundingClientRect();
+    var offsetX = e.clientX - rect.left;
+    var offsetY = e.clientY - rect.top;
+
+    var percentageOffsetX = offsetX / _this.settings.el.clientWidth;
+    var percentageOffsetY = offsetY / _this.settings.el.clientHeight;
+
+    _this.settings.zoomPane.setImagePosition(percentageOffsetX, percentageOffsetY);
   };
 };
 
@@ -261,15 +306,11 @@ var ZoomPane = (function () {
     this._completeShow = function () {
       _this.el.removeEventListener('animationend', _this._completeShow, false);
 
-      _this.isShowing = true;
-
       (0, _dom.removeClasses)(_this.el, _this.openingClasses);
     };
 
     this._completeHide = function () {
       _this.el.removeEventListener('animationend', _this._completeHide, false);
-
-      _this.isShowing = false;
 
       (0, _dom.removeClasses)(_this.el, _this.openClasses);
       (0, _dom.removeClasses)(_this.el, _this.closingClasses);
@@ -289,14 +330,18 @@ var ZoomPane = (function () {
 
     var _options$container = options.container;
     var container = _options$container === undefined ? null : _options$container;
+    var _options$zoomFactor = options.zoomFactor;
+    var zoomFactor = _options$zoomFactor === undefined ? (0, _throwIfMissing2.default)() : _options$zoomFactor;
     var _options$inlineContai = options.inlineContainer;
     var inlineContainer = _options$inlineContai === undefined ? (0, _throwIfMissing2.default)() : _options$inlineContai;
     var _options$inline = options.inline;
     var inline = _options$inline === undefined ? (0, _throwIfMissing2.default)() : _options$inline;
     var _options$namespace = options.namespace;
     var namespace = _options$namespace === undefined ? null : _options$namespace;
+    var _options$contain = options.contain;
+    var contain = _options$contain === undefined ? (0, _throwIfMissing2.default)() : _options$contain;
 
-    this.settings = { container: container, inlineContainer: inlineContainer, inline: inline, namespace: namespace };
+    this.settings = { container: container, zoomFactor: zoomFactor, inlineContainer: inlineContainer, inline: inline, namespace: namespace, contain: contain };
 
     this.openClasses = this._buildClasses('open');
     this.openingClasses = this._buildClasses('opening');
@@ -323,11 +368,57 @@ var ZoomPane = (function () {
     value: function _buildElement() {
       this.el = document.createElement('div');
       (0, _dom.addClasses)(this.el, this._buildClasses('zoom-pane'));
+
+      this.imgEl = document.createElement('img');
+      this.el.appendChild(this.imgEl);
+    }
+  }, {
+    key: '_setImageURL',
+    value: function _setImageURL(imageURL) {
+      this.imgEl.setAttribute('src', imageURL);
+    }
+  }, {
+    key: '_setImageSize',
+    value: function _setImageSize(triggerWidth) {
+      this.imgEl.style.width = triggerWidth * this.settings.zoomFactor;
+    }
+
+    // `percentageOffsetX` and `percentageOffsetY` must be percentages
+    // expressed as floats between `0' and `1`.
+
+  }, {
+    key: 'setImagePosition',
+    value: function setImagePosition(percentageOffsetX, percentageOffsetY) {
+      var left = -(this.imgEl.clientWidth * percentageOffsetX - this.el.clientWidth / 2);
+      var top = -(this.imgEl.clientHeight * percentageOffsetY - this.el.clientHeight / 2);
+      var maxLeft = -(this.imgEl.clientWidth - this.el.clientWidth);
+      var maxTop = -(this.imgEl.clientHeight - this.el.clientHeight);
+
+      if (this.settings.contain) {
+        if (left > 0) {
+          left = 0;
+        } else if (left < maxLeft) {
+          left = maxLeft;
+        }
+
+        if (top > 0) {
+          top = 0;
+        } else if (top < maxTop) {
+          top = maxTop;
+        }
+      }
+
+      this.imgEl.style.translate = left + 'px ' + top + 'px';
     }
   }, {
     key: 'show',
-    value: function show() {
+    value: function show(imageURL, triggerWidth) {
+      this.isShowing = true;
+
       (0, _dom.addClasses)(this.el, this.openClasses);
+
+      this._setImageURL(imageURL);
+      this._setImageSize(triggerWidth);
 
       if (this._isInline) {
         this._showInline();
@@ -354,6 +445,8 @@ var ZoomPane = (function () {
   }, {
     key: 'hide',
     value: function hide() {
+      this.isShowing = false;
+
       if (HAS_ANIMATION) {
         this.el.addEventListener('animationend', this._completeHide, false);
         (0, _dom.addClasses)(this.el, this.closingClasses);
@@ -382,7 +475,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = injectBaseStylesheet;
-var RULES = '\n@keyframes noop {  }\n\n.drift-zoom-pane.drift-open {\n  display: block;\n}\n\n.drift-zoom-pane.drift-opening, .drift-zoom-pane.drift-closing {\n  animation: noop;\n}\n';
+var RULES = '\n@keyframes noop {  }\n\n.drift-zoom-pane.drift-open {\n  display: block;\n}\n\n.drift-zoom-pane.drift-opening, .drift-zoom-pane.drift-closing {\n  animation: noop;\n}\n\n.drift-zoom-pane {\n  position: absolute;\n  overflow: hidden;\n  width: 100%;\n  height: 100%;\n  top: 0;\n  left: 0;\n}\n\n.drift-zoom-pane img {\n  position: absolute;\n  display: block;\n}\n';
 
 function injectBaseStylesheet() {
   if (document.querySelector('.drift-base-styles')) {

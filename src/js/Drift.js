@@ -22,8 +22,14 @@ export default class Drift {
       // result in classes such as `my-ns-pane`. Default `drift-`
       // prefixed classes will always be added as well.
       namespace = null,
-      // Which attribute to pull the ZoomPane image source from.
+      // Whether the ZoomPane should allow whitespace when near the edges.
+      contain = true,
+      // Which trigger attribute to pull the ZoomPane image source from.
       sourceAttribute = 'data-zoom',
+      // How much to magnify the trigger by in the ZoomPane.
+      // (e.g., `zoomFactor = 3` will result in a 900 px wide ZoomPane image
+      // if the trigger is displayed at 300 px wide)
+      zoomFactor = 3,
       // A DOM element to append the non-inline ZoomPane to.
       // Required if `inlinePane !== true`.
       paneContainer = null,
@@ -48,7 +54,7 @@ export default class Drift {
       throw new TypeError('`paneContainer` must be a DOM element when `inlinePane !== true`');
     }
 
-    this.settings = { namespace, sourceAttribute, paneContainer, inlinePane, inlineContainer, onShow, onHide, injectBaseStyles };
+    this.settings = { namespace, contain, sourceAttribute, zoomFactor, paneContainer, inlinePane, inlineContainer, onShow, onHide, injectBaseStyles };
 
     if (this.settings.injectBaseStyles) {
       injectBaseStylesheet();
@@ -63,9 +69,20 @@ export default class Drift {
     return this.zoomPane.isShowing;
   }
 
+  get zoomFactor() {
+    return this.settings.zoomFactor;
+  }
+
+  set zoomFactor(zf) {
+    this.settings.zoomFactor = zf;
+    this.zoomPane.settings.zoomFactor = zf;
+  }
+
   _buildZoomPane() {
     this.zoomPane = new ZoomPane({
       container: this.settings.paneContainer,
+      zoomFactor: this.settings.zoomFactor,
+      contain: this.settings.contain,
       inlineContainer: this.settings.inlineContainer,
       inline: this.settings.inlinePane,
       namespace: this.settings.namespace,
@@ -78,6 +95,7 @@ export default class Drift {
       zoomPane: this.zoomPane,
       onShow: this.settings.onShow,
       onHide: this.settings.onHide,
+      sourceAttribute: this.settings.sourceAttribute,
     });
   }
 

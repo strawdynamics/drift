@@ -17,7 +17,8 @@
         background: #FAFAFA;
       }
 
-      section {
+      .detail {
+        position: relative;
         max-width: 32em;
         margin: 0 auto;
       }
@@ -45,10 +46,6 @@
         color: #00C0FA;
       }
 
-      .zoom-in {
-        cursor: zoom-in;
-      }
-
       a img {
         max-width: 100%;
       }
@@ -56,23 +53,23 @@
   </head>
 
   <body>
-    <a class="drift-demo-1-trigger" href="http://assets.imgix.net/unsplash/pretty2.jpg?w=1600">
-      <img src="http://assets.imgix.net/unsplash/pretty2.jpg?w=400">
-    </a>
+    <img class="drift-demo-trigger" data-zoom="http://assets.imgix.net/unsplash/pretty2.jpg?w=1600" src="http://assets.imgix.net/unsplash/pretty2.jpg?w=400">
 
-    <section>
-      <h1>Drift Demo</h1>
-      <p>This is a demo of Drift, a simple, lightweight, no-dependencies JavaScript "zoom on hover" tool from <a href="http://imgix.com">imgix</a>. This demo uses the simple included theme, but it's very easy to extend and customize to fit your needs. You can <a href="https://github.com/imgix/luminous">learn more and download it here</a>.</p>
-    </section>
+    <div class="detail">
+      <section>
+        <h1>Drift Demo</h1>
+        <p>This is a demo of Drift, a simple, lightweight, no-dependencies JavaScript "zoom on hover" tool from <a href="http://imgix.com">imgix</a>. This demo uses the simple included theme, but it's very easy to extend and customize to fit your needs. You can <a href="https://github.com/imgix/luminous">learn more and download it here</a>.</p>
+      </section>
 
-    <a href="https://imgix.com">
-      <img src="https://assets.imgix.net/presskit/imgix-presskit.pdf?page=3&amp;fm=png&amp;w=320&amp;dpr=2" width="160" height="60" alt="imgix">
-    </a>
+      <a href="https://imgix.com">
+        <img src="https://assets.imgix.net/presskit/imgix-presskit.pdf?page=3&amp;fm=png&amp;w=320&amp;dpr=2" width="160" height="60" alt="imgix">
+      </a>
+    </div>
 
     <script src="dist/Drift.js"></script>
     <script>
-      new Drift(document.querySelector('.drift-demo-1-trigger'), {
-        paneContainer: document.querySelector('section')
+      new Drift(document.querySelector('.drift-demo-trigger'), {
+        paneContainer: document.querySelector('.detail')
       });
     </script>
   </body>

@@ -11,12 +11,14 @@ export default class ZoomPane {
 
     let {
       container = null,
+      zoomFactor = throwIfMissing(),
       inlineContainer = throwIfMissing(),
       inline = throwIfMissing(),
       namespace = null,
+      contain = throwIfMissing(),
     } = options;
 
-    this.settings = { container, inlineContainer, inline, namespace };
+    this.settings = { container, zoomFactor, inlineContainer, inline, namespace, contain };
 
     this.openClasses = this._buildClasses('open');
     this.openingClasses = this._buildClasses('opening');
@@ -39,7 +41,45 @@ export default class ZoomPane {
 
   _buildElement() {
     this.el = document.createElement('div');
-    addClasses(this.el, this._buildClasses('zoom-pane'))
+    addClasses(this.el, this._buildClasses('zoom-pane'));
+
+    this.imgEl = document.createElement('img');
+    this.el.appendChild(this.imgEl);
+  }
+
+  _setImageURL(imageURL) {
+    this.imgEl.setAttribute('src', imageURL);
+  }
+
+  _setImageSize(triggerWidth) {
+    this.imgEl.style.width = triggerWidth * this.settings.zoomFactor;
+  }
+
+  // `percentageOffsetX` and `percentageOffsetY` must be percentages
+  // expressed as floats between `0' and `1`.
+  setImagePosition(percentageOffsetX, percentageOffsetY) {
+    let left = -(this.imgEl.clientWidth * percentageOffsetX - (this.el.clientWidth / 2));
+    let top = -(this.imgEl.clientHeight * percentageOffsetY - (this.el.clientHeight / 2));
+    let maxLeft = -(this.imgEl.clientWidth - this.el.clientWidth);
+    let maxTop = -(this.imgEl.clientHeight - this.el.clientHeight);
+
+    if (this.settings.contain) {
+      if (left > 0) {
+        left = 0;
+      } else if (left < maxLeft) {
+        left = maxLeft;
+      }
+
+      if (top > 0) {
+        top = 0;
+      } else if (top < maxTop) {
+        top = maxTop;
+      }
+    }
+
+    // console.log(left, top);
+
+    this.imgEl.style.translate = `${left}px ${top}px`;
   }
 
   get _isInline() {
@@ -48,8 +88,13 @@ export default class ZoomPane {
     return inline === true || (typeof inline === 'number' && window.innerWidth <= inline);
   }
 
-  show() {
+  show(imageURL, triggerWidth) {
+    this.isShowing = true;
+
     addClasses(this.el, this.openClasses);
+
+    this._setImageURL(imageURL);
+    this._setImageSize(triggerWidth);
 
     if (this._isInline) {
       this._showInline();
@@ -73,6 +118,8 @@ export default class ZoomPane {
   }
 
   hide() {
+    this.isShowing = false;
+
     if (HAS_ANIMATION) {
       this.el.addEventListener('animationend', this._completeHide, false);
       addClasses(this.el, this.closingClasses);
@@ -84,15 +131,11 @@ export default class ZoomPane {
   _completeShow = () => {
     this.el.removeEventListener('animationend', this._completeShow, false);
 
-    this.isShowing = true;
-
     removeClasses(this.el, this.openingClasses);
   }
 
   _completeHide = () => {
     this.el.removeEventListener('animationend', this._completeHide, false);
-
-    this.isShowing = false;
 
     removeClasses(this.el, this.openClasses);
     removeClasses(this.el, this.closingClasses);

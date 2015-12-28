@@ -8,6 +8,20 @@ const RULES = `
 .drift-zoom-pane.drift-opening, .drift-zoom-pane.drift-closing {
   animation: noop;
 }
+
+.drift-zoom-pane {
+  position: absolute;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+.drift-zoom-pane img {
+  position: absolute;
+  display: block;
+}
 `
 
 export default function injectBaseStylesheet() {
