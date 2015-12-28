@@ -55,6 +55,8 @@ export default class Trigger {
     this.settings.zoomPane.show(
       this.settings.el.getAttribute(this.settings.sourceAttribute)
     );
+
+    this._handleMovement(e);
   }
 
   _hide = (e) => {
@@ -94,6 +96,8 @@ export default class Trigger {
     let percentageOffsetX = offsetX / this.settings.el.clientWidth;
     let percentageOffsetY = offsetY / this.settings.el.clientHeight;
 
-    this.settings.zoomPane.setImagePosition(percentageOffsetX, percentageOffsetY);
+    this.settings.zoomPane.setPosition(percentageOffsetX,
+      percentageOffsetY, this.settings.el.clientWidth,
+      this.settings.el.clientHeight, rect);
   }
 }

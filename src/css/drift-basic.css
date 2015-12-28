@@ -15,3 +15,11 @@
 .drift-zoom-pane.drift-closing {
 	animation: fadeZoomOut 90ms ease-in;
 }
+
+.drift-zoom-pane.drift-inline {
+	width: 150px;
+	height: 150px;
+	border-radius: 75px;
+	box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+	margin-top: -85px;
+}

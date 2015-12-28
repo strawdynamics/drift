@@ -12,18 +12,19 @@ export default class ZoomPane {
     let {
       container = null,
       zoomFactor = throwIfMissing(),
-      inlineContainer = throwIfMissing(),
       inline = throwIfMissing(),
       namespace = null,
       contain = throwIfMissing(),
     } = options;
 
-    this.settings = { container, zoomFactor, inlineContainer, inline, namespace, contain };
+    this.settings = { container, zoomFactor, inline, namespace, contain };
+    this.settings.inlineContainer = document.body;
 
     this.openClasses = this._buildClasses('open');
     this.openingClasses = this._buildClasses('opening');
     this.closingClasses = this._buildClasses('closing');
     this.inlineClasses = this._buildClasses('inline');
+
 
     this._buildElement();
   }
@@ -57,11 +58,19 @@ export default class ZoomPane {
 
   // `percentageOffsetX` and `percentageOffsetY` must be percentages
   // expressed as floats between `0' and `1`.
-  setImagePosition(percentageOffsetX, percentageOffsetY) {
+  setPosition(percentageOffsetX, percentageOffsetY, triggerWidth, triggerHeight, triggerRect) {
     let left = -(this.imgEl.clientWidth * percentageOffsetX - (this.el.clientWidth / 2));
     let top = -(this.imgEl.clientHeight * percentageOffsetY - (this.el.clientHeight / 2));
     let maxLeft = -(this.imgEl.clientWidth - this.el.clientWidth);
     let maxTop = -(this.imgEl.clientHeight - this.el.clientHeight);
+
+    if (this.el.parentElement === this.settings.inlineContainer) {
+      let inlineLeft = triggerRect.left + (percentageOffsetX * triggerWidth) - (this.el.clientWidth / 2);
+      let inlineTop = triggerRect.top + (percentageOffsetY * triggerHeight) - (this.el.clientHeight / 2);
+
+      this.el.style.left = `${inlineLeft}px`;
+      this.el.style.top = `${inlineTop}px`;
+    }
 
     if (this.settings.contain) {
       if (left > 0) {
@@ -142,9 +151,9 @@ export default class ZoomPane {
     // The window could have been resized above or below `inline`
     // limits since the ZoomPane was shown. Because of this, we
     // can't rely on `this._isInline` here.
-    if (this.el.parentElement == this.settings.container) {
+    if (this.el.parentElement === this.settings.container) {
       this.settings.container.removeChild(this.el);
-    } else if (this.el.parentElement == this.settings.inlineContainer) {
+    } else if (this.el.parentElement === this.settings.inlineContainer) {
       this.settings.inlineContainer.removeChild(this.el);
     }
   }

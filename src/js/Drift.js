@@ -37,8 +37,6 @@ export default class Drift {
       // an integer. If `true`, the ZoomPane will always be inline,
       // if `false`, it will switch to inline when `windowWidth <= inlinePane`
       inlinePane = 375,
-      // The element to attach the inline ZoomPane to.
-      inlineContainer = document.body,
       // If `true`, touch events will trigger the zoom, like mouse events.
       handleTouch = true,
       // If present (and a function), this will be called
@@ -56,7 +54,7 @@ export default class Drift {
       throw new TypeError('`paneContainer` must be a DOM element when `inlinePane !== true`');
     }
 
-    this.settings = { namespace, contain, sourceAttribute, zoomFactor, paneContainer, inlinePane, inlineContainer, handleTouch, onShow, onHide, injectBaseStyles };
+    this.settings = { namespace, contain, sourceAttribute, zoomFactor, paneContainer, inlinePane, handleTouch, onShow, onHide, injectBaseStyles };
 
     if (this.settings.injectBaseStyles) {
       injectBaseStylesheet();
@@ -85,7 +83,6 @@ export default class Drift {
       container: this.settings.paneContainer,
       zoomFactor: this.settings.zoomFactor,
       contain: this.settings.contain,
-      inlineContainer: this.settings.inlineContainer,
       inline: this.settings.inlinePane,
       namespace: this.settings.namespace,
     });

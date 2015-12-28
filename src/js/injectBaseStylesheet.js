@@ -18,6 +18,10 @@ const RULES = `
   left: 0;
 }
 
+.drift-zoom-pane.drift-inline {
+  pointer-events: none;
+}
+
 .drift-zoom-pane img {
   position: absolute;
   display: block;

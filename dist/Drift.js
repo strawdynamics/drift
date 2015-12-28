@@ -81,10 +81,6 @@ var Drift = (function () {
     // an integer. If `true`, the ZoomPane will always be inline,
     // if `false`, it will switch to inline when `windowWidth <= inlinePane`
     inlinePane = _options$inlinePane === undefined ? 375 : _options$inlinePane;
-    var _options$inlineContai = options.inlineContainer;
-    var
-    // The element to attach the inline ZoomPane to.
-    inlineContainer = _options$inlineContai === undefined ? document.body : _options$inlineContai;
     var _options$handleTouch = options.handleTouch;
     var
     // If `true`, touch events will trigger the zoom, like mouse events.
@@ -109,7 +105,7 @@ var Drift = (function () {
       throw new TypeError('`paneContainer` must be a DOM element when `inlinePane !== true`');
     }
 
-    this.settings = { namespace: namespace, contain: contain, sourceAttribute: sourceAttribute, zoomFactor: zoomFactor, paneContainer: paneContainer, inlinePane: inlinePane, inlineContainer: inlineContainer, handleTouch: handleTouch, onShow: onShow, onHide: onHide, injectBaseStyles: injectBaseStyles };
+    this.settings = { namespace: namespace, contain: contain, sourceAttribute: sourceAttribute, zoomFactor: zoomFactor, paneContainer: paneContainer, inlinePane: inlinePane, handleTouch: handleTouch, onShow: onShow, onHide: onHide, injectBaseStyles: injectBaseStyles };
 
     if (this.settings.injectBaseStyles) {
       (0, _injectBaseStylesheet2.default)();
@@ -127,7 +123,6 @@ var Drift = (function () {
         container: this.settings.paneContainer,
         zoomFactor: this.settings.zoomFactor,
         contain: this.settings.contain,
-        inlineContainer: this.settings.inlineContainer,
         inline: this.settings.inlinePane,
         namespace: this.settings.namespace
       });
@@ -259,6 +254,8 @@ var _initialiseProps = function _initialiseProps() {
     }
 
     _this.settings.zoomPane.show(_this.settings.el.getAttribute(_this.settings.sourceAttribute));
+
+    _this._handleMovement(e);
   };
 
   this._hide = function (e) {
@@ -299,7 +296,7 @@ var _initialiseProps = function _initialiseProps() {
     var percentageOffsetX = offsetX / _this.settings.el.clientWidth;
     var percentageOffsetY = offsetY / _this.settings.el.clientHeight;
 
-    _this.settings.zoomPane.setImagePosition(percentageOffsetX, percentageOffsetY);
+    _this.settings.zoomPane.setPosition(percentageOffsetX, percentageOffsetY, _this.settings.el.clientWidth, _this.settings.el.clientHeight, rect);
   };
 };
 
@@ -352,9 +349,9 @@ var ZoomPane = (function () {
       // The window could have been resized above or below `inline`
       // limits since the ZoomPane was shown. Because of this, we
       // can't rely on `this._isInline` here.
-      if (_this.el.parentElement == _this.settings.container) {
+      if (_this.el.parentElement === _this.settings.container) {
         _this.settings.container.removeChild(_this.el);
-      } else if (_this.el.parentElement == _this.settings.inlineContainer) {
+      } else if (_this.el.parentElement === _this.settings.inlineContainer) {
         _this.settings.inlineContainer.removeChild(_this.el);
       }
     };
@@ -365,8 +362,6 @@ var ZoomPane = (function () {
     var container = _options$container === undefined ? null : _options$container;
     var _options$zoomFactor = options.zoomFactor;
     var zoomFactor = _options$zoomFactor === undefined ? (0, _throwIfMissing2.default)() : _options$zoomFactor;
-    var _options$inlineContai = options.inlineContainer;
-    var inlineContainer = _options$inlineContai === undefined ? (0, _throwIfMissing2.default)() : _options$inlineContai;
     var _options$inline = options.inline;
     var inline = _options$inline === undefined ? (0, _throwIfMissing2.default)() : _options$inline;
     var _options$namespace = options.namespace;
@@ -374,7 +369,8 @@ var ZoomPane = (function () {
     var _options$contain = options.contain;
     var contain = _options$contain === undefined ? (0, _throwIfMissing2.default)() : _options$contain;
 
-    this.settings = { container: container, zoomFactor: zoomFactor, inlineContainer: inlineContainer, inline: inline, namespace: namespace, contain: contain };
+    this.settings = { container: container, zoomFactor: zoomFactor, inline: inline, namespace: namespace, contain: contain };
+    this.settings.inlineContainer = document.body;
 
     this.openClasses = this._buildClasses('open');
     this.openingClasses = this._buildClasses('opening');
@@ -420,12 +416,20 @@ var ZoomPane = (function () {
     // expressed as floats between `0' and `1`.
 
   }, {
-    key: 'setImagePosition',
-    value: function setImagePosition(percentageOffsetX, percentageOffsetY) {
+    key: 'setPosition',
+    value: function setPosition(percentageOffsetX, percentageOffsetY, triggerWidth, triggerHeight, triggerRect) {
       var left = -(this.imgEl.clientWidth * percentageOffsetX - this.el.clientWidth / 2);
       var top = -(this.imgEl.clientHeight * percentageOffsetY - this.el.clientHeight / 2);
       var maxLeft = -(this.imgEl.clientWidth - this.el.clientWidth);
       var maxTop = -(this.imgEl.clientHeight - this.el.clientHeight);
+
+      if (this.el.parentElement === this.settings.inlineContainer) {
+        var inlineLeft = triggerRect.left + percentageOffsetX * triggerWidth - this.el.clientWidth / 2;
+        var inlineTop = triggerRect.top + percentageOffsetY * triggerHeight - this.el.clientHeight / 2;
+
+        this.el.style.left = inlineLeft + 'px';
+        this.el.style.top = inlineTop + 'px';
+      }
 
       if (this.settings.contain) {
         if (left > 0) {
@@ -508,7 +512,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = injectBaseStylesheet;
-var RULES = '\n@keyframes noop {  }\n\n.drift-zoom-pane.drift-open {\n  display: block;\n}\n\n.drift-zoom-pane.drift-opening, .drift-zoom-pane.drift-closing {\n  animation: noop;\n}\n\n.drift-zoom-pane {\n  position: absolute;\n  overflow: hidden;\n  width: 100%;\n  height: 100%;\n  top: 0;\n  left: 0;\n}\n\n.drift-zoom-pane img {\n  position: absolute;\n  display: block;\n}\n';
+var RULES = '\n@keyframes noop {  }\n\n.drift-zoom-pane.drift-open {\n  display: block;\n}\n\n.drift-zoom-pane.drift-opening, .drift-zoom-pane.drift-closing {\n  animation: noop;\n}\n\n.drift-zoom-pane {\n  position: absolute;\n  overflow: hidden;\n  width: 100%;\n  height: 100%;\n  top: 0;\n  left: 0;\n}\n\n.drift-zoom-pane.drift-inline {\n  pointer-events: none;\n}\n\n.drift-zoom-pane img {\n  position: absolute;\n  display: block;\n}\n';
 
 function injectBaseStylesheet() {
   if (document.querySelector('.drift-base-styles')) {
