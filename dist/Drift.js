@@ -253,7 +253,7 @@ var _initialiseProps = function _initialiseProps() {
       onShow();
     }
 
-    _this.settings.zoomPane.show(_this.settings.el.getAttribute(_this.settings.sourceAttribute));
+    _this.settings.zoomPane.show(_this.settings.el.getAttribute(_this.settings.sourceAttribute), _this.settings.el.clientWidth);
 
     _this._handleMovement(e);
   };
@@ -411,7 +411,7 @@ var ZoomPane = (function () {
   }, {
     key: '_setImageSize',
     value: function _setImageSize(triggerWidth) {
-      this.imgEl.style.width = triggerWidth * this.settings.zoomFactor;
+      this.imgEl.style.width = triggerWidth * this.settings.zoomFactor + 'px';
     }
 
     // `percentageOffsetX` and `percentageOffsetY` must be percentages

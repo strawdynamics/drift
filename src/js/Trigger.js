@@ -53,7 +53,8 @@ export default class Trigger {
     }
 
     this.settings.zoomPane.show(
-      this.settings.el.getAttribute(this.settings.sourceAttribute)
+      this.settings.el.getAttribute(this.settings.sourceAttribute),
+      this.settings.el.clientWidth
     );
 
     this._handleMovement(e);
