@@ -15,10 +15,9 @@ Easily add "zoom on hover" functionality to your site's images. Lightweight, no-
 <a name="installation"></a>
 ## Installation
 
-* **NPM**: `npm install drift`
+* **NPM**: `npm install drift-zoom`
 * **Bower**: `bower install drift`
-* **cdnjs**: `https://cdnjs.cloudflare.com/ajax/libs/drift/0.1.0/dist/drift.min.js`
-* **Manual**: [Download](https://github.com/imgix/drift/archive/master.zip) and use `dist/drift.min.js` or `dist/drift.js`
+* **Manual**: [Download](https://github.com/imgix/drift/archive/master.zip) and use `dist/Drift.min.js` or `dist/Drift.js`
 
 
 <a name="usage"></a>
@@ -26,8 +25,16 @@ Easily add "zoom on hover" functionality to your site's images. Lightweight, no-
 
 Once you've installed Drift via one of the above methods, you're ready to get started. There are no dependencies, so you can just start making cool stuff. Check out the [announcement blog post](http://blog.imgix.com/TODO) for a demo, or clone/download the repository and take a peek at `index.html` in your browser. Here's an example of the most basic possible implementation:
 
+``` html
+<img src="http://assets.imgix.net/dog-small.png" data-zoom="http://assets.imgix.net/dog-large.png">
+
+<p>This is a simple description of the dog picture.</p>
+```
+
 ``` javascript
-// TODO
+new Drift(document.querySelector('img'), {
+  paneContainer: document.querySelector('p')
+});
 ```
 
 
@@ -35,7 +42,38 @@ Once you've installed Drift via one of the above methods, you're ready to get st
 ## Options / Defaults
 
 ``` javascript
-// TODO
+{
+	// Prefix for generated element class names (e.g. `my-ns` will
+	// result in classes such as `my-ns-pane`. Default `drift-`
+	// prefixed classes will always be added as well.
+	namespace = null,
+	// Whether the ZoomPane should show whitespace when near the edges.
+	contain = true,
+	// Which trigger attribute to pull the ZoomPane image source from.
+	sourceAttribute = 'data-zoom',
+	// How much to magnify the trigger by in the ZoomPane.
+	// (e.g., `zoomFactor = 3` will result in a 900 px wide ZoomPane image
+	// if the trigger is displayed at 300 px wide)
+	zoomFactor = 3,
+	// A DOM element to append the non-inline ZoomPane to.
+	// Required if `inlinePane !== true`.
+	paneContainer = null,
+	// When to switch to an inline ZoomPane. This can be a boolean or
+	// an integer. If `true`, the ZoomPane will always be inline,
+	// if `false`, it will switch to inline when `windowWidth <= inlinePane`
+	inlinePane = 375,
+	// If `true`, touch events will trigger the zoom, like mouse events.
+	handleTouch = true,
+	// If present (and a function), this will be called
+	// whenever the ZoomPane is shown.
+	onShow = null,
+	// If present (and a function), this will be called
+	// whenever the ZoomPane is hidden.
+	onHide = null,
+	// Add base styles to the page. See the "Theming"
+	// section of README.md for more information.
+	injectBaseStyles = true,
+}
 ```
 
 
@@ -44,7 +82,7 @@ Once you've installed Drift via one of the above methods, you're ready to get st
 
 By default, Drift injects an extremely basic set of styles into the page. You will almost certainly want to extend these basic styles for a prettier, more usable experience that matches your site. There is an included basic theme that may meet your needs, or at least give a good example of how to build out your own custom styles. The `namespace` option can be used as a way to easily apply different themes to specific instances of Drift.
 
-If you need to do something very out of the ordinary, or just prefer to include the default styles in CSS yourself, you can pass `injectBaseStyles: false` when instantiating a new instance of Drift. Please note that if you disable the included base styles, you will still need to provide an animation for `.drift-window.drift-showing` and `.drift-window.drift-hiding` (this can be a "noop" style animation, as seen in the base styles source).
+If you need to do something very out of the ordinary, or just prefer to include the default styles in CSS yourself, you can pass `injectBaseStyles: false` when instantiating a new instance of Drift. Please note that if you disable the included base styles, you will still need to provide an animation for `.drift-window.drift-opening` and `.drift-window.drift-closing` (this can be a "noop" style animation, as seen in the base styles source).
 
 
 <a name="browser-support"></a>
