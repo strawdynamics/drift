@@ -22,7 +22,7 @@ export default class Drift {
       // result in classes such as `my-ns-pane`. Default `drift-`
       // prefixed classes will always be added as well.
       namespace = null,
-      // Whether the ZoomPane should allow whitespace when near the edges.
+      // Whether the ZoomPane should show whitespace when near the edges.
       contain = true,
       // Which trigger attribute to pull the ZoomPane image source from.
       sourceAttribute = 'data-zoom',

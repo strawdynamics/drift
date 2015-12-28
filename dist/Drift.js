@@ -58,7 +58,7 @@ var Drift = (function () {
     namespace = _options$namespace === undefined ? null : _options$namespace;
     var _options$contain = options.contain;
     var
-    // Whether the ZoomPane should allow whitespace when near the edges.
+    // Whether the ZoomPane should show whitespace when near the edges.
     contain = _options$contain === undefined ? true : _options$contain;
     var _options$sourceAttrib = options.sourceAttribute;
     var

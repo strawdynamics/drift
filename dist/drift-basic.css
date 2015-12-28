@@ -1,0 +1,17 @@
+@keyframes fadeZoomIn {
+	0% { transform: scale(1.5); opacity: 0; }
+	100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes fadeZoomOut {
+	0% { transform: scale(1); opacity: 1; }
+	100% { transform: scale(0.5); opacity: 0; }
+}
+
+.drift-zoom-pane.drift-opening {
+	animation: fadeZoomIn 180ms ease-out;
+}
+
+.drift-zoom-pane.drift-closing {
+	animation: fadeZoomOut 90ms ease-in;
+}
