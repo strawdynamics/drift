@@ -15,6 +15,14 @@ var _injectBaseStylesheet = require('./injectBaseStylesheet');
 
 var _injectBaseStylesheet2 = _interopRequireDefault(_injectBaseStylesheet);
 
+var _Trigger = require('./Trigger');
+
+var _Trigger2 = _interopRequireDefault(_Trigger);
+
+var _ZoomPane = require('./ZoomPane');
+
+var _ZoomPane2 = _interopRequireDefault(_ZoomPane);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -22,18 +30,20 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 var VERSION = exports.VERSION = '0.1.0';
 
 var Drift = (function () {
-  function Drift(trigger) {
+  function Drift(triggerEl) {
+    var _this = this;
+
     var options = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
 
     _classCallCheck(this, Drift);
 
-    _initialiseProps.call(this);
+    this.destroy = function () {
+      _this._unbindEvents();
+    };
 
-    this.isShowing = false;
+    this.triggerEl = triggerEl;
 
-    this.trigger = trigger;
-
-    if (!(0, _dom.isDOMElement)(this.trigger)) {
+    if (!(0, _dom.isDOMElement)(this.triggerEl)) {
       throw new TypeError('`new Drift` requires a DOM element as its first argument.');
     }
 
@@ -43,75 +53,155 @@ var Drift = (function () {
     var _options$namespace = options.namespace;
     var
     // Prefix for generated element class names (e.g. `my-ns` will
-    // result in classes such as `my-ns-lightbox`. Default `lum-`
+    // result in classes such as `my-ns-pane`. Default `drift-`
     // prefixed classes will always be added as well.
     namespace = _options$namespace === undefined ? null : _options$namespace;
     var _options$sourceAttrib = options.sourceAttribute;
     var
-    // Which attribute to pull the lightbox image source from.
-    sourceAttribute = _options$sourceAttrib === undefined ? 'href' : _options$sourceAttrib;
-    var _options$openTrigger = options.openTrigger;
+    // Which attribute to pull the ZoomPane image source from.
+    sourceAttribute = _options$sourceAttrib === undefined ? 'data-zoom' : _options$sourceAttrib;
+    var _options$paneContaine = options.paneContainer;
     var
-    // The event to listen to on the _trigger_ element: triggers opening.
-    openTrigger = _options$openTrigger === undefined ? 'click' : _options$openTrigger;
-    var _options$closeTrigger = options.closeTrigger;
+    // A DOM element to append the non-inline ZoomPane to.
+    // Required if `inlinePane !== true`.
+    paneContainer = _options$paneContaine === undefined ? null : _options$paneContaine;
+    var _options$inlinePane = options.inlinePane;
     var
-    // The event to listen to on the _lightbox_ element: triggers closing.
-    closeTrigger = _options$closeTrigger === undefined ? 'click' : _options$closeTrigger;
-    var _options$closeWithEsc = options.closeWithEscape;
+    // When to switch to an inline ZoomPane. This can be a boolean or
+    // an integer. If `true`, the ZoomPane will always be inline,
+    // if `false`, it will switch to inline when `windowWidth <= inlinePane`
+    inlinePane = _options$inlinePane === undefined ? 375 : _options$inlinePane;
+    var _options$inlineContai = options.inlineContainer;
     var
-    // Allow closing by pressing escape.
-    closeWithEscape = _options$closeWithEsc === undefined ? true : _options$closeWithEsc;
-    var _options$appendToSele = options.appendToSelector;
-    var
-    // A selector defining what to append the lightbox element to.
-    appendToSelector = _options$appendToSele === undefined ? 'body' : _options$appendToSele;
+    // The element to attach the inline ZoomPane to.
+    inlineContainer = _options$inlineContai === undefined ? document.body : _options$inlineContai;
     var _options$onShow = options.onShow;
     var
     // If present (and a function), this will be called
-    // whenever the lightbox is opened.
+    // whenever the ZoomPane is shown.
     onShow = _options$onShow === undefined ? null : _options$onShow;
     var _options$onHide = options.onHide;
     var
     // If present (and a function), this will be called
-    // whenever the lightbox is closed.
+    // whenever the ZoomPane is hidden.
     onHide = _options$onHide === undefined ? null : _options$onHide;
-    var _options$includeImgix = options.includeImgixJSClass;
-    var
-    // When true, adds the `imgix-fluid` class to the `img`
-    // inside the lightbox. See https://github.com/imgix/imgix.js
-    // for more information.
-    includeImgixJSClass = _options$includeImgix === undefined ? false : _options$includeImgix;
     var _options$injectBaseSt = options.injectBaseStyles;
     var
     // Add base styles to the page. See the "Theming"
     // section of README.md for more information.
     injectBaseStyles = _options$injectBaseSt === undefined ? true : _options$injectBaseSt;
 
-    this.settings = { namespace: namespace, sourceAttribute: sourceAttribute, openTrigger: openTrigger, closeTrigger: closeTrigger, closeWithEscape: closeWithEscape, appendToSelector: appendToSelector, onShow: onShow, onHide: onHide, includeImgixJSClass: includeImgixJSClass, injectBaseStyles: injectBaseStyles };
+    if (inlinePane !== true && !(0, _dom.isDOMElement)(paneContainer)) {
+      throw new TypeError('`paneContainer` must be a DOM element when `inlinePane !== true`');
+    }
+
+    this.settings = { namespace: namespace, sourceAttribute: sourceAttribute, paneContainer: paneContainer, inlinePane: inlinePane, inlineContainer: inlineContainer, onShow: onShow, onHide: onHide, injectBaseStyles: injectBaseStyles };
 
     if (this.settings.injectBaseStyles) {
       (0, _injectBaseStylesheet2.default)();
     }
 
-    this._bindEvents();
+    // this._bindEvents();
+    this._buildZoomPane();
+    this._buildTrigger();
   }
 
   _createClass(Drift, [{
-    key: '_bindEvents',
-    value: function _bindEvents() {}
+    key: '_buildZoomPane',
+    value: function _buildZoomPane() {
+      this.zoomPane = new _ZoomPane2.default({
+        container: this.settings.paneContainer,
+        inlineContainer: this.settings.inlineContainer,
+        inline: this.settings.inlinePane,
+        namespace: this.settings.namespace
+      });
+    }
   }, {
-    key: '_unbindEvents',
-    value: function _unbindEvents() {}
+    key: '_buildTrigger',
+    value: function _buildTrigger() {
+      this.trigger = new _Trigger2.default({
+        el: this.triggerEl,
+        zoomPane: this.zoomPane,
+        onShow: this.settings.onShow,
+        onHide: this.settings.onHide
+      });
+    }
+  }, {
+    key: 'isShowing',
+    get: function get() {
+      return this.zoomPane.isShowing;
+    }
   }]);
 
   return Drift;
+})();
+
+exports.default = Drift;
+
+global.Drift = Drift;
+
+}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{"./Trigger":2,"./ZoomPane":3,"./injectBaseStylesheet":4,"./util/dom":5}],2:[function(require,module,exports){
+'use strict';
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _throwIfMissing = require('./util/throwIfMissing');
+
+var _throwIfMissing2 = _interopRequireDefault(_throwIfMissing);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Trigger = (function () {
+  function Trigger() {
+    var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+
+    _classCallCheck(this, Trigger);
+
+    _initialiseProps.call(this);
+
+    var _options$el = options.el;
+    var el = _options$el === undefined ? (0, _throwIfMissing2.default)() : _options$el;
+    var _options$zoomPane = options.zoomPane;
+    var zoomPane = _options$zoomPane === undefined ? (0, _throwIfMissing2.default)() : _options$zoomPane;
+    var _options$onShow = options.onShow;
+    var onShow = _options$onShow === undefined ? null : _options$onShow;
+    var _options$onHide = options.onHide;
+    var onHide = _options$onHide === undefined ? null : _options$onHide;
+
+    this.settings = { el: el, zoomPane: zoomPane, onShow: onShow, onHide: onHide };
+
+    this._bindEvents();
+  }
+
+  _createClass(Trigger, [{
+    key: '_bindEvents',
+    value: function _bindEvents() {
+      this.settings.el.addEventListener('mouseenter', this._show, false);
+      this.settings.el.addEventListener('mouseleave', this._hide, false);
+    }
+  }, {
+    key: '_unbindEvents',
+    value: function _unbindEvents() {
+      this.settings.el.removeEventListener('mouseenter', this._show, false);
+      this.settings.el.removeEventListener('mouseleave', this._hide, false);
+    }
+  }]);
+
+  return Trigger;
 })();
 
 var _initialiseProps = function _initialiseProps() {
   var _this = this;
 
   this._show = function (e) {
+    console.log('triggershow');
     e.preventDefault();
 
     var onShow = _this.settings.onShow;
@@ -119,10 +209,11 @@ var _initialiseProps = function _initialiseProps() {
       onShow();
     }
 
-    _this.isShowing = true;
+    _this.settings.zoomPane.show();
   };
 
   this._hide = function (e) {
+    console.log('triggerhide');
     e.preventDefault();
 
     var onHide = _this.settings.onHide;
@@ -130,36 +221,177 @@ var _initialiseProps = function _initialiseProps() {
       onHide();
     }
 
-    _this.isShowing = false;
-  };
-
-  this.destroy = function () {
-    _this._unbindEvents();
+    _this.settings.zoomPane.hide();
   };
 };
 
-exports.default = Drift;
+exports.default = Trigger;
 
-global.Drift = Drift;
+},{"./util/throwIfMissing":6}],3:[function(require,module,exports){
+'use strict';
 
-}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./injectBaseStylesheet":2,"./util/dom":3}],2:[function(require,module,exports){
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _throwIfMissing = require('./util/throwIfMissing');
+
+var _throwIfMissing2 = _interopRequireDefault(_throwIfMissing);
+
+var _dom = require('./util/dom');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+// All officially-supported browsers have this, but it's easy to
+// account for, just in case.
+var HAS_ANIMATION = 'animation' in document.body.style;
+
+var ZoomPane = (function () {
+  function ZoomPane() {
+    var _this = this;
+
+    var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+
+    _classCallCheck(this, ZoomPane);
+
+    this._completeShow = function () {
+      _this.el.removeEventListener('animationend', _this._completeShow, false);
+
+      _this.isShowing = true;
+
+      (0, _dom.removeClasses)(_this.el, _this.openingClasses);
+    };
+
+    this._completeHide = function () {
+      _this.el.removeEventListener('animationend', _this._completeHide, false);
+
+      _this.isShowing = false;
+
+      (0, _dom.removeClasses)(_this.el, _this.openClasses);
+      (0, _dom.removeClasses)(_this.el, _this.closingClasses);
+      (0, _dom.removeClasses)(_this.el, _this.inlineClasses);
+
+      // The window could have been resized above or below `inline`
+      // limits since the ZoomPane was shown. Because of this, we
+      // can't rely on `this._isInline` here.
+      if (_this.el.parentElement == _this.settings.container) {
+        _this.settings.container.removeChild(_this.el);
+      } else if (_this.el.parentElement == _this.settings.inlineContainer) {
+        _this.settings.inlineContainer.removeChild(_this.el);
+      }
+    };
+
+    this.isShowing = false;
+
+    var _options$container = options.container;
+    var container = _options$container === undefined ? null : _options$container;
+    var _options$inlineContai = options.inlineContainer;
+    var inlineContainer = _options$inlineContai === undefined ? (0, _throwIfMissing2.default)() : _options$inlineContai;
+    var _options$inline = options.inline;
+    var inline = _options$inline === undefined ? (0, _throwIfMissing2.default)() : _options$inline;
+    var _options$namespace = options.namespace;
+    var namespace = _options$namespace === undefined ? null : _options$namespace;
+
+    this.settings = { container: container, inlineContainer: inlineContainer, inline: inline, namespace: namespace };
+
+    this.openClasses = this._buildClasses('open');
+    this.openingClasses = this._buildClasses('opening');
+    this.closingClasses = this._buildClasses('closing');
+    this.inlineClasses = this._buildClasses('inline');
+
+    this._buildElement();
+  }
+
+  _createClass(ZoomPane, [{
+    key: '_buildClasses',
+    value: function _buildClasses(suffix) {
+      var classes = ['drift-' + suffix];
+
+      var ns = this.settings.namespace;
+      if (ns) {
+        classes.push(ns + '-' + suffix);
+      }
+
+      return classes;
+    }
+  }, {
+    key: '_buildElement',
+    value: function _buildElement() {
+      this.el = document.createElement('div');
+      (0, _dom.addClasses)(this.el, this._buildClasses('zoom-pane'));
+    }
+  }, {
+    key: 'show',
+    value: function show() {
+      (0, _dom.addClasses)(this.el, this.openClasses);
+
+      if (this._isInline) {
+        this._showInline();
+      } else {
+        this._showInContainer();
+      }
+
+      if (HAS_ANIMATION) {
+        this.el.addEventListener('animationend', this._completeShow, false);
+        (0, _dom.addClasses)(this.el, this.openingClasses);
+      }
+    }
+  }, {
+    key: '_showInline',
+    value: function _showInline() {
+      this.settings.inlineContainer.appendChild(this.el);
+      (0, _dom.addClasses)(this.el, this.inlineClasses);
+    }
+  }, {
+    key: '_showInContainer',
+    value: function _showInContainer() {
+      this.settings.container.appendChild(this.el);
+    }
+  }, {
+    key: 'hide',
+    value: function hide() {
+      if (HAS_ANIMATION) {
+        this.el.addEventListener('animationend', this._completeHide, false);
+        (0, _dom.addClasses)(this.el, this.closingClasses);
+      } else {
+        (0, _dom.removeClasses)(this.el, this.openClasses);
+      }
+    }
+  }, {
+    key: '_isInline',
+    get: function get() {
+      var inline = this.settings.inline;
+
+      return inline === true || typeof inline === 'number' && window.innerWidth <= inline;
+    }
+  }]);
+
+  return ZoomPane;
+})();
+
+exports.default = ZoomPane;
+
+},{"./util/dom":5,"./util/throwIfMissing":6}],4:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = injectBaseStylesheet;
-var RULES = '\n@keyframes noop {  }\n\n.lum-lightbox {\n  position: fixed;\n  display: none;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n}\n\n.lum-lightbox.lum-open {\n  display: block;\n}\n\n.lum-lightbox.lum-opening, .lum-lightbox.lum-closing {\n  animation: noop;\n}\n\n.lum-lightbox-inner {\n  position: absolute;\n  top: 0%;\n  right: 0%;\n  bottom: 0%;\n  left: 0%;\n\n  overflow: hidden;\n}\n\n.lum-lightbox-inner img {\n  max-width: 100%;\n  max-height: 100%;\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n  display: block;\n}\n';
+var RULES = '\n@keyframes noop {  }\n\n.drift-zoom-pane.drift-open {\n  display: block;\n}\n\n.drift-zoom-pane.drift-opening, .drift-zoom-pane.drift-closing {\n  animation: noop;\n}\n';
 
 function injectBaseStylesheet() {
-  if (document.querySelector('.lum-base-styles')) {
+  if (document.querySelector('.drift-base-styles')) {
     return;
   }
 
   var styleEl = document.createElement('style');
   styleEl.type = 'text/css';
-  styleEl.classList.add('lum-base-styles');
+  styleEl.classList.add('drift-base-styles');
 
   styleEl.appendChild(document.createTextNode(RULES));
 
@@ -167,7 +399,7 @@ function injectBaseStylesheet() {
   head.insertBefore(styleEl, head.firstChild);
 }
 
-},{}],3:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -197,6 +429,17 @@ function removeClasses(el, classNames) {
   classNames.forEach(function (className) {
     el.classList.remove(className);
   });
+}
+
+},{}],6:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = throwIfMissing;
+function throwIfMissing() {
+  throw new Error('Missing parameter');
 }
 
 },{}]},{},[1]);

@@ -1,15 +1,16 @@
 import { isDOMElement } from './util/dom';
 import injectBaseStylesheet from './injectBaseStylesheet';
 
+import Trigger from './Trigger';
+import ZoomPane from './ZoomPane';
+
 export const VERSION = '0.1.0';
 
 export default class Drift {
-  constructor(trigger, options = {}) {
-    this.isShowing = false;
+  constructor(triggerEl, options = {}) {
+    this.triggerEl = triggerEl;
 
-    this.trigger = trigger;
-
-    if (!isDOMElement(this.trigger)) {
+    if (!isDOMElement(this.triggerEl)) {
       throw new TypeError('`new Drift` requires a DOM element as its first argument.');
     }
 
@@ -18,71 +19,66 @@ export default class Drift {
     // https://github.com/getify/You-Dont-Know-JS/blob/master/es6%20&%20beyond/ch2.md#nested-defaults-destructured-and-restructured
     let {
       // Prefix for generated element class names (e.g. `my-ns` will
-      // result in classes such as `my-ns-lightbox`. Default `lum-`
+      // result in classes such as `my-ns-pane`. Default `drift-`
       // prefixed classes will always be added as well.
       namespace = null,
-      // Which attribute to pull the lightbox image source from.
-      sourceAttribute = 'href',
-      // The event to listen to on the _trigger_ element: triggers opening.
-      openTrigger = 'click',
-      // The event to listen to on the _lightbox_ element: triggers closing.
-      closeTrigger = 'click',
-      // Allow closing by pressing escape.
-      closeWithEscape = true,
-      // A selector defining what to append the lightbox element to.
-      appendToSelector = 'body',
+      // Which attribute to pull the ZoomPane image source from.
+      sourceAttribute = 'data-zoom',
+      // A DOM element to append the non-inline ZoomPane to.
+      // Required if `inlinePane !== true`.
+      paneContainer = null,
+      // When to switch to an inline ZoomPane. This can be a boolean or
+      // an integer. If `true`, the ZoomPane will always be inline,
+      // if `false`, it will switch to inline when `windowWidth <= inlinePane`
+      inlinePane = 375,
+      // The element to attach the inline ZoomPane to.
+      inlineContainer = document.body,
       // If present (and a function), this will be called
-      // whenever the lightbox is opened.
+      // whenever the ZoomPane is shown.
       onShow = null,
       // If present (and a function), this will be called
-      // whenever the lightbox is closed.
+      // whenever the ZoomPane is hidden.
       onHide = null,
-      // When true, adds the `imgix-fluid` class to the `img`
-      // inside the lightbox. See https://github.com/imgix/imgix.js
-      // for more information.
-      includeImgixJSClass = false,
       // Add base styles to the page. See the "Theming"
       // section of README.md for more information.
       injectBaseStyles = true,
-    } = options
+    } = options;
 
-    this.settings = { namespace, sourceAttribute, openTrigger, closeTrigger, closeWithEscape, appendToSelector, onShow, onHide, includeImgixJSClass, injectBaseStyles }
+    if (inlinePane !== true && !isDOMElement(paneContainer)) {
+      throw new TypeError('`paneContainer` must be a DOM element when `inlinePane !== true`');
+    }
+
+    this.settings = { namespace, sourceAttribute, paneContainer, inlinePane, inlineContainer, onShow, onHide, injectBaseStyles };
 
     if (this.settings.injectBaseStyles) {
       injectBaseStylesheet();
     }
 
-    this._bindEvents();
+    // this._bindEvents();
+    this._buildZoomPane();
+    this._buildTrigger();
   }
 
-  _show = (e) => {
-    e.preventDefault();
-
-    let onShow = this.settings.onShow
-    if (onShow && typeof onShow === 'function') {
-      onShow();
-    }
-
-    this.isShowing = true;
+  get isShowing() {
+    return this.zoomPane.isShowing;
   }
 
-  _hide = (e) => {
-    e.preventDefault();
-
-    let onHide = this.settings.onHide
-    if (onHide && typeof onHide === 'function') {
-      onHide();
-    }
-
-    this.isShowing = false;
+  _buildZoomPane() {
+    this.zoomPane = new ZoomPane({
+      container: this.settings.paneContainer,
+      inlineContainer: this.settings.inlineContainer,
+      inline: this.settings.inlinePane,
+      namespace: this.settings.namespace,
+    });
   }
 
-  _bindEvents() {
-
-  }
-
-  _unbindEvents() {
-
+  _buildTrigger() {
+    this.trigger = new Trigger({
+      el: this.triggerEl,
+      zoomPane: this.zoomPane,
+      onShow: this.settings.onShow,
+      onHide: this.settings.onHide,
+    });
   }
 
   destroy = () => {

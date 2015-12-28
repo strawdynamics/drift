@@ -56,7 +56,7 @@
   </head>
 
   <body>
-    <a class="zoom-in" href="http://assets.imgix.net/unsplash/pretty2.jpg?w=1600">
+    <a class="drift-demo-1-trigger" href="http://assets.imgix.net/unsplash/pretty2.jpg?w=1600">
       <img src="http://assets.imgix.net/unsplash/pretty2.jpg?w=400">
     </a>
 
@@ -69,9 +69,11 @@
       <img src="https://assets.imgix.net/presskit/imgix-presskit.pdf?page=3&amp;fm=png&amp;w=320&amp;dpr=2" width="160" height="60" alt="imgix">
     </a>
 
-    <script src="dist/luminous.js"></script>
+    <script src="dist/Drift.js"></script>
     <script>
-      // new Drift;
+      new Drift(document.querySelector('.drift-demo-1-trigger'), {
+        paneContainer: document.querySelector('section')
+      });
     </script>
   </body>
 </html>
