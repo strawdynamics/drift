@@ -78,15 +78,17 @@ export default class Trigger {
       return;
     }
 
-    let movementX, movementY;
+    let movementX, movementY, isTouch;
 
     if (e.touches) {
       let firstTouch = e.touches[0];
       movementX = firstTouch.clientX;
       movementY = firstTouch.clientY;
+      isTouch = true;
     } else {
       movementX = e.clientX;
       movementY = e.clientY;
+      isTouch = false;
     }
 
     let el = this.settings.el;
@@ -98,7 +100,6 @@ export default class Trigger {
     let percentageOffsetY = offsetY / this.settings.el.clientHeight;
 
     this.settings.zoomPane.setPosition(percentageOffsetX,
-      percentageOffsetY, this.settings.el.clientWidth,
-      this.settings.el.clientHeight, rect);
+      percentageOffsetY, rect, isTouch);
   }
 }

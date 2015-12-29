@@ -19,7 +19,7 @@
       }
 
       .drift-demo-trigger {
-        max-width: 100%;
+        /*max-width: 100%;*/
       }
 
       .detail {
@@ -54,7 +54,7 @@
   </head>
 
   <body>
-    <img class="drift-demo-trigger" data-zoom="http://assets.imgix.net/unsplash/lighthouse.jpg?w=1200&amp;ch=DPR&amp;dpr=2" src="http://assets.imgix.net/unsplash/lighthouse.jpg?w=400&amp;ch=DPR&amp;dpr=2">
+    <img class="drift-demo-trigger" data-zoom="http://assets.imgix.net/unsplash/lighthouse.jpg?w=1200&amp;ch=DPR&amp;dpr=2" src="http://assets.imgix.net/unsplash/lighthouse.jpg?w=800&amp;ch=DPR&amp;dpr=2">
 
     <div class="detail">
       <section>
@@ -72,7 +72,7 @@
       new Drift(document.querySelector('.drift-demo-trigger'), {
         paneContainer: document.querySelector('.detail'),
         inlinePane: 400,
-        inlineOffsetY: -85,
+        // inlineOffsetY: -85,
         containInline: true
       });
     </script>
