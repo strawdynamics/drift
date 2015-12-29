@@ -39,7 +39,7 @@ export default class Drift {
       zoomFactor = 3,
       // A DOM element to append the non-inline ZoomPane to.
       // Required if `inlinePane !== true`.
-      paneContainer = null,
+      paneContainer = document.body,
       // When to switch to an inline ZoomPane. This can be a boolean or
       // an integer. If `true`, the ZoomPane will always be inline,
       // if `false`, it will switch to inline when `windowWidth <= inlinePane`

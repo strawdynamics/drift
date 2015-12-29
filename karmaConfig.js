@@ -2,7 +2,7 @@ const baseConfig = {
   frameworks: ['browserify', 'jasmine'],
   files: [
     {pattern: 'src/**/*.js', included: false, served: false},
-    'test/**/*.js'
+    'test/**/test*.js'
   ],
   preprocessors: {
     'src/**/*.js': 'browserify',

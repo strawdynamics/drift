@@ -86,7 +86,7 @@ var Drift = (function () {
     var
     // A DOM element to append the non-inline ZoomPane to.
     // Required if `inlinePane !== true`.
-    paneContainer = _options$paneContaine === undefined ? null : _options$paneContaine;
+    paneContainer = _options$paneContaine === undefined ? document.body : _options$paneContaine;
     var _options$inlinePane = options.inlinePane;
     var
     // When to switch to an inline ZoomPane. This can be a boolean or
@@ -487,8 +487,18 @@ var ZoomPane = (function () {
       this.imgEl.style.transform = 'translate(' + left + 'px, ' + top + 'px)';
     }
   }, {
+    key: '_removeListenersAndResetClasses',
+    value: function _removeListenersAndResetClasses() {
+      this.el.removeEventListener('animationend', this._completeShow, false);
+      this.el.removeEventListener('animationend', this._completeHide, false);
+      (0, _dom.removeClasses)(this.el, this.openClasses);
+      (0, _dom.removeClasses)(this.el, this.closingClasses);
+      (0, _dom.removeClasses)(this.el, this.inlineClasses);
+    }
+  }, {
     key: 'show',
     value: function show(imageURL, triggerWidth) {
+      this._removeListenersAndResetClasses();
       this.isShowing = true;
 
       (0, _dom.addClasses)(this.el, this.openClasses);
@@ -521,6 +531,7 @@ var ZoomPane = (function () {
   }, {
     key: 'hide',
     value: function hide() {
+      this._removeListenersAndResetClasses();
       this.isShowing = false;
 
       if (HAS_ANIMATION) {
@@ -528,6 +539,7 @@ var ZoomPane = (function () {
         (0, _dom.addClasses)(this.el, this.closingClasses);
       } else {
         (0, _dom.removeClasses)(this.el, this.openClasses);
+        (0, _dom.removeClasses)(this.el, this.inlineClasses);
       }
     }
   }, {
