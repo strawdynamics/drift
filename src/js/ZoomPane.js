@@ -61,15 +61,19 @@ export default class ZoomPane {
 
   // `percentageOffsetX` and `percentageOffsetY` must be percentages
   // expressed as floats between `0' and `1`.
-  setPosition(percentageOffsetX, percentageOffsetY, triggerRect, isTouch) {
+  setPosition(percentageOffsetX, percentageOffsetY, triggerRect) {
     let left = -(this.imgEl.clientWidth * percentageOffsetX - (this.el.clientWidth / 2));
     let top = -(this.imgEl.clientHeight * percentageOffsetY - (this.el.clientHeight / 2));
     let maxLeft = -(this.imgEl.clientWidth - this.el.clientWidth);
     let maxTop = -(this.imgEl.clientHeight - this.el.clientHeight);
 
     if (this.el.parentElement === this.settings.inlineContainer) {
-      let scrollX = isTouch ? 0 : window.scrollX;
-      let scrollY = isTouch ? 0 : window.scrollY;
+      // This may be needed in the future to deal with browser event
+      // inconsistencies, but it's difficult to tell for sure.
+      // let scrollX = isTouch ? 0 : window.scrollX;
+      // let scrollY = isTouch ? 0 : window.scrollY;
+      let scrollX = window.scrollX;
+      let scrollY = window.scrollY;
 
       let inlineLeft = triggerRect.left + (percentageOffsetX * triggerRect.width)
         - (this.el.clientWidth / 2) + this.settings.inlineOffsetX + scrollX;

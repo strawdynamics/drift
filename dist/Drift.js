@@ -292,18 +292,15 @@ var _initialiseProps = function _initialiseProps() {
     }
 
     var movementX = undefined,
-        movementY = undefined,
-        isTouch = undefined;
+        movementY = undefined;
 
     if (e.touches) {
       var firstTouch = e.touches[0];
       movementX = firstTouch.clientX;
       movementY = firstTouch.clientY;
-      isTouch = true;
     } else {
       movementX = e.clientX;
       movementY = e.clientY;
-      isTouch = false;
     }
 
     var el = _this.settings.el;
@@ -314,7 +311,7 @@ var _initialiseProps = function _initialiseProps() {
     var percentageOffsetX = offsetX / _this.settings.el.clientWidth;
     var percentageOffsetY = offsetY / _this.settings.el.clientHeight;
 
-    _this.settings.zoomPane.setPosition(percentageOffsetX, percentageOffsetY, rect, isTouch);
+    _this.settings.zoomPane.setPosition(percentageOffsetX, percentageOffsetY, rect);
   };
 };
 
@@ -443,15 +440,19 @@ var ZoomPane = (function () {
 
   }, {
     key: 'setPosition',
-    value: function setPosition(percentageOffsetX, percentageOffsetY, triggerRect, isTouch) {
+    value: function setPosition(percentageOffsetX, percentageOffsetY, triggerRect) {
       var left = -(this.imgEl.clientWidth * percentageOffsetX - this.el.clientWidth / 2);
       var top = -(this.imgEl.clientHeight * percentageOffsetY - this.el.clientHeight / 2);
       var maxLeft = -(this.imgEl.clientWidth - this.el.clientWidth);
       var maxTop = -(this.imgEl.clientHeight - this.el.clientHeight);
 
       if (this.el.parentElement === this.settings.inlineContainer) {
-        var scrollX = isTouch ? 0 : window.scrollX;
-        var scrollY = isTouch ? 0 : window.scrollY;
+        // This may be needed in the future to deal with browser event
+        // inconsistencies, but it's difficult to tell for sure.
+        // let scrollX = isTouch ? 0 : window.scrollX;
+        // let scrollY = isTouch ? 0 : window.scrollY;
+        var scrollX = window.scrollX;
+        var scrollY = window.scrollY;
 
         var inlineLeft = triggerRect.left + percentageOffsetX * triggerRect.width - this.el.clientWidth / 2 + this.settings.inlineOffsetX + scrollX;
         var inlineTop = triggerRect.top + percentageOffsetY * triggerRect.height - this.el.clientHeight / 2 + this.settings.inlineOffsetY + scrollY;
