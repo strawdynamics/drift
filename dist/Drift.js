@@ -450,16 +450,11 @@ var ZoomPane = (function () {
       var maxTop = -(this.imgEl.clientHeight - this.el.clientHeight);
 
       if (this.el.parentElement === this.settings.inlineContainer) {
-        var scrollX = window.scrollX;
-        var scrollY = window.scrollY;
+        var scrollX = isTouch ? 0 : window.scrollX;
+        var scrollY = isTouch ? 0 : window.scrollY;
 
-        var inlineLeft = triggerRect.left + percentageOffsetX * triggerRect.width - this.el.clientWidth / 2 + this.settings.inlineOffsetX;
-        var inlineTop = triggerRect.top + percentageOffsetY * triggerRect.height - this.el.clientHeight / 2 + this.settings.inlineOffsetY;
-
-        if (!isTouch) {
-          inlineLeft += scrollX;
-          inlineTop += scrollY;
-        }
+        var inlineLeft = triggerRect.left + percentageOffsetX * triggerRect.width - this.el.clientWidth / 2 + this.settings.inlineOffsetX + scrollX;
+        var inlineTop = triggerRect.top + percentageOffsetY * triggerRect.height - this.el.clientHeight / 2 + this.settings.inlineOffsetY + scrollY;
 
         if (this.settings.containInline) {
           var elRect = this.el.getBoundingClientRect();

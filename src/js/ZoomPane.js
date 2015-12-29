@@ -68,18 +68,13 @@ export default class ZoomPane {
     let maxTop = -(this.imgEl.clientHeight - this.el.clientHeight);
 
     if (this.el.parentElement === this.settings.inlineContainer) {
-      let scrollX = window.scrollX;
-      let scrollY = window.scrollY;
+      let scrollX = isTouch ? 0 : window.scrollX;
+      let scrollY = isTouch ? 0 : window.scrollY;
 
       let inlineLeft = triggerRect.left + (percentageOffsetX * triggerRect.width)
-        - (this.el.clientWidth / 2) + this.settings.inlineOffsetX;
+        - (this.el.clientWidth / 2) + this.settings.inlineOffsetX + scrollX;
       let inlineTop = triggerRect.top + (percentageOffsetY * triggerRect.height)
-        - (this.el.clientHeight / 2) + this.settings.inlineOffsetY;
-
-      if (!isTouch) {
-        inlineLeft += scrollX;
-        inlineTop += scrollY;
-      }
+        - (this.el.clientHeight / 2) + this.settings.inlineOffsetY + scrollY;
 
       if (this.settings.containInline) {
         let elRect = this.el.getBoundingClientRect();
