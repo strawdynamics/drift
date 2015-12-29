@@ -311,7 +311,7 @@ var _initialiseProps = function _initialiseProps() {
     var percentageOffsetX = offsetX / _this.settings.el.clientWidth;
     var percentageOffsetY = offsetY / _this.settings.el.clientHeight;
 
-    _this.settings.zoomPane.setPosition(percentageOffsetX, percentageOffsetY, _this.settings.el.clientWidth, _this.settings.el.clientHeight, rect);
+    _this.settings.zoomPane.setPosition(percentageOffsetX, percentageOffsetY, rect);
   };
 };
 
@@ -440,29 +440,36 @@ var ZoomPane = (function () {
 
   }, {
     key: 'setPosition',
-    value: function setPosition(percentageOffsetX, percentageOffsetY, triggerWidth, triggerHeight, triggerRect) {
+    value: function setPosition(percentageOffsetX, percentageOffsetY, triggerRect) {
       var left = -(this.imgEl.clientWidth * percentageOffsetX - this.el.clientWidth / 2);
       var top = -(this.imgEl.clientHeight * percentageOffsetY - this.el.clientHeight / 2);
       var maxLeft = -(this.imgEl.clientWidth - this.el.clientWidth);
       var maxTop = -(this.imgEl.clientHeight - this.el.clientHeight);
 
       if (this.el.parentElement === this.settings.inlineContainer) {
-        var inlineLeft = triggerRect.left + percentageOffsetX * triggerWidth - this.el.clientWidth / 2 + this.settings.inlineOffsetX;
-        var inlineTop = triggerRect.top + percentageOffsetY * triggerHeight - this.el.clientHeight / 2 + this.settings.inlineOffsetY;
+        // This may be needed in the future to deal with browser event
+        // inconsistencies, but it's difficult to tell for sure.
+        // let scrollX = isTouch ? 0 : window.scrollX;
+        // let scrollY = isTouch ? 0 : window.scrollY;
+        var scrollX = window.scrollX;
+        var scrollY = window.scrollY;
+
+        var inlineLeft = triggerRect.left + percentageOffsetX * triggerRect.width - this.el.clientWidth / 2 + this.settings.inlineOffsetX + scrollX;
+        var inlineTop = triggerRect.top + percentageOffsetY * triggerRect.height - this.el.clientHeight / 2 + this.settings.inlineOffsetY + scrollY;
 
         if (this.settings.containInline) {
           var elRect = this.el.getBoundingClientRect();
 
-          if (inlineLeft < triggerRect.left) {
-            inlineLeft = triggerRect.left;
-          } else if (inlineLeft + this.el.clientWidth > triggerRect.left + triggerWidth) {
-            inlineLeft = triggerRect.left + triggerWidth - this.el.clientWidth;
+          if (inlineLeft < triggerRect.left + scrollX) {
+            inlineLeft = triggerRect.left + scrollX;
+          } else if (inlineLeft + this.el.clientWidth > triggerRect.left + triggerRect.width + scrollX) {
+            inlineLeft = triggerRect.left + triggerRect.width - this.el.clientWidth + scrollX;
           }
 
-          if (inlineTop < triggerRect.top) {
-            inlineTop = triggerRect.top;
-          } else if (inlineTop + this.el.clientHeight > triggerRect.top + triggerHeight) {
-            inlineTop = triggerRect.top + triggerHeight - this.el.clientHeight;
+          if (inlineTop < triggerRect.top + scrollY) {
+            inlineTop = triggerRect.top + scrollY;
+          } else if (inlineTop + this.el.clientHeight > triggerRect.top + triggerRect.height + scrollY) {
+            inlineTop = triggerRect.top + triggerRect.height - this.el.clientHeight + scrollY;
           }
         }
 

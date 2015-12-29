@@ -98,7 +98,6 @@ export default class Trigger {
     let percentageOffsetY = offsetY / this.settings.el.clientHeight;
 
     this.settings.zoomPane.setPosition(percentageOffsetX,
-      percentageOffsetY, this.settings.el.clientWidth,
-      this.settings.el.clientHeight, rect);
+      percentageOffsetY, rect);
   }
 }

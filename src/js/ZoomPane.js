@@ -61,31 +61,39 @@ export default class ZoomPane {
 
   // `percentageOffsetX` and `percentageOffsetY` must be percentages
   // expressed as floats between `0' and `1`.
-  setPosition(percentageOffsetX, percentageOffsetY, triggerWidth, triggerHeight, triggerRect) {
+  setPosition(percentageOffsetX, percentageOffsetY, triggerRect) {
     let left = -(this.imgEl.clientWidth * percentageOffsetX - (this.el.clientWidth / 2));
     let top = -(this.imgEl.clientHeight * percentageOffsetY - (this.el.clientHeight / 2));
     let maxLeft = -(this.imgEl.clientWidth - this.el.clientWidth);
     let maxTop = -(this.imgEl.clientHeight - this.el.clientHeight);
 
     if (this.el.parentElement === this.settings.inlineContainer) {
-      let inlineLeft = triggerRect.left + (percentageOffsetX * triggerWidth)
-        - (this.el.clientWidth / 2) + this.settings.inlineOffsetX;
-      let inlineTop = triggerRect.top + (percentageOffsetY * triggerHeight)
-        - (this.el.clientHeight / 2) + this.settings.inlineOffsetY;
+      // This may be needed in the future to deal with browser event
+      // inconsistencies, but it's difficult to tell for sure.
+      // let scrollX = isTouch ? 0 : window.scrollX;
+      // let scrollY = isTouch ? 0 : window.scrollY;
+      let scrollX = window.scrollX;
+      let scrollY = window.scrollY;
+
+      let inlineLeft = triggerRect.left + (percentageOffsetX * triggerRect.width)
+        - (this.el.clientWidth / 2) + this.settings.inlineOffsetX + scrollX;
+      let inlineTop = triggerRect.top + (percentageOffsetY * triggerRect.height)
+        - (this.el.clientHeight / 2) + this.settings.inlineOffsetY + scrollY;
 
       if (this.settings.containInline) {
         let elRect = this.el.getBoundingClientRect();
 
-        if (inlineLeft < triggerRect.left) {
-          inlineLeft = triggerRect.left;
-        } else if (inlineLeft + this.el.clientWidth > triggerRect.left + triggerWidth) {
-          inlineLeft = triggerRect.left + triggerWidth - this.el.clientWidth;
+
+        if (inlineLeft < triggerRect.left + scrollX) {
+          inlineLeft = triggerRect.left + scrollX;
+        } else if (inlineLeft + this.el.clientWidth > triggerRect.left + triggerRect.width + scrollX) {
+          inlineLeft = triggerRect.left + triggerRect.width - this.el.clientWidth + scrollX;
         }
 
-        if (inlineTop < triggerRect.top) {
-          inlineTop = triggerRect.top;
-        } else if (inlineTop + this.el.clientHeight > triggerRect.top + triggerHeight) {
-          inlineTop = triggerRect.top + triggerHeight - this.el.clientHeight;
+        if (inlineTop < triggerRect.top + scrollY) {
+          inlineTop = triggerRect.top + scrollY;
+        } else if (inlineTop + this.el.clientHeight > triggerRect.top + triggerRect.height + scrollY) {
+          inlineTop = triggerRect.top + triggerRect.height - this.el.clientHeight + scrollY;
         }
       }
 
