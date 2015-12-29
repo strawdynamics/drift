@@ -23,7 +23,7 @@ export default class Drift {
       // prefixed classes will always be added as well.
       namespace = null,
       // Whether the ZoomPane should show whitespace when near the edges.
-      contain = true,
+      showWhitespaceAtEdges = false,
       // Whether the inline ZoomPane should stay inside
       // the bounds of its image.
       containInline = false,
@@ -61,7 +61,7 @@ export default class Drift {
       throw new TypeError('`paneContainer` must be a DOM element when `inlinePane !== true`');
     }
 
-    this.settings = { namespace, contain, containInline, inlineOffsetX, inlineOffsetY, sourceAttribute, zoomFactor, paneContainer, inlinePane, handleTouch, onShow, onHide, injectBaseStyles };
+    this.settings = { namespace, showWhitespaceAtEdges, containInline, inlineOffsetX, inlineOffsetY, sourceAttribute, zoomFactor, paneContainer, inlinePane, handleTouch, onShow, onHide, injectBaseStyles };
 
     if (this.settings.injectBaseStyles) {
       injectBaseStylesheet();
@@ -89,7 +89,7 @@ export default class Drift {
     this.zoomPane = new ZoomPane({
       container: this.settings.paneContainer,
       zoomFactor: this.settings.zoomFactor,
-      contain: this.settings.contain,
+      showWhitespaceAtEdges: this.settings.showWhitespaceAtEdges,
       containInline: this.settings.containInline,
       inline: this.settings.inlinePane,
       namespace: this.settings.namespace,

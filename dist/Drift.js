@@ -56,10 +56,10 @@ var Drift = (function () {
     // result in classes such as `my-ns-pane`. Default `drift-`
     // prefixed classes will always be added as well.
     namespace = _options$namespace === undefined ? null : _options$namespace;
-    var _options$contain = options.contain;
+    var _options$showWhitespa = options.showWhitespaceAtEdges;
     var
     // Whether the ZoomPane should show whitespace when near the edges.
-    contain = _options$contain === undefined ? true : _options$contain;
+    showWhitespaceAtEdges = _options$showWhitespa === undefined ? false : _options$showWhitespa;
     var _options$containInlin = options.containInline;
     var
     // Whether the inline ZoomPane should stay inside
@@ -117,7 +117,7 @@ var Drift = (function () {
       throw new TypeError('`paneContainer` must be a DOM element when `inlinePane !== true`');
     }
 
-    this.settings = { namespace: namespace, contain: contain, containInline: containInline, inlineOffsetX: inlineOffsetX, inlineOffsetY: inlineOffsetY, sourceAttribute: sourceAttribute, zoomFactor: zoomFactor, paneContainer: paneContainer, inlinePane: inlinePane, handleTouch: handleTouch, onShow: onShow, onHide: onHide, injectBaseStyles: injectBaseStyles };
+    this.settings = { namespace: namespace, showWhitespaceAtEdges: showWhitespaceAtEdges, containInline: containInline, inlineOffsetX: inlineOffsetX, inlineOffsetY: inlineOffsetY, sourceAttribute: sourceAttribute, zoomFactor: zoomFactor, paneContainer: paneContainer, inlinePane: inlinePane, handleTouch: handleTouch, onShow: onShow, onHide: onHide, injectBaseStyles: injectBaseStyles };
 
     if (this.settings.injectBaseStyles) {
       (0, _injectBaseStylesheet2.default)();
@@ -134,7 +134,7 @@ var Drift = (function () {
       this.zoomPane = new _ZoomPane2.default({
         container: this.settings.paneContainer,
         zoomFactor: this.settings.zoomFactor,
-        contain: this.settings.contain,
+        showWhitespaceAtEdges: this.settings.showWhitespaceAtEdges,
         containInline: this.settings.containInline,
         inline: this.settings.inlinePane,
         namespace: this.settings.namespace,
@@ -361,7 +361,7 @@ var ZoomPane = (function () {
       (0, _dom.removeClasses)(_this.el, _this.closingClasses);
       (0, _dom.removeClasses)(_this.el, _this.inlineClasses);
 
-      _this.el.setAttribute('style', {});
+      _this.el.setAttribute('style', '');
 
       // The window could have been resized above or below `inline`
       // limits since the ZoomPane was shown. Because of this, we
@@ -383,8 +383,8 @@ var ZoomPane = (function () {
     var inline = _options$inline === undefined ? (0, _throwIfMissing2.default)() : _options$inline;
     var _options$namespace = options.namespace;
     var namespace = _options$namespace === undefined ? null : _options$namespace;
-    var _options$contain = options.contain;
-    var contain = _options$contain === undefined ? (0, _throwIfMissing2.default)() : _options$contain;
+    var _options$showWhitespa = options.showWhitespaceAtEdges;
+    var showWhitespaceAtEdges = _options$showWhitespa === undefined ? (0, _throwIfMissing2.default)() : _options$showWhitespa;
     var _options$containInlin = options.containInline;
     var containInline = _options$containInlin === undefined ? (0, _throwIfMissing2.default)() : _options$containInlin;
     var _options$inlineOffset = options.inlineOffsetX;
@@ -392,7 +392,7 @@ var ZoomPane = (function () {
     var _options$inlineOffset2 = options.inlineOffsetY;
     var inlineOffsetY = _options$inlineOffset2 === undefined ? 0 : _options$inlineOffset2;
 
-    this.settings = { container: container, zoomFactor: zoomFactor, inline: inline, namespace: namespace, contain: contain, containInline: containInline, inlineOffsetX: inlineOffsetX, inlineOffsetY: inlineOffsetY };
+    this.settings = { container: container, zoomFactor: zoomFactor, inline: inline, namespace: namespace, showWhitespaceAtEdges: showWhitespaceAtEdges, containInline: containInline, inlineOffsetX: inlineOffsetX, inlineOffsetY: inlineOffsetY };
     this.settings.inlineContainer = document.body;
 
     this.openClasses = this._buildClasses('open');
@@ -470,7 +470,7 @@ var ZoomPane = (function () {
         this.el.style.top = inlineTop + 'px';
       }
 
-      if (this.settings.contain) {
+      if (!this.settings.showWhitespaceAtEdges) {
         if (left > 0) {
           left = 0;
         } else if (left < maxLeft) {

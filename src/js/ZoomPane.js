@@ -14,13 +14,13 @@ export default class ZoomPane {
       zoomFactor = throwIfMissing(),
       inline = throwIfMissing(),
       namespace = null,
-      contain = throwIfMissing(),
+      showWhitespaceAtEdges = throwIfMissing(),
       containInline = throwIfMissing(),
       inlineOffsetX = 0,
       inlineOffsetY = 0,
     } = options;
 
-    this.settings = { container, zoomFactor, inline, namespace, contain, containInline, inlineOffsetX, inlineOffsetY };
+    this.settings = { container, zoomFactor, inline, namespace, showWhitespaceAtEdges, containInline, inlineOffsetX, inlineOffsetY };
     this.settings.inlineContainer = document.body;
 
     this.openClasses = this._buildClasses('open');
@@ -93,7 +93,7 @@ export default class ZoomPane {
       this.el.style.top = `${inlineTop}px`;
     }
 
-    if (this.settings.contain) {
+    if (!this.settings.showWhitespaceAtEdges) {
       if (left > 0) {
         left = 0;
       } else if (left < maxLeft) {
@@ -169,7 +169,7 @@ export default class ZoomPane {
     removeClasses(this.el, this.closingClasses);
     removeClasses(this.el, this.inlineClasses);
 
-    this.el.setAttribute('style', {});
+    this.el.setAttribute('style', '');
 
     // The window could have been resized above or below `inline`
     // limits since the ZoomPane was shown. Because of this, we

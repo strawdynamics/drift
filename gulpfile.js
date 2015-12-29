@@ -37,7 +37,7 @@ function runKarmaTests(configObj, done, singleRun) {
   }).start();
 }
 
-gulp.task('default', ['build', 'test-headless-no-watch']);
+gulp.task('default', ['build', 'test-headless']);
 
 gulp.task('build', ['build-js', 'build-css']);
 // When actually setting up CI stuff, this will need to run in sequence.
@@ -47,14 +47,10 @@ gulp.task('build-ci', function() {
 });
 
 gulp.task('test-local', function(done) {
-  runKarmaTests(karmaConfig.local, done);
+  runKarmaTests(karmaConfig.local, done, true);
 });
 
 gulp.task('test-headless', function(done) {
-  runKarmaTests(karmaConfig.headless, done);
-});
-
-gulp.task('test-headless-no-watch', function(done) {
   runKarmaTests(karmaConfig.headless, done, true);
 });
 
@@ -66,7 +62,7 @@ gulp.task('test-full', function(done) {
     });
   }
 
-  runKarmaTests(karmaConfig.full, done);
+  runKarmaTests(karmaConfig.full, done, true);
 });
 
 
