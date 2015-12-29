@@ -493,7 +493,6 @@ var ZoomPane = (function () {
       this.el.removeEventListener('animationend', this._completeHide, false);
       (0, _dom.removeClasses)(this.el, this.openClasses);
       (0, _dom.removeClasses)(this.el, this.closingClasses);
-      (0, _dom.removeClasses)(this.el, this.inlineClasses);
     }
   }, {
     key: 'show',

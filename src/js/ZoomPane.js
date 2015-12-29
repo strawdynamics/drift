@@ -121,7 +121,6 @@ export default class ZoomPane {
     this.el.removeEventListener('animationend', this._completeHide, false);
     removeClasses(this.el, this.openClasses);
     removeClasses(this.el, this.closingClasses);
-    removeClasses(this.el, this.inlineClasses);
   }
 
 

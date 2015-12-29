@@ -23,7 +23,7 @@ Easily add "zoom on hover" functionality to your site's images. Lightweight, no-
 <a name="usage"></a>
 ## Usage
 
-Once you've installed Drift via one of the above methods, you're ready to get started. There are no dependencies, so you can just start making cool stuff. Check out the [announcement blog post](http://blog.imgix.com/TODO) for a demo, or clone/download the repository and take a peek at `index.html` in your browser. Here's an example of the most basic possible implementation:
+Once you've installed Drift via one of the above methods, you're ready to get started. There are no dependencies, so you can just start making cool stuff. Check out the [announcement blog post](http://blog.imgix.com/TODO) for a demo, or take a peek here: https://imgix.github.io/drift. Here's an example of the most basic possible implementation:
 
 ``` html
 <img src="http://assets.imgix.net/dog.png?w=400" data-zoom="http://assets.imgix.net/dog.png?w=1200">
@@ -48,7 +48,14 @@ new Drift(document.querySelector('img'), {
 	// prefixed classes will always be added as well.
 	namespace = null,
 	// Whether the ZoomPane should show whitespace when near the edges.
-	contain = true,
+	showWhitespaceAtEdges = false,
+	// Whether the inline ZoomPane should stay inside
+	// the bounds of its image.
+	containInline = false,
+	// How much to offset the ZoomPane from the
+	// interaction point when inline.
+	inlineOffsetX = 0,
+	inlineOffsetY = 0,
 	// Which trigger attribute to pull the ZoomPane image source from.
 	sourceAttribute = 'data-zoom',
 	// How much to magnify the trigger by in the ZoomPane.
@@ -57,7 +64,7 @@ new Drift(document.querySelector('img'), {
 	zoomFactor = 3,
 	// A DOM element to append the non-inline ZoomPane to.
 	// Required if `inlinePane !== true`.
-	paneContainer = null,
+	paneContainer = document.body,
 	// When to switch to an inline ZoomPane. This can be a boolean or
 	// an integer. If `true`, the ZoomPane will always be inline,
 	// if `false`, it will switch to inline when `windowWidth <= inlinePane`
