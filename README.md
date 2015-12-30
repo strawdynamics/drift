@@ -41,46 +41,50 @@ new Drift(document.querySelector('img'), {
 <a name="options-defaults"></a>
 ## Options / Defaults
 
+Here's an example of using Drift with a custom configuration. All of the listed options are displayed with their default value.
+
 ``` javascript
 {
 	// Prefix for generated element class names (e.g. `my-ns` will
 	// result in classes such as `my-ns-pane`. Default `drift-`
 	// prefixed classes will always be added as well.
-	namespace = null,
+	namespace: null,
 	// Whether the ZoomPane should show whitespace when near the edges.
-	showWhitespaceAtEdges = false,
+	showWhitespaceAtEdges: false,
 	// Whether the inline ZoomPane should stay inside
 	// the bounds of its image.
-	containInline = false,
+	containInline: false,
 	// How much to offset the ZoomPane from the
 	// interaction point when inline.
-	inlineOffsetX = 0,
-	inlineOffsetY = 0,
+	inlineOffsetX: 0,
+	inlineOffsetY: 0,
 	// Which trigger attribute to pull the ZoomPane image source from.
-	sourceAttribute = 'data-zoom',
+	sourceAttribute: 'data-zoom',
 	// How much to magnify the trigger by in the ZoomPane.
-	// (e.g., `zoomFactor = 3` will result in a 900 px wide ZoomPane image
+	// (e.g., `zoomFactor: 3` will result in a 900 px wide ZoomPane image
 	// if the trigger is displayed at 300 px wide)
-	zoomFactor = 3,
+	zoomFactor: 3,
 	// A DOM element to append the non-inline ZoomPane to.
 	// Required if `inlinePane !== true`.
-	paneContainer = document.body,
+	paneContainer: document.body,
 	// When to switch to an inline ZoomPane. This can be a boolean or
 	// an integer. If `true`, the ZoomPane will always be inline,
 	// if `false`, it will switch to inline when `windowWidth <= inlinePane`
-	inlinePane = 375,
+	inlinePane: 375,
 	// If `true`, touch events will trigger the zoom, like mouse events.
-	handleTouch = true,
+	handleTouch: true,
 	// If present (and a function), this will be called
 	// whenever the ZoomPane is shown.
-	onShow = null,
+	onShow: null,
 	// If present (and a function), this will be called
 	// whenever the ZoomPane is hidden.
-	onHide = null,
+	onHide: null,
 	// Add base styles to the page. See the "Theming"
 	// section of README.md for more information.
-	injectBaseStyles = true,
+	injectBaseStyles: true,
 }
+
+new Luminous(document.querySelector('img'), options);
 ```
 
 
