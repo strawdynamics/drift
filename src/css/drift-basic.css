@@ -1,25 +1,25 @@
 @keyframes fadeZoomIn {
-	0% { transform: scale(1.5); opacity: 0; }
-	100% { transform: scale(1); opacity: 1; }
+  0% { transform: scale(1.5); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
 }
 
 @keyframes fadeZoomOut {
-	0% { transform: scale(1); opacity: 1; }
-	15% { transform: scale(1.1); opacity: 1; }
-	100% { transform: scale(0.5); opacity: 0; }
+  0% { transform: scale(1); opacity: 1; }
+  15% { transform: scale(1.1); opacity: 1; }
+  100% { transform: scale(0.5); opacity: 0; }
 }
 
 .drift-zoom-pane.drift-opening {
-	animation: fadeZoomIn 180ms ease-out;
+  animation: fadeZoomIn 180ms ease-out;
 }
 
 .drift-zoom-pane.drift-closing {
-	animation: fadeZoomOut 210ms ease-in;
+  animation: fadeZoomOut 210ms ease-in;
 }
 
 .drift-zoom-pane.drift-inline {
-	width: 150px;
-	height: 150px;
-	border-radius: 75px !important;
-	box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+  width: 150px;
+  height: 150px;
+  border-radius: 75px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
 }

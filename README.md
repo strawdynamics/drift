@@ -44,7 +44,7 @@ new Drift(document.querySelector('img'), {
 Here's an example of using Drift with a custom configuration. All of the listed options are displayed with their default value.
 
 ``` javascript
-{
+var options = {
 	// Prefix for generated element class names (e.g. `my-ns` will
 	// result in classes such as `my-ns-pane`. Default `drift-`
 	// prefixed classes will always be added as well.
@@ -82,7 +82,7 @@ Here's an example of using Drift with a custom configuration. All of the listed 
 	// Add base styles to the page. See the "Theming"
 	// section of README.md for more information.
 	injectBaseStyles: true,
-}
+};
 
 new Luminous(document.querySelector('img'), options);
 ```
