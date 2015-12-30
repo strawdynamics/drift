@@ -421,6 +421,10 @@ var ZoomPane = (function () {
       this.el = document.createElement('div');
       (0, _dom.addClasses)(this.el, this._buildClasses('zoom-pane'));
 
+      var loaderEl = document.createElement('div');
+      (0, _dom.addClasses)(loaderEl, this._buildClasses('zoom-pane-loader'));
+      this.el.appendChild(loaderEl);
+
       this.imgEl = document.createElement('img');
       this.el.appendChild(this.imgEl);
     }
@@ -569,7 +573,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = injectBaseStylesheet;
-var RULES = '\n@keyframes noop {  }\n\n.drift-zoom-pane.drift-open {\n  display: block;\n}\n\n.drift-zoom-pane.drift-opening, .drift-zoom-pane.drift-closing {\n  animation: noop;\n}\n\n.drift-zoom-pane {\n  position: absolute;\n  overflow: hidden;\n  width: 100%;\n  height: 100%;\n  top: 0;\n  left: 0;\n}\n\n.drift-zoom-pane.drift-inline {\n  pointer-events: none;\n}\n\n.drift-zoom-pane img {\n  position: absolute;\n  display: block;\n}\n';
+var RULES = '\n@keyframes noop {  }\n\n.drift-zoom-pane.drift-open {\n  display: block;\n}\n\n.drift-zoom-pane.drift-opening, .drift-zoom-pane.drift-closing {\n  animation: noop;\n}\n\n.drift-zoom-pane {\n  position: absolute;\n  overflow: hidden;\n  width: 100%;\n  height: 100%;\n  top: 0;\n  left: 0;\n  pointer-events: none;\n}\n\n.drift-zoom-pane-loader {\n  display: none;\n}\n\n.drift-zoom-pane img {\n  position: absolute;\n  display: block;\n}\n';
 
 function injectBaseStylesheet() {
   if (document.querySelector('.drift-base-styles')) {

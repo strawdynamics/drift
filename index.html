@@ -12,33 +12,37 @@
     <link rel="stylesheet" media="screen, projection" href="./dist/drift-basic.css">
     <style type="text/css">
       body {
-        text-align: center;
         font-family: Helvetica Neue, Arial, sans;
         margin-top: 2em;
         background: #FAFAFA;
       }
 
+      .wrapper {
+        margin: 0 auto;
+        width: 860px;
+      }
+
       .drift-demo-trigger {
-        max-width: 100%;
+        width: 40%;
+        float: left;
       }
 
       .detail {
         position: relative;
-        max-width: 32em;
-        margin: 0 auto;
+        width: 55%;
+        margin-left: 5%;
+        float: left;
       }
 
       h1 {
-        text-align: center;
         color: #013C4A;
-        margin-top: 3em;
+        margin-top: 1em;
         margin-bottom: 1em;
       }
 
       p {
         max-width: 32em;
         margin-bottom: 1em;
-        text-align: left;
         color: #23637f;
         line-height: 1.6em;
       }
@@ -50,28 +54,66 @@
       a {
         color: #00C0FA;
       }
+
+      .ix-link {
+        display: block;
+        margin-bottom: 3em;
+      }
+
+      @media (max-width: 900px) {
+        .wrapper {
+          text-align: center;
+          width: auto;
+        }
+
+        .detail, .drift-demo-trigger {
+          float: none;
+        }
+
+        .drift-demo-trigger {
+          max-width: 100%;
+          width: auto;
+          margin: 0 auto;
+        }
+
+        .detail {
+          margin: 0;
+          width: auto;
+        }
+
+        p {
+          margin: 0 auto 1em;
+        }
+
+        .responsive-hint {
+          display: none;
+        }
+      }
     </style>
   </head>
 
   <body>
-    <img class="drift-demo-trigger" data-zoom="http://assets.imgix.net/unsplash/lighthouse.jpg?w=1200&amp;ch=DPR&amp;dpr=2" src="http://assets.imgix.net/unsplash/lighthouse.jpg?w=400&amp;ch=DPR&amp;dpr=2">
+    <div class="wrapper">
+      <img class="drift-demo-trigger" data-zoom="http://assets.imgix.net/unsplash/lighthouse.jpg?w=1200&amp;ch=DPR&amp;dpr=2" src="http://assets.imgix.net/unsplash/lighthouse.jpg?w=400&amp;ch=DPR&amp;dpr=2">
 
-    <div class="detail">
-      <section>
-        <h1>Drift Demo</h1>
-        <p>This is a demo of Drift, a simple, lightweight, no-dependencies JavaScript "zoom on hover" tool from <a href="http://imgix.com">imgix</a>. This demo uses the simple included theme, but it's very easy to extend and customize to fit your needs. You can <a href="https://github.com/imgix/drift">learn more and download it here</a>.</p>
-      </section>
+      <div class="detail">
+        <section>
+          <h1>Drift Demo</h1>
+          <p>This is a demo of Drift, a simple, lightweight, no-dependencies JavaScript "zoom on hover" tool from <a href="http://imgix.com">imgix</a>. This demo uses the simple included theme, but it's very easy to extend and customize to fit your needs. You can <a href="https://github.com/imgix/drift">learn more and download it here</a>.</p>
+          <p class="responsive-hint">(Psst… try making your brower window smaller!)</p>
+        </section>
 
-      <a href="https://imgix.com">
-        <img src="https://assets.imgix.net/presskit/imgix-presskit.pdf?page=3&amp;fm=png&amp;w=320&amp;dpr=2" width="160" height="60" alt="imgix">
-      </a>
+        <a href="https://imgix.com" class="ix-link">
+          <img src="https://assets.imgix.net/presskit/imgix-presskit.pdf?page=3&amp;fm=png&amp;w=320&amp;dpr=2" width="160" height="60" alt="imgix">
+        </a>
+      </div>
     </div>
 
     <script src="dist/Drift.js"></script>
     <script>
       new Drift(document.querySelector('.drift-demo-trigger'), {
         paneContainer: document.querySelector('.detail'),
-        inlinePane: 400,
+        inlinePane: 900,
         inlineOffsetY: -85,
         containInline: true
       });

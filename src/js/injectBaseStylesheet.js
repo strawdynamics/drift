@@ -16,10 +16,11 @@ const RULES = `
   height: 100%;
   top: 0;
   left: 0;
+  pointer-events: none;
 }
 
-.drift-zoom-pane.drift-inline {
-  pointer-events: none;
+.drift-zoom-pane-loader {
+  display: none;
 }
 
 .drift-zoom-pane img {

@@ -47,6 +47,10 @@ export default class ZoomPane {
     this.el = document.createElement('div');
     addClasses(this.el, this._buildClasses('zoom-pane'));
 
+    let loaderEl = document.createElement('div');
+    addClasses(loaderEl, this._buildClasses('zoom-pane-loader'));
+    this.el.appendChild(loaderEl);
+
     this.imgEl = document.createElement('img');
     this.el.appendChild(this.imgEl);
   }
