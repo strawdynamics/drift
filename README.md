@@ -23,7 +23,7 @@ Easily add "zoom on hover" functionality to your site's images. Lightweight, no-
 <a name="usage"></a>
 ## Usage
 
-Once you've installed Drift via one of the above methods, you're ready to get started. There are no dependencies, so you can just start making cool stuff. Check out the [announcement blog post](http://blog.imgix.com/TODO) for a demo, or take a peek here: https://imgix.github.io/drift. Here's an example of the most basic possible implementation:
+Once you've installed Drift via one of the above methods, you're ready to get started. There are no dependencies, so you can just start making cool stuff. Check out the [announcement blog post](http://blog.imgix.com/2016/01/06/better-lightbox-zoom-viewer-with-imgix.html) for a demo, or take a peek here: https://imgix.github.io/drift. Here's an example of the most basic possible implementation:
 
 ``` html
 <img src="http://assets.imgix.net/dog.png?w=400" data-zoom="http://assets.imgix.net/dog.png?w=1200">
