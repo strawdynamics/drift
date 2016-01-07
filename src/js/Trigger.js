@@ -58,7 +58,7 @@ export default class Trigger {
     );
 
     this._handleMovement(e);
-  }
+  };
 
   _hide = (e) => {
     e.preventDefault();
@@ -69,7 +69,7 @@ export default class Trigger {
     }
 
     this.settings.zoomPane.hide()
-  }
+  };
 
   _handleMovement = (e) => {
     e.preventDefault();
@@ -99,5 +99,5 @@ export default class Trigger {
 
     this.settings.zoomPane.setPosition(percentageOffsetX,
       percentageOffsetY, rect);
-  }
+  };
 }

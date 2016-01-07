@@ -183,7 +183,7 @@ export default class ZoomPane {
     this.el.removeEventListener('animationend', this._completeShow, false);
 
     removeClasses(this.el, this.openingClasses);
-  }
+  };
 
   _completeHide = () => {
     this.el.removeEventListener('animationend', this._completeHide, false);
@@ -202,5 +202,5 @@ export default class ZoomPane {
     } else if (this.el.parentElement === this.settings.inlineContainer) {
       this.settings.inlineContainer.removeChild(this.el);
     }
-  }
+  };
 }

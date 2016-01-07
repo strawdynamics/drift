@@ -111,7 +111,7 @@ export default class Drift {
 
   destroy = () => {
     this._unbindEvents();
-  }
+  };
 }
 
 global.Drift = Drift;
