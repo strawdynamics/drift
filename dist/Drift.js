@@ -338,7 +338,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 // All officially-supported browsers have this, but it's easy to
 // account for, just in case.
-var HAS_ANIMATION = 'animation' in document.body.style;
+var HAS_ANIMATION = 'animation' in document.createElement('div').style;
 
 var ZoomPane = (function () {
   function ZoomPane() {
