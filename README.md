@@ -84,7 +84,7 @@ var options = {
 	injectBaseStyles: true,
 };
 
-new Luminous(document.querySelector('img'), options);
+new Drift(document.querySelector('img'), options);
 ```
 
 
