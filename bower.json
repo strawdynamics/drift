@@ -27,6 +27,6 @@
     "gulpfile.js",
     "index.html",
     "karmaConfig.js",
-    "package.json",
+    "package.json"
   ]
 }
