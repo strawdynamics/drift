@@ -110,7 +110,7 @@ export default class Drift {
   }
 
   destroy = () => {
-    this._unbindEvents();
+    this.trigger._unbindEvents();
   }
 }
 
