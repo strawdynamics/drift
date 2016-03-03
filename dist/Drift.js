@@ -38,7 +38,7 @@ var Drift = (function () {
     _classCallCheck(this, Drift);
 
     this.destroy = function () {
-      _this._unbindEvents();
+      _this.trigger._unbindEvents();
     };
 
     this.triggerEl = triggerEl;
