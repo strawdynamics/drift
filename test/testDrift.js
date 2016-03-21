@@ -17,10 +17,6 @@ afterEach(function() {
 });
 
 describe('Core', () => {
-  it('exposes `Drift` on `window`', () => {
-    expect(window.Drift).toBeDefined();
-  });
-
   it('throws if no arguments are passed', () => {
     expect(() => {
       new Drift;

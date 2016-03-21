@@ -68,6 +68,7 @@ gulp.task('test-full', function(done) {
 
 gulp.task('build-js', function() {
   var b = browserify({
+    standalone: 'Drift',
     entries: paths.jsEntry,
     transform: [babelify]
   }).bundle();
