@@ -19,6 +19,8 @@ Easily add "zoom on hover" functionality to your site's images. Lightweight, no-
 * **Bower**: `bower install drift`
 * **Manual**: [Download](https://github.com/imgix/drift/archive/master.zip) and use `dist/Drift.min.js` or `dist/Drift.js`
 
+If your build process will re-run `dist/Drift.js` or `dist/Drift.min.js` through Browserify, you'll need to add `noParse: ['luminous-lightbox']` to your Browserify config. If you skip this, Browserify will attempt to re-require Drift's dependencies which have already been inlined.
+
 
 <a name="usage"></a>
 ## Usage
