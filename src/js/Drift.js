@@ -4,9 +4,9 @@ import injectBaseStylesheet from './injectBaseStylesheet';
 import Trigger from './Trigger';
 import ZoomPane from './ZoomPane';
 
-export const VERSION = '0.1.6';
+module.exports = class Drift {
+  VERSION = '0.1.6'
 
-export default class Drift {
   constructor(triggerEl, options = {}) {
     this.triggerEl = triggerEl;
 
@@ -113,5 +113,3 @@ export default class Drift {
     this.trigger._unbindEvents();
   };
 }
-
-global.Drift = Drift;
