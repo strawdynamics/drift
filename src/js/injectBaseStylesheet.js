@@ -1,12 +1,14 @@
 const RULES = `
-@keyframes noop {  }
+@keyframes noop {
+  0% { zoom: 1; }
+}
 
 .drift-zoom-pane.drift-open {
   display: block;
 }
 
 .drift-zoom-pane.drift-opening, .drift-zoom-pane.drift-closing {
-  animation: noop;
+  animation: noop 1ms;
 }
 
 .drift-zoom-pane {
