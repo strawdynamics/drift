@@ -1,7 +1,7 @@
 (function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.Drift = f()}})(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 'use strict';
 
-var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _dom = require('./util/dom');
 
@@ -21,7 +21,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-module.exports = (function () {
+module.exports = function () {
   function Drift(triggerEl) {
     var _this = this;
 
@@ -115,7 +115,10 @@ module.exports = (function () {
     var
     // An optional number that determines how long to wait before
     // showing the ZoomPane because of a `touchstart` event.
+    // It's unlikely that you would want to use this option, since
+    // "tap and hold" is much more intentional than a hover event.
     touchDelay = _options$touchDelay === undefined ? 0 : _options$touchDelay;
+
 
     if (inlinePane !== true && !(0, _dom.isDOMElement)(paneContainer)) {
       throw new TypeError('`paneContainer` must be a DOM element when `inlinePane !== true`');
@@ -127,7 +130,6 @@ module.exports = (function () {
       (0, _injectBaseStylesheet2.default)();
     }
 
-    // this._bindEvents();
     this._buildZoomPane();
     this._buildTrigger();
   }
@@ -177,16 +179,16 @@ module.exports = (function () {
   }]);
 
   return Drift;
-})();
+}();
 
 },{"./Trigger":2,"./ZoomPane":3,"./injectBaseStylesheet":4,"./util/dom":5}],2:[function(require,module,exports){
 'use strict';
 
-var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _throwIfMissing = require('./util/throwIfMissing');
 
@@ -196,7 +198,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var Trigger = (function () {
+var Trigger = function () {
   function Trigger() {
     var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
 
@@ -220,6 +222,7 @@ var Trigger = (function () {
     var hoverDelay = _options$hoverDelay === undefined ? 0 : _options$hoverDelay;
     var _options$touchDelay = options.touchDelay;
     var touchDelay = _options$touchDelay === undefined ? 0 : _options$touchDelay;
+
 
     this.settings = { el: el, zoomPane: zoomPane, sourceAttribute: sourceAttribute, handleTouch: handleTouch, onShow: onShow, onHide: onHide, hoverDelay: hoverDelay, touchDelay: touchDelay };
 
@@ -260,7 +263,7 @@ var Trigger = (function () {
   }]);
 
   return Trigger;
-})();
+}();
 
 var _initialiseProps = function _initialiseProps() {
   var _this = this;
@@ -316,8 +319,8 @@ var _initialiseProps = function _initialiseProps() {
       return;
     }
 
-    var movementX = undefined,
-        movementY = undefined;
+    var movementX = void 0,
+        movementY = void 0;
 
     if (e.touches) {
       var firstTouch = e.touches[0];
@@ -345,11 +348,11 @@ exports.default = Trigger;
 },{"./util/throwIfMissing":6}],3:[function(require,module,exports){
 'use strict';
 
-var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _throwIfMissing = require('./util/throwIfMissing');
 
@@ -365,7 +368,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 // account for, just in case.
 var HAS_ANIMATION = typeof document === 'undefined' ? false : 'animation' in document.createElement('div').style;
 
-var ZoomPane = (function () {
+var ZoomPane = function () {
   function ZoomPane() {
     var _this = this;
 
@@ -416,6 +419,7 @@ var ZoomPane = (function () {
     var inlineOffsetX = _options$inlineOffset === undefined ? 0 : _options$inlineOffset;
     var _options$inlineOffset2 = options.inlineOffsetY;
     var inlineOffsetY = _options$inlineOffset2 === undefined ? 0 : _options$inlineOffset2;
+
 
     this.settings = { container: container, zoomFactor: zoomFactor, inline: inline, namespace: namespace, showWhitespaceAtEdges: showWhitespaceAtEdges, containInline: containInline, inlineOffsetX: inlineOffsetX, inlineOffsetY: inlineOffsetY };
     this.settings.inlineContainer = document.body;
@@ -588,7 +592,7 @@ var ZoomPane = (function () {
   }]);
 
   return ZoomPane;
-})();
+}();
 
 exports.default = ZoomPane;
 
@@ -622,12 +626,12 @@ function injectBaseStylesheet() {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
 exports.isDOMElement = isDOMElement;
 exports.addClasses = addClasses;
 exports.removeClasses = removeClasses;
-
-function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.constructor === Symbol ? "symbol" : typeof obj; }
-
 // This is not really a perfect check, but works fine.
 // From http://stackoverflow.com/questions/384286
 var HAS_DOM_2 = (typeof HTMLElement === 'undefined' ? 'undefined' : _typeof(HTMLElement)) === 'object';
