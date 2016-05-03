@@ -19,6 +19,8 @@ export function defaultDriftConfig() {
     onShow: null,
     onHide: null,
     injectBaseStyles: true,
+    hoverDelay: 0,
+    touchDelay: 0,
   };
 }
 
@@ -43,5 +45,7 @@ export function triggerOptions() {
     handleTouch: true,
     onShow: null,
     onHide: null,
+    hoverDelay: 0,
+    touchDelay: 0,
   };
 }

@@ -106,12 +106,22 @@ module.exports = (function () {
     // Add base styles to the page. See the "Theming"
     // section of README.md for more information.
     injectBaseStyles = _options$injectBaseSt === undefined ? true : _options$injectBaseSt;
+    var _options$hoverDelay = options.hoverDelay;
+    var
+    // An optional number that determines how long to wait before
+    // showing the ZoomPane because of a `mouseenter` event.
+    hoverDelay = _options$hoverDelay === undefined ? 0 : _options$hoverDelay;
+    var _options$touchDelay = options.touchDelay;
+    var
+    // An optional number that determines how long to wait before
+    // showing the ZoomPane because of a `touchstart` event.
+    touchDelay = _options$touchDelay === undefined ? 0 : _options$touchDelay;
 
     if (inlinePane !== true && !(0, _dom.isDOMElement)(paneContainer)) {
       throw new TypeError('`paneContainer` must be a DOM element when `inlinePane !== true`');
     }
 
-    this.settings = { namespace: namespace, showWhitespaceAtEdges: showWhitespaceAtEdges, containInline: containInline, inlineOffsetX: inlineOffsetX, inlineOffsetY: inlineOffsetY, sourceAttribute: sourceAttribute, zoomFactor: zoomFactor, paneContainer: paneContainer, inlinePane: inlinePane, handleTouch: handleTouch, onShow: onShow, onHide: onHide, injectBaseStyles: injectBaseStyles };
+    this.settings = { namespace: namespace, showWhitespaceAtEdges: showWhitespaceAtEdges, containInline: containInline, inlineOffsetX: inlineOffsetX, inlineOffsetY: inlineOffsetY, sourceAttribute: sourceAttribute, zoomFactor: zoomFactor, paneContainer: paneContainer, inlinePane: inlinePane, handleTouch: handleTouch, onShow: onShow, onHide: onHide, injectBaseStyles: injectBaseStyles, hoverDelay: hoverDelay, touchDelay: touchDelay };
 
     if (this.settings.injectBaseStyles) {
       (0, _injectBaseStylesheet2.default)();
@@ -145,7 +155,9 @@ module.exports = (function () {
         handleTouch: this.settings.handleTouch,
         onShow: this.settings.onShow,
         onHide: this.settings.onHide,
-        sourceAttribute: this.settings.sourceAttribute
+        sourceAttribute: this.settings.sourceAttribute,
+        hoverDelay: this.settings.hoverDelay,
+        touchDelay: this.settings.touchDelay
       });
     }
   }, {
@@ -204,8 +216,12 @@ var Trigger = (function () {
     var onShow = _options$onShow === undefined ? null : _options$onShow;
     var _options$onHide = options.onHide;
     var onHide = _options$onHide === undefined ? null : _options$onHide;
+    var _options$hoverDelay = options.hoverDelay;
+    var hoverDelay = _options$hoverDelay === undefined ? 0 : _options$hoverDelay;
+    var _options$touchDelay = options.touchDelay;
+    var touchDelay = _options$touchDelay === undefined ? 0 : _options$touchDelay;
 
-    this.settings = { el: el, zoomPane: zoomPane, sourceAttribute: sourceAttribute, handleTouch: handleTouch, onShow: onShow, onHide: onHide };
+    this.settings = { el: el, zoomPane: zoomPane, sourceAttribute: sourceAttribute, handleTouch: handleTouch, onShow: onShow, onHide: onHide, hoverDelay: hoverDelay, touchDelay: touchDelay };
 
     this._bindEvents();
   }
@@ -213,12 +229,12 @@ var Trigger = (function () {
   _createClass(Trigger, [{
     key: '_bindEvents',
     value: function _bindEvents() {
-      this.settings.el.addEventListener('mouseenter', this._show, false);
+      this.settings.el.addEventListener('mouseenter', this._handleEntry, false);
       this.settings.el.addEventListener('mouseleave', this._hide, false);
       this.settings.el.addEventListener('mousemove', this._handleMovement, false);
 
       if (this.settings.handleTouch) {
-        this.settings.el.addEventListener('touchstart', this._show, false);
+        this.settings.el.addEventListener('touchstart', this._handleEntry, false);
         this.settings.el.addEventListener('touchend', this._hide, false);
         this.settings.el.addEventListener('touchmove', this._handleMovement, false);
       }
@@ -226,12 +242,12 @@ var Trigger = (function () {
   }, {
     key: '_unbindEvents',
     value: function _unbindEvents() {
-      this.settings.el.removeEventListener('mouseenter', this._show, false);
+      this.settings.el.removeEventListener('mouseenter', this._handleEntry, false);
       this.settings.el.removeEventListener('mouseleave', this._hide, false);
       this.settings.el.removeEventListener('mousemove', this._handleMovement, false);
 
       if (this.settings.handleTouch) {
-        this.settings.el.removeEventListener('touchstart', this._show, false);
+        this.settings.el.removeEventListener('touchstart', this._handleEntry, false);
         this.settings.el.removeEventListener('touchend', this._hide, false);
         this.settings.el.removeEventListener('touchmove', this._handleMovement, false);
       }
@@ -249,21 +265,38 @@ var Trigger = (function () {
 var _initialiseProps = function _initialiseProps() {
   var _this = this;
 
-  this._show = function (e) {
+  this._handleEntry = function (e) {
     e.preventDefault();
+    _this._lastMovement = e;
 
+    if (e.type == 'mouseenter' && _this.settings.hoverDelay) {
+      _this.entryTimeout = setTimeout(_this._show, _this.settings.hoverDelay);
+    } else if (_this.settings.touchDelay) {
+      _this.entryTimeout = setTimeout(_this._show, _this.settings.touchDelay);
+    } else {
+      _this._show();
+    }
+  };
+
+  this._show = function () {
     var onShow = _this.settings.onShow;
     if (onShow && typeof onShow === 'function') {
       onShow();
     }
 
-    _this.settings.zoomPane.show(_this.settings.el.getAttribute(_this.settings.sourceAttribute), _this.settings.el.clientWidth);
+    _this.settings.zoomPane.show(_this.settings.el.getAttribute(_this.settings.sourceAttribute), _this.settings.el.clientWidth, _this.settings.el.clientHeight);
 
-    _this._handleMovement(e);
+    _this._handleMovement();
   };
 
   this._hide = function (e) {
     e.preventDefault();
+
+    _this._lastMovement = null;
+
+    if (_this.entryTimeout) {
+      clearTimeout(_this.entryTimeout);
+    }
 
     var onHide = _this.settings.onHide;
     if (onHide && typeof onHide === 'function') {
@@ -274,9 +307,12 @@ var _initialiseProps = function _initialiseProps() {
   };
 
   this._handleMovement = function (e) {
-    e.preventDefault();
-
-    if (!_this.isShowing) {
+    if (e) {
+      e.preventDefault();
+      _this._lastMovement = e;
+    } else if (_this._lastMovement) {
+      e = _this._lastMovement;
+    } else {
       return;
     }
 
@@ -424,8 +460,9 @@ var ZoomPane = (function () {
     }
   }, {
     key: '_setImageSize',
-    value: function _setImageSize(triggerWidth) {
+    value: function _setImageSize(triggerWidth, triggerHeight) {
       this.imgEl.style.width = triggerWidth * this.settings.zoomFactor + 'px';
+      this.imgEl.style.height = triggerHeight * this.settings.zoomFactor + 'px';
     }
 
     // `percentageOffsetX` and `percentageOffsetY` must be percentages
@@ -496,14 +533,14 @@ var ZoomPane = (function () {
     }
   }, {
     key: 'show',
-    value: function show(imageURL, triggerWidth) {
+    value: function show(imageURL, triggerWidth, triggerHeight) {
       this._removeListenersAndResetClasses();
       this.isShowing = true;
 
       (0, _dom.addClasses)(this.el, this.openClasses);
 
       this._setImageURL(imageURL);
-      this._setImageSize(triggerWidth);
+      this._setImageSize(triggerWidth, triggerHeight);
 
       if (this._isInline) {
         this._showInline();

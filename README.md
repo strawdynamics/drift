@@ -84,6 +84,12 @@ var options = {
 	// Add base styles to the page. See the "Theming"
 	// section of README.md for more information.
 	injectBaseStyles: true,
+	// An optional number that determines how long to wait before
+	// showing the ZoomPane because of a `mouseenter` event.
+	hoverDelay: 0,
+	// An optional number that determines how long to wait before
+	// showing the ZoomPane because of a `touchstart` event.
+	touchDelay: 0,
 };
 
 new Drift(document.querySelector('img'), options);
