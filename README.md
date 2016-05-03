@@ -89,6 +89,8 @@ var options = {
 	hoverDelay: 0,
 	// An optional number that determines how long to wait before
 	// showing the ZoomPane because of a `touchstart` event.
+	// It's unlikely that you would want to use this option, since
+	// "tap and hold" is much more intentional than a hover event.
 	touchDelay: 0,
 };
 

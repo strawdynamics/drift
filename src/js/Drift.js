@@ -60,6 +60,8 @@ module.exports = class Drift {
       hoverDelay = 0,
       // An optional number that determines how long to wait before
       // showing the ZoomPane because of a `touchstart` event.
+      // It's unlikely that you would want to use this option, since
+      // "tap and hold" is much more intentional than a hover event.
       touchDelay = 0,
     } = options;
 
@@ -73,7 +75,6 @@ module.exports = class Drift {
       injectBaseStylesheet();
     }
 
-    // this._bindEvents();
     this._buildZoomPane();
     this._buildTrigger();
   }
