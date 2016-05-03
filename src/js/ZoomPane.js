@@ -61,8 +61,9 @@ export default class ZoomPane {
     this.imgEl.setAttribute('src', imageURL);
   }
 
-  _setImageSize(triggerWidth) {
+  _setImageSize(triggerWidth, triggerHeight) {
     this.imgEl.style.width = `${triggerWidth * this.settings.zoomFactor}px`;
+    this.imgEl.style.height = `${triggerHeight * this.settings.zoomFactor}px`;
   }
 
   // `percentageOffsetX` and `percentageOffsetY` must be percentages
@@ -138,14 +139,14 @@ export default class ZoomPane {
   }
 
 
-  show(imageURL, triggerWidth) {
+  show(imageURL, triggerWidth, triggerHeight) {
     this._removeListenersAndResetClasses();
     this.isShowing = true;
 
     addClasses(this.el, this.openClasses);
 
     this._setImageURL(imageURL);
-    this._setImageSize(triggerWidth);
+    this._setImageSize(triggerWidth, triggerHeight);
 
     if (this._isInline) {
       this._showInline();

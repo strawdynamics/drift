@@ -9,9 +9,11 @@ export default class Trigger {
       handleTouch = throwIfMissing(),
       onShow = null,
       onHide = null,
+      hoverDelay = 0,
+      touchDelay = 0
     } = options;
 
-    this.settings = { el, zoomPane, sourceAttribute, handleTouch, onShow, onHide };
+    this.settings = { el, zoomPane, sourceAttribute, handleTouch, onShow, onHide, hoverDelay, touchDelay };
 
     this._bindEvents();
   }
@@ -21,32 +23,43 @@ export default class Trigger {
   }
 
   _bindEvents() {
-    this.settings.el.addEventListener('mouseenter', this._show, false);
+    this.settings.el.addEventListener('mouseenter', this._handleEntry, false);
     this.settings.el.addEventListener('mouseleave', this._hide, false);
     this.settings.el.addEventListener('mousemove', this._handleMovement, false);
 
     if (this.settings.handleTouch) {
-      this.settings.el.addEventListener('touchstart', this._show, false);
+      this.settings.el.addEventListener('touchstart', this._handleEntry, false);
       this.settings.el.addEventListener('touchend', this._hide, false);
       this.settings.el.addEventListener('touchmove', this._handleMovement, false);
     }
   }
 
   _unbindEvents() {
-    this.settings.el.removeEventListener('mouseenter', this._show, false);
+    this.settings.el.removeEventListener('mouseenter', this._handleEntry, false);
     this.settings.el.removeEventListener('mouseleave', this._hide, false);
     this.settings.el.removeEventListener('mousemove', this._handleMovement, false);
 
     if (this.settings.handleTouch) {
-      this.settings.el.removeEventListener('touchstart', this._show, false);
+      this.settings.el.removeEventListener('touchstart', this._handleEntry, false);
       this.settings.el.removeEventListener('touchend', this._hide, false);
       this.settings.el.removeEventListener('touchmove', this._handleMovement, false);
     }
   }
 
-  _show = (e) => {
+  _handleEntry = (e) => {
     e.preventDefault();
+    this._lastMovement = e;
 
+    if (e.type == 'mouseenter' && this.settings.hoverDelay) {
+      this.entryTimeout = setTimeout(this._show, this.settings.hoverDelay);
+    } else if (this.settings.touchDelay) {
+      this.entryTimeout = setTimeout(this._show, this.settings.touchDelay);
+    } else {
+      this._show();
+    }
+  };
+
+  _show = () => {
     let onShow = this.settings.onShow
     if (onShow && typeof onShow === 'function') {
       onShow();
@@ -54,14 +67,21 @@ export default class Trigger {
 
     this.settings.zoomPane.show(
       this.settings.el.getAttribute(this.settings.sourceAttribute),
-      this.settings.el.clientWidth
+      this.settings.el.clientWidth,
+      this.settings.el.clientHeight
     );
 
-    this._handleMovement(e);
-  };
+    this._handleMovement();
+  }
 
   _hide = (e) => {
     e.preventDefault();
+
+    this._lastMovement = null;
+
+    if (this.entryTimeout) {
+      clearTimeout(this.entryTimeout);
+    }
 
     let onHide = this.settings.onHide
     if (onHide && typeof onHide === 'function') {
@@ -72,9 +92,12 @@ export default class Trigger {
   };
 
   _handleMovement = (e) => {
-    e.preventDefault();
-
-    if (!this.isShowing) {
+    if (e) {
+      e.preventDefault();
+      this._lastMovement = e;
+    } else if (this._lastMovement) {
+      e = this._lastMovement;
+    } else {
       return;
     }
 

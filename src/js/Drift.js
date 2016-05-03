@@ -55,19 +55,26 @@ module.exports = class Drift {
       // Add base styles to the page. See the "Theming"
       // section of README.md for more information.
       injectBaseStyles = true,
+      // An optional number that determines how long to wait before
+      // showing the ZoomPane because of a `mouseenter` event.
+      hoverDelay = 0,
+      // An optional number that determines how long to wait before
+      // showing the ZoomPane because of a `touchstart` event.
+      // It's unlikely that you would want to use this option, since
+      // "tap and hold" is much more intentional than a hover event.
+      touchDelay = 0,
     } = options;
 
     if (inlinePane !== true && !isDOMElement(paneContainer)) {
       throw new TypeError('`paneContainer` must be a DOM element when `inlinePane !== true`');
     }
 
-    this.settings = { namespace, showWhitespaceAtEdges, containInline, inlineOffsetX, inlineOffsetY, sourceAttribute, zoomFactor, paneContainer, inlinePane, handleTouch, onShow, onHide, injectBaseStyles };
+    this.settings = { namespace, showWhitespaceAtEdges, containInline, inlineOffsetX, inlineOffsetY, sourceAttribute, zoomFactor, paneContainer, inlinePane, handleTouch, onShow, onHide, injectBaseStyles, hoverDelay, touchDelay };
 
     if (this.settings.injectBaseStyles) {
       injectBaseStylesheet();
     }
 
-    // this._bindEvents();
     this._buildZoomPane();
     this._buildTrigger();
   }
@@ -106,6 +113,8 @@ module.exports = class Drift {
       onShow: this.settings.onShow,
       onHide: this.settings.onHide,
       sourceAttribute: this.settings.sourceAttribute,
+      hoverDelay: this.settings.hoverDelay,
+      touchDelay: this.settings.touchDelay,
     });
   }
 
