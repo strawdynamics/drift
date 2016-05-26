@@ -6,9 +6,10 @@ export default class BoundingBox {
 
     let {
       namespace = null,
+      zoomFactor = throwIfMissing()
     } = options;
 
-    this.settings = { namespace };
+    this.settings = { namespace, zoomFactor };
 
     this.openClasses = this._buildClasses('open');
 
@@ -34,9 +35,8 @@ export default class BoundingBox {
   show(zoomPaneWidth, zoomPaneHeight) {
     this.isShowing = true;
 
-    // TODO set aspect ratio based on zoomPaneWidth and zoomPaneHeight. The
-    // default size of BoundingBox should come from CSS, and we'll only change
-    // the _height_ in order to match the ZoomPane aspect ratio.
+    // TODO set size here (zoomPaneWidth / this.settings.zoomFactor,
+    // zoomPaneHeight / this.settings.zoomFactor). The
 
     addClasses(this.el, this.openClasses);
   }
