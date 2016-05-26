@@ -63,13 +63,19 @@ module.exports = class Drift {
       // It's unlikely that you would want to use this option, since
       // "tap and hold" is much more intentional than a hover event.
       touchDelay = 0,
+      // If true, a bounding box will show the area currently being previewed
+      // during mouse hover
+      hoverBoundingBox = false,
+      // If true, a bounding box will show the area currently being previewed
+      // during touch events
+      touchBoundingBox = false,
     } = options;
 
     if (inlinePane !== true && !isDOMElement(paneContainer)) {
       throw new TypeError('`paneContainer` must be a DOM element when `inlinePane !== true`');
     }
 
-    this.settings = { namespace, showWhitespaceAtEdges, containInline, inlineOffsetX, inlineOffsetY, sourceAttribute, zoomFactor, paneContainer, inlinePane, handleTouch, onShow, onHide, injectBaseStyles, hoverDelay, touchDelay };
+    this.settings = { namespace, showWhitespaceAtEdges, containInline, inlineOffsetX, inlineOffsetY, sourceAttribute, zoomFactor, paneContainer, inlinePane, handleTouch, onShow, onHide, injectBaseStyles, hoverDelay, touchDelay, hoverBoundingBox, touchBoundingBox };
 
     if (this.settings.injectBaseStyles) {
       injectBaseStylesheet();
@@ -115,6 +121,9 @@ module.exports = class Drift {
       sourceAttribute: this.settings.sourceAttribute,
       hoverDelay: this.settings.hoverDelay,
       touchDelay: this.settings.touchDelay,
+      hoverBoundingBox: this.settings.hoverBoundingBox,
+      touchBoundingBox: this.settings.touchBoundingBox,
+      namespace: this.settings.namespace,
     });
   }
 

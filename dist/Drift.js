@@ -118,13 +118,23 @@ module.exports = function () {
     // It's unlikely that you would want to use this option, since
     // "tap and hold" is much more intentional than a hover event.
     touchDelay = _options$touchDelay === undefined ? 0 : _options$touchDelay;
+    var _options$hoverBoundin = options.hoverBoundingBox;
+    var
+    // If true, a bounding box will show the area currently being previewed
+    // during mouse hover
+    hoverBoundingBox = _options$hoverBoundin === undefined ? false : _options$hoverBoundin;
+    var _options$touchBoundin = options.touchBoundingBox;
+    var
+    // If true, a bounding box will show the area currently being previewed
+    // during touch events
+    touchBoundingBox = _options$touchBoundin === undefined ? false : _options$touchBoundin;
 
 
     if (inlinePane !== true && !(0, _dom.isDOMElement)(paneContainer)) {
       throw new TypeError('`paneContainer` must be a DOM element when `inlinePane !== true`');
     }
 
-    this.settings = { namespace: namespace, showWhitespaceAtEdges: showWhitespaceAtEdges, containInline: containInline, inlineOffsetX: inlineOffsetX, inlineOffsetY: inlineOffsetY, sourceAttribute: sourceAttribute, zoomFactor: zoomFactor, paneContainer: paneContainer, inlinePane: inlinePane, handleTouch: handleTouch, onShow: onShow, onHide: onHide, injectBaseStyles: injectBaseStyles, hoverDelay: hoverDelay, touchDelay: touchDelay };
+    this.settings = { namespace: namespace, showWhitespaceAtEdges: showWhitespaceAtEdges, containInline: containInline, inlineOffsetX: inlineOffsetX, inlineOffsetY: inlineOffsetY, sourceAttribute: sourceAttribute, zoomFactor: zoomFactor, paneContainer: paneContainer, inlinePane: inlinePane, handleTouch: handleTouch, onShow: onShow, onHide: onHide, injectBaseStyles: injectBaseStyles, hoverDelay: hoverDelay, touchDelay: touchDelay, hoverBoundingBox: hoverBoundingBox, touchBoundingBox: touchBoundingBox };
 
     if (this.settings.injectBaseStyles) {
       (0, _injectBaseStylesheet2.default)();
@@ -159,7 +169,10 @@ module.exports = function () {
         onHide: this.settings.onHide,
         sourceAttribute: this.settings.sourceAttribute,
         hoverDelay: this.settings.hoverDelay,
-        touchDelay: this.settings.touchDelay
+        touchDelay: this.settings.touchDelay,
+        hoverBoundingBox: this.settings.hoverBoundingBox,
+        touchBoundingBox: this.settings.touchBoundingBox,
+        namespace: this.settings.namespace
       });
     }
   }, {
@@ -222,9 +235,21 @@ var Trigger = function () {
     var hoverDelay = _options$hoverDelay === undefined ? 0 : _options$hoverDelay;
     var _options$touchDelay = options.touchDelay;
     var touchDelay = _options$touchDelay === undefined ? 0 : _options$touchDelay;
+    var _options$hoverBoundin = options.hoverBoundingBox;
+    var hoverBoundingBox = _options$hoverBoundin === undefined ? (0, _throwIfMissing2.default)() : _options$hoverBoundin;
+    var _options$touchBoundin = options.touchBoundingBox;
+    var touchBoundingBox = _options$touchBoundin === undefined ? (0, _throwIfMissing2.default)() : _options$touchBoundin;
+    var _options$namespace = options.namespace;
+    var namespace = _options$namespace === undefined ? null : _options$namespace;
 
 
-    this.settings = { el: el, zoomPane: zoomPane, sourceAttribute: sourceAttribute, handleTouch: handleTouch, onShow: onShow, onHide: onHide, hoverDelay: hoverDelay, touchDelay: touchDelay };
+    this.settings = { el: el, zoomPane: zoomPane, sourceAttribute: sourceAttribute, handleTouch: handleTouch, onShow: onShow, onHide: onHide, hoverDelay: hoverDelay, touchDelay: touchDelay, hoverBoundingBox: hoverBoundingBox, touchBoundingBox: touchBoundingBox, namespace: namespace };
+
+    if (this.settings.hoverBoundingBox || this.settings.touchBoundingBox) {
+      this.boundingBox = new BoundingBox({
+        namespace: this.settings.namespace
+      });
+    }
 
     this._bindEvents();
   }
@@ -287,6 +312,12 @@ var _initialiseProps = function _initialiseProps() {
       onShow();
     }
 
+    // Only show the bounding box if
+    var touchActivated = _this._lastMovement.touches;
+    if (touchActivated && _this.settings.touchBoundingBox || !touchActivated && _this.settings.hoverBoundingBox) {
+      _this.boundingBox.show();
+    }
+
     _this.settings.zoomPane.show(_this.settings.el.getAttribute(_this.settings.sourceAttribute), _this.settings.el.clientWidth, _this.settings.el.clientHeight);
 
     _this._handleMovement();
@@ -299,6 +330,10 @@ var _initialiseProps = function _initialiseProps() {
 
     if (_this.entryTimeout) {
       clearTimeout(_this.entryTimeout);
+    }
+
+    if (_this.boundingBox) {
+      _this.boundingBox.hide();
     }
 
     var onHide = _this.settings.onHide;

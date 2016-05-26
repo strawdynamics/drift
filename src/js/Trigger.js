@@ -10,10 +10,19 @@ export default class Trigger {
       onShow = null,
       onHide = null,
       hoverDelay = 0,
-      touchDelay = 0
+      touchDelay = 0,
+      hoverBoundingBox = throwIfMissing(),
+      touchBoundingBox = throwIfMissing(),
+      namespace = null,
     } = options;
 
-    this.settings = { el, zoomPane, sourceAttribute, handleTouch, onShow, onHide, hoverDelay, touchDelay };
+    this.settings = { el, zoomPane, sourceAttribute, handleTouch, onShow, onHide, hoverDelay, touchDelay, hoverBoundingBox, touchBoundingBox, namespace };
+
+    if (this.settings.hoverBoundingBox || this.settings.touchBoundingBox) {
+      this.boundingBox = new BoundingBox({
+        namespace: this.settings.namespace,
+      });
+    }
 
     this._bindEvents();
   }
@@ -65,6 +74,15 @@ export default class Trigger {
       onShow();
     }
 
+    // Only show the bounding box if
+    let touchActivated = this._lastMovement.touches;
+    if (
+      (touchActivated && this.settings.touchBoundingBox) ||
+      (!touchActivated && this.settings.hoverBoundingBox)
+    ) {
+      this.boundingBox.show();
+    }
+
     this.settings.zoomPane.show(
       this.settings.el.getAttribute(this.settings.sourceAttribute),
       this.settings.el.clientWidth,
@@ -81,6 +99,10 @@ export default class Trigger {
 
     if (this.entryTimeout) {
       clearTimeout(this.entryTimeout);
+    }
+
+    if (this.boundingBox) {
+      this.boundingBox.hide();
     }
 
     let onHide = this.settings.onHide
