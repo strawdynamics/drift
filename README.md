@@ -92,6 +92,12 @@ var options = {
 	// It's unlikely that you would want to use this option, since
 	// "tap and hold" is much more intentional than a hover event.
 	touchDelay: 0,
+	// If true, a bounding box will show the area currently being previewed
+	// during mouse hover
+	hoverBoundingBox: false,
+	// If true, a bounding box will show the area currently being previewed
+	// during touch events
+	touchBoundingBox: false,
 };
 
 new Drift(document.querySelector('img'), options);
