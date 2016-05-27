@@ -1,4 +1,5 @@
 import throwIfMissing from './util/throwIfMissing';
+import BoundingBox from './BoundingBox';
 
 export default class Trigger {
   constructor(options = {}) {
@@ -10,10 +11,22 @@ export default class Trigger {
       onShow = null,
       onHide = null,
       hoverDelay = 0,
-      touchDelay = 0
+      touchDelay = 0,
+      hoverBoundingBox = throwIfMissing(),
+      touchBoundingBox = throwIfMissing(),
+      namespace = null,
+      zoomFactor = throwIfMissing(),
     } = options;
 
-    this.settings = { el, zoomPane, sourceAttribute, handleTouch, onShow, onHide, hoverDelay, touchDelay };
+    this.settings = { el, zoomPane, sourceAttribute, handleTouch, onShow, onHide, hoverDelay, touchDelay, hoverBoundingBox, touchBoundingBox, namespace, zoomFactor };
+
+    if (this.settings.hoverBoundingBox || this.settings.touchBoundingBox) {
+      this.boundingBox = new BoundingBox({
+        namespace: this.settings.namespace,
+        zoomFactor: this.settings.zoomFactor,
+        containerEl: this.settings.el.offsetParent,
+      });
+    }
 
     this._bindEvents();
   }
@@ -71,6 +84,19 @@ export default class Trigger {
       this.settings.el.clientHeight
     );
 
+    if (this._lastMovement) {
+      let touchActivated = this._lastMovement.touches;
+      if (
+        (touchActivated && this.settings.touchBoundingBox) ||
+        (!touchActivated && this.settings.hoverBoundingBox)
+      ) {
+        this.boundingBox.show(
+          this.settings.zoomPane.el.clientWidth,
+          this.settings.zoomPane.el.clientHeight
+        );
+      }
+    }
+
     this._handleMovement();
   }
 
@@ -81,6 +107,10 @@ export default class Trigger {
 
     if (this.entryTimeout) {
       clearTimeout(this.entryTimeout);
+    }
+
+    if (this.boundingBox) {
+      this.boundingBox.hide();
     }
 
     let onHide = this.settings.onHide
@@ -119,6 +149,11 @@ export default class Trigger {
 
     let percentageOffsetX = offsetX / this.settings.el.clientWidth;
     let percentageOffsetY = offsetY / this.settings.el.clientHeight;
+
+    if (this.boundingBox) {
+      this.boundingBox.setPosition(percentageOffsetX,
+        percentageOffsetY, rect);
+    }
 
     this.settings.zoomPane.setPosition(percentageOffsetX,
       percentageOffsetY, rect);

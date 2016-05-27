@@ -96,3 +96,7 @@
   animation: drift-loader-after 1800ms infinite linear;
   animation-delay: -900ms;
 }
+
+.drift-bounding-box {
+  background-color: rgba(0, 0, 0, 0.4);
+}
