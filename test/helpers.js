@@ -55,3 +55,11 @@ export function triggerOptions() {
     zoomFactor: 3,
   };
 }
+
+export function boundingBoxOptions() {
+  return {
+    namespace: null,
+    zoomFactor: 3,
+    containerEl: document.querySelector('.test-anchor').offsetParent,
+  };
+}
