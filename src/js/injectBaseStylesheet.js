@@ -29,6 +29,11 @@ const RULES = `
   position: absolute;
   display: block;
 }
+
+.drift-bounding-box {
+  position: absolute;
+  pointer-events: none;
+}
 `
 
 export default function injectBaseStylesheet() {

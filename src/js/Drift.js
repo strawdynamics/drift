@@ -124,6 +124,7 @@ module.exports = class Drift {
       hoverBoundingBox: this.settings.hoverBoundingBox,
       touchBoundingBox: this.settings.touchBoundingBox,
       namespace: this.settings.namespace,
+      zoomFactor: this.settings.zoomFactor,
     });
   }
 
