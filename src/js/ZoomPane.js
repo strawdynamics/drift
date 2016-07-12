@@ -3,9 +3,11 @@ import { addClasses, removeClasses } from './util/dom';
 
 // All officially-supported browsers have this, but it's easy to
 // account for, just in case.
+var divStyle = document.createElement('div').style;
+
 const HAS_ANIMATION = typeof document === 'undefined' ?
   false :
-  'animation' in document.createElement('div').style;
+  ('animation' in divStyle || 'webkitAnimation' in divStyle);
 
 export default class ZoomPane {
   constructor(options = {}) {
@@ -123,6 +125,7 @@ export default class ZoomPane {
     }
 
     this.imgEl.style.transform = `translate(${left}px, ${top}px)`;
+    this.imgEl.style.webkitTransform = `translate(${left}px, ${top}px)`;
   }
 
   get _isInline() {
@@ -134,6 +137,8 @@ export default class ZoomPane {
   _removeListenersAndResetClasses() {
     this.el.removeEventListener('animationend', this._completeShow, false);
     this.el.removeEventListener('animationend', this._completeHide, false);
+    this.el.removeEventListener('webkitAnimationEnd', this._completeShow, false);
+    this.el.removeEventListener('webkitAnimationEnd', this._completeHide, false);
     removeClasses(this.el, this.openClasses);
     removeClasses(this.el, this.closingClasses);
   }
@@ -156,6 +161,7 @@ export default class ZoomPane {
 
     if (HAS_ANIMATION) {
       this.el.addEventListener('animationend', this._completeShow, false);
+      this.el.addEventListener('webkitAnimationEnd', this._completeShow, false);
       addClasses(this.el, this.openingClasses);
     }
   }
@@ -175,6 +181,7 @@ export default class ZoomPane {
 
     if (HAS_ANIMATION) {
       this.el.addEventListener('animationend', this._completeHide, false);
+      this.el.addEventListener('webkitAnimationEnd', this._completeHide, false);
       addClasses(this.el, this.closingClasses);
     } else {
       removeClasses(this.el, this.openClasses);
@@ -184,12 +191,14 @@ export default class ZoomPane {
 
   _completeShow = () => {
     this.el.removeEventListener('animationend', this._completeShow, false);
+    this.el.removeEventListener('webkitAnimationEnd', this._completeShow, false);
 
     removeClasses(this.el, this.openingClasses);
   };
 
   _completeHide = () => {
     this.el.removeEventListener('animationend', this._completeHide, false);
+    this.el.removeEventListener('webkitAnimationEnd', this._completeHide, false);
 
     removeClasses(this.el, this.openClasses);
     removeClasses(this.el, this.closingClasses);
