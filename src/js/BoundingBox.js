@@ -57,26 +57,26 @@ export default class BoundingBox {
   }
 
   setPosition(percentageOffsetX, percentageOffsetY, triggerRect) {
-    let scrollX = window.scrollX;
-    let scrollY = window.scrollY;
+    let pageXOffset = window.pageXOffset;
+    let pageYOffset = window.pageYOffset;
 
     let inlineLeft = triggerRect.left + (percentageOffsetX * triggerRect.width)
-      - (this.el.clientWidth / 2) + scrollX;
+      - (this.el.clientWidth / 2) + pageXOffset;
     let inlineTop = triggerRect.top + (percentageOffsetY * triggerRect.height)
-      - (this.el.clientHeight / 2) + scrollY;
+      - (this.el.clientHeight / 2) + pageYOffset;
 
     let elRect = this.el.getBoundingClientRect();
 
-    if (inlineLeft < triggerRect.left + scrollX) {
-      inlineLeft = triggerRect.left + scrollX;
-    } else if (inlineLeft + this.el.clientWidth > triggerRect.left + triggerRect.width + scrollX) {
-      inlineLeft = triggerRect.left + triggerRect.width - this.el.clientWidth + scrollX;
+    if (inlineLeft < triggerRect.left + pageXOffset) {
+      inlineLeft = triggerRect.left + pageXOffset;
+    } else if (inlineLeft + this.el.clientWidth > triggerRect.left + triggerRect.width + pageXOffset) {
+      inlineLeft = triggerRect.left + triggerRect.width - this.el.clientWidth + pageXOffset;
     }
 
-    if (inlineTop < triggerRect.top + scrollY) {
-      inlineTop = triggerRect.top + scrollY;
-    } else if (inlineTop + this.el.clientHeight > triggerRect.top + triggerRect.height + scrollY) {
-      inlineTop = triggerRect.top + triggerRect.height - this.el.clientHeight + scrollY;
+    if (inlineTop < triggerRect.top + pageYOffset) {
+      inlineTop = triggerRect.top + pageYOffset;
+    } else if (inlineTop + this.el.clientHeight > triggerRect.top + triggerRect.height + pageYOffset) {
+      inlineTop = triggerRect.top + triggerRect.height - this.el.clientHeight + pageYOffset;
     }
 
     this.el.style.left = `${inlineLeft}px`;
