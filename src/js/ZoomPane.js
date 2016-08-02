@@ -31,7 +31,7 @@ export default class ZoomPane {
     this.openingClasses = this._buildClasses('opening');
     this.closingClasses = this._buildClasses('closing');
     this.inlineClasses = this._buildClasses('inline');
-
+    this.loadingClasses = this._buildClasses('loading');
 
     this._buildElement();
   }
@@ -149,7 +149,9 @@ export default class ZoomPane {
     this.isShowing = true;
 
     addClasses(this.el, this.openClasses);
+    addClasses(this.el, this.loadingClasses);
 
+    this.imgEl.addEventListener('load', this._handleLoad, false);
     this._setImageURL(imageURL);
     this._setImageSize(triggerWidth, triggerHeight);
 
@@ -214,5 +216,10 @@ export default class ZoomPane {
     } else if (this.el.parentElement === this.settings.inlineContainer) {
       this.settings.inlineContainer.removeChild(this.el);
     }
+  };
+
+  _handleLoad = () => {
+    this.imgEl.removeEventListener('load', this._handleLoad, false);
+    removeClasses(this.el, this.loadingClasses);
   };
 }
