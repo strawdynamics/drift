@@ -569,6 +569,11 @@ var ZoomPane = function () {
       }
     };
 
+    this._handleLoad = function () {
+      _this.imgEl.removeEventListener('load', _this._handleLoad, false);
+      (0, _dom.removeClasses)(_this.el, _this.loadingClasses);
+    };
+
     this.isShowing = false;
 
     var _options$container = options.container;
@@ -596,6 +601,7 @@ var ZoomPane = function () {
     this.openingClasses = this._buildClasses('opening');
     this.closingClasses = this._buildClasses('closing');
     this.inlineClasses = this._buildClasses('inline');
+    this.loadingClasses = this._buildClasses('loading');
 
     this._buildElement();
   }
@@ -713,7 +719,9 @@ var ZoomPane = function () {
       this.isShowing = true;
 
       (0, _dom.addClasses)(this.el, this.openClasses);
+      (0, _dom.addClasses)(this.el, this.loadingClasses);
 
+      this.imgEl.addEventListener('load', this._handleLoad, false);
       this._setImageURL(imageURL);
       this._setImageSize(triggerWidth, triggerHeight);
 

@@ -106,8 +106,7 @@
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
 }
 
-.drift-zoom-pane-loader {
-  display: none;
+.drift-loading .drift-zoom-pane-loader {
   display: block;
   position: absolute;
   top: 50%;
