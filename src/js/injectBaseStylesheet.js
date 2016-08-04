@@ -33,6 +33,8 @@ const RULES = `
 .drift-zoom-pane img {
   position: absolute;
   display: block;
+  max-width: none;
+  max-height: none;
 }
 
 .drift-bounding-box {
