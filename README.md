@@ -136,9 +136,9 @@ document.querySelector('.enable-button').addEventListener('click', function() {
 });
 ```
 
-### `Drift#setZoomImageURL`
+### `Drift#setZoomImageURL(imageURL)`
 
-Change the URL of the zoom image. This only has a visible effect while your Drift is currently open. When opening, Drift always pulls the zoom image URL from the specified `sourceAttribute`. If you want to make a "permanent" change that will persist after the user leaves and re-enters your Drift trigger, you update its `sourceAttribute` as well (default `data-zoom`). For more information about this method, please see [issue #42](https://github.com/imgix/drift/issues/42).
+Change the URL of the zoom image to the passed string. This only has a visible effect while your Drift is currently open. When opening, Drift always pulls the zoom image URL from the specified `sourceAttribute`. If you want to make a "permanent" change that will persist after the user leaves and re-enters your Drift trigger, you update its `sourceAttribute` as well (default `data-zoom`). For more information about this method, please see [issue #42](https://github.com/imgix/drift/issues/42).
 
 ``` javascript
 var triggerEl = document.querySelector('img');
