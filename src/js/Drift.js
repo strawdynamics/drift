@@ -5,7 +5,7 @@ import Trigger from './Trigger';
 import ZoomPane from './ZoomPane';
 
 module.exports = class Drift {
-  VERSION = '0.3.4'
+  VERSION = '0.4.0'
 
   constructor(triggerEl, options = {}) {
     this.triggerEl = triggerEl;
