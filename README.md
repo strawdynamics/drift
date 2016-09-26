@@ -5,8 +5,9 @@
 Easily add "zoom on hover" functionality to your site's images. Lightweight, no-dependency JavaScript.
 
 * [Installation](#installation)
-* [Usage](#usage)
+* [Basic Usage](#basic-usage)
 * [Options / Defaults](#options-defaults)
+* [API](#api)
 * [Browser Support](#browser-support)
 * [Theming](#theming)
 * [Meta](#meta)
@@ -22,8 +23,8 @@ Easily add "zoom on hover" functionality to your site's images. Lightweight, no-
 If your build process will re-run `dist/Drift.js` or `dist/Drift.min.js` through Browserify, you'll need to add `noParse: ['drift-zoom']` to your Browserify config. If you skip this, Browserify will attempt to re-require Drift's dependencies which have already been inlined.
 
 
-<a name="usage"></a>
-## Usage
+<a name="basic-usage"></a>
+## Basic Usage
 
 Once you've installed Drift via one of the above methods, you're ready to get started. There are no dependencies, so you can just start making cool stuff. Check out the [announcement blog post](http://blog.imgix.com/2016/01/06/better-lightbox-zoom-viewer-with-imgix.html) for a demo, or take a peek here: https://imgix.github.io/drift. Here's an example of the most basic possible implementation:
 
@@ -101,6 +102,68 @@ var options = {
 };
 
 new Drift(document.querySelector('img'), options);
+```
+
+
+<a name="api"></a>
+## API
+
+### `Drift#disable`
+
+Disable your Drift instance. This will prevent your Drift instance from showing, but will not hide it if it's currently visible.
+
+``` javascript
+var drift = new Drift(document.querySelector('img'), {
+  paneContainer: document.querySelector('p')
+});
+
+document.querySelector('.disable-button').addEventListener('click', function() {
+  drift.disable();
+});
+```
+
+### `Drift#enable`
+
+Enable your Drift instance.
+
+``` javascript
+var drift = new Drift(document.querySelector('img'), {
+  paneContainer: document.querySelector('p')
+});
+
+document.querySelector('.enable-button').addEventListener('click', function() {
+  drift.enable();
+});
+```
+
+### `Drift#setZoomImageURL()`
+
+Change the URL of the zoom image. This only has a visible effect while your Drift is currently open. When opening, Drift always pulls the zoom image URL from the specified `sourceAttribute`. If you want to make a "permanent" change that will persist after the user leaves and re-enters your Drift trigger, you update its `sourceAttribute` as well (default `data-zoom`). For more information about this method, please see [issue #42](https://github.com/imgix/drift/issues/42).
+
+``` javascript
+var triggerEl = document.querySelector('img');
+var drift = new Drift(triggerEl, {
+  paneContainer: document.querySelector('p')
+});
+
+var frames = [
+  'https://mysite.com/frame1.jpg',
+  'https://mysite.com/frame2.jpg',
+  'https://mysite.com/frame3.jpg'
+];
+
+var currentFrame = 0;
+
+setInterval(function() {
+  currentFrame++
+
+  if (currentFrame > frames.length - 1) {
+    currentFrame = 0;
+  }
+
+  drift.setZoomImageURL(frames[currentFrame]);
+  triggerEl.setAttribute('data-zoom', frames[currentFrame]);
+}, 1200);
 ```
 
 
