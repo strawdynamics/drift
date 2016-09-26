@@ -16,83 +16,122 @@ afterEach(function() {
   document.body.removeChild(anchor);
 });
 
-describe('Core', () => {
-  it('throws if no arguments are passed', () => {
-    expect(() => {
-      new Drift;
-    }).toThrowError(TypeError, '`new Drift` requires a DOM element as its first argument.')
+describe('Drift', () => {
+  describe('core', () => {
+    it('throws if no arguments are passed', () => {
+      expect(() => {
+        new Drift;
+      }).toThrowError(TypeError, '`new Drift` requires a DOM element as its first argument.')
+    });
+
+    it('throws if the first argument is not a DOM element', () => {
+      expect(() => {
+        new Drift('.some-selector');
+      }).toThrowError(TypeError, '`new Drift` requires a DOM element as its first argument.')
+    });
+
+    it('returns an instance of `Drift` when correctly instantiated', () => {
+      let anchor = document.querySelector('.test-anchor');
+      let drift = new Drift(anchor);
+
+      expect(drift.constructor).toBe(Drift);
+    });
   });
 
-  it('throws if the first argument is not a DOM element', () => {
-    expect(() => {
-      new Drift('.some-selector');
-    }).toThrowError(TypeError, '`new Drift` requires a DOM element as its first argument.')
+  describe('configuration', () => {
+    it('sets up settings object when no options are passed', () => {
+      let anchor = document.querySelector('.test-anchor');
+      let drift = new Drift(anchor);
+
+      expect(drift.settings).toBeDefined();
+    });
+
+    it('applies proper setting defaults when no options are passed', () => {
+      let anchor = document.querySelector('.test-anchor');
+      let drift = new Drift(anchor);
+
+      expect(drift.settings).toEqual(defaultDriftConfig());
+    });
+
+    it('accepts custom settings', () => {
+      let anchor = document.querySelector('.test-anchor');
+      let drift = new Drift(anchor, {inlineOffsetX: 12});
+
+      let expectedConfig = defaultDriftConfig();
+      expectedConfig.inlineOffsetX = 12;
+
+      expect(drift.settings).toEqual(expectedConfig);
+    });
+
+    it('requires `paneContainer` setting when `inlinePane !== true`', () => {
+      let anchor = document.querySelector('.test-anchor');
+
+      let conf = defaultDriftConfig();
+      conf.paneContainer = null;
+
+      expect(() => {
+        new Drift(anchor, conf);
+      }).toThrowError(TypeError, '`paneContainer` must be a DOM element when `inlinePane !== true`');
+    });
+
+    it('requires `paneContainer` to be a DOM element when `inlinePane !== true`', () => {
+      let anchor = document.querySelector('.test-anchor');
+
+      let conf = defaultDriftConfig();
+      conf.paneContainer = '.not-a-dom-element';
+
+      expect(() => {
+        new Drift(anchor, conf);
+      }).toThrowError(TypeError, '`paneContainer` must be a DOM element when `inlinePane !== true`');
+    });
+
+    it('allows `paneContainer` to be null when `inlinePane === true`', () => {
+      let anchor = document.querySelector('.test-anchor');
+
+      let conf = defaultDriftConfig();
+      conf.paneContainer = null;
+      conf.inlinePane = true;
+
+      expect(() => {
+        new Drift(anchor, conf);
+      }).not.toThrow();
+    });
   });
 
-  it('returns an instance of `Drift` when correctly instantiated', () => {
-    let anchor = document.querySelector('.test-anchor');
-    let drift = new Drift(anchor);
+  describe('public methods', () => {
+    describe('#setZoomImageURL', () => {
+      it('updates the `src` attribute of the ZoomPane\'s `imgEl`', () => {
+        let anchor = document.querySelector('.test-anchor');
+        let drift = new Drift(anchor);
 
-    expect(drift.constructor).toBe(Drift);
-  });
-});
+        drift.setZoomImageURL('test!');
 
-describe('Configuration', () => {
-  it('sets up settings object when no options are passed', () => {
-    let anchor = document.querySelector('.test-anchor');
-    let drift = new Drift(anchor);
+        expect(drift.zoomPane.imgEl.getAttribute('src')).toBe('test!');
+      });
+    });
 
-    expect(drift.settings).toBeDefined();
-  });
+    describe('#enable', () => {
+      it('sets `trigger.enabled` to `true`', () => {
+        let anchor = document.querySelector('.test-anchor');
+        let drift = new Drift(anchor);
 
-  it('applies proper setting defaults when no options are passed', () => {
-    let anchor = document.querySelector('.test-anchor');
-    let drift = new Drift(anchor);
+        drift.trigger.enabled = false;
 
-    expect(drift.settings).toEqual(defaultDriftConfig());
-  });
+        drift.enable();
 
-  it('accepts custom settings', () => {
-    let anchor = document.querySelector('.test-anchor');
-    let drift = new Drift(anchor, {inlineOffsetX: 12});
+        expect(drift.trigger.enabled).toBe(true);
+      });
+    });
 
-    let expectedConfig = defaultDriftConfig();
-    expectedConfig.inlineOffsetX = 12;
+    describe('#disable', () => {
+      it('sets `trigger.enabled` to `false`', () => {
+        let anchor = document.querySelector('.test-anchor');
+        let drift = new Drift(anchor);
 
-    expect(drift.settings).toEqual(expectedConfig);
-  });
+        drift.disable();
 
-  it('requires `paneContainer` setting when `inlinePane !== true`', () => {
-    let anchor = document.querySelector('.test-anchor');
-
-    let conf = defaultDriftConfig();
-    conf.paneContainer = null;
-
-    expect(() => {
-      new Drift(anchor, conf);
-    }).toThrowError(TypeError, '`paneContainer` must be a DOM element when `inlinePane !== true`');
-  });
-
-  it('requires `paneContainer` to be a DOM element when `inlinePane !== true`', () => {
-    let anchor = document.querySelector('.test-anchor');
-
-    let conf = defaultDriftConfig();
-    conf.paneContainer = '.not-a-dom-element';
-
-    expect(() => {
-      new Drift(anchor, conf);
-    }).toThrowError(TypeError, '`paneContainer` must be a DOM element when `inlinePane !== true`');
-  });
-
-  it('allows `paneContainer` to be null when `inlinePane === true`', () => {
-    let anchor = document.querySelector('.test-anchor');
-
-    let conf = defaultDriftConfig();
-    conf.paneContainer = null;
-    conf.inlinePane = true;
-
-    expect(() => {
-      new Drift(anchor, conf);
-    }).not.toThrow();
+        expect(drift.trigger.enabled).toBe(false);
+      });
+    });
   });
 });

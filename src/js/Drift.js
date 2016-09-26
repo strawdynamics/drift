@@ -128,6 +128,18 @@ module.exports = class Drift {
     });
   }
 
+  setZoomImageURL(imageURL) {
+    this.zoomPane._setImageURL(imageURL);
+  };
+
+  disable() {
+    this.trigger.enabled = false;
+  }
+
+  enable() {
+    this.trigger.enabled = true;
+  }
+
   destroy = () => {
     this.trigger._unbindEvents();
   };

@@ -160,89 +160,39 @@ module.exports = function () {
     // Based on the pattern here:
     // https://github.com/getify/You-Dont-Know-JS/blob/master/es6%20&%20beyond/ch2.md#nested-defaults-destructured-and-restructured
     var _options$namespace = options.namespace;
-    var
-    // Prefix for generated element class names (e.g. `my-ns` will
-    // result in classes such as `my-ns-pane`. Default `drift-`
-    // prefixed classes will always be added as well.
-    namespace = _options$namespace === undefined ? null : _options$namespace;
+    var namespace = _options$namespace === undefined ? null : _options$namespace;
     var _options$showWhitespa = options.showWhitespaceAtEdges;
-    var
-    // Whether the ZoomPane should show whitespace when near the edges.
-    showWhitespaceAtEdges = _options$showWhitespa === undefined ? false : _options$showWhitespa;
+    var showWhitespaceAtEdges = _options$showWhitespa === undefined ? false : _options$showWhitespa;
     var _options$containInlin = options.containInline;
-    var
-    // Whether the inline ZoomPane should stay inside
-    // the bounds of its image.
-    containInline = _options$containInlin === undefined ? false : _options$containInlin;
+    var containInline = _options$containInlin === undefined ? false : _options$containInlin;
     var _options$inlineOffset = options.inlineOffsetX;
-    var
-    // How much to offset the ZoomPane from the
-    // interaction point when inline.
-    inlineOffsetX = _options$inlineOffset === undefined ? 0 : _options$inlineOffset;
+    var inlineOffsetX = _options$inlineOffset === undefined ? 0 : _options$inlineOffset;
     var _options$inlineOffset2 = options.inlineOffsetY;
     var inlineOffsetY = _options$inlineOffset2 === undefined ? 0 : _options$inlineOffset2;
     var _options$sourceAttrib = options.sourceAttribute;
-    var
-    // Which trigger attribute to pull the ZoomPane image source from.
-    sourceAttribute = _options$sourceAttrib === undefined ? 'data-zoom' : _options$sourceAttrib;
+    var sourceAttribute = _options$sourceAttrib === undefined ? 'data-zoom' : _options$sourceAttrib;
     var _options$zoomFactor = options.zoomFactor;
-    var
-    // How much to magnify the trigger by in the ZoomPane.
-    // (e.g., `zoomFactor = 3` will result in a 900 px wide ZoomPane image
-    // if the trigger is displayed at 300 px wide)
-    zoomFactor = _options$zoomFactor === undefined ? 3 : _options$zoomFactor;
+    var zoomFactor = _options$zoomFactor === undefined ? 3 : _options$zoomFactor;
     var _options$paneContaine = options.paneContainer;
-    var
-    // A DOM element to append the non-inline ZoomPane to.
-    // Required if `inlinePane !== true`.
-    paneContainer = _options$paneContaine === undefined ? document.body : _options$paneContaine;
+    var paneContainer = _options$paneContaine === undefined ? document.body : _options$paneContaine;
     var _options$inlinePane = options.inlinePane;
-    var
-    // When to switch to an inline ZoomPane. This can be a boolean or
-    // an integer. If `true`, the ZoomPane will always be inline,
-    // if `false`, it will switch to inline when `windowWidth <= inlinePane`
-    inlinePane = _options$inlinePane === undefined ? 375 : _options$inlinePane;
+    var inlinePane = _options$inlinePane === undefined ? 375 : _options$inlinePane;
     var _options$handleTouch = options.handleTouch;
-    var
-    // If `true`, touch events will trigger the zoom, like mouse events.
-    handleTouch = _options$handleTouch === undefined ? true : _options$handleTouch;
+    var handleTouch = _options$handleTouch === undefined ? true : _options$handleTouch;
     var _options$onShow = options.onShow;
-    var
-    // If present (and a function), this will be called
-    // whenever the ZoomPane is shown.
-    onShow = _options$onShow === undefined ? null : _options$onShow;
+    var onShow = _options$onShow === undefined ? null : _options$onShow;
     var _options$onHide = options.onHide;
-    var
-    // If present (and a function), this will be called
-    // whenever the ZoomPane is hidden.
-    onHide = _options$onHide === undefined ? null : _options$onHide;
+    var onHide = _options$onHide === undefined ? null : _options$onHide;
     var _options$injectBaseSt = options.injectBaseStyles;
-    var
-    // Add base styles to the page. See the "Theming"
-    // section of README.md for more information.
-    injectBaseStyles = _options$injectBaseSt === undefined ? true : _options$injectBaseSt;
+    var injectBaseStyles = _options$injectBaseSt === undefined ? true : _options$injectBaseSt;
     var _options$hoverDelay = options.hoverDelay;
-    var
-    // An optional number that determines how long to wait before
-    // showing the ZoomPane because of a `mouseenter` event.
-    hoverDelay = _options$hoverDelay === undefined ? 0 : _options$hoverDelay;
+    var hoverDelay = _options$hoverDelay === undefined ? 0 : _options$hoverDelay;
     var _options$touchDelay = options.touchDelay;
-    var
-    // An optional number that determines how long to wait before
-    // showing the ZoomPane because of a `touchstart` event.
-    // It's unlikely that you would want to use this option, since
-    // "tap and hold" is much more intentional than a hover event.
-    touchDelay = _options$touchDelay === undefined ? 0 : _options$touchDelay;
+    var touchDelay = _options$touchDelay === undefined ? 0 : _options$touchDelay;
     var _options$hoverBoundin = options.hoverBoundingBox;
-    var
-    // If true, a bounding box will show the area currently being previewed
-    // during mouse hover
-    hoverBoundingBox = _options$hoverBoundin === undefined ? false : _options$hoverBoundin;
+    var hoverBoundingBox = _options$hoverBoundin === undefined ? false : _options$hoverBoundin;
     var _options$touchBoundin = options.touchBoundingBox;
-    var
-    // If true, a bounding box will show the area currently being previewed
-    // during touch events
-    touchBoundingBox = _options$touchBoundin === undefined ? false : _options$touchBoundin;
+    var touchBoundingBox = _options$touchBoundin === undefined ? false : _options$touchBoundin;
 
 
     if (inlinePane !== true && !(0, _dom.isDOMElement)(paneContainer)) {
@@ -290,6 +240,21 @@ module.exports = function () {
         namespace: this.settings.namespace,
         zoomFactor: this.settings.zoomFactor
       });
+    }
+  }, {
+    key: 'setZoomImageURL',
+    value: function setZoomImageURL(imageURL) {
+      this.zoomPane._setImageURL(imageURL);
+    }
+  }, {
+    key: 'disable',
+    value: function disable() {
+      this.trigger.enabled = false;
+    }
+  }, {
+    key: 'enable',
+    value: function enable() {
+      this.trigger.enabled = true;
     }
   }, {
     key: 'isShowing',
@@ -375,6 +340,8 @@ var Trigger = function () {
       });
     }
 
+    this.enabled = true;
+
     this._bindEvents();
   }
 
@@ -431,6 +398,10 @@ var _initialiseProps = function _initialiseProps() {
   };
 
   this._show = function () {
+    if (!_this.enabled) {
+      return;
+    }
+
     var onShow = _this.settings.onShow;
     if (onShow && typeof onShow === 'function') {
       onShow();
