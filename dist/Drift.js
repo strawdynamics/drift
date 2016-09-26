@@ -247,6 +247,16 @@ module.exports = function () {
       this.zoomPane._setImageURL(imageURL);
     }
   }, {
+    key: 'disable',
+    value: function disable() {
+      this.trigger.enabled = false;
+    }
+  }, {
+    key: 'enable',
+    value: function enable() {
+      this.trigger.enabled = true;
+    }
+  }, {
     key: 'isShowing',
     get: function get() {
       return this.zoomPane.isShowing;
@@ -330,6 +340,8 @@ var Trigger = function () {
       });
     }
 
+    this.enabled = true;
+
     this._bindEvents();
   }
 
@@ -386,6 +398,10 @@ var _initialiseProps = function _initialiseProps() {
   };
 
   this._show = function () {
+    if (!_this.enabled) {
+      return;
+    }
+
     var onShow = _this.settings.onShow;
     if (onShow && typeof onShow === 'function') {
       onShow();

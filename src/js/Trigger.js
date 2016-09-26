@@ -28,6 +28,8 @@ export default class Trigger {
       });
     }
 
+    this.enabled = true;
+
     this._bindEvents();
   }
 
@@ -73,6 +75,10 @@ export default class Trigger {
   };
 
   _show = () => {
+    if (!this.enabled) {
+      return;
+    }
+
     let onShow = this.settings.onShow
     if (onShow && typeof onShow === 'function') {
       onShow();

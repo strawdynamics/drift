@@ -102,11 +102,35 @@ describe('Drift', () => {
     describe('#setZoomImageURL', () => {
       it('updates the `src` attribute of the ZoomPane\'s `imgEl`', () => {
         let anchor = document.querySelector('.test-anchor');
-        let dd = new Drift(anchor);
+        let drift = new Drift(anchor);
 
-        dd.setZoomImageURL('test!');
+        drift.setZoomImageURL('test!');
 
-        expect(dd.zoomPane.imgEl.getAttribute('src')).toBe('test!');
+        expect(drift.zoomPane.imgEl.getAttribute('src')).toBe('test!');
+      });
+    });
+
+    describe('#enable', () => {
+      it('sets `trigger.enabled` to `true`', () => {
+        let anchor = document.querySelector('.test-anchor');
+        let drift = new Drift(anchor);
+
+        drift.trigger.enabled = false;
+
+        drift.enable();
+
+        expect(drift.trigger.enabled).toBe(true);
+      });
+    });
+
+    describe('#disable', () => {
+      it('sets `trigger.enabled` to `false`', () => {
+        let anchor = document.querySelector('.test-anchor');
+        let drift = new Drift(anchor);
+
+        drift.disable();
+
+        expect(drift.trigger.enabled).toBe(false);
       });
     });
   });
