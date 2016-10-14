@@ -630,8 +630,8 @@ var ZoomPane = function () {
         // inconsistencies, but it's difficult to tell for sure.
         // let scrollX = isTouch ? 0 : window.scrollX;
         // let scrollY = isTouch ? 0 : window.scrollY;
-        var scrollX = window.scrollX;
-        var scrollY = window.scrollY;
+        var scrollX = window.pageXOffset;
+        var scrollY = window.pageYOffset;
 
         var inlineLeft = triggerRect.left + percentageOffsetX * triggerRect.width - this.el.clientWidth / 2 + this.settings.inlineOffsetX + scrollX;
         var inlineTop = triggerRect.top + percentageOffsetY * triggerRect.height - this.el.clientHeight / 2 + this.settings.inlineOffsetY + scrollY;
