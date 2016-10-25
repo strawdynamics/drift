@@ -171,7 +171,7 @@ module.exports = function () {
 
     _classCallCheck(this, Drift);
 
-    this.VERSION = '0.4.1';
+    this.VERSION = '1.0.0';
 
     this.destroy = function () {
       _this.trigger._unbindEvents();
