@@ -22,10 +22,10 @@ export default class ZoomPane {
       containInline = throwIfMissing(),
       inlineOffsetX = 0,
       inlineOffsetY = 0,
+      inlineContainer = document.body
     } = options;
 
-    this.settings = { container, zoomFactor, inline, namespace, showWhitespaceAtEdges, containInline, inlineOffsetX, inlineOffsetY };
-    this.settings.inlineContainer = document.body;
+    this.settings = { container, zoomFactor, inline, namespace, showWhitespaceAtEdges, containInline, inlineOffsetX, inlineOffsetY, inlineContainer };
 
     this.openClasses = this._buildClasses('open');
     this.openingClasses = this._buildClasses('opening');

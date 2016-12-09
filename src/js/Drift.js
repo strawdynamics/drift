@@ -31,6 +31,8 @@ module.exports = class Drift {
       // interaction point when inline.
       inlineOffsetX = 0,
       inlineOffsetY = 0,
+      // A DOM element to append the inline ZoomPane to
+      inlineContainer = document.body,
       // Which trigger attribute to pull the ZoomPane image source from.
       sourceAttribute = 'data-zoom',
       // How much to magnify the trigger by in the ZoomPane.
@@ -74,8 +76,11 @@ module.exports = class Drift {
     if (inlinePane !== true && !isDOMElement(paneContainer)) {
       throw new TypeError('`paneContainer` must be a DOM element when `inlinePane !== true`');
     }
+    if(!isDOMElement(inlineContainer)){
+      throw new TypeError('`inlineContainer` must be a DOM element');
+    }
 
-    this.settings = { namespace, showWhitespaceAtEdges, containInline, inlineOffsetX, inlineOffsetY, sourceAttribute, zoomFactor, paneContainer, inlinePane, handleTouch, onShow, onHide, injectBaseStyles, hoverDelay, touchDelay, hoverBoundingBox, touchBoundingBox };
+    this.settings = { namespace, showWhitespaceAtEdges, containInline, inlineOffsetX, inlineOffsetY, inlineContainer, sourceAttribute, zoomFactor, paneContainer, inlinePane, handleTouch, onShow, onHide, injectBaseStyles, hoverDelay, touchDelay, hoverBoundingBox, touchBoundingBox };
 
     if (this.settings.injectBaseStyles) {
       injectBaseStylesheet();
@@ -108,6 +113,7 @@ module.exports = class Drift {
       namespace: this.settings.namespace,
       inlineOffsetX: this.settings.inlineOffsetX,
       inlineOffsetY: this.settings.inlineOffsetY,
+      inlineContainer: this.settings.inlineContainer
     });
   }
 

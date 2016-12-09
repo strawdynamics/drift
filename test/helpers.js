@@ -11,6 +11,7 @@ export function defaultDriftConfig() {
     containInline: false,
     inlineOffsetX: 0,
     inlineOffsetY: 0,
+    inlineContainer: document.body,
     sourceAttribute: 'data-zoom',
     zoomFactor: 3,
     paneContainer: document.body,
@@ -22,7 +23,7 @@ export function defaultDriftConfig() {
     hoverDelay: 0,
     touchDelay: 0,
     hoverBoundingBox: false,
-    touchBoundingBox: false,
+    touchBoundingBox: false
   };
 }
 

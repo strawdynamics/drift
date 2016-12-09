@@ -77,6 +77,8 @@ var options = {
 	// interaction point when inline.
 	inlineOffsetX: 0,
 	inlineOffsetY: 0,
+	// A DOM element to append the inline ZoomPane to.
+	inlineContainer: document.body,
 	// Which trigger attribute to pull the ZoomPane image source from.
 	sourceAttribute: 'data-zoom',
 	// How much to magnify the trigger by in the ZoomPane.
