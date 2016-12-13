@@ -37,12 +37,12 @@ var BoundingBox = function () {
 
     this.isShowing = false;
 
-    var _options$namespace = options.namespace;
-    var namespace = _options$namespace === undefined ? null : _options$namespace;
-    var _options$zoomFactor = options.zoomFactor;
-    var zoomFactor = _options$zoomFactor === undefined ? (0, _throwIfMissing2.default)() : _options$zoomFactor;
-    var _options$containerEl = options.containerEl;
-    var containerEl = _options$containerEl === undefined ? (0, _throwIfMissing2.default)() : _options$containerEl;
+    var _options$namespace = options.namespace,
+        namespace = _options$namespace === undefined ? null : _options$namespace,
+        _options$zoomFactor = options.zoomFactor,
+        zoomFactor = _options$zoomFactor === undefined ? (0, _throwIfMissing2.default)() : _options$zoomFactor,
+        _options$containerEl = options.containerEl,
+        containerEl = _options$containerEl === undefined ? (0, _throwIfMissing2.default)() : _options$containerEl;
 
     this.settings = { namespace: namespace, zoomFactor: zoomFactor, containerEl: containerEl };
 
@@ -171,7 +171,7 @@ module.exports = function () {
 
     _classCallCheck(this, Drift);
 
-    this.VERSION = '1.0.0';
+    this.VERSION = '1.1.0';
 
     this.destroy = function () {
       _this.trigger._unbindEvents();
@@ -186,46 +186,51 @@ module.exports = function () {
     // A bit unexpected if you haven't seen this pattern before.
     // Based on the pattern here:
     // https://github.com/getify/You-Dont-Know-JS/blob/master/es6%20&%20beyond/ch2.md#nested-defaults-destructured-and-restructured
-    var _options$namespace = options.namespace;
-    var namespace = _options$namespace === undefined ? null : _options$namespace;
-    var _options$showWhitespa = options.showWhitespaceAtEdges;
-    var showWhitespaceAtEdges = _options$showWhitespa === undefined ? false : _options$showWhitespa;
-    var _options$containInlin = options.containInline;
-    var containInline = _options$containInlin === undefined ? false : _options$containInlin;
-    var _options$inlineOffset = options.inlineOffsetX;
-    var inlineOffsetX = _options$inlineOffset === undefined ? 0 : _options$inlineOffset;
-    var _options$inlineOffset2 = options.inlineOffsetY;
-    var inlineOffsetY = _options$inlineOffset2 === undefined ? 0 : _options$inlineOffset2;
-    var _options$sourceAttrib = options.sourceAttribute;
-    var sourceAttribute = _options$sourceAttrib === undefined ? 'data-zoom' : _options$sourceAttrib;
-    var _options$zoomFactor = options.zoomFactor;
-    var zoomFactor = _options$zoomFactor === undefined ? 3 : _options$zoomFactor;
-    var _options$paneContaine = options.paneContainer;
-    var paneContainer = _options$paneContaine === undefined ? document.body : _options$paneContaine;
-    var _options$inlinePane = options.inlinePane;
-    var inlinePane = _options$inlinePane === undefined ? 375 : _options$inlinePane;
-    var _options$handleTouch = options.handleTouch;
-    var handleTouch = _options$handleTouch === undefined ? true : _options$handleTouch;
-    var _options$onShow = options.onShow;
-    var onShow = _options$onShow === undefined ? null : _options$onShow;
-    var _options$onHide = options.onHide;
-    var onHide = _options$onHide === undefined ? null : _options$onHide;
-    var _options$injectBaseSt = options.injectBaseStyles;
-    var injectBaseStyles = _options$injectBaseSt === undefined ? true : _options$injectBaseSt;
-    var _options$hoverDelay = options.hoverDelay;
-    var hoverDelay = _options$hoverDelay === undefined ? 0 : _options$hoverDelay;
-    var _options$touchDelay = options.touchDelay;
-    var touchDelay = _options$touchDelay === undefined ? 0 : _options$touchDelay;
-    var _options$hoverBoundin = options.hoverBoundingBox;
-    var hoverBoundingBox = _options$hoverBoundin === undefined ? false : _options$hoverBoundin;
-    var _options$touchBoundin = options.touchBoundingBox;
-    var touchBoundingBox = _options$touchBoundin === undefined ? false : _options$touchBoundin;
+    var _options$namespace = options.namespace,
+        namespace = _options$namespace === undefined ? null : _options$namespace,
+        _options$showWhitespa = options.showWhitespaceAtEdges,
+        showWhitespaceAtEdges = _options$showWhitespa === undefined ? false : _options$showWhitespa,
+        _options$containInlin = options.containInline,
+        containInline = _options$containInlin === undefined ? false : _options$containInlin,
+        _options$inlineOffset = options.inlineOffsetX,
+        inlineOffsetX = _options$inlineOffset === undefined ? 0 : _options$inlineOffset,
+        _options$inlineOffset2 = options.inlineOffsetY,
+        inlineOffsetY = _options$inlineOffset2 === undefined ? 0 : _options$inlineOffset2,
+        _options$inlineContai = options.inlineContainer,
+        inlineContainer = _options$inlineContai === undefined ? document.body : _options$inlineContai,
+        _options$sourceAttrib = options.sourceAttribute,
+        sourceAttribute = _options$sourceAttrib === undefined ? 'data-zoom' : _options$sourceAttrib,
+        _options$zoomFactor = options.zoomFactor,
+        zoomFactor = _options$zoomFactor === undefined ? 3 : _options$zoomFactor,
+        _options$paneContaine = options.paneContainer,
+        paneContainer = _options$paneContaine === undefined ? document.body : _options$paneContaine,
+        _options$inlinePane = options.inlinePane,
+        inlinePane = _options$inlinePane === undefined ? 375 : _options$inlinePane,
+        _options$handleTouch = options.handleTouch,
+        handleTouch = _options$handleTouch === undefined ? true : _options$handleTouch,
+        _options$onShow = options.onShow,
+        onShow = _options$onShow === undefined ? null : _options$onShow,
+        _options$onHide = options.onHide,
+        onHide = _options$onHide === undefined ? null : _options$onHide,
+        _options$injectBaseSt = options.injectBaseStyles,
+        injectBaseStyles = _options$injectBaseSt === undefined ? true : _options$injectBaseSt,
+        _options$hoverDelay = options.hoverDelay,
+        hoverDelay = _options$hoverDelay === undefined ? 0 : _options$hoverDelay,
+        _options$touchDelay = options.touchDelay,
+        touchDelay = _options$touchDelay === undefined ? 0 : _options$touchDelay,
+        _options$hoverBoundin = options.hoverBoundingBox,
+        hoverBoundingBox = _options$hoverBoundin === undefined ? false : _options$hoverBoundin,
+        _options$touchBoundin = options.touchBoundingBox,
+        touchBoundingBox = _options$touchBoundin === undefined ? false : _options$touchBoundin;
 
     if (inlinePane !== true && !(0, _dom.isDOMElement)(paneContainer)) {
       throw new TypeError('`paneContainer` must be a DOM element when `inlinePane !== true`');
     }
+    if (!(0, _dom.isDOMElement)(inlineContainer)) {
+      throw new TypeError('`inlineContainer` must be a DOM element');
+    }
 
-    this.settings = { namespace: namespace, showWhitespaceAtEdges: showWhitespaceAtEdges, containInline: containInline, inlineOffsetX: inlineOffsetX, inlineOffsetY: inlineOffsetY, sourceAttribute: sourceAttribute, zoomFactor: zoomFactor, paneContainer: paneContainer, inlinePane: inlinePane, handleTouch: handleTouch, onShow: onShow, onHide: onHide, injectBaseStyles: injectBaseStyles, hoverDelay: hoverDelay, touchDelay: touchDelay, hoverBoundingBox: hoverBoundingBox, touchBoundingBox: touchBoundingBox };
+    this.settings = { namespace: namespace, showWhitespaceAtEdges: showWhitespaceAtEdges, containInline: containInline, inlineOffsetX: inlineOffsetX, inlineOffsetY: inlineOffsetY, inlineContainer: inlineContainer, sourceAttribute: sourceAttribute, zoomFactor: zoomFactor, paneContainer: paneContainer, inlinePane: inlinePane, handleTouch: handleTouch, onShow: onShow, onHide: onHide, injectBaseStyles: injectBaseStyles, hoverDelay: hoverDelay, touchDelay: touchDelay, hoverBoundingBox: hoverBoundingBox, touchBoundingBox: touchBoundingBox };
 
     if (this.settings.injectBaseStyles) {
       (0, _injectBaseStylesheet2.default)();
@@ -246,7 +251,8 @@ module.exports = function () {
         inline: this.settings.inlinePane,
         namespace: this.settings.namespace,
         inlineOffsetX: this.settings.inlineOffsetX,
-        inlineOffsetY: this.settings.inlineOffsetY
+        inlineOffsetY: this.settings.inlineOffsetY,
+        inlineContainer: this.settings.inlineContainer
       });
     }
   }, {
@@ -344,30 +350,30 @@ var Trigger = function () {
 
     _initialiseProps.call(this);
 
-    var _options$el = options.el;
-    var el = _options$el === undefined ? (0, _throwIfMissing2.default)() : _options$el;
-    var _options$zoomPane = options.zoomPane;
-    var zoomPane = _options$zoomPane === undefined ? (0, _throwIfMissing2.default)() : _options$zoomPane;
-    var _options$sourceAttrib = options.sourceAttribute;
-    var sourceAttribute = _options$sourceAttrib === undefined ? (0, _throwIfMissing2.default)() : _options$sourceAttrib;
-    var _options$handleTouch = options.handleTouch;
-    var handleTouch = _options$handleTouch === undefined ? (0, _throwIfMissing2.default)() : _options$handleTouch;
-    var _options$onShow = options.onShow;
-    var onShow = _options$onShow === undefined ? null : _options$onShow;
-    var _options$onHide = options.onHide;
-    var onHide = _options$onHide === undefined ? null : _options$onHide;
-    var _options$hoverDelay = options.hoverDelay;
-    var hoverDelay = _options$hoverDelay === undefined ? 0 : _options$hoverDelay;
-    var _options$touchDelay = options.touchDelay;
-    var touchDelay = _options$touchDelay === undefined ? 0 : _options$touchDelay;
-    var _options$hoverBoundin = options.hoverBoundingBox;
-    var hoverBoundingBox = _options$hoverBoundin === undefined ? (0, _throwIfMissing2.default)() : _options$hoverBoundin;
-    var _options$touchBoundin = options.touchBoundingBox;
-    var touchBoundingBox = _options$touchBoundin === undefined ? (0, _throwIfMissing2.default)() : _options$touchBoundin;
-    var _options$namespace = options.namespace;
-    var namespace = _options$namespace === undefined ? null : _options$namespace;
-    var _options$zoomFactor = options.zoomFactor;
-    var zoomFactor = _options$zoomFactor === undefined ? (0, _throwIfMissing2.default)() : _options$zoomFactor;
+    var _options$el = options.el,
+        el = _options$el === undefined ? (0, _throwIfMissing2.default)() : _options$el,
+        _options$zoomPane = options.zoomPane,
+        zoomPane = _options$zoomPane === undefined ? (0, _throwIfMissing2.default)() : _options$zoomPane,
+        _options$sourceAttrib = options.sourceAttribute,
+        sourceAttribute = _options$sourceAttrib === undefined ? (0, _throwIfMissing2.default)() : _options$sourceAttrib,
+        _options$handleTouch = options.handleTouch,
+        handleTouch = _options$handleTouch === undefined ? (0, _throwIfMissing2.default)() : _options$handleTouch,
+        _options$onShow = options.onShow,
+        onShow = _options$onShow === undefined ? null : _options$onShow,
+        _options$onHide = options.onHide,
+        onHide = _options$onHide === undefined ? null : _options$onHide,
+        _options$hoverDelay = options.hoverDelay,
+        hoverDelay = _options$hoverDelay === undefined ? 0 : _options$hoverDelay,
+        _options$touchDelay = options.touchDelay,
+        touchDelay = _options$touchDelay === undefined ? 0 : _options$touchDelay,
+        _options$hoverBoundin = options.hoverBoundingBox,
+        hoverBoundingBox = _options$hoverBoundin === undefined ? (0, _throwIfMissing2.default)() : _options$hoverBoundin,
+        _options$touchBoundin = options.touchBoundingBox,
+        touchBoundingBox = _options$touchBoundin === undefined ? (0, _throwIfMissing2.default)() : _options$touchBoundin,
+        _options$namespace = options.namespace,
+        namespace = _options$namespace === undefined ? null : _options$namespace,
+        _options$zoomFactor = options.zoomFactor,
+        zoomFactor = _options$zoomFactor === undefined ? (0, _throwIfMissing2.default)() : _options$zoomFactor;
 
     this.settings = { el: el, zoomPane: zoomPane, sourceAttribute: sourceAttribute, handleTouch: handleTouch, onShow: onShow, onHide: onHide, hoverDelay: hoverDelay, touchDelay: touchDelay, hoverBoundingBox: hoverBoundingBox, touchBoundingBox: touchBoundingBox, namespace: namespace, zoomFactor: zoomFactor };
 
@@ -600,25 +606,26 @@ var ZoomPane = function () {
 
     this.isShowing = false;
 
-    var _options$container = options.container;
-    var container = _options$container === undefined ? null : _options$container;
-    var _options$zoomFactor = options.zoomFactor;
-    var zoomFactor = _options$zoomFactor === undefined ? (0, _throwIfMissing2.default)() : _options$zoomFactor;
-    var _options$inline = options.inline;
-    var inline = _options$inline === undefined ? (0, _throwIfMissing2.default)() : _options$inline;
-    var _options$namespace = options.namespace;
-    var namespace = _options$namespace === undefined ? null : _options$namespace;
-    var _options$showWhitespa = options.showWhitespaceAtEdges;
-    var showWhitespaceAtEdges = _options$showWhitespa === undefined ? (0, _throwIfMissing2.default)() : _options$showWhitespa;
-    var _options$containInlin = options.containInline;
-    var containInline = _options$containInlin === undefined ? (0, _throwIfMissing2.default)() : _options$containInlin;
-    var _options$inlineOffset = options.inlineOffsetX;
-    var inlineOffsetX = _options$inlineOffset === undefined ? 0 : _options$inlineOffset;
-    var _options$inlineOffset2 = options.inlineOffsetY;
-    var inlineOffsetY = _options$inlineOffset2 === undefined ? 0 : _options$inlineOffset2;
+    var _options$container = options.container,
+        container = _options$container === undefined ? null : _options$container,
+        _options$zoomFactor = options.zoomFactor,
+        zoomFactor = _options$zoomFactor === undefined ? (0, _throwIfMissing2.default)() : _options$zoomFactor,
+        _options$inline = options.inline,
+        inline = _options$inline === undefined ? (0, _throwIfMissing2.default)() : _options$inline,
+        _options$namespace = options.namespace,
+        namespace = _options$namespace === undefined ? null : _options$namespace,
+        _options$showWhitespa = options.showWhitespaceAtEdges,
+        showWhitespaceAtEdges = _options$showWhitespa === undefined ? (0, _throwIfMissing2.default)() : _options$showWhitespa,
+        _options$containInlin = options.containInline,
+        containInline = _options$containInlin === undefined ? (0, _throwIfMissing2.default)() : _options$containInlin,
+        _options$inlineOffset = options.inlineOffsetX,
+        inlineOffsetX = _options$inlineOffset === undefined ? 0 : _options$inlineOffset,
+        _options$inlineOffset2 = options.inlineOffsetY,
+        inlineOffsetY = _options$inlineOffset2 === undefined ? 0 : _options$inlineOffset2,
+        _options$inlineContai = options.inlineContainer,
+        inlineContainer = _options$inlineContai === undefined ? document.body : _options$inlineContai;
 
-    this.settings = { container: container, zoomFactor: zoomFactor, inline: inline, namespace: namespace, showWhitespaceAtEdges: showWhitespaceAtEdges, containInline: containInline, inlineOffsetX: inlineOffsetX, inlineOffsetY: inlineOffsetY };
-    this.settings.inlineContainer = document.body;
+    this.settings = { container: container, zoomFactor: zoomFactor, inline: inline, namespace: namespace, showWhitespaceAtEdges: showWhitespaceAtEdges, containInline: containInline, inlineOffsetX: inlineOffsetX, inlineOffsetY: inlineOffsetY, inlineContainer: inlineContainer };
 
     this.openClasses = this._buildClasses('open');
     this.openingClasses = this._buildClasses('opening');
