@@ -96,11 +96,11 @@ project:
 
    ```bash
    # Clone your fork of the repo into the current directory
-   git clone git@github.com:<YOUR_USERNAME>/luminous.git
+   git clone git@github.com:<YOUR_USERNAME>/drift.git
    # Navigate to the newly cloned directory
-   cd luminous
+   cd drift
    # Assign the original repo to a remote called "upstream"
-   git remote add upstream https://github.com/imgix/luminous
+   git remote add upstream https://github.com/imgix/drift
    ```
 
 2. If you cloned a while ago, get the latest changes from upstream:
@@ -161,7 +161,7 @@ npm install
 Once you're configured, building the JavaScript from the command line is easy:
 
 ```
-gulp            # build Luminous from source
+gulp            # build Drift from source
 gulp watch      # watch for changes and build automatically, testing with PhantomJS
 gulp test-local # run the test against local browsers only (Chrome, Safari, Firefox)
 gulp test-full  # run the test suite against all supported browsers (using SauceLabs)
