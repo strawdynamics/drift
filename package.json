@@ -20,7 +20,7 @@
     "hover"
   ],
   "author": "imgix",
-  "license": "MIT",
+  "license": "BSD-2",
   "bugs": {
     "url": "https://github.com/imgix/drift/issues"
   },
