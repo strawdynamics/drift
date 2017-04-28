@@ -117,6 +117,8 @@ var options = {
 	// If true, a bounding box will show the area currently being previewed
 	// during touch events
 	touchBoundingBox: false,
+	// A DOM element to append the bounding box to.
+	boundingBoxContainer = document.body,
 };
 
 new Drift(document.querySelector('img'), options);
