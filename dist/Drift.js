@@ -301,6 +301,8 @@ module.exports = function () {
     set: function set(zf) {
       this.settings.zoomFactor = zf;
       this.zoomPane.settings.zoomFactor = zf;
+      this.trigger.settings.zoomFactor = zf;
+      this.boundingBox.settings.zoomFactor = zf;
     }
   }]);
 
