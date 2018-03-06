@@ -4,7 +4,7 @@ import injectBaseStylesheet from './injectBaseStylesheet';
 import Trigger from './Trigger';
 import ZoomPane from './ZoomPane';
 
-module.exports = class Drift {
+export default class Drift {
   VERSION = '1.2.0'
 
   constructor(triggerEl, options = {}) {
