@@ -103,6 +103,8 @@ export default class Drift {
   set zoomFactor(zf) {
     this.settings.zoomFactor = zf;
     this.zoomPane.settings.zoomFactor = zf;
+    this.trigger.settings.zoomFactor = zf;
+    this.boundingBox.settings.zoomFactor = zf;
   }
 
   _buildZoomPane() {
