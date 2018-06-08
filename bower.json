@@ -1,22 +1,12 @@
 {
   "name": "drift",
   "version": "1.2.0",
-  "description": "Easily add \"zoom on hover\" functionality to your site's images. Lightweight, no-dependency JavaScript.",
-  "main": [
-    "dist/Drift.js",
-    "dist/drift-basic.css"
-  ],
-  "authors": [
-    "imgix"
-  ],
+  "description":
+    "Easily add \"zoom on hover\" functionality to your site's images. Lightweight, no-dependency JavaScript.",
+  "main": ["dist/Drift.js", "dist/drift-basic.css"],
+  "authors": ["imgix"],
   "license": "MIT",
-  "keywords": [
-    "javascript",
-    "zoom",
-    "hover",
-    "image",
-    "images"
-  ],
+  "keywords": ["javascript", "zoom", "hover", "image", "images"],
   "homepage": "https://github.com/imgix/drift",
   "moduleType": [],
   "ignore": [

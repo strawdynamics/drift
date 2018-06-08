@@ -41,16 +41,16 @@ const RULES = `
   position: absolute;
   pointer-events: none;
 }
-`
+`;
 
 export default function injectBaseStylesheet() {
-  if (document.querySelector('.drift-base-styles')) {
+  if (document.querySelector(".drift-base-styles")) {
     return;
   }
 
-  let styleEl = document.createElement('style');
-  styleEl.type = 'text/css';
-  styleEl.classList.add('drift-base-styles');
+  let styleEl = document.createElement("style");
+  styleEl.type = "text/css";
+  styleEl.classList.add("drift-base-styles");
 
   styleEl.appendChild(document.createTextNode(RULES));
 

@@ -37,5 +37,5 @@ export default function debounce(func, wait, immediate) {
     }
 
     return result;
-  }
+  };
 }
