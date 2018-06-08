@@ -23,7 +23,8 @@ export function defaultDriftConfig() {
     hoverDelay: 0,
     touchDelay: 0,
     hoverBoundingBox: false,
-    touchBoundingBox: false
+    touchBoundingBox: false,
+    boundingBoxContainer: document.body,
   };
 }
 
@@ -54,6 +55,7 @@ export function triggerOptions() {
     touchBoundingBox: false,
     namespace: null,
     zoomFactor: 3,
+    boundingBoxContainer: document.body,
   };
 }
 
