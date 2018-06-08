@@ -146,6 +146,7 @@ license your work under the same license as that used by the project.
 
 1.  Make all changes to files under `./src`, **not** `./dist`.
 2.  Use [Gulp](#gulp) to build the JavaScript files.
+3.  Use [Prettier](https://prettier.io/) for code formatting. Code will automatically be formatted upon submitting a PR.
 
 <a name="gulp"></a>
 
