@@ -1,5 +1,5 @@
-import throwIfMissing from './util/throwIfMissing';
-import BoundingBox from './BoundingBox';
+import throwIfMissing from "./util/throwIfMissing";
+import BoundingBox from "./BoundingBox";
 
 export default class Trigger {
   constructor(options = {}) {
@@ -16,16 +16,30 @@ export default class Trigger {
       touchBoundingBox = throwIfMissing(),
       namespace = null,
       zoomFactor = throwIfMissing(),
-      boundingBoxContainer = throwIfMissing(),
+      boundingBoxContainer = throwIfMissing()
     } = options;
 
-    this.settings = { el, zoomPane, sourceAttribute, handleTouch, onShow, onHide, hoverDelay, touchDelay, hoverBoundingBox, touchBoundingBox, namespace, zoomFactor, boundingBoxContainer };
+    this.settings = {
+      el,
+      zoomPane,
+      sourceAttribute,
+      handleTouch,
+      onShow,
+      onHide,
+      hoverDelay,
+      touchDelay,
+      hoverBoundingBox,
+      touchBoundingBox,
+      namespace,
+      zoomFactor,
+      boundingBoxContainer
+    };
 
     if (this.settings.hoverBoundingBox || this.settings.touchBoundingBox) {
       this.boundingBox = new BoundingBox({
         namespace: this.settings.namespace,
         zoomFactor: this.settings.zoomFactor,
-        containerEl: this.settings.boundingBoxContainer,
+        containerEl: this.settings.boundingBoxContainer
       });
     }
 
@@ -39,34 +53,54 @@ export default class Trigger {
   }
 
   _bindEvents() {
-    this.settings.el.addEventListener('mouseenter', this._handleEntry, false);
-    this.settings.el.addEventListener('mouseleave', this._hide, false);
-    this.settings.el.addEventListener('mousemove', this._handleMovement, false);
+    this.settings.el.addEventListener("mouseenter", this._handleEntry, false);
+    this.settings.el.addEventListener("mouseleave", this._hide, false);
+    this.settings.el.addEventListener("mousemove", this._handleMovement, false);
 
     if (this.settings.handleTouch) {
-      this.settings.el.addEventListener('touchstart', this._handleEntry, false);
-      this.settings.el.addEventListener('touchend', this._hide, false);
-      this.settings.el.addEventListener('touchmove', this._handleMovement, false);
+      this.settings.el.addEventListener("touchstart", this._handleEntry, false);
+      this.settings.el.addEventListener("touchend", this._hide, false);
+      this.settings.el.addEventListener(
+        "touchmove",
+        this._handleMovement,
+        false
+      );
     }
   }
 
   _unbindEvents() {
-    this.settings.el.removeEventListener('mouseenter', this._handleEntry, false);
-    this.settings.el.removeEventListener('mouseleave', this._hide, false);
-    this.settings.el.removeEventListener('mousemove', this._handleMovement, false);
+    this.settings.el.removeEventListener(
+      "mouseenter",
+      this._handleEntry,
+      false
+    );
+    this.settings.el.removeEventListener("mouseleave", this._hide, false);
+    this.settings.el.removeEventListener(
+      "mousemove",
+      this._handleMovement,
+      false
+    );
 
     if (this.settings.handleTouch) {
-      this.settings.el.removeEventListener('touchstart', this._handleEntry, false);
-      this.settings.el.removeEventListener('touchend', this._hide, false);
-      this.settings.el.removeEventListener('touchmove', this._handleMovement, false);
+      this.settings.el.removeEventListener(
+        "touchstart",
+        this._handleEntry,
+        false
+      );
+      this.settings.el.removeEventListener("touchend", this._hide, false);
+      this.settings.el.removeEventListener(
+        "touchmove",
+        this._handleMovement,
+        false
+      );
     }
   }
 
-  _handleEntry = (e) => {
+  _handleEntry = e => {
     e.preventDefault();
     this._lastMovement = e;
 
-    if (e.type == 'mouseenter' && this.settings.hoverDelay) {
+    if (e.type == "mouseenter" && this.settings.hoverDelay) {
       this.entryTimeout = setTimeout(this._show, this.settings.hoverDelay);
     } else if (this.settings.touchDelay) {
       this.entryTimeout = setTimeout(this._show, this.settings.touchDelay);
@@ -80,8 +114,8 @@ export default class Trigger {
       return;
     }
 
-    let onShow = this.settings.onShow
-    if (onShow && typeof onShow === 'function') {
+    let onShow = this.settings.onShow;
+    if (onShow && typeof onShow === "function") {
       onShow();
     }
 
@@ -105,9 +139,9 @@ export default class Trigger {
     }
 
     this._handleMovement();
-  }
+  };
 
-  _hide = (e) => {
+  _hide = e => {
     e.preventDefault();
 
     this._lastMovement = null;
@@ -120,15 +154,15 @@ export default class Trigger {
       this.boundingBox.hide();
     }
 
-    let onHide = this.settings.onHide
-    if (onHide && typeof onHide === 'function') {
+    let onHide = this.settings.onHide;
+    if (onHide && typeof onHide === "function") {
       onHide();
     }
 
-    this.settings.zoomPane.hide()
+    this.settings.zoomPane.hide();
   };
 
-  _handleMovement = (e) => {
+  _handleMovement = e => {
     if (e) {
       e.preventDefault();
       this._lastMovement = e;
@@ -150,7 +184,7 @@ export default class Trigger {
     }
 
     let el = this.settings.el;
-    let rect = el.getBoundingClientRect()
+    let rect = el.getBoundingClientRect();
     let offsetX = movementX - rect.left;
     let offsetY = movementY - rect.top;
 
@@ -158,11 +192,13 @@ export default class Trigger {
     let percentageOffsetY = offsetY / this.settings.el.clientHeight;
 
     if (this.boundingBox) {
-      this.boundingBox.setPosition(percentageOffsetX,
-        percentageOffsetY, rect);
+      this.boundingBox.setPosition(percentageOffsetX, percentageOffsetY, rect);
     }
 
-    this.settings.zoomPane.setPosition(percentageOffsetX,
-      percentageOffsetY, rect);
+    this.settings.zoomPane.setPosition(
+      percentageOffsetX,
+      percentageOffsetY,
+      rect
+    );
   };
 }

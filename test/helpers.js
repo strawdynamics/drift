@@ -1,4 +1,4 @@
-import ZoomPane from '../src/js/ZoomPane';
+import ZoomPane from "../src/js/ZoomPane";
 
 export let mockEvent = {
   preventDefault: function() {}
@@ -12,7 +12,7 @@ export function defaultDriftConfig() {
     inlineOffsetX: 0,
     inlineOffsetY: 0,
     inlineContainer: document.body,
-    sourceAttribute: 'data-zoom',
+    sourceAttribute: "data-zoom",
     zoomFactor: 3,
     paneContainer: document.body,
     inlinePane: 375,
@@ -24,7 +24,7 @@ export function defaultDriftConfig() {
     touchDelay: 0,
     hoverBoundingBox: false,
     touchBoundingBox: false,
-    boundingBoxContainer: document.body,
+    boundingBoxContainer: document.body
   };
 }
 
@@ -37,15 +37,15 @@ export function zoomPaneOptions() {
     showWhitespaceAtEdges: false,
     containInline: false,
     inlineOffsetX: 0,
-    inlineOffsetY: 0,
+    inlineOffsetY: 0
   };
 }
 
 export function triggerOptions() {
   return {
-    el: document.querySelector('.test-anchor'),
+    el: document.querySelector(".test-anchor"),
     zoomPane: new ZoomPane(zoomPaneOptions()),
-    sourceAttribute: 'data-zoom',
+    sourceAttribute: "data-zoom",
     handleTouch: true,
     onShow: null,
     onHide: null,
@@ -55,7 +55,7 @@ export function triggerOptions() {
     touchBoundingBox: false,
     namespace: null,
     zoomFactor: 3,
-    boundingBoxContainer: document.body,
+    boundingBoxContainer: document.body
   };
 }
 
@@ -63,6 +63,6 @@ export function boundingBoxOptions() {
   return {
     namespace: null,
     zoomFactor: 3,
-    containerEl: document.querySelector('.test-anchor').offsetParent,
+    containerEl: document.querySelector(".test-anchor").offsetParent
   };
 }
