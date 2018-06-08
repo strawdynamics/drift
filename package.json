@@ -4,7 +4,10 @@
   "description": "Easily add \"zoom on hover\" functionality to your site's images. Lightweight, no-dependency JavaScript.",
   "main": "dist/Drift.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "format": "prettier --write \"{src,test}/**/*.js\"",
+    "format:check": "prettier --list-different \"{src,test}/**/*.js\"",
+    "test": "gulp build-ci",
+    "start": "gulp"
   },
   "files": [
     "dist",
@@ -48,6 +51,7 @@
     "karma-phantomjs-launcher": "^1.0.2",
     "karma-sauce-launcher": "^0.3.0",
     "phantomjs": "^1.9.19",
+    "prettier": "^1.13.5",
     "run-sequence": "^1.1.5",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0"
