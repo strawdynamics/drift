@@ -221,9 +221,7 @@ module.exports = function () {
         _options$hoverBoundin = options.hoverBoundingBox,
         hoverBoundingBox = _options$hoverBoundin === undefined ? false : _options$hoverBoundin,
         _options$touchBoundin = options.touchBoundingBox,
-        touchBoundingBox = _options$touchBoundin === undefined ? false : _options$touchBoundin,
-        _options$boundingBoxC = options.boundingBoxContainer,
-        boundingBoxContainer = _options$boundingBoxC === undefined ? document.body : _options$boundingBoxC;
+        touchBoundingBox = _options$touchBoundin === undefined ? false : _options$touchBoundin;
 
     if (inlinePane !== true && !(0, _dom.isDOMElement)(paneContainer)) {
       throw new TypeError('`paneContainer` must be a DOM element when `inlinePane !== true`');
@@ -232,7 +230,7 @@ module.exports = function () {
       throw new TypeError('`inlineContainer` must be a DOM element');
     }
 
-    this.settings = { namespace: namespace, showWhitespaceAtEdges: showWhitespaceAtEdges, containInline: containInline, inlineOffsetX: inlineOffsetX, inlineOffsetY: inlineOffsetY, inlineContainer: inlineContainer, sourceAttribute: sourceAttribute, zoomFactor: zoomFactor, paneContainer: paneContainer, inlinePane: inlinePane, handleTouch: handleTouch, onShow: onShow, onHide: onHide, injectBaseStyles: injectBaseStyles, hoverDelay: hoverDelay, touchDelay: touchDelay, hoverBoundingBox: hoverBoundingBox, touchBoundingBox: touchBoundingBox, boundingBoxContainer: boundingBoxContainer };
+    this.settings = { namespace: namespace, showWhitespaceAtEdges: showWhitespaceAtEdges, containInline: containInline, inlineOffsetX: inlineOffsetX, inlineOffsetY: inlineOffsetY, inlineContainer: inlineContainer, sourceAttribute: sourceAttribute, zoomFactor: zoomFactor, paneContainer: paneContainer, inlinePane: inlinePane, handleTouch: handleTouch, onShow: onShow, onHide: onHide, injectBaseStyles: injectBaseStyles, hoverDelay: hoverDelay, touchDelay: touchDelay, hoverBoundingBox: hoverBoundingBox, touchBoundingBox: touchBoundingBox };
 
     if (this.settings.injectBaseStyles) {
       (0, _injectBaseStylesheet2.default)();
@@ -272,8 +270,7 @@ module.exports = function () {
         hoverBoundingBox: this.settings.hoverBoundingBox,
         touchBoundingBox: this.settings.touchBoundingBox,
         namespace: this.settings.namespace,
-        zoomFactor: this.settings.zoomFactor,
-        boundingBoxContainer: this.settings.boundingBoxContainer
+        zoomFactor: this.settings.zoomFactor
       });
     }
   }, {
@@ -376,17 +373,15 @@ var Trigger = function () {
         _options$namespace = options.namespace,
         namespace = _options$namespace === undefined ? null : _options$namespace,
         _options$zoomFactor = options.zoomFactor,
-        zoomFactor = _options$zoomFactor === undefined ? (0, _throwIfMissing2.default)() : _options$zoomFactor,
-        _options$boundingBoxC = options.boundingBoxContainer,
-        boundingBoxContainer = _options$boundingBoxC === undefined ? (0, _throwIfMissing2.default)() : _options$boundingBoxC;
+        zoomFactor = _options$zoomFactor === undefined ? (0, _throwIfMissing2.default)() : _options$zoomFactor;
 
-    this.settings = { el: el, zoomPane: zoomPane, sourceAttribute: sourceAttribute, handleTouch: handleTouch, onShow: onShow, onHide: onHide, hoverDelay: hoverDelay, touchDelay: touchDelay, hoverBoundingBox: hoverBoundingBox, touchBoundingBox: touchBoundingBox, namespace: namespace, zoomFactor: zoomFactor, boundingBoxContainer: boundingBoxContainer };
+    this.settings = { el: el, zoomPane: zoomPane, sourceAttribute: sourceAttribute, handleTouch: handleTouch, onShow: onShow, onHide: onHide, hoverDelay: hoverDelay, touchDelay: touchDelay, hoverBoundingBox: hoverBoundingBox, touchBoundingBox: touchBoundingBox, namespace: namespace, zoomFactor: zoomFactor };
 
     if (this.settings.hoverBoundingBox || this.settings.touchBoundingBox) {
       this.boundingBox = new _BoundingBox2.default({
         namespace: this.settings.namespace,
         zoomFactor: this.settings.zoomFactor,
-        containerEl: this.settings.boundingBoxContainer
+        containerEl: this.settings.el.offsetParent
       });
     }
 
