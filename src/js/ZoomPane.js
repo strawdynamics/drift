@@ -1,13 +1,12 @@
-import throwIfMissing from './util/throwIfMissing';
-import { addClasses, removeClasses } from './util/dom';
+import throwIfMissing from "./util/throwIfMissing";
+import { addClasses, removeClasses } from "./util/dom";
 
 // All officially-supported browsers have this, but it's easy to
 // account for, just in case.
-var divStyle = document.createElement('div').style;
+var divStyle = document.createElement("div").style;
 
-const HAS_ANIMATION = typeof document === 'undefined' ?
-  false :
-  ('animation' in divStyle || 'webkitAnimation' in divStyle);
+const HAS_ANIMATION =
+  typeof document === "undefined" ? false : "animation" in divStyle || "webkitAnimation" in divStyle;
 
 export default class ZoomPane {
   constructor(options = {}) {
@@ -25,13 +24,23 @@ export default class ZoomPane {
       inlineContainer = document.body
     } = options;
 
-    this.settings = { container, zoomFactor, inline, namespace, showWhitespaceAtEdges, containInline, inlineOffsetX, inlineOffsetY, inlineContainer };
+    this.settings = {
+      container,
+      zoomFactor,
+      inline,
+      namespace,
+      showWhitespaceAtEdges,
+      containInline,
+      inlineOffsetX,
+      inlineOffsetY,
+      inlineContainer
+    };
 
-    this.openClasses = this._buildClasses('open');
-    this.openingClasses = this._buildClasses('opening');
-    this.closingClasses = this._buildClasses('closing');
-    this.inlineClasses = this._buildClasses('inline');
-    this.loadingClasses = this._buildClasses('loading');
+    this.openClasses = this._buildClasses("open");
+    this.openingClasses = this._buildClasses("opening");
+    this.closingClasses = this._buildClasses("closing");
+    this.inlineClasses = this._buildClasses("inline");
+    this.loadingClasses = this._buildClasses("loading");
 
     this._buildElement();
   }
@@ -48,19 +57,19 @@ export default class ZoomPane {
   }
 
   _buildElement() {
-    this.el = document.createElement('div');
-    addClasses(this.el, this._buildClasses('zoom-pane'));
+    this.el = document.createElement("div");
+    addClasses(this.el, this._buildClasses("zoom-pane"));
 
-    let loaderEl = document.createElement('div');
-    addClasses(loaderEl, this._buildClasses('zoom-pane-loader'));
+    let loaderEl = document.createElement("div");
+    addClasses(loaderEl, this._buildClasses("zoom-pane-loader"));
     this.el.appendChild(loaderEl);
 
-    this.imgEl = document.createElement('img');
+    this.imgEl = document.createElement("img");
     this.el.appendChild(this.imgEl);
   }
 
   _setImageURL(imageURL) {
-    this.imgEl.setAttribute('src', imageURL);
+    this.imgEl.setAttribute("src", imageURL);
   }
 
   _setImageSize(triggerWidth, triggerHeight) {
@@ -71,8 +80,8 @@ export default class ZoomPane {
   // `percentageOffsetX` and `percentageOffsetY` must be percentages
   // expressed as floats between `0' and `1`.
   setPosition(percentageOffsetX, percentageOffsetY, triggerRect) {
-    let left = -(this.imgEl.clientWidth * percentageOffsetX - (this.el.clientWidth / 2));
-    let top = -(this.imgEl.clientHeight * percentageOffsetY - (this.el.clientHeight / 2));
+    let left = -(this.imgEl.clientWidth * percentageOffsetX - this.el.clientWidth / 2);
+    let top = -(this.imgEl.clientHeight * percentageOffsetY - this.el.clientHeight / 2);
     let maxLeft = -(this.imgEl.clientWidth - this.el.clientWidth);
     let maxTop = -(this.imgEl.clientHeight - this.el.clientHeight);
 
@@ -84,14 +93,21 @@ export default class ZoomPane {
       let scrollX = window.pageXOffset;
       let scrollY = window.pageYOffset;
 
-      let inlineLeft = triggerRect.left + (percentageOffsetX * triggerRect.width)
-        - (this.el.clientWidth / 2) + this.settings.inlineOffsetX + scrollX;
-      let inlineTop = triggerRect.top + (percentageOffsetY * triggerRect.height)
-        - (this.el.clientHeight / 2) + this.settings.inlineOffsetY + scrollY;
+      let inlineLeft =
+        triggerRect.left +
+        percentageOffsetX * triggerRect.width -
+        this.el.clientWidth / 2 +
+        this.settings.inlineOffsetX +
+        scrollX;
+      let inlineTop =
+        triggerRect.top +
+        percentageOffsetY * triggerRect.height -
+        this.el.clientHeight / 2 +
+        this.settings.inlineOffsetY +
+        scrollY;
 
       if (this.settings.containInline) {
         let elRect = this.el.getBoundingClientRect();
-
 
         if (inlineLeft < triggerRect.left + scrollX) {
           inlineLeft = triggerRect.left + scrollX;
@@ -131,18 +147,17 @@ export default class ZoomPane {
   get _isInline() {
     let inline = this.settings.inline;
 
-    return inline === true || (typeof inline === 'number' && window.innerWidth <= inline);
+    return inline === true || (typeof inline === "number" && window.innerWidth <= inline);
   }
 
   _removeListenersAndResetClasses() {
-    this.el.removeEventListener('animationend', this._completeShow, false);
-    this.el.removeEventListener('animationend', this._completeHide, false);
-    this.el.removeEventListener('webkitAnimationEnd', this._completeShow, false);
-    this.el.removeEventListener('webkitAnimationEnd', this._completeHide, false);
+    this.el.removeEventListener("animationend", this._completeShow, false);
+    this.el.removeEventListener("animationend", this._completeHide, false);
+    this.el.removeEventListener("webkitAnimationEnd", this._completeShow, false);
+    this.el.removeEventListener("webkitAnimationEnd", this._completeHide, false);
     removeClasses(this.el, this.openClasses);
     removeClasses(this.el, this.closingClasses);
   }
-
 
   show(imageURL, triggerWidth, triggerHeight) {
     this._removeListenersAndResetClasses();
@@ -151,7 +166,7 @@ export default class ZoomPane {
     addClasses(this.el, this.openClasses);
     addClasses(this.el, this.loadingClasses);
 
-    this.imgEl.addEventListener('load', this._handleLoad, false);
+    this.imgEl.addEventListener("load", this._handleLoad, false);
     this._setImageURL(imageURL);
     this._setImageSize(triggerWidth, triggerHeight);
 
@@ -162,8 +177,8 @@ export default class ZoomPane {
     }
 
     if (HAS_ANIMATION) {
-      this.el.addEventListener('animationend', this._completeShow, false);
-      this.el.addEventListener('webkitAnimationEnd', this._completeShow, false);
+      this.el.addEventListener("animationend", this._completeShow, false);
+      this.el.addEventListener("webkitAnimationEnd", this._completeShow, false);
       addClasses(this.el, this.openingClasses);
     }
   }
@@ -182,8 +197,8 @@ export default class ZoomPane {
     this.isShowing = false;
 
     if (HAS_ANIMATION) {
-      this.el.addEventListener('animationend', this._completeHide, false);
-      this.el.addEventListener('webkitAnimationEnd', this._completeHide, false);
+      this.el.addEventListener("animationend", this._completeHide, false);
+      this.el.addEventListener("webkitAnimationEnd", this._completeHide, false);
       addClasses(this.el, this.closingClasses);
     } else {
       removeClasses(this.el, this.openClasses);
@@ -192,21 +207,21 @@ export default class ZoomPane {
   }
 
   _completeShow = () => {
-    this.el.removeEventListener('animationend', this._completeShow, false);
-    this.el.removeEventListener('webkitAnimationEnd', this._completeShow, false);
+    this.el.removeEventListener("animationend", this._completeShow, false);
+    this.el.removeEventListener("webkitAnimationEnd", this._completeShow, false);
 
     removeClasses(this.el, this.openingClasses);
   };
 
   _completeHide = () => {
-    this.el.removeEventListener('animationend', this._completeHide, false);
-    this.el.removeEventListener('webkitAnimationEnd', this._completeHide, false);
+    this.el.removeEventListener("animationend", this._completeHide, false);
+    this.el.removeEventListener("webkitAnimationEnd", this._completeHide, false);
 
     removeClasses(this.el, this.openClasses);
     removeClasses(this.el, this.closingClasses);
     removeClasses(this.el, this.inlineClasses);
 
-    this.el.setAttribute('style', '');
+    this.el.setAttribute("style", "");
 
     // The window could have been resized above or below `inline`
     // limits since the ZoomPane was shown. Because of this, we
@@ -219,7 +234,7 @@ export default class ZoomPane {
   };
 
   _handleLoad = () => {
-    this.imgEl.removeEventListener('load', this._handleLoad, false);
+    this.imgEl.removeEventListener("load", this._handleLoad, false);
     removeClasses(this.el, this.loadingClasses);
   };
 }

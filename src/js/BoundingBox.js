@@ -1,19 +1,15 @@
-import throwIfMissing from './util/throwIfMissing';
-import { addClasses, removeClasses } from './util/dom';
+import throwIfMissing from "./util/throwIfMissing";
+import { addClasses, removeClasses } from "./util/dom";
 
 export default class BoundingBox {
   constructor(options) {
     this.isShowing = false;
 
-    let {
-      namespace = null,
-      zoomFactor = throwIfMissing(),
-      containerEl = throwIfMissing(),
-    } = options;
+    let { namespace = null, zoomFactor = throwIfMissing(), containerEl = throwIfMissing() } = options;
 
     this.settings = { namespace, zoomFactor, containerEl };
 
-    this.openClasses = this._buildClasses('open');
+    this.openClasses = this._buildClasses("open");
 
     this._buildElement();
   }
@@ -30,8 +26,8 @@ export default class BoundingBox {
   }
 
   _buildElement() {
-    this.el = document.createElement('div');
-    addClasses(this.el, this._buildClasses('bounding-box'));
+    this.el = document.createElement("div");
+    addClasses(this.el, this._buildClasses("bounding-box"));
   }
 
   show(zoomPaneWidth, zoomPaneHeight) {
@@ -60,10 +56,8 @@ export default class BoundingBox {
     let pageXOffset = window.pageXOffset;
     let pageYOffset = window.pageYOffset;
 
-    let inlineLeft = triggerRect.left + (percentageOffsetX * triggerRect.width)
-      - (this.el.clientWidth / 2) + pageXOffset;
-    let inlineTop = triggerRect.top + (percentageOffsetY * triggerRect.height)
-      - (this.el.clientHeight / 2) + pageYOffset;
+    let inlineLeft = triggerRect.left + percentageOffsetX * triggerRect.width - this.el.clientWidth / 2 + pageXOffset;
+    let inlineTop = triggerRect.top + percentageOffsetY * triggerRect.height - this.el.clientHeight / 2 + pageYOffset;
 
     let elRect = this.el.getBoundingClientRect();
 

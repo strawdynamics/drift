@@ -4,27 +4,27 @@
 
 Easily add "zoom on hover" functionality to your site's images. Lightweight, no-dependency JavaScript.
 
-* [Installation](#installation)
-* [Basic Usage](#basic-usage)
-* [Options / Defaults](#options-defaults)
-* [API](#api)
-* [Browser Support](#browser-support)
-* [Theming](#theming)
-* [Meta](#meta)
-
+- [Installation](#installation)
+- [Basic Usage](#basic-usage)
+- [Options / Defaults](#options-defaults)
+- [API](#api)
+- [Browser Support](#browser-support)
+- [Theming](#theming)
+- [Meta](#meta)
 
 <a name="installation"></a>
+
 ## Installation
 
-* **NPM**: `npm install drift-zoom`
-* **Bower**: `bower install drift`
-* **Manual**: [Download](https://github.com/imgix/drift/archive/master.zip) and use `dist/Drift.min.js` or `dist/Drift.js`
+- **NPM**: `npm install drift-zoom`
+- **Bower**: `bower install drift`
+- **Manual**: [Download](https://github.com/imgix/drift/archive/master.zip) and use `dist/Drift.min.js` or `dist/Drift.js`
 
 If you're using the pre-built version of Drift, it will automatically make `window.Drift` available for your use when included on your page.
 
 If you prefer to use `require` statements and a build tool like Browserify, here are a couple examples to help:
 
- ``` javascript
+```javascript
 var Drift = require('drift-zoom');
 
 new Drift(…);
@@ -32,37 +32,37 @@ new Drift(…);
 
 If your project uses ES6, you can do the following instead:
 
-``` javascript
+```javascript
 import Drift from 'drift-zoom';
 
 new Drift(…);
 ```
 
-
 <a name="basic-usage"></a>
+
 ## Basic Usage
 
 Once you've installed Drift via one of the above methods, you're ready to get started. There are no dependencies, so you can just start making cool stuff. Check out the [announcement blog post](http://blog.imgix.com/2016/01/06/better-lightbox-zoom-viewer-with-imgix.html) for a demo, or take a peek here: https://imgix.github.io/drift. Here's an example of the most basic possible implementation:
 
-``` html
+```html
 <img src="http://assets.imgix.net/dog.png?w=400" data-zoom="http://assets.imgix.net/dog.png?w=1200">
 
 <p>This is a simple description of the dog picture.</p>
 ```
 
-``` javascript
-new Drift(document.querySelector('img'), {
-  paneContainer: document.querySelector('p')
+```javascript
+new Drift(document.querySelector("img"), {
+  paneContainer: document.querySelector("p")
 });
 ```
 
-
 <a name="options-defaults"></a>
+
 ## Options / Defaults
 
 Here's an example of using Drift with a custom configuration. All of the listed options are displayed with their default value.
 
-``` javascript
+```javascript
 var options = {
 	// Prefix for generated element class names (e.g. `my-ns` will
 	// result in classes such as `my-ns-pane`. Default `drift-`
@@ -124,20 +124,20 @@ var options = {
 new Drift(document.querySelector('img'), options);
 ```
 
-
 <a name="api"></a>
+
 ## API
 
 ### `Drift#disable`
 
 Disable your Drift instance. This will prevent your Drift instance from showing, but will not hide it if it's currently visible.
 
-``` javascript
-var drift = new Drift(document.querySelector('img'), {
-  paneContainer: document.querySelector('p')
+```javascript
+var drift = new Drift(document.querySelector("img"), {
+  paneContainer: document.querySelector("p")
 });
 
-document.querySelector('.disable-button').addEventListener('click', function() {
+document.querySelector(".disable-button").addEventListener("click", function() {
   drift.disable();
 });
 ```
@@ -146,12 +146,12 @@ document.querySelector('.disable-button').addEventListener('click', function() {
 
 Enable your Drift instance.
 
-``` javascript
-var drift = new Drift(document.querySelector('img'), {
-  paneContainer: document.querySelector('p')
+```javascript
+var drift = new Drift(document.querySelector("img"), {
+  paneContainer: document.querySelector("p")
 });
 
-document.querySelector('.enable-button').addEventListener('click', function() {
+document.querySelector(".enable-button").addEventListener("click", function() {
   drift.enable();
 });
 ```
@@ -160,48 +160,44 @@ document.querySelector('.enable-button').addEventListener('click', function() {
 
 Change the URL of the zoom image to the passed string. This only has a visible effect while your Drift is currently open. When opening, Drift always pulls the zoom image URL from the specified `sourceAttribute`. If you want to make a "permanent" change that will persist after the user leaves and re-enters your Drift trigger, you update its `sourceAttribute` as well (default `data-zoom`). For more information about this method, please see [issue #42](https://github.com/imgix/drift/issues/42).
 
-``` javascript
-var triggerEl = document.querySelector('img');
+```javascript
+var triggerEl = document.querySelector("img");
 var drift = new Drift(triggerEl, {
-  paneContainer: document.querySelector('p')
+  paneContainer: document.querySelector("p")
 });
 
-var frames = [
-  'https://mysite.com/frame1.jpg',
-  'https://mysite.com/frame2.jpg',
-  'https://mysite.com/frame3.jpg'
-];
+var frames = ["https://mysite.com/frame1.jpg", "https://mysite.com/frame2.jpg", "https://mysite.com/frame3.jpg"];
 
 var currentFrame = 0;
 
 setInterval(function() {
-  currentFrame++
+  currentFrame++;
 
   if (currentFrame > frames.length - 1) {
     currentFrame = 0;
   }
 
   drift.setZoomImageURL(frames[currentFrame]);
-  triggerEl.setAttribute('data-zoom', frames[currentFrame]);
+  triggerEl.setAttribute("data-zoom", frames[currentFrame]);
 }, 1200);
 ```
 
-
 <a name="theming"></a>
+
 ## Theming
 
 By default, Drift injects an extremely basic set of styles into the page. You will almost certainly want to extend these basic styles for a prettier, more usable experience that matches your site. There is an included basic theme that may meet your needs, or at least give a good example of how to build out your own custom styles. The `namespace` option can be used as a way to easily apply different themes to specific instances of Drift.
 
 If you need to do something very out of the ordinary, or just prefer to include the default styles in CSS yourself, you can pass `injectBaseStyles: false` when instantiating a new instance of Drift. Please note that if you disable the included base styles, you will still need to provide an animation for `.drift-window.drift-opening` and `.drift-window.drift-closing` (this can be a "noop" style animation, as seen in the base styles source).
 
-
 <a name="browser-support"></a>
+
 ## Browser Support
 
 We support the latest version of Google Chrome (which [automatically updates](https://support.google.com/chrome/answer/95414) whenever it detects that a new version of the browser is available). We also support the current and previous major releases of desktop Firefox, Internet Explorer, and Safari on a rolling basis. Mobile support is tested on the most recent minor version of the current and previous major release for the default browser on iOS and Android (e.g., iOS 9.2 and 8.4). Each time a new version is released, we begin supporting that version and stop supporting the third most recent version.
 
-
 <a name="meta"></a>
+
 ## Meta
 
 Drift was made by [imgix](http://imgix.com). It's licensed under the BSD 2-Clause license (see the [license file](https://github.com/imgix/drift/blob/master/LICENSE.md) for more info). Any contribution is absolutely welcome, but please review the [contribution guidelines](https://github.com/imgix/drift/blob/master/CONTRIBUTING.md) before getting started.

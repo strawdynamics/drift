@@ -1,128 +1,134 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="designer" content="imgix">
-    <meta name="developer" content="imgix">
-    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,maximum-scale=1">
-    <meta http-equiv="Accept-CH" content="DPR, Width, Viewport-Width">
 
-    <title>Drift Playground</title>
-    <link rel="stylesheet" media="screen, projection" href="./dist/drift-basic.css">
-    <style type="text/css">
-      body {
-        font-family: Helvetica Neue, Arial, sans;
-        margin-top: 2em;
-        background: #FAFAFA;
-      }
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="designer" content="imgix">
+	<meta name="developer" content="imgix">
+	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,maximum-scale=1">
+	<meta http-equiv="Accept-CH" content="DPR, Width, Viewport-Width">
 
-      .wrapper {
-        margin: 0 auto;
-        width: 860px;
-      }
+	<title>Drift Playground</title>
+	<link rel="stylesheet" media="screen, projection" href="./dist/drift-basic.css">
+	<style type="text/css">
+		body {
+			font-family: Helvetica Neue, Arial, sans;
+			margin-top: 2em;
+			background: #FAFAFA;
+		}
 
-      .drift-demo-trigger {
-        width: 40%;
-        float: left;
-      }
+		.wrapper {
+			margin: 0 auto;
+			width: 860px;
+		}
 
-      .detail {
-        position: relative;
-        width: 55%;
-        margin-left: 5%;
-        float: left;
-      }
+		.drift-demo-trigger {
+			width: 40%;
+			float: left;
+		}
 
-      h1 {
-        color: #013C4A;
-        margin-top: 1em;
-        margin-bottom: 1em;
-      }
+		.detail {
+			position: relative;
+			width: 55%;
+			margin-left: 5%;
+			float: left;
+		}
 
-      p {
-        max-width: 32em;
-        margin-bottom: 1em;
-        color: #23637f;
-        line-height: 1.6em;
-      }
+		h1 {
+			color: #013C4A;
+			margin-top: 1em;
+			margin-bottom: 1em;
+		}
 
-      p:last-of-type {
-        margin-bottom: 2em;
-      }
+		p {
+			max-width: 32em;
+			margin-bottom: 1em;
+			color: #23637f;
+			line-height: 1.6em;
+		}
 
-      a {
-        color: #00C0FA;
-      }
+		p:last-of-type {
+			margin-bottom: 2em;
+		}
 
-      .ix-link {
-        display: block;
-        margin-bottom: 3em;
-      }
+		a {
+			color: #00C0FA;
+		}
 
-      @media (max-width: 900px) {
-        .wrapper {
-          text-align: center;
-          width: auto;
-        }
+		.ix-link {
+			display: block;
+			margin-bottom: 3em;
+		}
 
-        .detail, .drift-demo-trigger {
-          float: none;
-        }
+		@media (max-width: 900px) {
+			.wrapper {
+				text-align: center;
+				width: auto;
+			}
 
-        .drift-demo-trigger {
-          max-width: 100%;
-          width: auto;
-          margin: 0 auto;
-        }
+			.detail,
+			.drift-demo-trigger {
+				float: none;
+			}
 
-        .detail {
-          margin: 0;
-          width: auto;
-        }
+			.drift-demo-trigger {
+				max-width: 100%;
+				width: auto;
+				margin: 0 auto;
+			}
 
-        p {
-          margin: 0 auto 1em;
-        }
+			.detail {
+				margin: 0;
+				width: auto;
+			}
 
-        .responsive-hint {
-          display: none;
-        }
+			p {
+				margin: 0 auto 1em;
+			}
 
-        .drift-bounding-box {
-          display: none;
-        }
-      }
-    </style>
-  </head>
+			.responsive-hint {
+				display: none;
+			}
 
-  <body>
-    <div class="wrapper">
-      <img class="drift-demo-trigger" data-zoom="http://assets.imgix.net/unsplash/lighthouse.jpg?w=1200&amp;ch=DPR&amp;dpr=2" src="http://assets.imgix.net/unsplash/lighthouse.jpg?w=400&amp;ch=DPR&amp;dpr=2">
+			.drift-bounding-box {
+				display: none;
+			}
+		}
+	</style>
+</head>
 
-      <div class="detail">
-        <section>
-          <h1>Drift Demo</h1>
-          <p>This is a demo of Drift, a simple, lightweight, no-dependencies JavaScript "zoom on hover" tool from <a href="http://imgix.com">imgix</a>. Move your mouse over the image (or touch it) to see it in action.</p>
-          <p>This demo uses the simple included theme, but it's very easy to extend and customize to fit your needs. You can <a href="https://github.com/imgix/drift">learn more and download it here</a>.</p>
-          <p class="responsive-hint">(Psst… try making your browser window smaller!)</p>
-        </section>
+<body>
+	<div class="wrapper">
+		<img class="drift-demo-trigger" data-zoom="http://assets.imgix.net/unsplash/lighthouse.jpg?w=1200&amp;ch=DPR&amp;dpr=2" src="http://assets.imgix.net/unsplash/lighthouse.jpg?w=400&amp;ch=DPR&amp;dpr=2">
 
-        <a href="https://imgix.com" class="ix-link">
-          <img src="https://assets.imgix.net/presskit/imgix-presskit.pdf?page=3&amp;fm=png&amp;w=320&amp;dpr=2" width="160" height="60" alt="imgix">
-        </a>
-      </div>
-    </div>
+		<div class="detail">
+			<section>
+				<h1>Drift Demo</h1>
+				<p>This is a demo of Drift, a simple, lightweight, no-dependencies JavaScript "zoom on hover" tool from
+					<a href="http://imgix.com">imgix</a>. Move your mouse over the image (or touch it) to see it in action.</p>
+				<p>This demo uses the simple included theme, but it's very easy to extend and customize to fit your needs. You can
+					<a href="https://github.com/imgix/drift">learn more and download it here</a>.</p>
+				<p class="responsive-hint">(Psst… try making your browser window smaller!)</p>
+			</section>
 
-    <script src="dist/Drift.js"></script>
-    <script>
-      new Drift(document.querySelector('.drift-demo-trigger'), {
-        paneContainer: document.querySelector('.detail'),
-        inlinePane: 900,
-        inlineOffsetY: -85,
-        containInline: true,
-        hoverBoundingBox: true
-      });
-    </script>
-  </body>
+			<a href="https://imgix.com" class="ix-link">
+				<img src="https://assets.imgix.net/presskit/imgix-presskit.pdf?page=3&amp;fm=png&amp;w=320&amp;dpr=2" width="160" height="60"
+				 alt="imgix">
+			</a>
+		</div>
+	</div>
+
+	<script src="dist/Drift.js"></script>
+	<script>
+		new Drift(document.querySelector('.drift-demo-trigger'), {
+			paneContainer: document.querySelector('.detail'),
+			inlinePane: 900,
+			inlineOffsetY: -85,
+			containInline: true,
+			hoverBoundingBox: true
+		});
+	</script>
+</body>
+
 </html>
