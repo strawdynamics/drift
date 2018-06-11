@@ -6,9 +6,7 @@ import { addClasses, removeClasses } from "./util/dom";
 var divStyle = document.createElement("div").style;
 
 const HAS_ANIMATION =
-  typeof document === "undefined"
-    ? false
-    : "animation" in divStyle || "webkitAnimation" in divStyle;
+  typeof document === "undefined" ? false : "animation" in divStyle || "webkitAnimation" in divStyle;
 
 export default class ZoomPane {
   constructor(options = {}) {
@@ -82,14 +80,8 @@ export default class ZoomPane {
   // `percentageOffsetX` and `percentageOffsetY` must be percentages
   // expressed as floats between `0' and `1`.
   setPosition(percentageOffsetX, percentageOffsetY, triggerRect) {
-    let left = -(
-      this.imgEl.clientWidth * percentageOffsetX -
-      this.el.clientWidth / 2
-    );
-    let top = -(
-      this.imgEl.clientHeight * percentageOffsetY -
-      this.el.clientHeight / 2
-    );
+    let left = -(this.imgEl.clientWidth * percentageOffsetX - this.el.clientWidth / 2);
+    let top = -(this.imgEl.clientHeight * percentageOffsetY - this.el.clientHeight / 2);
     let maxLeft = -(this.imgEl.clientWidth - this.el.clientWidth);
     let maxTop = -(this.imgEl.clientHeight - this.el.clientHeight);
 
@@ -119,28 +111,14 @@ export default class ZoomPane {
 
         if (inlineLeft < triggerRect.left + scrollX) {
           inlineLeft = triggerRect.left + scrollX;
-        } else if (
-          inlineLeft + this.el.clientWidth >
-          triggerRect.left + triggerRect.width + scrollX
-        ) {
-          inlineLeft =
-            triggerRect.left +
-            triggerRect.width -
-            this.el.clientWidth +
-            scrollX;
+        } else if (inlineLeft + this.el.clientWidth > triggerRect.left + triggerRect.width + scrollX) {
+          inlineLeft = triggerRect.left + triggerRect.width - this.el.clientWidth + scrollX;
         }
 
         if (inlineTop < triggerRect.top + scrollY) {
           inlineTop = triggerRect.top + scrollY;
-        } else if (
-          inlineTop + this.el.clientHeight >
-          triggerRect.top + triggerRect.height + scrollY
-        ) {
-          inlineTop =
-            triggerRect.top +
-            triggerRect.height -
-            this.el.clientHeight +
-            scrollY;
+        } else if (inlineTop + this.el.clientHeight > triggerRect.top + triggerRect.height + scrollY) {
+          inlineTop = triggerRect.top + triggerRect.height - this.el.clientHeight + scrollY;
         }
       }
 
@@ -169,25 +147,14 @@ export default class ZoomPane {
   get _isInline() {
     let inline = this.settings.inline;
 
-    return (
-      inline === true ||
-      (typeof inline === "number" && window.innerWidth <= inline)
-    );
+    return inline === true || (typeof inline === "number" && window.innerWidth <= inline);
   }
 
   _removeListenersAndResetClasses() {
     this.el.removeEventListener("animationend", this._completeShow, false);
     this.el.removeEventListener("animationend", this._completeHide, false);
-    this.el.removeEventListener(
-      "webkitAnimationEnd",
-      this._completeShow,
-      false
-    );
-    this.el.removeEventListener(
-      "webkitAnimationEnd",
-      this._completeHide,
-      false
-    );
+    this.el.removeEventListener("webkitAnimationEnd", this._completeShow, false);
+    this.el.removeEventListener("webkitAnimationEnd", this._completeHide, false);
     removeClasses(this.el, this.openClasses);
     removeClasses(this.el, this.closingClasses);
   }
@@ -241,22 +208,14 @@ export default class ZoomPane {
 
   _completeShow = () => {
     this.el.removeEventListener("animationend", this._completeShow, false);
-    this.el.removeEventListener(
-      "webkitAnimationEnd",
-      this._completeShow,
-      false
-    );
+    this.el.removeEventListener("webkitAnimationEnd", this._completeShow, false);
 
     removeClasses(this.el, this.openingClasses);
   };
 
   _completeHide = () => {
     this.el.removeEventListener("animationend", this._completeHide, false);
-    this.el.removeEventListener(
-      "webkitAnimationEnd",
-      this._completeHide,
-      false
-    );
+    this.el.removeEventListener("webkitAnimationEnd", this._completeHide, false);
 
     removeClasses(this.el, this.openClasses);
     removeClasses(this.el, this.closingClasses);

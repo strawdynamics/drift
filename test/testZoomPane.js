@@ -50,9 +50,7 @@ describe("ZoomPane", () => {
     opts.namespace = "tb";
     let zoomPane = new ZoomPane(opts);
 
-    expect(zoomPane.el.classList.toString()).toBe(
-      "drift-zoom-pane tb-zoom-pane"
-    );
+    expect(zoomPane.el.classList.toString()).toBe("drift-zoom-pane tb-zoom-pane");
   });
 
   it("creates an `img` element inside its main element", () => {
@@ -77,8 +75,6 @@ describe("ZoomPane", () => {
 
     zoomPane.show(testSrc, triggerWidth);
 
-    expect(zoomPane.imgEl.style.width).toBe(
-      `${triggerWidth * zoomPane.settings.zoomFactor}px`
-    );
+    expect(zoomPane.imgEl.style.width).toBe(`${triggerWidth * zoomPane.settings.zoomFactor}px`);
   });
 });

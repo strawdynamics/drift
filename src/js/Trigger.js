@@ -60,39 +60,19 @@ export default class Trigger {
     if (this.settings.handleTouch) {
       this.settings.el.addEventListener("touchstart", this._handleEntry, false);
       this.settings.el.addEventListener("touchend", this._hide, false);
-      this.settings.el.addEventListener(
-        "touchmove",
-        this._handleMovement,
-        false
-      );
+      this.settings.el.addEventListener("touchmove", this._handleMovement, false);
     }
   }
 
   _unbindEvents() {
-    this.settings.el.removeEventListener(
-      "mouseenter",
-      this._handleEntry,
-      false
-    );
+    this.settings.el.removeEventListener("mouseenter", this._handleEntry, false);
     this.settings.el.removeEventListener("mouseleave", this._hide, false);
-    this.settings.el.removeEventListener(
-      "mousemove",
-      this._handleMovement,
-      false
-    );
+    this.settings.el.removeEventListener("mousemove", this._handleMovement, false);
 
     if (this.settings.handleTouch) {
-      this.settings.el.removeEventListener(
-        "touchstart",
-        this._handleEntry,
-        false
-      );
+      this.settings.el.removeEventListener("touchstart", this._handleEntry, false);
       this.settings.el.removeEventListener("touchend", this._hide, false);
-      this.settings.el.removeEventListener(
-        "touchmove",
-        this._handleMovement,
-        false
-      );
+      this.settings.el.removeEventListener("touchmove", this._handleMovement, false);
     }
   }
 
@@ -127,14 +107,8 @@ export default class Trigger {
 
     if (this._lastMovement) {
       let touchActivated = this._lastMovement.touches;
-      if (
-        (touchActivated && this.settings.touchBoundingBox) ||
-        (!touchActivated && this.settings.hoverBoundingBox)
-      ) {
-        this.boundingBox.show(
-          this.settings.zoomPane.el.clientWidth,
-          this.settings.zoomPane.el.clientHeight
-        );
+      if ((touchActivated && this.settings.touchBoundingBox) || (!touchActivated && this.settings.hoverBoundingBox)) {
+        this.boundingBox.show(this.settings.zoomPane.el.clientWidth, this.settings.zoomPane.el.clientHeight);
       }
     }
 
@@ -195,10 +169,6 @@ export default class Trigger {
       this.boundingBox.setPosition(percentageOffsetX, percentageOffsetY, rect);
     }
 
-    this.settings.zoomPane.setPosition(
-      percentageOffsetX,
-      percentageOffsetY,
-      rect
-    );
+    this.settings.zoomPane.setPosition(percentageOffsetX, percentageOffsetY, rect);
   };
 }

@@ -32,8 +32,6 @@ describe("BoundingBox", () => {
     opts.namespace = "tb";
     let zoomPane = new BoundingBox(opts);
 
-    expect(zoomPane.el.classList.toString()).toBe(
-      "drift-bounding-box tb-bounding-box"
-    );
+    expect(zoomPane.el.classList.toString()).toBe("drift-bounding-box tb-bounding-box");
   });
 });

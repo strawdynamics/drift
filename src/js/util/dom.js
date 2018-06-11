@@ -5,11 +5,7 @@ const HAS_DOM_2 = typeof HTMLElement === "object";
 export function isDOMElement(obj) {
   return HAS_DOM_2
     ? obj instanceof HTMLElement
-    : obj &&
-        typeof obj === "object" &&
-        obj !== null &&
-        obj.nodeType === 1 &&
-        typeof obj.nodeName === "string";
+    : obj && typeof obj === "object" && obj !== null && obj.nodeType === 1 && typeof obj.nodeName === "string";
 }
 
 export function addClasses(el, classNames) {

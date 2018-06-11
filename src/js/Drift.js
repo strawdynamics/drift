@@ -11,9 +11,7 @@ export default class Drift {
     this.triggerEl = triggerEl;
 
     if (!isDOMElement(this.triggerEl)) {
-      throw new TypeError(
-        "`new Drift` requires a DOM element as its first argument."
-      );
+      throw new TypeError("`new Drift` requires a DOM element as its first argument.");
     }
 
     // A bit unexpected if you haven't seen this pattern before.
@@ -78,9 +76,7 @@ export default class Drift {
     } = options;
 
     if (inlinePane !== true && !isDOMElement(paneContainer)) {
-      throw new TypeError(
-        "`paneContainer` must be a DOM element when `inlinePane !== true`"
-      );
+      throw new TypeError("`paneContainer` must be a DOM element when `inlinePane !== true`");
     }
     if (!isDOMElement(inlineContainer)) {
       throw new TypeError("`inlineContainer` must be a DOM element");

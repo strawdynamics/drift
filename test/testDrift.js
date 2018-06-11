@@ -21,19 +21,13 @@ describe("Drift", () => {
     it("throws if no arguments are passed", () => {
       expect(() => {
         new Drift();
-      }).toThrowError(
-        TypeError,
-        "`new Drift` requires a DOM element as its first argument."
-      );
+      }).toThrowError(TypeError, "`new Drift` requires a DOM element as its first argument.");
     });
 
     it("throws if the first argument is not a DOM element", () => {
       expect(() => {
         new Drift(".some-selector");
-      }).toThrowError(
-        TypeError,
-        "`new Drift` requires a DOM element as its first argument."
-      );
+      }).toThrowError(TypeError, "`new Drift` requires a DOM element as its first argument.");
     });
 
     it("returns an instance of `Drift` when correctly instantiated", () => {
@@ -77,10 +71,7 @@ describe("Drift", () => {
 
       expect(() => {
         new Drift(anchor, conf);
-      }).toThrowError(
-        TypeError,
-        "`paneContainer` must be a DOM element when `inlinePane !== true`"
-      );
+      }).toThrowError(TypeError, "`paneContainer` must be a DOM element when `inlinePane !== true`");
     });
 
     it("requires `paneContainer` to be a DOM element when `inlinePane !== true`", () => {
@@ -91,10 +82,7 @@ describe("Drift", () => {
 
       expect(() => {
         new Drift(anchor, conf);
-      }).toThrowError(
-        TypeError,
-        "`paneContainer` must be a DOM element when `inlinePane !== true`"
-      );
+      }).toThrowError(TypeError, "`paneContainer` must be a DOM element when `inlinePane !== true`");
     });
 
     it("allows `paneContainer` to be null when `inlinePane === true`", () => {
