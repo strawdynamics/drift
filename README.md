@@ -166,11 +166,7 @@ var drift = new Drift(triggerEl, {
   paneContainer: document.querySelector("p")
 });
 
-var frames = [
-  "https://mysite.com/frame1.jpg",
-  "https://mysite.com/frame2.jpg",
-  "https://mysite.com/frame3.jpg"
-];
+var frames = ["https://mysite.com/frame1.jpg", "https://mysite.com/frame2.jpg", "https://mysite.com/frame3.jpg"];
 
 var currentFrame = 0;
 
