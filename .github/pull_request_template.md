@@ -39,7 +39,7 @@ _To help the project's maintainers and community to quickly understand the natur
 
 ## Checklist
 
-Please use the checklist that is most closely related to your pr _(you only need to use one checklist, and you can skip items that aren't applicable or don't make sense)_:
+Please use the checklist that is most closely related to your PR _(you only need to use one checklist, and you can skip items that aren't applicable or don't make sense)_:
 
 - [fixing typos]()
 - [documentation]()
@@ -49,12 +49,12 @@ Please use the checklist that is most closely related to your pr _(you only need
 
 ### Fixing typos
 
-- [ ] The PR title is in the conventional commit format: e.g. `chore(readme): fixed typo`
-- [ ] Add your to the [contributors](#packagejson-contributors) array in package.json!
+- [ ] The PR title is in the [conventional commit](#conventional-commit-spec) format: e.g. `chore(readme): fixed typo`
+- [ ] Add your info to the [contributors](#packagejson-contributors) array in package.json!
 
 ### Documentation
 
-- [ ] The PR title is in the conventional commit format: e.g. `chore(readme): updated documentation for ___`
+- [ ] The PR title is in the [conventional commit](#conventional-commit-spec) format: e.g. `chore(readme): updated documentation for ___`
 - [ ] Add your info to the [contributors](#packagejson-contributors) array in package.json!
 
 ### Bug Fix
@@ -64,17 +64,17 @@ Please use the checklist that is most closely related to your pr _(you only need
 - [ ] Update the readme
 - [ ] Update or add any necessary API documentation
 - [ ] Add some [steps](#steps-to-test) so we can test your bug fix
-- [ ] The PR title is in the conventional commit format: e.g. `fix(<area>): fixed bug #issue-number`
+- [ ] The PR title is in the [conventional commit](#conventional-commit-spec) format: e.g. `fix(<area>): fixed bug #issue-number`
 - [ ] Add your info to the [contributors](#packagejson-contributors) array in package.json!
 
 ### New Feature
 
-- [ ] If this is a big feature with breaking changes, consider [opening an issue][issues] to discuss first. This is completely up to you, but please keep in mind that your pr might not be accepted.
+- [ ] If this is a big feature with breaking changes, consider [opening an issue][issues] to discuss first. This is completely up to you, but please keep in mind that your PR might not be accepted.
 - [ ] Run unit tests to ensure all existing tests are still passing
 - [ ] Add new passing unit tests to cover the code introduced by your pr
 - [ ] Update the readme
 - [ ] Add some [steps](#steps-to-test) so we can test your cool new feature!
-- [ ] The PR title is in the conventional commit format: e.g. `feat(<area>): added new way to do this cool thing #issue-number`
+- [ ] The PR title is in the [conventional commit](#conventional-commit-spec) format: e.g. `feat(<area>): added new way to do this cool thing #issue-number`
 - [ ] Add your info to the [contributors](#packagejson-contributors) array in package.json!
 
 ## Steps to Test
@@ -123,8 +123,8 @@ full name <email@address.com> (https://website.com)
 {
   "name": "drift",
   "contributors": [
-    "Brian Woodward <jon.schlinkert@sellside.com> (https://github.com/jonschlinkert)",
-    "Jon Schlinkert <brian.woodward@sellside.com> (https://github.com/doowb)"
+    "Frederick Fogerty <frederick.fogerty@gmail.com> (https://github.com/frederickfogerty)",
+    "Jon Smith <jon.smith@jonsmith.com> (https://github.com/jonsmith)"
   ]
 }
 ```
