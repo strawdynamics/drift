@@ -1,3 +1,4 @@
+<!-- prettier-ignore-start -->
 Hello, and thanks for contributing to drift! 🎉🙌
 
 **Before submitting a pull request,** please make sure the following is done:
@@ -10,11 +11,6 @@ Hello, and thanks for contributing to drift! 🎉🙌
 6.  Fill out the template below and delete everything above the line.
 
 **Learn more about contributing:** https://github.com/imgix/drift/blob/master/CONTRIBUTING.md
-
-<!--
-DELETE EVERYTHING ABOVE THIS LINE
--------------------------------------------
--->
 
 ## tldr
 
@@ -29,6 +25,18 @@ The following sections provide more detail on each.
 **Improve this document**
 
 Please don't hesitate to [ask questions][issues] for clarification, or to [make suggestions][issues] (or a pull request) to improve this document.
+
+
+
+
+
+delete everything above this line
+-------------------------------------------
+
+
+
+
+
 
 ## Description
 
@@ -98,6 +106,18 @@ Steps:
 3.  Scroll down to '....'
 4.  See that the error has been fixed
 
+
+
+
+
+delete everything below this line
+-------------------------------------------
+
+
+
+
+
+
 ## Conventional Commit Spec
 
 PR titles should be in the format `<type>(<scope>): <description>`. For example: `chore(readme): fix typo`
@@ -110,10 +130,10 @@ PR titles should be in the format `<type>(<scope>): <description>`. For example:
 
 **Add yourself!**
 
-When adding your information to the `contributors` array in package.json, please use the following format (provide your name at minimum, the other fields are optional):
+When adding your information to the `contributors` array in package.json, please use the following format (provide your name or username at minimum, the other fields are optional):
 
 ```
-full name <email@address.com> (https://website.com)
+full name or username <email@address.com> (https://website.com)
 ```
 
 **Example**
@@ -124,9 +144,11 @@ full name <email@address.com> (https://website.com)
   "name": "drift",
   "contributors": [
     "Frederick Fogerty <frederick.fogerty@gmail.com> (https://github.com/frederickfogerty)",
-    "Jon Smith <jon.smith@jonsmith.com> (https://github.com/jonsmith)"
+    "Jon Smith <jon.smith@jonsmith.com> (https://github.com/jonsmith)",
+    "helenjones"
   ]
 }
 ```
 
 [issues]: ../../issues
+<!-- prettier-ignore-end -->
