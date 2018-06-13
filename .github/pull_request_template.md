@@ -14,7 +14,7 @@ Hello, and thanks for contributing to drift! 🎉🙌
 
 ## tldr
 
-There are three main goals in this document, depending on the nature of your pr:
+There are three main goals in this document, depending on the nature of your PR:
 
 - [description](#description): please tell us about your PR
 - [checklist](#checklist): please review the checklist that is most closly related to your PR
