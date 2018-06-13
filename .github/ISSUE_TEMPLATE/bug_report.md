@@ -13,7 +13,7 @@ about: Create a report to help us improve
 A clear and concise description of what the bug is. Please strive to reach the **root problem** of your issue to avoid the XY problem. See more: https://meta.stackexchange.com/questions/66377/what-is-the-xy-problem
 
 **To Reproduce**
-A bug is a _demonstrable problem_ that is scause by the code in the repository. Thus, the contributors need a way to reproduce your issue - if we can't reproduce your issue, we can't help you! Also, please be as detailed as possible!
+A bug is a _demonstrable problem_ that is caused by the code in the repository. Thus, the contributors need a way to reproduce your issue - if we can't reproduce your issue, we can't help you! Also, please be as detailed as possible.
 
 [a link to a codepen; here is a link to a codepen with drift installed which can be forked: https://codepen.io/imgix/pen/WrRmLb]
 

@@ -16,8 +16,8 @@ Hello, and thanks for contributing to drift! 🎉🙌
 
 There are three main goals in this document, depending on the nature of your pr:
 
-- [description](#description): please tell us about your pr
-- [checklist](#checklist): please review the checklist that is most closly related to your pr
+- [description](#description): please tell us about your PR
+- [checklist](#checklist): please review the checklist that is most closly related to your PR
 - [contributors list](#packagejson-contributors): you're one of us now, please add yourself to `package.json` and let the world know!
 
 The following sections provide more detail on each.
@@ -42,7 +42,7 @@ delete everything above this line
 
 _To help the project's maintainers and community to quickly understand the nature of your pull requeset, please create a description that incorporates the following elements:_
 
-- [] what is accomplished by the pr
+- [] what is accomplished by the PR
 - [] if there is something potentially controversial in your pr, please take a moment to tell us about your choices
 
 ## Checklist
@@ -68,7 +68,7 @@ Please use the checklist that is most closely related to your PR _(you only need
 ### Bug Fix
 
 - [ ] All existing unit tests are still passing (if applicable)
-- [ ] Add new passing unit tests to cover the code introduced by your pr
+- [ ] Add new passing unit tests to cover the code introduced by your PR
 - [ ] Update the readme
 - [ ] Update or add any necessary API documentation
 - [ ] Add some [steps](#steps-to-test) so we can test your bug fix
@@ -79,7 +79,7 @@ Please use the checklist that is most closely related to your PR _(you only need
 
 - [ ] If this is a big feature with breaking changes, consider [opening an issue][issues] to discuss first. This is completely up to you, but please keep in mind that your PR might not be accepted.
 - [ ] Run unit tests to ensure all existing tests are still passing
-- [ ] Add new passing unit tests to cover the code introduced by your pr
+- [ ] Add new passing unit tests to cover the code introduced by your PR
 - [ ] Update the readme
 - [ ] Add some [steps](#steps-to-test) so we can test your cool new feature!
 - [ ] The PR title is in the [conventional commit](#conventional-commit-spec) format: e.g. `feat(<area>): added new way to do this cool thing #issue-number`
