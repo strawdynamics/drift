@@ -21,7 +21,7 @@ A bug is a _demonstrable problem_ that is caused by the code in the repository. 
 
 ```js
 // A *self-contained* demonstration of the problem follows...
-// This should be able to be dropped into a file with react-imgix installed and just work
+// This should be able to be dropped into a file with drift installed and just work
 ```
 
 Steps to reproduce the behaviour:
