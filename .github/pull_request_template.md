@@ -53,7 +53,6 @@ Please use the checklist that is most closely related to your PR _(you only need
 - [documentation]()
 - [bug fix]()
 - [new feature]()
-- [other]()
 
 ### Fixing typos
 
