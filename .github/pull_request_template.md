@@ -14,10 +14,10 @@ Hello, and thanks for contributing to drift! 🎉🙌
 
 ## tldr
 
-There are three main goals in this document, depending on the nature of your pr:
+There are three main goals in this document, depending on the nature of your PR:
 
 - [description](#description): please tell us about your PR
-- [checklist](#checklist): please review the checklist that is most closly related to your PR
+- [checklist](#checklist): please review the checklist that is most closely related to your PR
 - [contributors list](#packagejson-contributors): you're one of us now, please add yourself to `package.json` and let the world know!
 
 The following sections provide more detail on each.
@@ -40,7 +40,7 @@ delete everything above this line
 
 ## Description
 
-_To help the project's maintainers and community to quickly understand the nature of your pull requeset, please create a description that incorporates the following elements:_
+_To help the project's maintainers and community to quickly understand the nature of your pull request, please create a description that incorporates the following elements:_
 
 - [] what is accomplished by the PR
 - [] if there is something potentially controversial in your pr, please take a moment to tell us about your choices
@@ -122,15 +122,15 @@ delete everything below this line
 
 PR titles should be in the format `<type>(<scope>): <description>`. For example: `chore(readme): fix typo`
 
-`type` can be one of `feat`, `fix`, `test`, or `chore`
+`type` can be one of `feat`, `fix`, `test`, or `chore`.
 `scope` is optional, and can be anything.
-`description` should be a short description of the change, in past tense
+`description` should be a short description of the change, in past tense.
 
 ## package.json contributors
 
 **Add yourself!**
 
-When adding your information to the `contributors` array in package.json, please use the following format (provide your name or username at minimum, the other fields are optional):
+When adding your information to the `contributors` array in package.json, please use the following format (provide your name or username at a minimum, the other fields are optional):
 
 ```
 full name or username <email@address.com> (https://website.com)
