@@ -165,3 +165,14 @@ gulp test-full  # run the test suite against all supported browsers (using Sauce
 ```
 
 Please note: in order to run tests in-browser (with `gulp test-local`), Chrome and Firefox should be installed locally. If you want to run `gulp test-full`, `SAUCE_USERNAME` and `SAUCE_ACCESS_KEY` must be defined in your shell.
+
+### Cutting a release
+
+Ensure all commits and PR titles are correctly described using the [Conventional Commits Specification](https://conventionalcommits.org/)
+
+```sh
+npm install # update dependencies to latest
+npm run release # build code, bump package version according to commit messages, and generate changelog
+git push --follow-tags origin master  # push to github and publish
+npm publish # publish to npm
+```

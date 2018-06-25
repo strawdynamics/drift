@@ -7,10 +7,12 @@
   ],
   "main": "dist/Drift.js",
   "scripts": {
-    "format": "prettier --write \"{src,test}/**/*.js\"",
+    "build": "gulp build",
     "format:check": "prettier --list-different \"{src,test}/**/*.js\"",
-    "test": "gulp build-ci",
-    "start": "gulp"
+    "format": "prettier --write \"{src,test}/**/*.js\"",
+    "release": "npm run build && git add dist && standard-version -a",
+    "start": "gulp",
+    "test": "gulp build-ci"
   },
   "files": [
     "dist",
@@ -56,6 +58,7 @@
     "phantomjs": "^1.9.19",
     "prettier": "^1.13.5",
     "run-sequence": "^1.1.5",
+    "standard-version": "^4.4.0",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0"
   },

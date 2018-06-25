@@ -33,10 +33,9 @@ Please don't hesitate to [ask questions][issues] for clarification, or to [make 
 delete everything above this line
 -------------------------------------------
 
+BREAKING CHANGE: description
 
-
-
-
+Does this PR contain a breaking change? If yes, please update this description on the line above to include a short description of the breaking change. If no, please delete this line and the line above.
 
 ## Description
 
