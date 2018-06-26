@@ -1,5 +1,5 @@
-(function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.Drift = f()}})(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-'use strict';
+(function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.Drift = f()}})(function(){var define,module,exports;return (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -15,11 +15,11 @@ var _createClass = function () {
   };
 }();
 
-var _throwIfMissing = require('./util/throwIfMissing');
+var _throwIfMissing = require("./util/throwIfMissing");
 
 var _throwIfMissing2 = _interopRequireDefault(_throwIfMissing);
 
-var _dom = require('./util/dom');
+var _dom = require("./util/dom");
 
 function _interopRequireDefault(obj) {
   return obj && obj.__esModule ? obj : { default: obj };
@@ -46,44 +46,44 @@ var BoundingBox = function () {
 
     this.settings = { namespace: namespace, zoomFactor: zoomFactor, containerEl: containerEl };
 
-    this.openClasses = this._buildClasses('open');
+    this.openClasses = this._buildClasses("open");
 
     this._buildElement();
   }
 
   _createClass(BoundingBox, [{
-    key: '_buildClasses',
+    key: "_buildClasses",
     value: function _buildClasses(suffix) {
-      var classes = ['drift-' + suffix];
+      var classes = ["drift-" + suffix];
 
       var ns = this.settings.namespace;
       if (ns) {
-        classes.push(ns + '-' + suffix);
+        classes.push(ns + "-" + suffix);
       }
 
       return classes;
     }
   }, {
-    key: '_buildElement',
+    key: "_buildElement",
     value: function _buildElement() {
-      this.el = document.createElement('div');
-      (0, _dom.addClasses)(this.el, this._buildClasses('bounding-box'));
+      this.el = document.createElement("div");
+      (0, _dom.addClasses)(this.el, this._buildClasses("bounding-box"));
     }
   }, {
-    key: 'show',
+    key: "show",
     value: function show(zoomPaneWidth, zoomPaneHeight) {
       this.isShowing = true;
 
       this.settings.containerEl.appendChild(this.el);
 
       var style = this.el.style;
-      style.width = Math.round(zoomPaneWidth / this.settings.zoomFactor) + 'px';
-      style.height = Math.round(zoomPaneHeight / this.settings.zoomFactor) + 'px';
+      style.width = Math.round(zoomPaneWidth / this.settings.zoomFactor) + "px";
+      style.height = Math.round(zoomPaneHeight / this.settings.zoomFactor) + "px";
 
       (0, _dom.addClasses)(this.el, this.openClasses);
     }
   }, {
-    key: 'hide',
+    key: "hide",
     value: function hide() {
       if (this.isShowing) {
         this.settings.containerEl.removeChild(this.el);
@@ -94,7 +94,7 @@ var BoundingBox = function () {
       (0, _dom.removeClasses)(this.el, this.openClasses);
     }
   }, {
-    key: 'setPosition',
+    key: "setPosition",
     value: function setPosition(percentageOffsetX, percentageOffsetY, triggerRect) {
       var pageXOffset = window.pageXOffset;
       var pageYOffset = window.pageYOffset;
@@ -116,8 +116,8 @@ var BoundingBox = function () {
         inlineTop = triggerRect.top + triggerRect.height - this.el.clientHeight + pageYOffset;
       }
 
-      this.el.style.left = inlineLeft + 'px';
-      this.el.style.top = inlineTop + 'px';
+      this.el.style.left = inlineLeft + "px";
+      this.el.style.top = inlineTop + "px";
     }
   }]);
 
@@ -127,7 +127,11 @@ var BoundingBox = function () {
 exports.default = BoundingBox;
 
 },{"./util/dom":6,"./util/throwIfMissing":7}],2:[function(require,module,exports){
-'use strict';
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 
 var _createClass = function () {
   function defineProperties(target, props) {
@@ -139,17 +143,17 @@ var _createClass = function () {
   };
 }();
 
-var _dom = require('./util/dom');
+var _dom = require("./util/dom");
 
-var _injectBaseStylesheet = require('./injectBaseStylesheet');
+var _injectBaseStylesheet = require("./injectBaseStylesheet");
 
 var _injectBaseStylesheet2 = _interopRequireDefault(_injectBaseStylesheet);
 
-var _Trigger = require('./Trigger');
+var _Trigger = require("./Trigger");
 
 var _Trigger2 = _interopRequireDefault(_Trigger);
 
-var _ZoomPane = require('./ZoomPane');
+var _ZoomPane = require("./ZoomPane");
 
 var _ZoomPane2 = _interopRequireDefault(_ZoomPane);
 
@@ -163,7 +167,7 @@ function _classCallCheck(instance, Constructor) {
   }
 }
 
-module.exports = function () {
+var Drift = function () {
   function Drift(triggerEl) {
     var _this = this;
 
@@ -171,7 +175,7 @@ module.exports = function () {
 
     _classCallCheck(this, Drift);
 
-    this.VERSION = '1.2.0';
+    this.VERSION = "1.2.0";
 
     this.destroy = function () {
       _this.trigger._unbindEvents();
@@ -180,7 +184,7 @@ module.exports = function () {
     this.triggerEl = triggerEl;
 
     if (!(0, _dom.isDOMElement)(this.triggerEl)) {
-      throw new TypeError('`new Drift` requires a DOM element as its first argument.');
+      throw new TypeError("`new Drift` requires a DOM element as its first argument.");
     }
 
     // A bit unexpected if you haven't seen this pattern before.
@@ -199,7 +203,7 @@ module.exports = function () {
         _options$inlineContai = options.inlineContainer,
         inlineContainer = _options$inlineContai === undefined ? document.body : _options$inlineContai,
         _options$sourceAttrib = options.sourceAttribute,
-        sourceAttribute = _options$sourceAttrib === undefined ? 'data-zoom' : _options$sourceAttrib,
+        sourceAttribute = _options$sourceAttrib === undefined ? "data-zoom" : _options$sourceAttrib,
         _options$zoomFactor = options.zoomFactor,
         zoomFactor = _options$zoomFactor === undefined ? 3 : _options$zoomFactor,
         _options$paneContaine = options.paneContainer,
@@ -221,16 +225,38 @@ module.exports = function () {
         _options$hoverBoundin = options.hoverBoundingBox,
         hoverBoundingBox = _options$hoverBoundin === undefined ? false : _options$hoverBoundin,
         _options$touchBoundin = options.touchBoundingBox,
-        touchBoundingBox = _options$touchBoundin === undefined ? false : _options$touchBoundin;
+        touchBoundingBox = _options$touchBoundin === undefined ? false : _options$touchBoundin,
+        _options$boundingBoxC = options.boundingBoxContainer,
+        boundingBoxContainer = _options$boundingBoxC === undefined ? document.body : _options$boundingBoxC;
 
     if (inlinePane !== true && !(0, _dom.isDOMElement)(paneContainer)) {
-      throw new TypeError('`paneContainer` must be a DOM element when `inlinePane !== true`');
+      throw new TypeError("`paneContainer` must be a DOM element when `inlinePane !== true`");
     }
     if (!(0, _dom.isDOMElement)(inlineContainer)) {
-      throw new TypeError('`inlineContainer` must be a DOM element');
+      throw new TypeError("`inlineContainer` must be a DOM element");
     }
 
-    this.settings = { namespace: namespace, showWhitespaceAtEdges: showWhitespaceAtEdges, containInline: containInline, inlineOffsetX: inlineOffsetX, inlineOffsetY: inlineOffsetY, inlineContainer: inlineContainer, sourceAttribute: sourceAttribute, zoomFactor: zoomFactor, paneContainer: paneContainer, inlinePane: inlinePane, handleTouch: handleTouch, onShow: onShow, onHide: onHide, injectBaseStyles: injectBaseStyles, hoverDelay: hoverDelay, touchDelay: touchDelay, hoverBoundingBox: hoverBoundingBox, touchBoundingBox: touchBoundingBox };
+    this.settings = {
+      namespace: namespace,
+      showWhitespaceAtEdges: showWhitespaceAtEdges,
+      containInline: containInline,
+      inlineOffsetX: inlineOffsetX,
+      inlineOffsetY: inlineOffsetY,
+      inlineContainer: inlineContainer,
+      sourceAttribute: sourceAttribute,
+      zoomFactor: zoomFactor,
+      paneContainer: paneContainer,
+      inlinePane: inlinePane,
+      handleTouch: handleTouch,
+      onShow: onShow,
+      onHide: onHide,
+      injectBaseStyles: injectBaseStyles,
+      hoverDelay: hoverDelay,
+      touchDelay: touchDelay,
+      hoverBoundingBox: hoverBoundingBox,
+      touchBoundingBox: touchBoundingBox,
+      boundingBoxContainer: boundingBoxContainer
+    };
 
     if (this.settings.injectBaseStyles) {
       (0, _injectBaseStylesheet2.default)();
@@ -241,7 +267,7 @@ module.exports = function () {
   }
 
   _createClass(Drift, [{
-    key: '_buildZoomPane',
+    key: "_buildZoomPane",
     value: function _buildZoomPane() {
       this.zoomPane = new _ZoomPane2.default({
         container: this.settings.paneContainer,
@@ -256,7 +282,7 @@ module.exports = function () {
       });
     }
   }, {
-    key: '_buildTrigger',
+    key: "_buildTrigger",
     value: function _buildTrigger() {
       this.trigger = new _Trigger2.default({
         el: this.triggerEl,
@@ -270,45 +296,50 @@ module.exports = function () {
         hoverBoundingBox: this.settings.hoverBoundingBox,
         touchBoundingBox: this.settings.touchBoundingBox,
         namespace: this.settings.namespace,
-        zoomFactor: this.settings.zoomFactor
+        zoomFactor: this.settings.zoomFactor,
+        boundingBoxContainer: this.settings.boundingBoxContainer
       });
     }
   }, {
-    key: 'setZoomImageURL',
+    key: "setZoomImageURL",
     value: function setZoomImageURL(imageURL) {
       this.zoomPane._setImageURL(imageURL);
     }
   }, {
-    key: 'disable',
+    key: "disable",
     value: function disable() {
       this.trigger.enabled = false;
     }
   }, {
-    key: 'enable',
+    key: "enable",
     value: function enable() {
       this.trigger.enabled = true;
     }
   }, {
-    key: 'isShowing',
+    key: "isShowing",
     get: function get() {
       return this.zoomPane.isShowing;
     }
   }, {
-    key: 'zoomFactor',
+    key: "zoomFactor",
     get: function get() {
       return this.settings.zoomFactor;
     },
     set: function set(zf) {
       this.settings.zoomFactor = zf;
       this.zoomPane.settings.zoomFactor = zf;
+      this.trigger.settings.zoomFactor = zf;
+      this.boundingBox.settings.zoomFactor = zf;
     }
   }]);
 
   return Drift;
 }();
 
+exports.default = Drift;
+
 },{"./Trigger":3,"./ZoomPane":4,"./injectBaseStylesheet":5,"./util/dom":6}],3:[function(require,module,exports){
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -324,11 +355,11 @@ var _createClass = function () {
   };
 }();
 
-var _throwIfMissing = require('./util/throwIfMissing');
+var _throwIfMissing = require("./util/throwIfMissing");
 
 var _throwIfMissing2 = _interopRequireDefault(_throwIfMissing);
 
-var _BoundingBox = require('./BoundingBox');
+var _BoundingBox = require("./BoundingBox");
 
 var _BoundingBox2 = _interopRequireDefault(_BoundingBox);
 
@@ -373,15 +404,31 @@ var Trigger = function () {
         _options$namespace = options.namespace,
         namespace = _options$namespace === undefined ? null : _options$namespace,
         _options$zoomFactor = options.zoomFactor,
-        zoomFactor = _options$zoomFactor === undefined ? (0, _throwIfMissing2.default)() : _options$zoomFactor;
+        zoomFactor = _options$zoomFactor === undefined ? (0, _throwIfMissing2.default)() : _options$zoomFactor,
+        _options$boundingBoxC = options.boundingBoxContainer,
+        boundingBoxContainer = _options$boundingBoxC === undefined ? (0, _throwIfMissing2.default)() : _options$boundingBoxC;
 
-    this.settings = { el: el, zoomPane: zoomPane, sourceAttribute: sourceAttribute, handleTouch: handleTouch, onShow: onShow, onHide: onHide, hoverDelay: hoverDelay, touchDelay: touchDelay, hoverBoundingBox: hoverBoundingBox, touchBoundingBox: touchBoundingBox, namespace: namespace, zoomFactor: zoomFactor };
+    this.settings = {
+      el: el,
+      zoomPane: zoomPane,
+      sourceAttribute: sourceAttribute,
+      handleTouch: handleTouch,
+      onShow: onShow,
+      onHide: onHide,
+      hoverDelay: hoverDelay,
+      touchDelay: touchDelay,
+      hoverBoundingBox: hoverBoundingBox,
+      touchBoundingBox: touchBoundingBox,
+      namespace: namespace,
+      zoomFactor: zoomFactor,
+      boundingBoxContainer: boundingBoxContainer
+    };
 
     if (this.settings.hoverBoundingBox || this.settings.touchBoundingBox) {
       this.boundingBox = new _BoundingBox2.default({
         namespace: this.settings.namespace,
         zoomFactor: this.settings.zoomFactor,
-        containerEl: this.settings.el.offsetParent
+        containerEl: this.settings.boundingBoxContainer
       });
     }
 
@@ -391,33 +438,33 @@ var Trigger = function () {
   }
 
   _createClass(Trigger, [{
-    key: '_bindEvents',
+    key: "_bindEvents",
     value: function _bindEvents() {
-      this.settings.el.addEventListener('mouseenter', this._handleEntry, false);
-      this.settings.el.addEventListener('mouseleave', this._hide, false);
-      this.settings.el.addEventListener('mousemove', this._handleMovement, false);
+      this.settings.el.addEventListener("mouseenter", this._handleEntry, false);
+      this.settings.el.addEventListener("mouseleave", this._hide, false);
+      this.settings.el.addEventListener("mousemove", this._handleMovement, false);
 
       if (this.settings.handleTouch) {
-        this.settings.el.addEventListener('touchstart', this._handleEntry, false);
-        this.settings.el.addEventListener('touchend', this._hide, false);
-        this.settings.el.addEventListener('touchmove', this._handleMovement, false);
+        this.settings.el.addEventListener("touchstart", this._handleEntry, false);
+        this.settings.el.addEventListener("touchend", this._hide, false);
+        this.settings.el.addEventListener("touchmove", this._handleMovement, false);
       }
     }
   }, {
-    key: '_unbindEvents',
+    key: "_unbindEvents",
     value: function _unbindEvents() {
-      this.settings.el.removeEventListener('mouseenter', this._handleEntry, false);
-      this.settings.el.removeEventListener('mouseleave', this._hide, false);
-      this.settings.el.removeEventListener('mousemove', this._handleMovement, false);
+      this.settings.el.removeEventListener("mouseenter", this._handleEntry, false);
+      this.settings.el.removeEventListener("mouseleave", this._hide, false);
+      this.settings.el.removeEventListener("mousemove", this._handleMovement, false);
 
       if (this.settings.handleTouch) {
-        this.settings.el.removeEventListener('touchstart', this._handleEntry, false);
-        this.settings.el.removeEventListener('touchend', this._hide, false);
-        this.settings.el.removeEventListener('touchmove', this._handleMovement, false);
+        this.settings.el.removeEventListener("touchstart", this._handleEntry, false);
+        this.settings.el.removeEventListener("touchend", this._hide, false);
+        this.settings.el.removeEventListener("touchmove", this._handleMovement, false);
       }
     }
   }, {
-    key: 'isShowing',
+    key: "isShowing",
     get: function get() {
       return this.settings.zoomPane.isShowing;
     }
@@ -433,7 +480,7 @@ var _initialiseProps = function _initialiseProps() {
     e.preventDefault();
     _this._lastMovement = e;
 
-    if (e.type == 'mouseenter' && _this.settings.hoverDelay) {
+    if (e.type == "mouseenter" && _this.settings.hoverDelay) {
       _this.entryTimeout = setTimeout(_this._show, _this.settings.hoverDelay);
     } else if (_this.settings.touchDelay) {
       _this.entryTimeout = setTimeout(_this._show, _this.settings.touchDelay);
@@ -448,7 +495,7 @@ var _initialiseProps = function _initialiseProps() {
     }
 
     var onShow = _this.settings.onShow;
-    if (onShow && typeof onShow === 'function') {
+    if (onShow && typeof onShow === "function") {
       onShow();
     }
 
@@ -478,7 +525,7 @@ var _initialiseProps = function _initialiseProps() {
     }
 
     var onHide = _this.settings.onHide;
-    if (onHide && typeof onHide === 'function') {
+    if (onHide && typeof onHide === "function") {
       onHide();
     }
 
@@ -526,7 +573,7 @@ var _initialiseProps = function _initialiseProps() {
 exports.default = Trigger;
 
 },{"./BoundingBox":1,"./util/throwIfMissing":7}],4:[function(require,module,exports){
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -542,11 +589,11 @@ var _createClass = function () {
   };
 }();
 
-var _throwIfMissing = require('./util/throwIfMissing');
+var _throwIfMissing = require("./util/throwIfMissing");
 
 var _throwIfMissing2 = _interopRequireDefault(_throwIfMissing);
 
-var _dom = require('./util/dom');
+var _dom = require("./util/dom");
 
 function _interopRequireDefault(obj) {
   return obj && obj.__esModule ? obj : { default: obj };
@@ -560,9 +607,9 @@ function _classCallCheck(instance, Constructor) {
 
 // All officially-supported browsers have this, but it's easy to
 // account for, just in case.
-var divStyle = document.createElement('div').style;
+var divStyle = document.createElement("div").style;
 
-var HAS_ANIMATION = typeof document === 'undefined' ? false : 'animation' in divStyle || 'webkitAnimation' in divStyle;
+var HAS_ANIMATION = typeof document === "undefined" ? false : "animation" in divStyle || "webkitAnimation" in divStyle;
 
 var ZoomPane = function () {
   function ZoomPane() {
@@ -573,21 +620,21 @@ var ZoomPane = function () {
     _classCallCheck(this, ZoomPane);
 
     this._completeShow = function () {
-      _this.el.removeEventListener('animationend', _this._completeShow, false);
-      _this.el.removeEventListener('webkitAnimationEnd', _this._completeShow, false);
+      _this.el.removeEventListener("animationend", _this._completeShow, false);
+      _this.el.removeEventListener("webkitAnimationEnd", _this._completeShow, false);
 
       (0, _dom.removeClasses)(_this.el, _this.openingClasses);
     };
 
     this._completeHide = function () {
-      _this.el.removeEventListener('animationend', _this._completeHide, false);
-      _this.el.removeEventListener('webkitAnimationEnd', _this._completeHide, false);
+      _this.el.removeEventListener("animationend", _this._completeHide, false);
+      _this.el.removeEventListener("webkitAnimationEnd", _this._completeHide, false);
 
       (0, _dom.removeClasses)(_this.el, _this.openClasses);
       (0, _dom.removeClasses)(_this.el, _this.closingClasses);
       (0, _dom.removeClasses)(_this.el, _this.inlineClasses);
 
-      _this.el.setAttribute('style', '');
+      _this.el.setAttribute("style", "");
 
       // The window could have been resized above or below `inline`
       // limits since the ZoomPane was shown. Because of this, we
@@ -600,7 +647,7 @@ var ZoomPane = function () {
     };
 
     this._handleLoad = function () {
-      _this.imgEl.removeEventListener('load', _this._handleLoad, false);
+      _this.imgEl.removeEventListener("load", _this._handleLoad, false);
       (0, _dom.removeClasses)(_this.el, _this.loadingClasses);
     };
 
@@ -625,59 +672,69 @@ var ZoomPane = function () {
         _options$inlineContai = options.inlineContainer,
         inlineContainer = _options$inlineContai === undefined ? document.body : _options$inlineContai;
 
-    this.settings = { container: container, zoomFactor: zoomFactor, inline: inline, namespace: namespace, showWhitespaceAtEdges: showWhitespaceAtEdges, containInline: containInline, inlineOffsetX: inlineOffsetX, inlineOffsetY: inlineOffsetY, inlineContainer: inlineContainer };
+    this.settings = {
+      container: container,
+      zoomFactor: zoomFactor,
+      inline: inline,
+      namespace: namespace,
+      showWhitespaceAtEdges: showWhitespaceAtEdges,
+      containInline: containInline,
+      inlineOffsetX: inlineOffsetX,
+      inlineOffsetY: inlineOffsetY,
+      inlineContainer: inlineContainer
+    };
 
-    this.openClasses = this._buildClasses('open');
-    this.openingClasses = this._buildClasses('opening');
-    this.closingClasses = this._buildClasses('closing');
-    this.inlineClasses = this._buildClasses('inline');
-    this.loadingClasses = this._buildClasses('loading');
+    this.openClasses = this._buildClasses("open");
+    this.openingClasses = this._buildClasses("opening");
+    this.closingClasses = this._buildClasses("closing");
+    this.inlineClasses = this._buildClasses("inline");
+    this.loadingClasses = this._buildClasses("loading");
 
     this._buildElement();
   }
 
   _createClass(ZoomPane, [{
-    key: '_buildClasses',
+    key: "_buildClasses",
     value: function _buildClasses(suffix) {
-      var classes = ['drift-' + suffix];
+      var classes = ["drift-" + suffix];
 
       var ns = this.settings.namespace;
       if (ns) {
-        classes.push(ns + '-' + suffix);
+        classes.push(ns + "-" + suffix);
       }
 
       return classes;
     }
   }, {
-    key: '_buildElement',
+    key: "_buildElement",
     value: function _buildElement() {
-      this.el = document.createElement('div');
-      (0, _dom.addClasses)(this.el, this._buildClasses('zoom-pane'));
+      this.el = document.createElement("div");
+      (0, _dom.addClasses)(this.el, this._buildClasses("zoom-pane"));
 
-      var loaderEl = document.createElement('div');
-      (0, _dom.addClasses)(loaderEl, this._buildClasses('zoom-pane-loader'));
+      var loaderEl = document.createElement("div");
+      (0, _dom.addClasses)(loaderEl, this._buildClasses("zoom-pane-loader"));
       this.el.appendChild(loaderEl);
 
-      this.imgEl = document.createElement('img');
+      this.imgEl = document.createElement("img");
       this.el.appendChild(this.imgEl);
     }
   }, {
-    key: '_setImageURL',
+    key: "_setImageURL",
     value: function _setImageURL(imageURL) {
-      this.imgEl.setAttribute('src', imageURL);
+      this.imgEl.setAttribute("src", imageURL);
     }
   }, {
-    key: '_setImageSize',
+    key: "_setImageSize",
     value: function _setImageSize(triggerWidth, triggerHeight) {
-      this.imgEl.style.width = triggerWidth * this.settings.zoomFactor + 'px';
-      this.imgEl.style.height = triggerHeight * this.settings.zoomFactor + 'px';
+      this.imgEl.style.width = triggerWidth * this.settings.zoomFactor + "px";
+      this.imgEl.style.height = triggerHeight * this.settings.zoomFactor + "px";
     }
 
     // `percentageOffsetX` and `percentageOffsetY` must be percentages
     // expressed as floats between `0' and `1`.
 
   }, {
-    key: 'setPosition',
+    key: "setPosition",
     value: function setPosition(percentageOffsetX, percentageOffsetY, triggerRect) {
       var left = -(this.imgEl.clientWidth * percentageOffsetX - this.el.clientWidth / 2);
       var top = -(this.imgEl.clientHeight * percentageOffsetY - this.el.clientHeight / 2);
@@ -711,8 +768,8 @@ var ZoomPane = function () {
           }
         }
 
-        this.el.style.left = inlineLeft + 'px';
-        this.el.style.top = inlineTop + 'px';
+        this.el.style.left = inlineLeft + "px";
+        this.el.style.top = inlineTop + "px";
       }
 
       if (!this.settings.showWhitespaceAtEdges) {
@@ -729,21 +786,21 @@ var ZoomPane = function () {
         }
       }
 
-      this.imgEl.style.transform = 'translate(' + left + 'px, ' + top + 'px)';
-      this.imgEl.style.webkitTransform = 'translate(' + left + 'px, ' + top + 'px)';
+      this.imgEl.style.transform = "translate(" + left + "px, " + top + "px)";
+      this.imgEl.style.webkitTransform = "translate(" + left + "px, " + top + "px)";
     }
   }, {
-    key: '_removeListenersAndResetClasses',
+    key: "_removeListenersAndResetClasses",
     value: function _removeListenersAndResetClasses() {
-      this.el.removeEventListener('animationend', this._completeShow, false);
-      this.el.removeEventListener('animationend', this._completeHide, false);
-      this.el.removeEventListener('webkitAnimationEnd', this._completeShow, false);
-      this.el.removeEventListener('webkitAnimationEnd', this._completeHide, false);
+      this.el.removeEventListener("animationend", this._completeShow, false);
+      this.el.removeEventListener("animationend", this._completeHide, false);
+      this.el.removeEventListener("webkitAnimationEnd", this._completeShow, false);
+      this.el.removeEventListener("webkitAnimationEnd", this._completeHide, false);
       (0, _dom.removeClasses)(this.el, this.openClasses);
       (0, _dom.removeClasses)(this.el, this.closingClasses);
     }
   }, {
-    key: 'show',
+    key: "show",
     value: function show(imageURL, triggerWidth, triggerHeight) {
       this._removeListenersAndResetClasses();
       this.isShowing = true;
@@ -751,7 +808,7 @@ var ZoomPane = function () {
       (0, _dom.addClasses)(this.el, this.openClasses);
       (0, _dom.addClasses)(this.el, this.loadingClasses);
 
-      this.imgEl.addEventListener('load', this._handleLoad, false);
+      this.imgEl.addEventListener("load", this._handleLoad, false);
       this._setImageURL(imageURL);
       this._setImageSize(triggerWidth, triggerHeight);
 
@@ -762,31 +819,31 @@ var ZoomPane = function () {
       }
 
       if (HAS_ANIMATION) {
-        this.el.addEventListener('animationend', this._completeShow, false);
-        this.el.addEventListener('webkitAnimationEnd', this._completeShow, false);
+        this.el.addEventListener("animationend", this._completeShow, false);
+        this.el.addEventListener("webkitAnimationEnd", this._completeShow, false);
         (0, _dom.addClasses)(this.el, this.openingClasses);
       }
     }
   }, {
-    key: '_showInline',
+    key: "_showInline",
     value: function _showInline() {
       this.settings.inlineContainer.appendChild(this.el);
       (0, _dom.addClasses)(this.el, this.inlineClasses);
     }
   }, {
-    key: '_showInContainer',
+    key: "_showInContainer",
     value: function _showInContainer() {
       this.settings.container.appendChild(this.el);
     }
   }, {
-    key: 'hide',
+    key: "hide",
     value: function hide() {
       this._removeListenersAndResetClasses();
       this.isShowing = false;
 
       if (HAS_ANIMATION) {
-        this.el.addEventListener('animationend', this._completeHide, false);
-        this.el.addEventListener('webkitAnimationEnd', this._completeHide, false);
+        this.el.addEventListener("animationend", this._completeHide, false);
+        this.el.addEventListener("webkitAnimationEnd", this._completeHide, false);
         (0, _dom.addClasses)(this.el, this.closingClasses);
       } else {
         (0, _dom.removeClasses)(this.el, this.openClasses);
@@ -794,11 +851,11 @@ var ZoomPane = function () {
       }
     }
   }, {
-    key: '_isInline',
+    key: "_isInline",
     get: function get() {
       var inline = this.settings.inline;
 
-      return inline === true || typeof inline === 'number' && window.innerWidth <= inline;
+      return inline === true || typeof inline === "number" && window.innerWidth <= inline;
     }
   }]);
 
@@ -808,22 +865,22 @@ var ZoomPane = function () {
 exports.default = ZoomPane;
 
 },{"./util/dom":6,"./util/throwIfMissing":7}],5:[function(require,module,exports){
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = injectBaseStylesheet;
-var RULES = '\n@keyframes noop {\n  0% { zoom: 1; }\n}\n\n@-webkit-keyframes noop {\n  0% { zoom: 1; }\n}\n\n.drift-zoom-pane.drift-open {\n  display: block;\n}\n\n.drift-zoom-pane.drift-opening, .drift-zoom-pane.drift-closing {\n  animation: noop 1ms;\n  -webkit-animation: noop 1ms;\n}\n\n.drift-zoom-pane {\n  position: absolute;\n  overflow: hidden;\n  width: 100%;\n  height: 100%;\n  top: 0;\n  left: 0;\n  pointer-events: none;\n}\n\n.drift-zoom-pane-loader {\n  display: none;\n}\n\n.drift-zoom-pane img {\n  position: absolute;\n  display: block;\n  max-width: none;\n  max-height: none;\n}\n\n.drift-bounding-box {\n  position: absolute;\n  pointer-events: none;\n}\n';
+var RULES = "\n@keyframes noop {\n  0% { zoom: 1; }\n}\n\n@-webkit-keyframes noop {\n  0% { zoom: 1; }\n}\n\n.drift-zoom-pane.drift-open {\n  display: block;\n}\n\n.drift-zoom-pane.drift-opening, .drift-zoom-pane.drift-closing {\n  animation: noop 1ms;\n  -webkit-animation: noop 1ms;\n}\n\n.drift-zoom-pane {\n  position: absolute;\n  overflow: hidden;\n  width: 100%;\n  height: 100%;\n  top: 0;\n  left: 0;\n  pointer-events: none;\n}\n\n.drift-zoom-pane-loader {\n  display: none;\n}\n\n.drift-zoom-pane img {\n  position: absolute;\n  display: block;\n  max-width: none;\n  max-height: none;\n}\n\n.drift-bounding-box {\n  position: absolute;\n  pointer-events: none;\n}\n";
 
 function injectBaseStylesheet() {
-  if (document.querySelector('.drift-base-styles')) {
+  if (document.querySelector(".drift-base-styles")) {
     return;
   }
 
-  var styleEl = document.createElement('style');
-  styleEl.type = 'text/css';
-  styleEl.classList.add('drift-base-styles');
+  var styleEl = document.createElement("style");
+  styleEl.type = "text/css";
+  styleEl.classList.add("drift-base-styles");
 
   styleEl.appendChild(document.createTextNode(RULES));
 
@@ -832,7 +889,7 @@ function injectBaseStylesheet() {
 }
 
 },{}],6:[function(require,module,exports){
-'use strict';
+"use strict";
 
 var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
@@ -851,10 +908,10 @@ exports.addClasses = addClasses;
 exports.removeClasses = removeClasses;
 // This is not really a perfect check, but works fine.
 // From http://stackoverflow.com/questions/384286
-var HAS_DOM_2 = (typeof HTMLElement === 'undefined' ? 'undefined' : _typeof(HTMLElement)) === 'object';
+var HAS_DOM_2 = (typeof HTMLElement === "undefined" ? "undefined" : _typeof(HTMLElement)) === "object";
 
 function isDOMElement(obj) {
-  return HAS_DOM_2 ? obj instanceof HTMLElement : obj && (typeof obj === 'undefined' ? 'undefined' : _typeof(obj)) === 'object' && obj !== null && obj.nodeType === 1 && typeof obj.nodeName === 'string';
+  return HAS_DOM_2 ? obj instanceof HTMLElement : obj && (typeof obj === "undefined" ? "undefined" : _typeof(obj)) === "object" && obj !== null && obj.nodeType === 1 && typeof obj.nodeName === "string";
 }
 
 function addClasses(el, classNames) {
@@ -870,14 +927,14 @@ function removeClasses(el, classNames) {
 }
 
 },{}],7:[function(require,module,exports){
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = throwIfMissing;
 function throwIfMissing() {
-  throw new Error('Missing parameter');
+  throw new Error("Missing parameter");
 }
 
 },{}]},{},[2])(2)
