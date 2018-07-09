@@ -10,6 +10,10 @@ const HAS_ANIMATION =
 
 export default class ZoomPane {
   constructor(options = {}) {
+    this._completeShow = this._completeShow.bind(this);
+    this._completeHide = this._completeHide.bind(this);
+    this._handleLoad = this._handleLoad.bind(this);
+
     this.isShowing = false;
 
     let {
@@ -206,14 +210,14 @@ export default class ZoomPane {
     }
   }
 
-  _completeShow = () => {
+  _completeShow() {
     this.el.removeEventListener("animationend", this._completeShow, false);
     this.el.removeEventListener("webkitAnimationEnd", this._completeShow, false);
 
     removeClasses(this.el, this.openingClasses);
-  };
+  }
 
-  _completeHide = () => {
+  _completeHide() {
     this.el.removeEventListener("animationend", this._completeHide, false);
     this.el.removeEventListener("webkitAnimationEnd", this._completeHide, false);
 
@@ -231,10 +235,10 @@ export default class ZoomPane {
     } else if (this.el.parentElement === this.settings.inlineContainer) {
       this.settings.inlineContainer.removeChild(this.el);
     }
-  };
+  }
 
-  _handleLoad = () => {
+  _handleLoad() {
     this.imgEl.removeEventListener("load", this._handleLoad, false);
     removeClasses(this.el, this.loadingClasses);
-  };
+  }
 }
