@@ -2,6 +2,4 @@
 
 import Drift from "./Drift";
 
-
 window["Drift"] = Drift;
-
