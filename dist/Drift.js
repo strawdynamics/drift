@@ -129,10 +129,6 @@ exports.default = BoundingBox;
 },{"./util/dom":6,"./util/throwIfMissing":7}],2:[function(require,module,exports){
 "use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
 var _createClass = function () {
   function defineProperties(target, props) {
     for (var i = 0; i < props.length; i++) {
@@ -167,7 +163,7 @@ function _classCallCheck(instance, Constructor) {
   }
 }
 
-var Drift = function () {
+module.exports = function () {
   function Drift(triggerEl) {
     var _this = this;
 
@@ -175,7 +171,7 @@ var Drift = function () {
 
     _classCallCheck(this, Drift);
 
-    this.VERSION = "1.2.0";
+    this.VERSION = "1.2.2";
 
     this.destroy = function () {
       _this.trigger._unbindEvents();
@@ -335,8 +331,6 @@ var Drift = function () {
 
   return Drift;
 }();
-
-exports.default = Drift;
 
 },{"./Trigger":3,"./ZoomPane":4,"./injectBaseStylesheet":5,"./util/dom":6}],3:[function(require,module,exports){
 "use strict";
