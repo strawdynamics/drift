@@ -80,10 +80,32 @@ export default class ZoomPane {
   // `percentageOffsetX` and `percentageOffsetY` must be percentages
   // expressed as floats between `0' and `1`.
   setPosition(percentageOffsetX, percentageOffsetY, triggerRect) {
-    let left = -(this.imgEl.clientWidth * percentageOffsetX - this.el.clientWidth / 2);
-    let top = -(this.imgEl.clientHeight * percentageOffsetY - this.el.clientHeight / 2);
-    let maxLeft = -(this.imgEl.clientWidth - this.el.clientWidth);
-    let maxTop = -(this.imgEl.clientHeight - this.el.clientHeight);
+    const { width: imgElWidth, height: imgElHeight } = this.imgEl.getBoundingClientRect();
+    const { width: elWidth, height: elHeight } = this.el.getBoundingClientRect();
+
+    const centreOfContainerX = elWidth / 2;
+    const centreOfContainerY = elHeight / 2;
+
+    const targetImgXToBeCentre = imgElWidth * percentageOffsetX;
+    const targetImgYToBeCentre = imgElHeight * percentageOffsetY;
+
+    let left = centreOfContainerX - targetImgXToBeCentre;
+    let top = centreOfContainerY - targetImgYToBeCentre;
+
+    const differenceBetweenContainerWidthAndImgWidth = elWidth - imgElWidth;
+    const differenceBetweenContainerHeightAndImgHeight = elHeight - imgElHeight;
+    const isContainerLargerThanImgX = differenceBetweenContainerWidthAndImgWidth > 0;
+    const isContainerLargerThanImgY = differenceBetweenContainerHeightAndImgHeight > 0;
+
+    const minLeft = isContainerLargerThanImgX ? differenceBetweenContainerWidthAndImgWidth / 2 : 0;
+    const minTop = isContainerLargerThanImgY ? differenceBetweenContainerHeightAndImgHeight / 2 : 0;
+
+    const maxLeft = isContainerLargerThanImgX
+      ? differenceBetweenContainerWidthAndImgWidth / 2
+      : differenceBetweenContainerWidthAndImgWidth;
+    const maxTop = isContainerLargerThanImgY
+      ? differenceBetweenContainerHeightAndImgHeight / 2
+      : differenceBetweenContainerHeightAndImgHeight;
 
     if (this.el.parentElement === this.settings.inlineContainer) {
       // This may be needed in the future to deal with browser event
@@ -94,31 +116,21 @@ export default class ZoomPane {
       let scrollY = window.pageYOffset;
 
       let inlineLeft =
-        triggerRect.left +
-        percentageOffsetX * triggerRect.width -
-        this.el.clientWidth / 2 +
-        this.settings.inlineOffsetX +
-        scrollX;
+        triggerRect.left + percentageOffsetX * triggerRect.width - elWidth / 2 + this.settings.inlineOffsetX + scrollX;
       let inlineTop =
-        triggerRect.top +
-        percentageOffsetY * triggerRect.height -
-        this.el.clientHeight / 2 +
-        this.settings.inlineOffsetY +
-        scrollY;
+        triggerRect.top + percentageOffsetY * triggerRect.height - elHeight / 2 + this.settings.inlineOffsetY + scrollY;
 
       if (this.settings.containInline) {
-        let elRect = this.el.getBoundingClientRect();
-
         if (inlineLeft < triggerRect.left + scrollX) {
           inlineLeft = triggerRect.left + scrollX;
-        } else if (inlineLeft + this.el.clientWidth > triggerRect.left + triggerRect.width + scrollX) {
-          inlineLeft = triggerRect.left + triggerRect.width - this.el.clientWidth + scrollX;
+        } else if (inlineLeft + elWidth > triggerRect.left + triggerRect.width + scrollX) {
+          inlineLeft = triggerRect.left + triggerRect.width - elWidth + scrollX;
         }
 
         if (inlineTop < triggerRect.top + scrollY) {
           inlineTop = triggerRect.top + scrollY;
-        } else if (inlineTop + this.el.clientHeight > triggerRect.top + triggerRect.height + scrollY) {
-          inlineTop = triggerRect.top + triggerRect.height - this.el.clientHeight + scrollY;
+        } else if (inlineTop + elHeight > triggerRect.top + triggerRect.height + scrollY) {
+          inlineTop = triggerRect.top + triggerRect.height - elHeight + scrollY;
         }
       }
 
@@ -127,14 +139,14 @@ export default class ZoomPane {
     }
 
     if (!this.settings.showWhitespaceAtEdges) {
-      if (left > 0) {
-        left = 0;
+      if (left > minLeft) {
+        left = minLeft;
       } else if (left < maxLeft) {
         left = maxLeft;
       }
 
-      if (top > 0) {
-        top = 0;
+      if (top > minTop) {
+        top = minTop;
       } else if (top < maxTop) {
         top = maxTop;
       }
