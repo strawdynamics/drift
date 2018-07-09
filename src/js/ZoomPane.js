@@ -96,6 +96,7 @@ export default class ZoomPane {
     const differenceBetweenContainerHeightAndImgHeight = elHeight - imgElHeight;
     const isContainerLargerThanImgX = differenceBetweenContainerWidthAndImgWidth > 0;
     const isContainerLargerThanImgY = differenceBetweenContainerHeightAndImgHeight > 0;
+    
     const minLeft = isContainerLargerThanImgX ? differenceBetweenContainerWidthAndImgWidth / 2 : 0;
     const minTop = isContainerLargerThanImgY ? differenceBetweenContainerHeightAndImgHeight / 2 : 0;
 
