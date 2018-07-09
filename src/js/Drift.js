@@ -4,7 +4,7 @@ import injectBaseStylesheet from "./injectBaseStylesheet";
 import Trigger from "./Trigger";
 import ZoomPane from "./ZoomPane";
 
-export default class Drift {
+module.exports = class Drift {
   VERSION = "1.2.0";
 
   constructor(triggerEl, options = {}) {
@@ -174,4 +174,4 @@ export default class Drift {
   destroy = () => {
     this.trigger._unbindEvents();
   };
-}
+};
