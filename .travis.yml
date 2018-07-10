@@ -5,7 +5,7 @@ install:
   - npm install
 script:
   - npm run build
-	- npm run test:ci
+  - npm run test:ci
 # See https://docs.travis-ci.com/user/languages/javascript-with-nodejs#Node.js-v4-(or-io.js-v3)-compiler-requirements
 env:
   - CXX=g++-4.8
