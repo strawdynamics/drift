@@ -45,6 +45,7 @@ function buildWithEnv(mode, outputFile) {
           compilation_level: "ADVANCED",
           create_source_map: true
         },
+        test: /src\/js\/\.*\.js($|\?)/,
         concurrency: 3
       })
     ]
