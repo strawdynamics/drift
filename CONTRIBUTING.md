@@ -142,12 +142,11 @@ license your work under the same license as that used by the project.
 ## Code Conventions
 
 1.  Make all changes to files under `./src`, **not** `./dist`.
-2.  Use [Gulp](#gulp) to build the JavaScript files.
-3.  Use [Prettier](https://prettier.io/) for code formatting. Code will automatically be formatted upon submitting a PR.
+2.  Use [Prettier](https://prettier.io/) for code formatting. Code will automatically be formatted upon submitting a PR.
 
-<a name="gulp"></a>
+<a name="npm-scripts"></a>
 
-### Using ES6 and Gulp
+### Using ES6 and NPM scripts
 
 To install all development dependencies, in the project's root directory, run
 
@@ -158,13 +157,13 @@ npm install
 Once you're configured, building the JavaScript from the command line is easy:
 
 ```
-gulp            # build Drift from source
-gulp watch      # watch for changes and build automatically, testing with PhantomJS
-gulp test-local # run the test against local browsers only (Chrome, Safari, Firefox)
-gulp test-full  # run the test suite against all supported browsers (using SauceLabs)
+npm run build			# build Drift from source
+npm run build:watch     # watch for changes and build automatically
+npm run test:watch 		# watch for changes and test automatically
+npm run test:local 		# run the test against local browsers only (Chrome, Safari, Firefox)
 ```
 
-Please note: in order to run tests in-browser (with `gulp test-local`), Chrome and Firefox should be installed locally. If you want to run `gulp test-full`, `SAUCE_USERNAME` and `SAUCE_ACCESS_KEY` must be defined in your shell.
+Please note: in order to run tests in-browser (with `npm run test:local`), Chrome and Firefox should be installed locally.
 
 ### Cutting a release
 
