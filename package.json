@@ -92,5 +92,14 @@
     "webpack-closure-compiler": "^2.1.6",
     "yargs": "^10.0.3"
   },
-  "dependencies": {}
+	"dependencies": {},
+	"browserslist": [
+		"ie 11",
+    "last 2 edge versions",
+    "last 2 Chrome versions",
+    "last 2 Firefox versions",
+    "last 2 Safari versions",
+    "last 2 iOS versions",
+    "last 2 Android versions"
+	]
 }
