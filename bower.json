@@ -25,7 +25,6 @@
     "src",
     "test",
     "CONTRIBUTING.md",
-    "gulpfile.js",
     "index.html",
     "karmaConfig.js",
     "package.json"
