@@ -37,6 +37,10 @@ const baseConfig = {
 
 const stringConfig = JSON.stringify(baseConfig);
 
+/**
+ * Local testing - Chrome and FF, headlessly
+ */
+
 const localConfig = karmaConfig => {
   const config = {
     ...baseConfig,
@@ -53,7 +57,7 @@ const localConfig = karmaConfig => {
 };
 
 /**
- * CI testing - Chrome, Firefox, and (if available) BrowserStack
+ * CI testing - Chrome, Firefox
  */
 
 const ciConfig = karmaConfig => {
@@ -81,6 +85,10 @@ const ciConfig = karmaConfig => {
 
   karmaConfig.set(config);
 };
+
+/**
+ * SauceLabs configuration - not supported
+ */
 
 var fullConfig = JSON.parse(stringConfig);
 fullConfig.reporters = ["progress", "saucelabs"];
