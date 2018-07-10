@@ -63,7 +63,6 @@ const localConfig = karmaConfig => {
 const ciConfig = karmaConfig => {
   const config = {
     ...baseConfig,
-    reporters: [...baseConfig.reporters],
     browsers: ["ChromeTravis", "FirefoxHeadless"],
     customLaunchers: {
       ChromeTravis: {
@@ -75,7 +74,6 @@ const ciConfig = karmaConfig => {
         flags: ["-headless"]
       }
     },
-    plugins: [...baseConfig.plugins],
     client: {
       mocha: {
         timeout: 20000 // 20 seconds
