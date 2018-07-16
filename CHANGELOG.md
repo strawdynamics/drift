@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.3.0"></a>
+# [1.3.0](https://github.com/imgix/drift/compare/v1.2.2...v1.3.0) (2018-07-16)
+
+
+### Bug Fixes
+
+* **zoom-pane:** set min and max values correctly when image is smaller than container ([#69](https://github.com/imgix/drift/issues/69)) ([03f9e26](https://github.com/imgix/drift/commit/03f9e26))
+
+
+### Features
+
+* add lib and es6 bundles, use closure compiler, remove gulp ([#70](https://github.com/imgix/drift/issues/70)) ([e48daa7](https://github.com/imgix/drift/commit/e48daa7))
+
+
+
 <a name="1.2.2"></a>
 ## 1.2.2 (2018-07-09)
 
