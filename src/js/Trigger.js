@@ -3,6 +3,11 @@ import BoundingBox from "./BoundingBox";
 
 export default class Trigger {
   constructor(options = {}) {
+    this._show = this._show.bind(this);
+    this._hide = this._hide.bind(this);
+    this._handleEntry = this._handleEntry.bind(this);
+    this._handleMovement = this._handleMovement.bind(this);
+
     let {
       el = throwIfMissing(),
       zoomPane = throwIfMissing(),
@@ -76,7 +81,7 @@ export default class Trigger {
     }
   }
 
-  _handleEntry = e => {
+  _handleEntry(e) {
     e.preventDefault();
     this._lastMovement = e;
 
@@ -87,9 +92,9 @@ export default class Trigger {
     } else {
       this._show();
     }
-  };
+  }
 
-  _show = () => {
+  _show() {
     if (!this.enabled) {
       return;
     }
@@ -113,9 +118,9 @@ export default class Trigger {
     }
 
     this._handleMovement();
-  };
+  }
 
-  _hide = e => {
+  _hide(e) {
     e.preventDefault();
 
     this._lastMovement = null;
@@ -134,9 +139,9 @@ export default class Trigger {
     }
 
     this.settings.zoomPane.hide();
-  };
+  }
 
-  _handleMovement = e => {
+  _handleMovement(e) {
     if (e) {
       e.preventDefault();
       this._lastMovement = e;
@@ -170,5 +175,5 @@ export default class Trigger {
     }
 
     this.settings.zoomPane.setPosition(percentageOffsetX, percentageOffsetY, rect);
-  };
+  }
 }

@@ -3,7 +3,7 @@
   "version": "1.2.2",
   "description": "Easily add \"zoom on hover\" functionality to your site's images. Lightweight, no-dependency JavaScript.",
   "main": [
-    "dist/Drift.js",
+    "dist/Drift.min.js",
     "dist/drift-basic.css"
   ],
   "authors": [
@@ -20,14 +20,16 @@
   "homepage": "https://github.com/imgix/drift",
   "moduleType": [],
   "ignore": [
-    "**/.*",
+		"**/.*",
+		".github",
     "node_modules",
     "src",
-    "test",
+		"test",
     "CONTRIBUTING.md",
-    "gulpfile.js",
-    "index.html",
-    "karmaConfig.js",
-    "package.json"
+		"index.html",
+		"config",
+		"package.json",
+		"postcss.config.js",
+		"webpack.config.js"
   ]
 }

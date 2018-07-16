@@ -4,76 +4,72 @@ import injectBaseStylesheet from "./injectBaseStylesheet";
 import Trigger from "./Trigger";
 import ZoomPane from "./ZoomPane";
 
-module.exports = class Drift {
-  VERSION = "1.2.2";
-
+export default class Drift {
   constructor(triggerEl, options = {}) {
+    this.VERSION = "1.2.2";
     this.triggerEl = triggerEl;
+
+    this.destroy = this.destroy.bind(this);
 
     if (!isDOMElement(this.triggerEl)) {
       throw new TypeError("`new Drift` requires a DOM element as its first argument.");
     }
 
-    // A bit unexpected if you haven't seen this pattern before.
-    // Based on the pattern here:
-    // https://github.com/getify/You-Dont-Know-JS/blob/master/es6%20&%20beyond/ch2.md#nested-defaults-destructured-and-restructured
-    let {
-      // Prefix for generated element class names (e.g. `my-ns` will
-      // result in classes such as `my-ns-pane`. Default `drift-`
-      // prefixed classes will always be added as well.
-      namespace = null,
-      // Whether the ZoomPane should show whitespace when near the edges.
-      showWhitespaceAtEdges = false,
-      // Whether the inline ZoomPane should stay inside
-      // the bounds of its image.
-      containInline = false,
-      // How much to offset the ZoomPane from the
-      // interaction point when inline.
-      inlineOffsetX = 0,
-      inlineOffsetY = 0,
-      // A DOM element to append the inline ZoomPane to
-      inlineContainer = document.body,
-      // Which trigger attribute to pull the ZoomPane image source from.
-      sourceAttribute = "data-zoom",
-      // How much to magnify the trigger by in the ZoomPane.
-      // (e.g., `zoomFactor = 3` will result in a 900 px wide ZoomPane image
-      // if the trigger is displayed at 300 px wide)
-      zoomFactor = 3,
-      // A DOM element to append the non-inline ZoomPane to.
-      // Required if `inlinePane !== true`.
-      paneContainer = document.body,
-      // When to switch to an inline ZoomPane. This can be a boolean or
-      // an integer. If `true`, the ZoomPane will always be inline,
-      // if `false`, it will switch to inline when `windowWidth <= inlinePane`
-      inlinePane = 375,
-      // If `true`, touch events will trigger the zoom, like mouse events.
-      handleTouch = true,
-      // If present (and a function), this will be called
-      // whenever the ZoomPane is shown.
-      onShow = null,
-      // If present (and a function), this will be called
-      // whenever the ZoomPane is hidden.
-      onHide = null,
-      // Add base styles to the page. See the "Theming"
-      // section of README.md for more information.
-      injectBaseStyles = true,
-      // An optional number that determines how long to wait before
-      // showing the ZoomPane because of a `mouseenter` event.
-      hoverDelay = 0,
-      // An optional number that determines how long to wait before
-      // showing the ZoomPane because of a `touchstart` event.
-      // It's unlikely that you would want to use this option, since
-      // "tap and hold" is much more intentional than a hover event.
-      touchDelay = 0,
-      // If true, a bounding box will show the area currently being previewed
-      // during mouse hover
-      hoverBoundingBox = false,
-      // If true, a bounding box will show the area currently being previewed
-      // during touch events
-      touchBoundingBox = false,
-      // A DOM element to append the bounding box to.
-      boundingBoxContainer = document.body
-    } = options;
+    // Prefix for generated element class names (e.g. `my-ns` will
+    // result in classes such as `my-ns-pane`. Default `drift-`
+    // prefixed classes will always be added as well.
+    const namespace = options["namespace"] || null;
+    // Whether the ZoomPane should show whitespace when near the edges.
+    const showWhitespaceAtEdges = options["showWhitespaceAtEdges"] || false;
+    // Whether the inline ZoomPane should stay inside
+    // the bounds of its image.
+    const containInline = options["containInline"] || false;
+    // How much to offset the ZoomPane from the
+    // interaction point when inline.
+    const inlineOffsetX = options["inlineOffsetX"] || 0;
+    const inlineOffsetY = options["inlineOffsetY"] || 0;
+    // A DOM element to append the inline ZoomPane to
+    const inlineContainer = options["inlineContainer"] || document.body;
+    // Which trigger attribute to pull the ZoomPane image source from.
+    const sourceAttribute = options["sourceAttribute"] || "data-zoom";
+    // How much to magnify the trigger by in the ZoomPane.
+    // (e.g., `zoomFactor: 3` will result in a 900 px wide ZoomPane imag
+    // if the trigger is displayed at 300 px wide)
+    const zoomFactor = options["zoomFactor"] || 3;
+    // A DOM element to append the non-inline ZoomPane to.
+    // Required if `inlinePane !== true`.
+    const paneContainer = options["paneContainer"] === undefined ? document.body : options["paneContainer"];
+    // When to switch to an inline ZoomPane. This can be a boolean or
+    // an integer. If `true`, the ZoomPane will always be inline,
+    // if `false`, it will switch to inline when `windowWidth <= inlinePane`
+    const inlinePane = options["inlinePane"] || 375;
+    // If `true`, touch events will trigger the zoom, like mouse events.
+    const handleTouch = options["handleTouch"] || true;
+    // If present (and a function), this will be called
+    // whenever the ZoomPane is shown.
+    const onShow = options["onShow"] || null;
+    // If present (and a function), this will be called
+    // whenever the ZoomPane is hidden.
+    const onHide = options["onHide"] || null;
+    // Add base styles to the page. See the "Theming"
+    // section of README.md for more information.
+    const injectBaseStyles = options["injectBaseStyles"] || true;
+    // An optional number that determines how long to wait before
+    // showing the ZoomPane because of a `mouseenter` event.
+    const hoverDelay = options["hoverDelay"] || 0;
+    // An optional number that determines how long to wait before
+    // showing the ZoomPane because of a `touchstart` event.
+    // It's unlikely that you would want to use this option, since
+    // "tap and hold" is much more intentional than a hover event.
+    const touchDelay = options["touchDelay"] || 0;
+    // If true, a bounding box will show the area currently being previewed
+    // during mouse hover
+    const hoverBoundingBox = options["hoverBoundingBox"] || false;
+    // If true, a bounding box will show the area currently being previewed
+    // during touch events
+    const touchBoundingBox = options["touchBoundingBox"] || false;
+    // A DOM element to append the bounding box to.
+    const boundingBoxContainer = options["boundingBoxContainer"] || document.body;
 
     if (inlinePane !== true && !isDOMElement(paneContainer)) {
       throw new TypeError("`paneContainer` must be a DOM element when `inlinePane !== true`");
@@ -171,7 +167,7 @@ module.exports = class Drift {
     this.trigger.enabled = true;
   }
 
-  destroy = () => {
+  destroy() {
     this.trigger._unbindEvents();
-  };
-};
+  }
+}
