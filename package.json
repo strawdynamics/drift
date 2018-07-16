@@ -29,6 +29,8 @@
     "test": "npm run test:local"
   },
   "files": [
+		"lib",
+		"es",
     "dist",
     "src"
   ],
