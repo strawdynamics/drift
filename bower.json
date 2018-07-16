@@ -20,13 +20,16 @@
   "homepage": "https://github.com/imgix/drift",
   "moduleType": [],
   "ignore": [
-    "**/.*",
+		"**/.*",
+		".github",
     "node_modules",
     "src",
-    "test",
+		"test",
     "CONTRIBUTING.md",
-    "index.html",
-    "karmaConfig.js",
-    "package.json"
+		"index.html",
+		"config",
+		"package.json",
+		"postcss.config.js",
+		"webpack.config.js"
   ]
 }
