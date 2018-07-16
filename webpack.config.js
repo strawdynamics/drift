@@ -1,8 +1,6 @@
 const webpack = require("webpack");
 const path = require("path");
 const env = require("yargs").argv.env; // use --env with webpack 2
-const pkg = require("./package.json");
-const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 const ClosureCompilerPlugin = require("webpack-closure-compiler");
 
 let libraryName = "Drift";
