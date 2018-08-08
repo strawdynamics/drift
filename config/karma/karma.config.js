@@ -5,7 +5,6 @@ const webpackConfigAugmented = {
   module: {
     ...webpackConfig.module,
     rules: [
-      // ...webpackConfig.module.rules,
       {
         test: /(\.jsx|\.js)$/,
         loader: "babel-loader",
@@ -17,13 +16,9 @@ const webpackConfigAugmented = {
 
 const baseConfig = {
   frameworks: ["jasmine"],
-  files: [
-    { pattern: "../../src/**/*.js", included: false, served: false, watched: false },
-    { pattern: "../../test/**/test*.js", watched: false }
-  ],
+  files: ["../../tests.webpack.js"],
   preprocessors: {
-    "../../src/**/*.js": ["webpack"],
-    "../../test/**/*.js": ["webpack"]
+    "../../tests.webpack.js": "webpack"
   },
   webpack: webpackConfigAugmented,
   webpackMiddleware: {
