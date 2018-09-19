@@ -171,3 +171,22 @@ export default class Drift {
     this.trigger._unbindEvents();
   }
 }
+
+// Public API
+Object.defineProperty(Drift.prototype, "isShowing", {
+  get: function() {
+    return this.isShowing;
+  }
+});
+Object.defineProperty(Drift.prototype, "zoomFactor", {
+  get: function() {
+    return this.zoomFactor;
+  },
+  set: function(value) {
+    this.zoomFactor = value;
+  }
+});
+Drift.prototype["setZoomImageURL"] = Drift.prototype.setZoomImageURL;
+Drift.prototype["disable"] = Drift.prototype.disable;
+Drift.prototype["enable"] = Drift.prototype.enable;
+Drift.prototype["destroy"] = Drift.prototype.destroy;
