@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.3.2"></a>
+## [1.3.2](https://github.com/imgix/drift/compare/v1.3.1...v1.3.2) (2018-09-29)
+
+
+### Bug Fixes
+
+* export Drift's public API ([#83](https://github.com/imgix/drift/issues/83)) ([82052c4](https://github.com/imgix/drift/commit/82052c4)), closes [#81](https://github.com/imgix/drift/issues/81)
+
+
+
 <a name="1.3.1"></a>
 ## [1.3.1](https://github.com/imgix/drift/compare/v1.3.0...v1.3.1) (2018-08-08)
 
