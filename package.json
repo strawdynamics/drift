@@ -61,7 +61,7 @@
     "closure-webpack-plugin": "1.1.1",
     "cross-env": "5.2.0",
     "cssnano": "4.0.2",
-    "cssnano-preset-advanced": "4.0.0",
+    "cssnano-preset-advanced": "4.0.3",
     "google-closure-compiler-js": "20180610.0.0",
     "jasmine-core": "3.1.0",
     "karma": "2.0.4",
