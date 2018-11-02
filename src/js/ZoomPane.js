@@ -121,16 +121,6 @@ export default class ZoomPane {
       let scrollX = window.pageXOffset;
       let scrollY = window.pageYOffset;
 
-      console.log(
-        "triggerRect.left, percentageOffsetX, triggerRect.width, elWidth / 2, this.settings.inlineOffsetX, scrollX",
-        triggerRect.left,
-        percentageOffsetX,
-        triggerRect.width,
-        elWidth / 2,
-        this.settings.inlineOffsetX,
-        scrollX
-      );
-
       let inlineLeft =
         triggerRect.left + percentageOffsetX * triggerRect.width - elWidth / 2 + this.settings.inlineOffsetX + scrollX;
       let inlineTop =
@@ -150,7 +140,6 @@ export default class ZoomPane {
         }
       }
 
-      console.log("inlineLeft", inlineLeft);
       this.el.style.left = `${inlineLeft}px`;
       this.el.style.top = `${inlineTop}px`;
     }
