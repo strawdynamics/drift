@@ -59,8 +59,6 @@ export default class BoundingBox {
     let inlineLeft = triggerRect.left + percentageOffsetX * triggerRect.width - this.el.clientWidth / 2 + pageXOffset;
     let inlineTop = triggerRect.top + percentageOffsetY * triggerRect.height - this.el.clientHeight / 2 + pageYOffset;
 
-    let elRect = this.el.getBoundingClientRect();
-
     if (inlineLeft < triggerRect.left + pageXOffset) {
       inlineLeft = triggerRect.left + pageXOffset;
     } else if (inlineLeft + this.el.clientWidth > triggerRect.left + triggerRect.width + pageXOffset) {

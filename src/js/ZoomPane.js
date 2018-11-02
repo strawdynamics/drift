@@ -84,8 +84,10 @@ export default class ZoomPane {
   // `percentageOffsetX` and `percentageOffsetY` must be percentages
   // expressed as floats between `0' and `1`.
   setPosition(percentageOffsetX, percentageOffsetY, triggerRect) {
-    const { width: imgElWidth, height: imgElHeight } = this.imgEl.getBoundingClientRect();
-    const { width: elWidth, height: elHeight } = this.el.getBoundingClientRect();
+    const imgElWidth = this.imgEl.offsetWidth;
+    const imgElHeight = this.imgEl.offsetHeight;
+    const elWidth = this.el.offsetWidth;
+    const elHeight = this.el.offsetHeight;
 
     const centreOfContainerX = elWidth / 2;
     const centreOfContainerY = elHeight / 2;
