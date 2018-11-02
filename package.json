@@ -21,7 +21,7 @@
     "dev": "npm run build:watch",
     "format:check": "prettier --list-different \"{src,test}/**/*.js\"",
     "format": "prettier --write \"{src,test}/**/*.js\"",
-    "release": "npm run build && git add dist && standard-version -a",
+    "release": "npm run build && git add dist src/js/Drift.js && standard-version -a",
     "start": "npm run dev",
     "test:watch": "karma start config/karma/karma-local.config.js",
     "test:local": "karma start config/karma/karma-local.config.js --singleRun",
