@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.3.3"></a>
+## [1.3.3](https://github.com/imgix/drift/compare/v1.3.2...v1.3.3) (2018-11-02)
+
+
+### Bug Fixes
+
+* stop loupe being shown in incorrect position on mouseenter ([#113](https://github.com/imgix/drift/issues/113)) ([710dfd7](https://github.com/imgix/drift/commit/710dfd7))
+
+
+
 <a name="1.3.2"></a>
 ## [1.3.2](https://github.com/imgix/drift/compare/v1.3.1...v1.3.2) (2018-09-29)
 
