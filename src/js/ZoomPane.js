@@ -84,8 +84,10 @@ export default class ZoomPane {
   // `percentageOffsetX` and `percentageOffsetY` must be percentages
   // expressed as floats between `0' and `1`.
   setPosition(percentageOffsetX, percentageOffsetY, triggerRect) {
-    const { width: imgElWidth, height: imgElHeight } = this.imgEl.getBoundingClientRect();
-    const { width: elWidth, height: elHeight } = this.el.getBoundingClientRect();
+    const imgElWidth = this.imgEl.offsetWidth;
+    const imgElHeight = this.imgEl.offsetHeight;
+    const elWidth = this.el.offsetWidth;
+    const elHeight = this.el.offsetHeight;
 
     const centreOfContainerX = elWidth / 2;
     const centreOfContainerY = elHeight / 2;
@@ -119,6 +121,16 @@ export default class ZoomPane {
       let scrollX = window.pageXOffset;
       let scrollY = window.pageYOffset;
 
+      console.log(
+        "triggerRect.left, percentageOffsetX, triggerRect.width, elWidth / 2, this.settings.inlineOffsetX, scrollX",
+        triggerRect.left,
+        percentageOffsetX,
+        triggerRect.width,
+        elWidth / 2,
+        this.settings.inlineOffsetX,
+        scrollX
+      );
+
       let inlineLeft =
         triggerRect.left + percentageOffsetX * triggerRect.width - elWidth / 2 + this.settings.inlineOffsetX + scrollX;
       let inlineTop =
@@ -138,6 +150,7 @@ export default class ZoomPane {
         }
       }
 
+      console.log("inlineLeft", inlineLeft);
       this.el.style.left = `${inlineLeft}px`;
       this.el.style.top = `${inlineTop}px`;
     }
