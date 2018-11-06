@@ -55,12 +55,12 @@ export default function injectBaseStylesheet() {
     return;
   }
 
-  let styleEl = document.createElement("style");
+  const styleEl = document.createElement("style");
   styleEl.type = "text/css";
   styleEl.classList.add("drift-base-styles");
 
   styleEl.appendChild(document.createTextNode(RULES));
 
-  let head = document.head;
+  const head = document.head;
   head.insertBefore(styleEl, head.firstChild);
 }

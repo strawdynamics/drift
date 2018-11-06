@@ -1,16 +1,18 @@
+/* global describe it expect */
+
 import BoundingBox from "../src/js/BoundingBox";
 
 import { boundingBoxOptions } from "./helpers";
 
 describe("BoundingBox", () => {
   it("returns an instance of `BoundingBox` when correctly instantiated", () => {
-    let zoomPane = new BoundingBox(boundingBoxOptions());
+    const zoomPane = new BoundingBox(boundingBoxOptions());
 
     expect(zoomPane.constructor).toBe(BoundingBox);
   });
 
   it("requires `zoomFactor` option", () => {
-    let opts = boundingBoxOptions();
+    const opts = boundingBoxOptions();
     delete opts.zoomFactor;
 
     expect(() => {
@@ -19,7 +21,7 @@ describe("BoundingBox", () => {
   });
 
   it("requires `containerEl` option", () => {
-    let opts = boundingBoxOptions();
+    const opts = boundingBoxOptions();
     delete opts.containerEl;
 
     expect(() => {
@@ -28,9 +30,9 @@ describe("BoundingBox", () => {
   });
 
   it("builds its element", () => {
-    let opts = boundingBoxOptions();
+    const opts = boundingBoxOptions();
     opts.namespace = "tb";
-    let zoomPane = new BoundingBox(opts);
+    const zoomPane = new BoundingBox(opts);
 
     expect(zoomPane.el.classList.toString()).toBe("drift-bounding-box tb-bounding-box");
   });

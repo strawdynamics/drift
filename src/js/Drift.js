@@ -173,6 +173,7 @@ export default class Drift {
 }
 
 // Public API
+/* eslint-disable no-self-assign */
 Object.defineProperty(Drift.prototype, "isShowing", {
   get: function() {
     return this.isShowing;
@@ -190,3 +191,4 @@ Drift.prototype["setZoomImageURL"] = Drift.prototype.setZoomImageURL;
 Drift.prototype["disable"] = Drift.prototype.disable;
 Drift.prototype["enable"] = Drift.prototype.enable;
 Drift.prototype["destroy"] = Drift.prototype.destroy;
+/* eslint-enable no-self-assign */

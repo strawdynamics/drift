@@ -1,10 +1,11 @@
-import ZoomPane from "../src/js/ZoomPane";
+/* global describe it expect beforeEach afterEach */
+
 import Trigger from "../src/js/Trigger";
 
-import { mockEvent, zoomPaneOptions, triggerOptions } from "./helpers";
+import { mockEvent, triggerOptions } from "./helpers";
 
 beforeEach(function() {
-  let anchor = document.createElement("a");
+  const anchor = document.createElement("a");
   anchor.classList.add("test-anchor");
   anchor.setAttribute("href", "http://assets.imgix.net/test.png&w=400");
   anchor.dataset.zoom = "http://assets.imgix.net/test.png&w=1200";
@@ -12,20 +13,20 @@ beforeEach(function() {
 });
 
 afterEach(function() {
-  let anchor = document.querySelector(".test-anchor");
+  const anchor = document.querySelector(".test-anchor");
 
   document.body.removeChild(anchor);
 });
 
 describe("Trigger", () => {
   it("returns an instance of `Trigger` when correctly instantiated", () => {
-    let trigger = new Trigger(triggerOptions());
+    const trigger = new Trigger(triggerOptions());
 
     expect(trigger.constructor).toBe(Trigger);
   });
 
   it("requires `el` option", () => {
-    let opts = triggerOptions();
+    const opts = triggerOptions();
     delete opts.el;
 
     expect(() => {
@@ -34,7 +35,7 @@ describe("Trigger", () => {
   });
 
   it("requires `zoomPane` option", () => {
-    let opts = triggerOptions();
+    const opts = triggerOptions();
     delete opts.zoomPane;
 
     expect(() => {
@@ -43,7 +44,7 @@ describe("Trigger", () => {
   });
 
   it("requires `sourceAttribute` option", () => {
-    let opts = triggerOptions();
+    const opts = triggerOptions();
     delete opts.sourceAttribute;
 
     expect(() => {
@@ -52,7 +53,7 @@ describe("Trigger", () => {
   });
 
   it("requires `handleTouch` option", () => {
-    let opts = triggerOptions();
+    const opts = triggerOptions();
     delete opts.handleTouch;
 
     expect(() => {
@@ -62,13 +63,14 @@ describe("Trigger", () => {
 
   it("executes the `onShow` callback when present", () => {
     let called = false;
+    // e
     function showCallback() {
       called = true;
     }
-    let opts = triggerOptions();
+    const opts = triggerOptions();
     opts.onShow = showCallback;
 
-    let trigger = new Trigger(opts);
+    const trigger = new Trigger(opts);
     trigger._show(mockEvent);
 
     expect(called).toBe(true);
@@ -80,10 +82,10 @@ describe("Trigger", () => {
       called = true;
     }
 
-    let opts = triggerOptions();
+    const opts = triggerOptions();
     opts.onHide = hideCallback;
 
-    let trigger = new Trigger(opts);
+    const trigger = new Trigger(opts);
     trigger._show(mockEvent);
     trigger._hide(mockEvent);
 
