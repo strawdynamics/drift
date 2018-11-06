@@ -9,15 +9,6 @@
     "browser": true
   },
   "rules": {
-    "require-jsdoc": [
-      "warn",
-      {
-        "require": {
-          "FunctionDeclaration": true,
-          "MethodDefinition": true,
-          "ClassDeclaration": true
-        }
-      }
-    ]
+    "require-jsdoc": "off"
   }
 }
