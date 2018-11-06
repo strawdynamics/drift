@@ -1,3 +1,5 @@
+/* global describe it expect beforeEach afterEach */
+
 import Drift from "../src/js/Drift";
 
 import { defaultDriftConfig } from "./helpers";

@@ -1,7 +1,8 @@
-import ZoomPane from "../src/js/ZoomPane";
+/* global describe it expect beforeEach afterEach */
+
 import Trigger from "../src/js/Trigger";
 
-import { mockEvent, zoomPaneOptions, triggerOptions } from "./helpers";
+import { mockEvent, triggerOptions } from "./helpers";
 
 beforeEach(function() {
   const anchor = document.createElement("a");
@@ -61,7 +62,8 @@ describe("Trigger", () => {
   });
 
   it("executes the `onShow` callback when present", () => {
-    let called = false;
+		let called = false;
+		// e
     function showCallback() {
       called = true;
     }

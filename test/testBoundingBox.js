@@ -1,3 +1,5 @@
+/* global describe it expect */
+
 import BoundingBox from "../src/js/BoundingBox";
 
 import { boundingBoxOptions } from "./helpers";

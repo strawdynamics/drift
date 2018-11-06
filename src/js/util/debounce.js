@@ -1,6 +1,11 @@
+/* eslint-disable */
 // http://underscorejs.org/docs/underscore.html#section-83
 export default function debounce(func, wait, immediate) {
-  let timeout; let args; let context; let timestamp; let result;
+  let timeout;
+  let args;
+  let context;
+  let timestamp;
+  let result;
 
   const later = function() {
     const last = Date.now() - timestamp;
