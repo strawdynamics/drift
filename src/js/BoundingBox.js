@@ -5,7 +5,7 @@ export default class BoundingBox {
   constructor(options) {
     this.isShowing = false;
 
-    let { namespace = null, zoomFactor = throwIfMissing(), containerEl = throwIfMissing() } = options;
+    const { namespace = null, zoomFactor = throwIfMissing(), containerEl = throwIfMissing() } = options;
 
     this.settings = { namespace, zoomFactor, containerEl };
 
@@ -15,9 +15,9 @@ export default class BoundingBox {
   }
 
   _buildClasses(suffix) {
-    let classes = [`drift-${suffix}`];
+    const classes = [`drift-${suffix}`];
 
-    let ns = this.settings.namespace;
+    const ns = this.settings.namespace;
     if (ns) {
       classes.push(`${ns}-${suffix}`);
     }
@@ -35,7 +35,7 @@ export default class BoundingBox {
 
     this.settings.containerEl.appendChild(this.el);
 
-    let style = this.el.style;
+    const style = this.el.style;
     style.width = `${Math.round(zoomPaneWidth / this.settings.zoomFactor)}px`;
     style.height = `${Math.round(zoomPaneHeight / this.settings.zoomFactor)}px`;
 
@@ -53,8 +53,8 @@ export default class BoundingBox {
   }
 
   setPosition(percentageOffsetX, percentageOffsetY, triggerRect) {
-    let pageXOffset = window.pageXOffset;
-    let pageYOffset = window.pageYOffset;
+    const pageXOffset = window.pageXOffset;
+    const pageYOffset = window.pageYOffset;
 
     let inlineLeft = triggerRect.left + percentageOffsetX * triggerRect.width - this.el.clientWidth / 2 + pageXOffset;
     let inlineTop = triggerRect.top + percentageOffsetY * triggerRect.height - this.el.clientHeight / 2 + pageYOffset;

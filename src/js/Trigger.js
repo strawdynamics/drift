@@ -8,7 +8,7 @@ export default class Trigger {
     this._handleEntry = this._handleEntry.bind(this);
     this._handleMovement = this._handleMovement.bind(this);
 
-    let {
+    const {
       el = throwIfMissing(),
       zoomPane = throwIfMissing(),
       sourceAttribute = throwIfMissing(),
@@ -99,7 +99,7 @@ export default class Trigger {
       return;
     }
 
-    let onShow = this.settings.onShow;
+    const onShow = this.settings.onShow;
     if (onShow && typeof onShow === "function") {
       onShow();
     }
@@ -111,7 +111,7 @@ export default class Trigger {
     );
 
     if (this._lastMovement) {
-      let touchActivated = this._lastMovement.touches;
+      const touchActivated = this._lastMovement.touches;
       if ((touchActivated && this.settings.touchBoundingBox) || (!touchActivated && this.settings.hoverBoundingBox)) {
         this.boundingBox.show(this.settings.zoomPane.el.clientWidth, this.settings.zoomPane.el.clientHeight);
       }
@@ -133,7 +133,7 @@ export default class Trigger {
       this.boundingBox.hide();
     }
 
-    let onHide = this.settings.onHide;
+    const onHide = this.settings.onHide;
     if (onHide && typeof onHide === "function") {
       onHide();
     }
@@ -151,10 +151,10 @@ export default class Trigger {
       return;
     }
 
-    let movementX, movementY;
+    let movementX; let movementY;
 
     if (e.touches) {
-      let firstTouch = e.touches[0];
+      const firstTouch = e.touches[0];
       movementX = firstTouch.clientX;
       movementY = firstTouch.clientY;
     } else {
@@ -162,13 +162,13 @@ export default class Trigger {
       movementY = e.clientY;
     }
 
-    let el = this.settings.el;
-    let rect = el.getBoundingClientRect();
-    let offsetX = movementX - rect.left;
-    let offsetY = movementY - rect.top;
+    const el = this.settings.el;
+    const rect = el.getBoundingClientRect();
+    const offsetX = movementX - rect.left;
+    const offsetY = movementY - rect.top;
 
-    let percentageOffsetX = offsetX / this.settings.el.clientWidth;
-    let percentageOffsetY = offsetY / this.settings.el.clientHeight;
+    const percentageOffsetX = offsetX / this.settings.el.clientWidth;
+    const percentageOffsetY = offsetY / this.settings.el.clientHeight;
 
     if (this.boundingBox) {
       this.boundingBox.setPosition(percentageOffsetX, percentageOffsetY, rect);

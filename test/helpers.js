@@ -1,6 +1,6 @@
 import ZoomPane from "../src/js/ZoomPane";
 
-export let mockEvent = {
+export const mockEvent = {
   preventDefault: function() {}
 };
 

@@ -4,13 +4,13 @@ import { zoomPaneOptions } from "./helpers";
 
 describe("ZoomPane", () => {
   it("returns an instance of `ZoomPane` when correctly instantiated", () => {
-    let zoomPane = new ZoomPane(zoomPaneOptions());
+    const zoomPane = new ZoomPane(zoomPaneOptions());
 
     expect(zoomPane.constructor).toBe(ZoomPane);
   });
 
   it("requires `zoomFactor` option", () => {
-    let opts = zoomPaneOptions();
+    const opts = zoomPaneOptions();
     delete opts.zoomFactor;
 
     expect(() => {
@@ -19,7 +19,7 @@ describe("ZoomPane", () => {
   });
 
   it("requires `inline` option", () => {
-    let opts = zoomPaneOptions();
+    const opts = zoomPaneOptions();
     delete opts.inline;
 
     expect(() => {
@@ -28,7 +28,7 @@ describe("ZoomPane", () => {
   });
 
   it("requires `showWhitespaceAtEdges` option", () => {
-    let opts = zoomPaneOptions();
+    const opts = zoomPaneOptions();
     delete opts.showWhitespaceAtEdges;
 
     expect(() => {
@@ -37,7 +37,7 @@ describe("ZoomPane", () => {
   });
 
   it("requires `containInline` option", () => {
-    let opts = zoomPaneOptions();
+    const opts = zoomPaneOptions();
     delete opts.containInline;
 
     expect(() => {
@@ -46,22 +46,22 @@ describe("ZoomPane", () => {
   });
 
   it("builds its element", () => {
-    let opts = zoomPaneOptions();
+    const opts = zoomPaneOptions();
     opts.namespace = "tb";
-    let zoomPane = new ZoomPane(opts);
+    const zoomPane = new ZoomPane(opts);
 
     expect(zoomPane.el.classList.toString()).toBe("drift-zoom-pane tb-zoom-pane");
   });
 
   it("creates an `img` element inside its main element", () => {
-    let zoomPane = new ZoomPane(zoomPaneOptions());
+    const zoomPane = new ZoomPane(zoomPaneOptions());
 
     expect(zoomPane.imgEl.parentElement).toBe(zoomPane.el);
   });
 
   it("sets the `imgEl` `src` attribute when `#show` is called", () => {
-    let zoomPane = new ZoomPane(zoomPaneOptions());
-    let testSrc = "http://assets.imgix.net/unsplash/pretty2.jpg";
+    const zoomPane = new ZoomPane(zoomPaneOptions());
+    const testSrc = "http://assets.imgix.net/unsplash/pretty2.jpg";
 
     zoomPane.show(testSrc, 400);
 
@@ -69,9 +69,9 @@ describe("ZoomPane", () => {
   });
 
   it("sets the `imgEl` width attribute when `#show` is called", () => {
-    let zoomPane = new ZoomPane(zoomPaneOptions());
-    let testSrc = "http://assets.imgix.net/unsplash/pretty2.jpg";
-    let triggerWidth = 400;
+    const zoomPane = new ZoomPane(zoomPaneOptions());
+    const testSrc = "http://assets.imgix.net/unsplash/pretty2.jpg";
+    const triggerWidth = 400;
 
     zoomPane.show(testSrc, triggerWidth);
 

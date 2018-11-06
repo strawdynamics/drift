@@ -3,7 +3,7 @@ import Drift from "../src/js/Drift";
 import { defaultDriftConfig } from "./helpers";
 
 beforeEach(function() {
-  let anchor = document.createElement("a");
+  const anchor = document.createElement("a");
   anchor.classList.add("test-anchor");
   anchor.setAttribute("href", "http://assets.imgix.net/test.png&w=400");
   anchor.dataset.zoom = "http://assets.imgix.net/test.png&w=1200";
@@ -11,7 +11,7 @@ beforeEach(function() {
 });
 
 afterEach(function() {
-  let anchor = document.querySelector(".test-anchor");
+  const anchor = document.querySelector(".test-anchor");
 
   document.body.removeChild(anchor);
 });
@@ -31,8 +31,8 @@ describe("Drift", () => {
     });
 
     it("returns an instance of `Drift` when correctly instantiated", () => {
-      let anchor = document.querySelector(".test-anchor");
-      let drift = new Drift(anchor);
+      const anchor = document.querySelector(".test-anchor");
+      const drift = new Drift(anchor);
 
       expect(drift.constructor).toBe(Drift);
     });
@@ -40,33 +40,33 @@ describe("Drift", () => {
 
   describe("configuration", () => {
     it("sets up settings object when no options are passed", () => {
-      let anchor = document.querySelector(".test-anchor");
-      let drift = new Drift(anchor);
+      const anchor = document.querySelector(".test-anchor");
+      const drift = new Drift(anchor);
 
       expect(drift.settings).toBeDefined();
     });
 
     it("applies proper setting defaults when no options are passed", () => {
-      let anchor = document.querySelector(".test-anchor");
-      let drift = new Drift(anchor);
+      const anchor = document.querySelector(".test-anchor");
+      const drift = new Drift(anchor);
 
       expect(drift.settings).toEqual(defaultDriftConfig());
     });
 
     it("accepts custom settings", () => {
-      let anchor = document.querySelector(".test-anchor");
-      let drift = new Drift(anchor, { inlineOffsetX: 12 });
+      const anchor = document.querySelector(".test-anchor");
+      const drift = new Drift(anchor, { inlineOffsetX: 12 });
 
-      let expectedConfig = defaultDriftConfig();
+      const expectedConfig = defaultDriftConfig();
       expectedConfig.inlineOffsetX = 12;
 
       expect(drift.settings).toEqual(expectedConfig);
     });
 
     it("requires `paneContainer` setting when `inlinePane !== true`", () => {
-      let anchor = document.querySelector(".test-anchor");
+      const anchor = document.querySelector(".test-anchor");
 
-      let conf = defaultDriftConfig();
+      const conf = defaultDriftConfig();
       conf.paneContainer = null;
 
       expect(() => {
@@ -75,9 +75,9 @@ describe("Drift", () => {
     });
 
     it("requires `paneContainer` to be a DOM element when `inlinePane !== true`", () => {
-      let anchor = document.querySelector(".test-anchor");
+      const anchor = document.querySelector(".test-anchor");
 
-      let conf = defaultDriftConfig();
+      const conf = defaultDriftConfig();
       conf.paneContainer = ".not-a-dom-element";
 
       expect(() => {
@@ -86,9 +86,9 @@ describe("Drift", () => {
     });
 
     it("allows `paneContainer` to be null when `inlinePane === true`", () => {
-      let anchor = document.querySelector(".test-anchor");
+      const anchor = document.querySelector(".test-anchor");
 
-      let conf = defaultDriftConfig();
+      const conf = defaultDriftConfig();
       conf.paneContainer = null;
       conf.inlinePane = true;
 
@@ -101,8 +101,8 @@ describe("Drift", () => {
   describe("public methods", () => {
     describe("#setZoomImageURL", () => {
       it("updates the `src` attribute of the ZoomPane's `imgEl`", () => {
-        let anchor = document.querySelector(".test-anchor");
-        let drift = new Drift(anchor);
+        const anchor = document.querySelector(".test-anchor");
+        const drift = new Drift(anchor);
 
         drift.setZoomImageURL("test!");
 
@@ -112,8 +112,8 @@ describe("Drift", () => {
 
     describe("#enable", () => {
       it("sets `trigger.enabled` to `true`", () => {
-        let anchor = document.querySelector(".test-anchor");
-        let drift = new Drift(anchor);
+        const anchor = document.querySelector(".test-anchor");
+        const drift = new Drift(anchor);
 
         drift.trigger.enabled = false;
 
@@ -125,8 +125,8 @@ describe("Drift", () => {
 
     describe("#disable", () => {
       it("sets `trigger.enabled` to `false`", () => {
-        let anchor = document.querySelector(".test-anchor");
-        let drift = new Drift(anchor);
+        const anchor = document.querySelector(".test-anchor");
+        const drift = new Drift(anchor);
 
         drift.disable();
 

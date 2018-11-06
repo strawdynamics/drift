@@ -3,7 +3,7 @@ import { addClasses, removeClasses } from "./util/dom";
 
 // All officially-supported browsers have this, but it's easy to
 // account for, just in case.
-var divStyle = document.createElement("div").style;
+const divStyle = document.createElement("div").style;
 
 const HAS_ANIMATION =
   typeof document === "undefined" ? false : "animation" in divStyle || "webkitAnimation" in divStyle;
@@ -16,7 +16,7 @@ export default class ZoomPane {
 
     this.isShowing = false;
 
-    let {
+    const {
       container = null,
       zoomFactor = throwIfMissing(),
       inline = throwIfMissing(),
@@ -50,9 +50,9 @@ export default class ZoomPane {
   }
 
   _buildClasses(suffix) {
-    let classes = [`drift-${suffix}`];
+    const classes = [`drift-${suffix}`];
 
-    let ns = this.settings.namespace;
+    const ns = this.settings.namespace;
     if (ns) {
       classes.push(`${ns}-${suffix}`);
     }
@@ -64,7 +64,7 @@ export default class ZoomPane {
     this.el = document.createElement("div");
     addClasses(this.el, this._buildClasses("zoom-pane"));
 
-    let loaderEl = document.createElement("div");
+    const loaderEl = document.createElement("div");
     addClasses(loaderEl, this._buildClasses("zoom-pane-loader"));
     this.el.appendChild(loaderEl);
 
@@ -118,8 +118,8 @@ export default class ZoomPane {
       // inconsistencies, but it's difficult to tell for sure.
       // let scrollX = isTouch ? 0 : window.scrollX;
       // let scrollY = isTouch ? 0 : window.scrollY;
-      let scrollX = window.pageXOffset;
-      let scrollY = window.pageYOffset;
+      const scrollX = window.pageXOffset;
+      const scrollY = window.pageYOffset;
 
       let inlineLeft =
         triggerRect.left + percentageOffsetX * triggerRect.width - elWidth / 2 + this.settings.inlineOffsetX + scrollX;
@@ -163,7 +163,7 @@ export default class ZoomPane {
   }
 
   get _isInline() {
-    let inline = this.settings.inline;
+    const inline = this.settings.inline;
 
     return inline === true || (typeof inline === "number" && window.innerWidth <= inline);
   }
