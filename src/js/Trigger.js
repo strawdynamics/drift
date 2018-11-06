@@ -151,7 +151,8 @@ export default class Trigger {
       return;
     }
 
-    let movementX; let movementY;
+    let movementX;
+    let movementY;
 
     if (e.touches) {
       const firstTouch = e.touches[0];

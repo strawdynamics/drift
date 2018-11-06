@@ -62,8 +62,8 @@ describe("Trigger", () => {
   });
 
   it("executes the `onShow` callback when present", () => {
-		let called = false;
-		// e
+    let called = false;
+    // e
     function showCallback() {
       called = true;
     }
