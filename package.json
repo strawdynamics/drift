@@ -62,7 +62,7 @@
     "closure-webpack-plugin": "1.1.1",
     "cross-env": "5.2.0",
     "cssnano": "4.1.8",
-    "cssnano-preset-advanced": "4.0.5",
+    "cssnano-preset-advanced": "4.0.6",
     "eslint": "5.10.0",
     "eslint-config-google": "0.11.0",
     "eslint-config-prettier": "3.3.0",
