@@ -61,7 +61,7 @@
     "chai": "4.2.0",
     "closure-webpack-plugin": "1.1.1",
     "cross-env": "5.2.0",
-    "cssnano": "4.1.8",
+    "cssnano": "4.1.9",
     "cssnano-preset-advanced": "4.0.6",
     "eslint": "5.13.0",
     "eslint-config-google": "0.12.0",
