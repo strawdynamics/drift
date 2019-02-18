@@ -78,7 +78,7 @@
     "prettier": "1.16.4",
     "rimraf": "2.6.3",
     "standard-version": "5.0.0",
-    "webpack": "4.29.4",
+    "webpack": "4.29.5",
     "webpack-cli": "3.2.3",
     "webpack-closure-compiler": "2.1.6",
     "yargs": "13.2.1"
