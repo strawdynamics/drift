@@ -65,7 +65,7 @@
     "cssnano-preset-advanced": "4.0.7",
     "eslint": "5.14.1",
     "eslint-config-google": "0.12.0",
-    "eslint-config-prettier": "4.0.0",
+    "eslint-config-prettier": "4.1.0",
     "google-closure-compiler-js": "20190215.0.1",
     "jasmine-core": "3.3.0",
     "karma": "4.0.0",
