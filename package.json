@@ -63,7 +63,7 @@
     "cross-env": "5.2.0",
     "cssnano": "4.1.10",
     "cssnano-preset-advanced": "4.0.7",
-    "eslint": "5.15.1",
+    "eslint": "5.15.2",
     "eslint-config-google": "0.12.0",
     "eslint-config-prettier": "4.1.0",
     "google-closure-compiler-js": "20190301.0.0",
