@@ -57,10 +57,13 @@ describe("Drift", () => {
 
     it("accepts custom settings", () => {
       const anchor = document.querySelector(".test-anchor");
-      const drift = new Drift(anchor, { inlineOffsetX: 12 });
+      const drift = new Drift(anchor, { inlineOffsetX: 12, handleTouch: false,
+                                        injectBaseStyles: false });
 
       const expectedConfig = defaultDriftConfig();
       expectedConfig.inlineOffsetX = 12;
+      expectedConfig.handleTouch = false;
+      expectedConfig.injectBaseStyles = false;
 
       expect(drift.settings).toEqual(expectedConfig);
     });
