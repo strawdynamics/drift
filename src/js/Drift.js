@@ -44,7 +44,7 @@ export default class Drift {
     // if `false`, it will switch to inline when `windowWidth <= inlinePane`
     const inlinePane = options["inlinePane"] || 375;
     // If `true`, touch events will trigger the zoom, like mouse events.
-    const handleTouch = options["handleTouch"] || true;
+    const handleTouch = "handleTouch" in options ? !!options["handleTouch"] : true;
     // If present (and a function), this will be called
     // whenever the ZoomPane is shown.
     const onShow = options["onShow"] || null;
@@ -53,7 +53,7 @@ export default class Drift {
     const onHide = options["onHide"] || null;
     // Add base styles to the page. See the "Theming"
     // section of README.md for more information.
-    const injectBaseStyles = options["injectBaseStyles"] || true;
+    const injectBaseStyles = "injectBaseStyles" in options ? !!options["injectBaseStyles"] : true;
     // An optional number that determines how long to wait before
     // showing the ZoomPane because of a `mouseenter` event.
     const hoverDelay = options["hoverDelay"] || 0;
