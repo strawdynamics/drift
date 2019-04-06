@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.3.4"></a>
+## [1.3.4](https://github.com/imgix/drift/compare/v1.3.3...v1.3.4) (2019-04-06)
+
+
+### Bug Fixes
+
+* ensure that handleTouch & injectBaseStyles can be disabled ([#221](https://github.com/imgix/drift/issues/221)) ([346f3bf](https://github.com/imgix/drift/commit/346f3bf)), fixes [#220](https://github.com/imgix/drift/issues/220)
+
+
+
 <a name="1.3.3"></a>
 ## [1.3.3](https://github.com/imgix/drift/compare/v1.3.2...v1.3.3) (2018-11-02)
 
