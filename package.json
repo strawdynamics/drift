@@ -82,7 +82,7 @@
     "webpack": "4.35.3",
     "webpack-cli": "3.3.6",
     "webpack-closure-compiler": "2.1.6",
-    "yargs": "13.2.4"
+    "yargs": "13.3.0"
   },
   "dependencies": {},
   "browserslist": [
