@@ -121,7 +121,9 @@ export default class Trigger {
   }
 
   _hide(e) {
-    e.preventDefault();
+    if (e) {
+      e.preventDefault();
+    }
 
     this._lastMovement = null;
 

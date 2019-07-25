@@ -137,5 +137,20 @@ describe("Drift", () => {
         expect(drift.trigger.enabled).toBe(false);
       });
     });
+
+    describe("#destroy", () => {
+      it("should hide and unbind events", function() {
+        const anchor = document.querySelector(".test-anchor");
+        const drift = new Drift(anchor);
+
+        const hideSpy = spyOn(drift.trigger, "_hide");
+        const unbindEventsSpy = spyOn(drift.trigger, "_unbindEvents");
+
+        drift.destroy();
+
+        expect(hideSpy).toHaveBeenCalled();
+        expect(unbindEventsSpy).toHaveBeenCalled();
+      });
+    });
   });
 });
