@@ -1,4 +1,4 @@
-/* global describe it expect beforeEach afterEach */
+/* global describe it expect beforeEach afterEach spyOn */
 
 import Drift from "../src/js/Drift";
 
