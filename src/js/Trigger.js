@@ -70,8 +70,7 @@ export default class Trigger {
       this.settings.el.addEventListener("touchstart", this._handleEntry, false);
       this.settings.el.addEventListener("touchend", this._hide, false);
       this.settings.el.addEventListener("touchmove", this._handleMovement, false);
-    }
-    else {
+    } else {
       this.settings.el.addEventListener("touchstart", this._preventDefault);
       this.settings.el.addEventListener("touchend", this._preventDefault);
       this.settings.el.addEventListener("touchmove", this._preventDefault);
