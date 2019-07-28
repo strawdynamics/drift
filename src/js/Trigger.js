@@ -57,6 +57,10 @@ export default class Trigger {
     return this.settings.zoomPane.isShowing;
   }
 
+  _preventDefault(event) {
+    event.preventDefault();
+  }
+
   _bindEvents() {
     this.settings.el.addEventListener("mouseenter", this._handleEntry, false);
     this.settings.el.addEventListener("mouseleave", this._hide, false);
@@ -66,6 +70,11 @@ export default class Trigger {
       this.settings.el.addEventListener("touchstart", this._handleEntry, false);
       this.settings.el.addEventListener("touchend", this._hide, false);
       this.settings.el.addEventListener("touchmove", this._handleMovement, false);
+    }
+    else {
+      this.settings.el.addEventListener("touchstart", this._preventDefault);
+      this.settings.el.addEventListener("touchend", this._preventDefault);
+      this.settings.el.addEventListener("touchmove", this._preventDefault);
     }
   }
 
