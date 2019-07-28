@@ -168,6 +168,7 @@ export default class Drift {
   }
 
   destroy() {
+    this.trigger._hide();
     this.trigger._unbindEvents();
   }
 }
