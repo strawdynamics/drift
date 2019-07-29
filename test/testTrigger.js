@@ -1,5 +1,3 @@
-/* global describe it expect beforeEach afterEach */
-
 import Trigger from "../src/js/Trigger";
 
 import { mockEvent, triggerOptions } from "./helpers";
