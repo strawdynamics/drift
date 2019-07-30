@@ -1,5 +1,3 @@
-/* global describe it expect */
-
 import ZoomPane from "../src/js/ZoomPane";
 
 import { zoomPaneOptions } from "./helpers";
