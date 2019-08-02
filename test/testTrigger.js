@@ -91,4 +91,18 @@ describe("Trigger", () => {
 
     expect(called).toBe(true);
   });
+  it("does not execute mousedown on mobile when handleTouch is set to false", () => {
+    const opts = triggerOptions();
+    opts.handleTouch = false;
+    const trigger = new Trigger(opts);
+    const spy = spyOn(trigger, "_handleEntry");
+
+    const event = new Event("touchstart");
+    // Optionally: add `console.log(e + ' ' + e.detail)` to _handleEntry
+    // and uncomment the next line
+    // const event = new CustomEvent('mouseenter', { detail: "This should not show on touchstart" });
+    
+    trigger.settings.el.dispatchEvent(event);
+    expect(trigger._handleEntry).not.toHaveBeenCalled();
+  });
 });
