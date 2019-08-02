@@ -1,6 +1,14 @@
-# Change Log
+# Changelog
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+### [1.3.5](https://github.com/imgix/drift/compare/v1.3.4...v1.3.5) (2019-08-02)
+
+
+### Bug Fixes
+
+* prevent zoom on mobile when handleTouch is set to false ([#293](https://github.com/imgix/drift/issues/293)) ([d1ea511](https://github.com/imgix/drift/commit/d1ea511))
+* remove lingering DOM elements on destroy() ([#291](https://github.com/imgix/drift/issues/291)) ([e217752](https://github.com/imgix/drift/commit/e217752))
 
 <a name="1.3.4"></a>
 ## [1.3.4](https://github.com/imgix/drift/compare/v1.3.3...v1.3.4) (2019-04-06)
