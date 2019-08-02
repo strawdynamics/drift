@@ -89,4 +89,28 @@ describe("Trigger", () => {
 
     expect(called).toBe(true);
   });
+
+  it("executes touchstart on mobile when handleTouch is set to true", () => {
+    const opts = triggerOptions();
+    opts.handleTouch = true;
+    const spy = spyOn(Trigger.prototype, "_handleEntry");
+    const trigger = new Trigger(opts);
+
+    const event = new Event("touchstart");
+
+    trigger.settings.el.dispatchEvent(event);
+    expect(spy).toHaveBeenCalled();
+  });
+
+  it("does not execute touchstart on mobile when handleTouch is set to false", () => {
+    const opts = triggerOptions();
+    opts.handleTouch = false;
+    const spy = spyOn(Trigger.prototype, "_handleEntry");
+    const trigger = new Trigger(opts);
+
+    const event = new Event("touchstart");
+
+    trigger.settings.el.dispatchEvent(event);
+    expect(spy).not.toHaveBeenCalled();
+  });
 });
