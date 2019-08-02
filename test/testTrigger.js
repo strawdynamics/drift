@@ -91,18 +91,28 @@ describe("Trigger", () => {
 
     expect(called).toBe(true);
   });
-  it("does not execute mousedown on mobile when handleTouch is set to false", () => {
+
+  it("executes touchstart on mobile when handleTouch is set to true", () => {
     const opts = triggerOptions();
-    opts.handleTouch = false;
+    opts.handleTouch = true;
+    const spy = spyOn(Trigger.prototype, "_handleEntry");
     const trigger = new Trigger(opts);
-    const spy = spyOn(trigger, "_handleEntry");
 
     const event = new Event("touchstart");
-    // Optionally: add `console.log(e + ' ' + e.detail)` to _handleEntry
-    // and uncomment the next line
-    // const event = new CustomEvent('mouseenter', { detail: "This should not show on touchstart" });
 
     trigger.settings.el.dispatchEvent(event);
-    expect(trigger._handleEntry).not.toHaveBeenCalled();
+    expect(spy).toHaveBeenCalled();
+  });
+
+  it("does not execute touchstart on mobile when handleTouch is set to false", () => {
+    const opts = triggerOptions();
+    opts.handleTouch = false;
+    const spy = spyOn(Trigger.prototype, "_handleEntry");
+    const trigger = new Trigger(opts);
+
+    const event = new Event("touchstart");
+
+    trigger.settings.el.dispatchEvent(event);
+    expect(spy).not.toHaveBeenCalled();
   });
 });
