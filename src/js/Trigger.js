@@ -57,8 +57,27 @@ export default class Trigger {
     return this.settings.zoomPane.isShowing;
   }
 
+  /**
+   * Prevents browsers default behaviour only if...
+   * ... there is NO touchDelay
+   * or
+   * ... it is a mouse event (mouseenter, mouseleave, mousemove)
+   * or
+   * ... the zoom is currently displayed
+   *
+   * this will allow mobiles to scroll if touchDelay is set.
+   *
+   * @param event
+   * @private
+   */
   _preventDefault(event) {
-    event.preventDefault();
+    if (!this.settings.touchDelay || !this._isTouchEvent(event) || this.isShowing) {
+      event.preventDefault();
+    }
+  }
+
+  _isTouchEvent(event) {
+    return !!event.touches
   }
 
   _bindEvents() {
@@ -94,7 +113,7 @@ export default class Trigger {
   }
 
   _handleEntry(e) {
-    e.preventDefault();
+    this._preventDefault(e)
     this._lastMovement = e;
 
     if (e.type == "mouseenter" && this.settings.hoverDelay) {
@@ -134,7 +153,7 @@ export default class Trigger {
 
   _hide(e) {
     if (e) {
-      e.preventDefault();
+      this._preventDefault(e)
     }
 
     this._lastMovement = null;
@@ -157,7 +176,7 @@ export default class Trigger {
 
   _handleMovement(e) {
     if (e) {
-      e.preventDefault();
+      this._preventDefault(e)
       this._lastMovement = e;
     } else if (this._lastMovement) {
       e = this._lastMovement;
