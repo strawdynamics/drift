@@ -61,18 +61,6 @@ export default class Trigger {
     event.preventDefault();
   }
 
-  /**
-   * Prevents browsers default behaviour only if...
-   * ... there is NO touchDelay
-   * or
-   * ... it is a mouse event (mouseenter, mouseleave, mousemove)
-   * or
-   * ... the zoom is currently displayed
-   * this will allow mobiles to scroll if touchDelay is set.
-   *
-   * @param {Event} event
-   * @private
-   */
   _preventDefaultAllowTouchScroll(event) {
     if (!this.settings.touchDelay || !this._isTouchEvent(event) || this.isShowing) {
       event.preventDefault();
