@@ -71,6 +71,10 @@ export default class Trigger {
    * @private
    */
   _preventDefault(event) {
+    event.preventDefault();
+  }
+
+  _preventDefaultAllowTouchScroll(event) {
     if (!this.settings.touchDelay || !this._isTouchEvent(event) || this.isShowing) {
       event.preventDefault();
     }
@@ -113,7 +117,7 @@ export default class Trigger {
   }
 
   _handleEntry(e) {
-    this._preventDefault(e)
+    this._preventDefaultAllowTouchScroll(e)
     this._lastMovement = e;
 
     if (e.type == "mouseenter" && this.settings.hoverDelay) {
@@ -153,7 +157,7 @@ export default class Trigger {
 
   _hide(e) {
     if (e) {
-      this._preventDefault(e)
+      this._preventDefaultAllowTouchScroll(e)
     }
 
     this._lastMovement = null;
@@ -176,7 +180,7 @@ export default class Trigger {
 
   _handleMovement(e) {
     if (e) {
-      this._preventDefault(e)
+      this._preventDefaultAllowTouchScroll(e)
       this._lastMovement = e;
     } else if (this._lastMovement) {
       e = this._lastMovement;
