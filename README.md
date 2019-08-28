@@ -108,8 +108,9 @@ var options = {
 	hoverDelay: 0,
 	// An optional number that determines how long to wait before
 	// showing the ZoomPane because of a `touchstart` event.
-	// It's unlikely that you would want to use this option, since
-	// "tap and hold" is much more intentional than a hover event.
+	// Setting this to a reasonable amount will allow users to execute 
+	// scroll-gestures events on touch-enabled devices with the image as 
+	// a starting point 
 	touchDelay: 0,
 	// If true, a bounding box will show the area currently being previewed
 	// during mouse hover
