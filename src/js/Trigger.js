@@ -57,6 +57,10 @@ export default class Trigger {
     return this.settings.zoomPane.isShowing;
   }
 
+  _preventDefault(event) {
+    event.preventDefault();
+  }
+
   /**
    * Prevents browsers default behaviour only if...
    * ... there is NO touchDelay
@@ -67,13 +71,9 @@ export default class Trigger {
    *
    * this will allow mobiles to scroll if touchDelay is set.
    *
-   * @param event
+   * @param {Event} event
    * @private
    */
-  _preventDefault(event) {
-    event.preventDefault();
-  }
-
   _preventDefaultAllowTouchScroll(event) {
     if (!this.settings.touchDelay || !this._isTouchEvent(event) || this.isShowing) {
       event.preventDefault();
