@@ -68,7 +68,6 @@ export default class Trigger {
    * ... it is a mouse event (mouseenter, mouseleave, mousemove)
    * or
    * ... the zoom is currently displayed
-   *
    * this will allow mobiles to scroll if touchDelay is set.
    *
    * @param {Event} event
