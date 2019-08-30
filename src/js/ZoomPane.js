@@ -182,7 +182,7 @@ export default class ZoomPane {
     this.isShowing = true;
 
     addClasses(this.el, this.openClasses);
-    
+
     if (this.imgEl.getAttribute("src") != imageURL) {
       addClasses(this.el, this.loadingClasses);
       this.imgEl.addEventListener("load", this._handleLoad, false);
