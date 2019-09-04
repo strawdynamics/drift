@@ -61,6 +61,16 @@ export default class Trigger {
     event.preventDefault();
   }
 
+  _preventDefaultAllowTouchScroll(event) {
+    if (!this.settings.touchDelay || !this._isTouchEvent(event) || this.isShowing) {
+      event.preventDefault();
+    }
+  }
+
+  _isTouchEvent(event) {
+    return !!event.touches;
+  }
+
   _bindEvents() {
     this.settings.el.addEventListener("mouseenter", this._handleEntry, false);
     this.settings.el.addEventListener("mouseleave", this._hide, false);
@@ -94,7 +104,7 @@ export default class Trigger {
   }
 
   _handleEntry(e) {
-    e.preventDefault();
+    this._preventDefaultAllowTouchScroll(e);
     this._lastMovement = e;
 
     if (e.type == "mouseenter" && this.settings.hoverDelay) {
@@ -134,7 +144,7 @@ export default class Trigger {
 
   _hide(e) {
     if (e) {
-      e.preventDefault();
+      this._preventDefaultAllowTouchScroll(e);
     }
 
     this._lastMovement = null;
@@ -157,7 +167,7 @@ export default class Trigger {
 
   _handleMovement(e) {
     if (e) {
-      e.preventDefault();
+      this._preventDefaultAllowTouchScroll(e);
       this._lastMovement = e;
     } else if (this._lastMovement) {
       e = this._lastMovement;
