@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.4.0](https://github.com/imgix/drift/compare/v1.3.5...v1.4.0) (2019-09-06)
+
+
+### Bug Fixes
+
+* do not add drift-loading class after first hover ([#317](https://github.com/imgix/drift/issues/317)) ([750c4cf](https://github.com/imgix/drift/commit/750c4cf))
+
+
+### Features
+
+* **mobile:** add touch delay to allow scroll on mobile ([#315](https://github.com/imgix/drift/issues/315)) ([ceb6101](https://github.com/imgix/drift/commit/ceb6101))
+
 ### [1.3.5](https://github.com/imgix/drift/compare/v1.3.4...v1.3.5) (2019-08-02)
 
 
