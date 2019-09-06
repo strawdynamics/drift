@@ -77,4 +77,23 @@ describe("ZoomPane", () => {
 
     expect(zoomPane.imgEl.style.width).toBe(`${triggerWidth * zoomPane.settings.zoomFactor}px`);
   });
+
+  it("does not add the drift-loading class after first hover", () => {
+    const zoomPane = new ZoomPane(zoomPaneOptions());
+    const testSrc = "http://assets.imgix.net/unsplash/pretty2.jpg";
+    const triggerWidth = 400;
+
+    zoomPane.show(testSrc, triggerWidth);
+    expect(zoomPane.el.classList.toString()).toContain("drift-loading");
+
+    zoomPane.hide();
+    setTimeout(function() {
+      expect(zoomPane.el.classList.toString()).not.toContain("drift-loading");
+    }, 1000);
+
+    zoomPane.show(testSrc, triggerWidth);
+    setTimeout(function() {
+      expect(zoomPane.el.classList.toString()).not.toContain("drift-loading");
+    }, 1000);
+  });
 });
