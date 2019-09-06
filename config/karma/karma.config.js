@@ -33,13 +33,13 @@ const baseConfig = {
 const stringConfig = JSON.stringify(baseConfig);
 
 /**
- * Local testing - Chrome and FF (headlessly) + Safari
+ * Local testing - Chrome and FF, headlessly
  */
 
 const localConfig = karmaConfig => {
   const config = {
     ...baseConfig,
-    browsers: ["ChromeHeadless", "FirefoxHeadless", "Safari"],
+    browsers: ["ChromeHeadless", "FirefoxHeadless"],
     customLaunchers: {
       FirefoxHeadless: {
         base: "Firefox",
@@ -52,13 +52,13 @@ const localConfig = karmaConfig => {
 };
 
 /**
- * CI testing - Chrome, Firefox, Safari
+ * CI testing - Chrome, Firefox
  */
 
 const ciConfig = karmaConfig => {
   const config = {
     ...baseConfig,
-    browsers: ["ChromeTravis", "FirefoxHeadless", "Safari"],
+    browsers: ["ChromeTravis", "FirefoxHeadless"],
     customLaunchers: {
       ChromeTravis: {
         base: "ChromeHeadless",
