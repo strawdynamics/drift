@@ -80,7 +80,7 @@
     "rimraf": "3.0.0",
     "standard-version": "7.0.0",
     "webpack": "4.40.2",
-    "webpack-cli": "3.3.8",
+    "webpack-cli": "3.3.9",
     "webpack-closure-compiler": "2.1.6",
     "yargs": "14.0.0"
   },
