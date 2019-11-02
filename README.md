@@ -1,5 +1,5 @@
 ![imgix logo](https://assets.imgix.net/imgix-logo-web-2014.pdf?page=2&fm=png&w=200&h=200)
-[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors)
+[![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat-square)](#contributors)
 
 # Drift [![Build Status](https://travis-ci.org/imgix/drift.svg?branch=master)](https://travis-ci.org/imgix/drift)
 
@@ -23,6 +23,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
   <tr>
     <td align="center"><a href="https://paulstraw.com"><img src="https://avatars2.githubusercontent.com/u/117288?v=4" width="100px;" alt="Paul Straw"/><br /><sub><b>Paul Straw</b></sub></a><br /><a href="https://github.com/imgix/drift/commits?author=paulstraw" title="Documentation">📖</a> <a href="https://github.com/imgix/drift/commits?author=paulstraw" title="Code">💻</a> <a href="#maintenance-paulstraw" title="Maintenance">🚧</a></td>
     <td align="center"><a href="https://github.com/sherwinski"><img src="https://avatars3.githubusercontent.com/u/15919091?v=4" width="100px;" alt="sherwinski"/><br /><sub><b>sherwinski</b></sub></a><br /><a href="https://github.com/imgix/drift/commits?author=sherwinski" title="Code">💻</a> <a href="https://github.com/imgix/drift/commits?author=sherwinski" title="Documentation">📖</a> <a href="#maintenance-sherwinski" title="Maintenance">🚧</a></td>
+    <td align="center"><a href="https://github.com/frederickfogerty"><img src="https://avatars0.githubusercontent.com/u/615334?v=4" width="100px;" alt="Frederick Fogerty"/><br /><sub><b>Frederick Fogerty</b></sub></a><br /><a href="https://github.com/imgix/drift/commits?author=frederickfogerty" title="Code">💻</a> <a href="https://github.com/imgix/drift/commits?author=frederickfogerty" title="Documentation">📖</a> <a href="#maintenance-frederickfogerty" title="Maintenance">🚧</a></td>
   </tr>
 </table>
 
