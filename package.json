@@ -53,7 +53,7 @@
   "homepage": "https://github.com/imgix/drift",
   "devDependencies": {
     "@babel/cli": "7.7.0",
-    "@babel/core": "7.7.0",
+    "@babel/core": "7.7.2",
     "@babel/plugin-proposal-class-properties": "7.7.0",
     "@babel/preset-env": "7.7.1",
     "babel-eslint": "10.0.3",
