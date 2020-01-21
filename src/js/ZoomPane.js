@@ -1,15 +1,16 @@
 import throwIfMissing from "./util/throwIfMissing";
 import { addClasses, removeClasses } from "./util/dom";
 
-// All officially-supported browsers have this, but it's easy to
-// account for, just in case.
-const divStyle = document.createElement("div").style;
-
-const HAS_ANIMATION =
-  typeof document === "undefined" ? false : "animation" in divStyle || "webkitAnimation" in divStyle;
-
 export default class ZoomPane {
   constructor(options = {}) {
+    // All officially-supported browsers have this, but it's easy to
+    // account for, just in case.
+    this.HAS_ANIMATION = false;
+    if (typeof document !== "undefined") {
+      const divStyle = document.createElement("div").style;
+      this.HAS_ANIMATION = "animation" in divStyle || "webkitAnimation" in divStyle;
+    }
+
     this._completeShow = this._completeShow.bind(this);
     this._completeHide = this._completeHide.bind(this);
     this._handleLoad = this._handleLoad.bind(this);
@@ -197,7 +198,7 @@ export default class ZoomPane {
       this._showInContainer();
     }
 
-    if (HAS_ANIMATION) {
+    if (this.HAS_ANIMATION) {
       this.el.addEventListener("animationend", this._completeShow, false);
       this.el.addEventListener("webkitAnimationEnd", this._completeShow, false);
       addClasses(this.el, this.openingClasses);
@@ -217,7 +218,7 @@ export default class ZoomPane {
     this._removeListenersAndResetClasses();
     this.isShowing = false;
 
-    if (HAS_ANIMATION) {
+    if (this.HAS_ANIMATION) {
       this.el.addEventListener("animationend", this._completeHide, false);
       this.el.addEventListener("webkitAnimationEnd", this._completeHide, false);
       addClasses(this.el, this.closingClasses);
