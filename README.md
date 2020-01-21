@@ -1,7 +1,7 @@
 <!-- ix-docs-ignore -->
 ![imgix logo](https://assets.imgix.net/sdk-imgix-logo.svg)
 
-`drift-zoom` add easy "zoom on hover" functionality to your site's images. All with lightweight, no-dependency JavaScript.
+`drift-zoom` adds easy "zoom on hover" functionality to your site's images, all with lightweight, no-dependency JavaScript.
 
 [![npm version](https://img.shields.io/npm/v/drift-zoom.svg)](https://www.npmjs.com/package/drift-zoom)
 [![Build Status](https://travis-ci.org/imgix/drift.svg?branch=master)](https://travis-ci.org/imgix/drift)
@@ -17,15 +17,13 @@
 - [Basic Usage](#basic-usage)
 - [Options / Defaults](#options--defaults)
 - [API](#api)
-	- [Drift#disable](#driftdisable)
-	- [Drift#enable](#driftenable)
-	- [Drift#setZoomImageURL(imageURL)](#driftsetzoomimageurlimageurl)
+	- [`Drift#disable`](#driftdisable)
+	- [`Drift#enable`](#driftenable)
+	- [`Drift#setZoomImageURL(imageURL)`](#driftsetzoomimageurlimageurl)
 - [Theming](#theming)
 - [Browser Support](#browser-support)
 - [Contributors ✨](#contributors-%e2%9c%a8)
 - [Meta](#meta)
-
-<a name="installation"></a>
 
 ## Installation
 
@@ -51,8 +49,6 @@ import Drift from 'drift-zoom';
 new Drift(…);
 ```
 
-<a name="basic-usage"></a>
-
 ## Basic Usage
 
 Once you've installed Drift via one of the above methods, you're ready to get started. There are no dependencies, so you can just start making cool stuff. Check out the [announcement blog post](http://blog.imgix.com/2016/01/06/better-lightbox-zoom-viewer-with-imgix.html), or take a peek at [our demo](https://imgix.github.io/drift). Here's an example of a basic implementation:
@@ -68,8 +64,6 @@ new Drift(document.querySelector("img"), {
   paneContainer: document.querySelector("p")
 });
 ```
-
-<a name="options-defaults"></a>
 
 ## Options / Defaults
 
@@ -138,8 +132,6 @@ var options = {
 new Drift(document.querySelector('img'), options);
 ```
 
-<a name="api"></a>
-
 ## API
 
 ### `Drift#disable`
@@ -196,15 +188,11 @@ setInterval(function() {
 }, 1200);
 ```
 
-<a name="theming"></a>
-
 ## Theming
 
 By default, Drift injects an extremely basic set of styles into the page. You will almost certainly want to extend these basic styles for a prettier, more usable experience that matches your site. There is an included basic theme that may meet your needs, or at least give a good example of how to build out your own custom styles. The `namespace` option can be used as a way to easily apply different themes to specific instances of Drift.
 
 If you need to do something very out of the ordinary, or just prefer to include the default styles in CSS yourself, you can pass `injectBaseStyles: false` when instantiating a new instance of Drift. Please note that if you disable the included base styles, you will still need to provide an animation for `.drift-window.drift-opening` and `.drift-window.drift-closing` (this can be a "noop" style animation, as seen in the base styles source).
-
-<a name="browser-support"></a>
 
 ## Browser Support
 
@@ -228,8 +216,6 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
-
-<a name="meta"></a>
 
 ## Meta
 
