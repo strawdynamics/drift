@@ -1,7 +1,7 @@
 <!-- ix-docs-ignore -->
 ![imgix logo](https://assets.imgix.net/sdk-imgix-logo.svg)
 
-`drift-zoom` adds easy "zoom on hover" functionality to your site's images, all with lightweight, no-dependency JavaScript.
+Drift adds easy "zoom on hover" functionality to your site's images, all with lightweight, no-dependency JavaScript.
 
 [![npm version](https://img.shields.io/npm/v/drift-zoom.svg)](https://www.npmjs.com/package/drift-zoom)
 [![Build Status](https://travis-ci.org/imgix/drift.svg?branch=master)](https://travis-ci.org/imgix/drift)
