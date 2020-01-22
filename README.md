@@ -1,42 +1,29 @@
-![imgix logo](https://assets.imgix.net/imgix-logo-web-2014.pdf?page=2&fm=png&w=200&h=200)
+<!-- ix-docs-ignore -->
+![imgix logo](https://assets.imgix.net/sdk-imgix-logo.svg)
 
-# Drift 
-[![npm](https://img.shields.io/npm/dm/drift-zoom.svg)](https://www.npmjs.com/package/drift-zoom)
-[![Build Status](https://travis-ci.org/imgix/drift.svg?branch=master)](https://travis-ci.org/imgix/drift)
+Drift adds easy "zoom on hover" functionality to your site's images, all with lightweight, no-dependency JavaScript.
+
 [![npm version](https://img.shields.io/npm/v/drift-zoom.svg)](https://www.npmjs.com/package/drift-zoom)
+[![Build Status](https://travis-ci.org/imgix/drift.svg?branch=master)](https://travis-ci.org/imgix/drift)
+[![npm](https://img.shields.io/npm/dm/drift-zoom.svg)](https://www.npmjs.com/package/drift-zoom)
+[![License](https://img.shields.io/github/license/imgix/drift)](https://github.com/imgix/drift/blob/master/LICENSE.md)
 [![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
-[![All Contributors](https://img.shields.io/badge/all_contributors-4-orange.svg?style=flat-square)](#contributors)
+[![All Contributors](https://img.shields.io/badge/all_contributors-4-orange.svg?style=flat-square)](#contributors-)
 
-Easily add "zoom on hover" functionality to your site's images. Lightweight, no-dependency JavaScript.
+---
+<!-- /ix-docs-ignore -->
 
 - [Installation](#installation)
 - [Basic Usage](#basic-usage)
-- [Options / Defaults](#options-defaults)
+- [Options / Defaults](#options--defaults)
 - [API](#api)
-- [Browser Support](#browser-support)
+	- [`Drift#disable`](#driftdisable)
+	- [`Drift#enable`](#driftenable)
+	- [`Drift#setZoomImageURL(imageURL)`](#driftsetzoomimageurlimageurl)
 - [Theming](#theming)
+- [Browser Support](#browser-support)
+- [Contributors ✨](#contributors-%e2%9c%a8)
 - [Meta](#meta)
-
-## Contributors ✨
-
-Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
-
-<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-<!-- prettier-ignore -->
-<table>
-  <tr>
-    <td align="center"><a href="https://paulstraw.com"><img src="https://avatars2.githubusercontent.com/u/117288?v=4" width="100px;" alt="Paul Straw"/><br /><sub><b>Paul Straw</b></sub></a><br /><a href="https://github.com/imgix/drift/commits?author=paulstraw" title="Documentation">📖</a> <a href="https://github.com/imgix/drift/commits?author=paulstraw" title="Code">💻</a> <a href="#maintenance-paulstraw" title="Maintenance">🚧</a></td>
-    <td align="center"><a href="https://github.com/sherwinski"><img src="https://avatars3.githubusercontent.com/u/15919091?v=4" width="100px;" alt="sherwinski"/><br /><sub><b>sherwinski</b></sub></a><br /><a href="https://github.com/imgix/drift/commits?author=sherwinski" title="Code">💻</a> <a href="https://github.com/imgix/drift/commits?author=sherwinski" title="Documentation">📖</a> <a href="#maintenance-sherwinski" title="Maintenance">🚧</a></td>
-    <td align="center"><a href="https://github.com/frederickfogerty"><img src="https://avatars0.githubusercontent.com/u/615334?v=4" width="100px;" alt="Frederick Fogerty"/><br /><sub><b>Frederick Fogerty</b></sub></a><br /><a href="https://github.com/imgix/drift/commits?author=frederickfogerty" title="Code">💻</a> <a href="https://github.com/imgix/drift/commits?author=frederickfogerty" title="Documentation">📖</a> <a href="#maintenance-frederickfogerty" title="Maintenance">🚧</a></td>
-    <td align="center"><a href="http://jayeb.com"><img src="https://avatars2.githubusercontent.com/u/609840?v=4" width="100px;" alt="Jason Eberle"/><br /><sub><b>Jason Eberle</b></sub></a><br /><a href="https://github.com/imgix/drift/commits?author=jayeb" title="Code">💻</a> <a href="https://github.com/imgix/drift/commits?author=jayeb" title="Documentation">📖</a> <a href="#maintenance-jayeb" title="Maintenance">🚧</a></td>
-  </tr>
-</table>
-
-<!-- ALL-CONTRIBUTORS-LIST:END -->
-
-This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
-
-<a name="installation"></a>
 
 ## Installation
 
@@ -62,11 +49,9 @@ import Drift from 'drift-zoom';
 new Drift(…);
 ```
 
-<a name="basic-usage"></a>
-
 ## Basic Usage
 
-Once you've installed Drift via one of the above methods, you're ready to get started. There are no dependencies, so you can just start making cool stuff. Check out the [announcement blog post](http://blog.imgix.com/2016/01/06/better-lightbox-zoom-viewer-with-imgix.html) for a demo, or take a peek here: https://imgix.github.io/drift. Here's an example of the most basic possible implementation:
+Once you've installed Drift via one of the above methods, you're ready to get started. There are no dependencies, so you can just start making cool stuff. Check out the [announcement blog post](http://blog.imgix.com/2016/01/06/better-lightbox-zoom-viewer-with-imgix.html), or take a peek at [our demo](https://imgix.github.io/drift). Here's an example of a basic implementation:
 
 ```html
 <img src="http://assets.imgix.net/dog.png?w=400" data-zoom="http://assets.imgix.net/dog.png?w=1200">
@@ -79,8 +64,6 @@ new Drift(document.querySelector("img"), {
   paneContainer: document.querySelector("p")
 });
 ```
-
-<a name="options-defaults"></a>
 
 ## Options / Defaults
 
@@ -149,8 +132,6 @@ var options = {
 new Drift(document.querySelector('img'), options);
 ```
 
-<a name="api"></a>
-
 ## API
 
 ### `Drift#disable`
@@ -207,23 +188,37 @@ setInterval(function() {
 }, 1200);
 ```
 
-<a name="theming"></a>
-
 ## Theming
 
 By default, Drift injects an extremely basic set of styles into the page. You will almost certainly want to extend these basic styles for a prettier, more usable experience that matches your site. There is an included basic theme that may meet your needs, or at least give a good example of how to build out your own custom styles. The `namespace` option can be used as a way to easily apply different themes to specific instances of Drift.
 
 If you need to do something very out of the ordinary, or just prefer to include the default styles in CSS yourself, you can pass `injectBaseStyles: false` when instantiating a new instance of Drift. Please note that if you disable the included base styles, you will still need to provide an animation for `.drift-window.drift-opening` and `.drift-window.drift-closing` (this can be a "noop" style animation, as seen in the base styles source).
 
-<a name="browser-support"></a>
-
 ## Browser Support
 
 We support the latest version of Google Chrome (which [automatically updates](https://support.google.com/chrome/answer/95414) whenever it detects that a new version of the browser is available). We also support the current and previous major releases of desktop Firefox, Internet Explorer, and Safari on a rolling basis. Mobile support is tested on the most recent minor version of the current and previous major release for the default browser on iOS and Android (e.g., iOS 9.2 and 8.4). Each time a new version is released, we begin supporting that version and stop supporting the third most recent version.
 
-<a name="meta"></a>
+## Contributors ✨
+<!-- ix-docs-ignore -->
+
+Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore -->
+<table>
+  <tr>
+    <td align="center"><a href="https://paulstraw.com"><img src="https://avatars2.githubusercontent.com/u/117288?v=4" width="100px;" alt="Paul Straw"/><br /><sub><b>Paul Straw</b></sub></a><br /><a href="https://github.com/imgix/drift/commits?author=paulstraw" title="Documentation">📖</a> <a href="https://github.com/imgix/drift/commits?author=paulstraw" title="Code">💻</a> <a href="#maintenance-paulstraw" title="Maintenance">🚧</a></td>
+    <td align="center"><a href="https://github.com/sherwinski"><img src="https://avatars3.githubusercontent.com/u/15919091?v=4" width="100px;" alt="sherwinski"/><br /><sub><b>sherwinski</b></sub></a><br /><a href="https://github.com/imgix/drift/commits?author=sherwinski" title="Code">💻</a> <a href="https://github.com/imgix/drift/commits?author=sherwinski" title="Documentation">📖</a> <a href="#maintenance-sherwinski" title="Maintenance">🚧</a></td>
+    <td align="center"><a href="https://github.com/frederickfogerty"><img src="https://avatars0.githubusercontent.com/u/615334?v=4" width="100px;" alt="Frederick Fogerty"/><br /><sub><b>Frederick Fogerty</b></sub></a><br /><a href="https://github.com/imgix/drift/commits?author=frederickfogerty" title="Code">💻</a> <a href="https://github.com/imgix/drift/commits?author=frederickfogerty" title="Documentation">📖</a> <a href="#maintenance-frederickfogerty" title="Maintenance">🚧</a></td>
+    <td align="center"><a href="http://jayeb.com"><img src="https://avatars2.githubusercontent.com/u/609840?v=4" width="100px;" alt="Jason Eberle"/><br /><sub><b>Jason Eberle</b></sub></a><br /><a href="https://github.com/imgix/drift/commits?author=jayeb" title="Code">💻</a> <a href="https://github.com/imgix/drift/commits?author=jayeb" title="Documentation">📖</a> <a href="#maintenance-jayeb" title="Maintenance">🚧</a></td>
+  </tr>
+</table>
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+<!-- /ix-docs-ignore -->
+
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
 
 ## Meta
 
 Drift was made by [imgix](http://imgix.com). It's licensed under the BSD 2-Clause license (see the [license file](https://github.com/imgix/drift/blob/master/LICENSE.md) for more info). Any contribution is absolutely welcome, but please review the [contribution guidelines](https://github.com/imgix/drift/blob/master/CONTRIBUTING.md) before getting started.
-
