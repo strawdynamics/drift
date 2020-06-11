@@ -69,7 +69,7 @@
     "eslint-config-prettier": "6.11.0",
     "google-closure-compiler-js": "20200517.0.0",
     "jasmine-core": "3.5.0",
-    "karma": "5.0.9",
+    "karma": "5.1.0",
     "karma-chrome-launcher": "3.1.0",
     "karma-firefox-launcher": "1.3.0",
     "karma-jasmine": "3.3.1",
