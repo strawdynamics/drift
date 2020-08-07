@@ -30,7 +30,7 @@ Guidelines for bug reports:
     reported.
 
 2.  **Check if the issue has been fixed** &mdash; try to reproduce it using the
-    latest `master` or development branch in the repository.
+    latest `main` or development branch in the repository.
 
 3.  **Isolate the problem** &mdash; create a [reduced test
     case](http://css-tricks.com/6263-reduced-test-cases/) and a live example.
@@ -172,6 +172,6 @@ Ensure all commits and PR titles are correctly described using the [Conventional
 ```sh
 npm install                             # update dependencies to latest
 npm run release                         # build code, bump package version according to commit messages, and generate changelog
-git push --follow-tags origin master    # push to github and publish
+git push --follow-tags origin main    # push to github and publish
 npm publish                             # publish to npm
 ```
