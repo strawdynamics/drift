@@ -126,7 +126,7 @@ var options = {
 	// during touch events
 	touchBoundingBox: false,
 	// A DOM element to append the bounding box to.
-	boundingBoxContainer = document.body,
+	boundingBoxContainer: document.body,
 };
 
 new Drift(document.querySelector('img'), options);
