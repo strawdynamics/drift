@@ -3,14 +3,14 @@ Hello, and thanks for contributing to drift! 🎉🙌
 
 **Before submitting a pull request,** please make sure the following is done:
 
-1.  Fork [the repository](https://github.com/imgix/drift) and create your branch from `master`.
+1.  Fork [the repository](https://github.com/imgix/drift) and create your branch from `main`.
 2.  Run `npm install` in the repository root.
 3.  If you've fixed a bug or added code that should be tested, add tests!
 4.  Ensure the test suite passes (`npm run test`). Tip: `npm run --watch` is helpful in development.
 5.  Format your code with [prettier](https://github.com/prettier/prettier) (`npm run format`). Don't worry too much if you haven't done this, we have a bot that will do this for you when you submit a PR.
 6.  Fill out the template below and delete everything above the line.
 
-**Learn more about contributing:** https://github.com/imgix/drift/blob/master/CONTRIBUTING.md
+**Learn more about contributing:** https://github.com/imgix/drift/blob/main/CONTRIBUTING.md
 
 ## tldr
 
