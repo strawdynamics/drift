@@ -27,6 +27,7 @@ Drift adds easy "zoom on hover" functionality to your site's images, all with li
     * [Disabling on Mobile](#disabling-on-mobile)
         + [CSS Solution (Recommended)](#css-solution-recommended)
         + [JS Solution](#js-solution)
+    * [Use Drift with Multiple Images on the Same Page](#use-drift-with-multiple-images-on-the-same-page)
 - [Browser Support](#browser-support)
 - [Contributors ✨](#contributors-%E2%9C%A8)
 - [Meta](#meta)
@@ -258,6 +259,21 @@ const handleChange = () => {
 window.addEventListener('resize', handleChange);
 window.addEventListener('load', handleChange);
 
+```
+
+### Use Drift with Multiple Images on the Same Page
+
+This code will iterate over all elements on your page with the class `drift-img`, and will instantiate Drift for each element. You can update the query selector and pane as you see fit.
+
+```js
+const driftImgs = document.querySelectorAll('.drift-img');
+const pane = document.querySelector('.drift-pane');
+driftImgs.map(img => {
+	new Drift(img, {
+		paneContainer: pane,
+		inlinePane: false
+	});
+});
 ```
 
 ## Browser Support
