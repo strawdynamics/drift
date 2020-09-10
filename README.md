@@ -13,16 +13,22 @@ Drift adds easy "zoom on hover" functionality to your site's images, all with li
 ---
 <!-- /ix-docs-ignore -->
 
+<!-- NB: Run `npx markdown-toc README.md --maxdepth 4 | sed -e 's/[[:space:]]\{2\}/    /g' | pbcopy` to generate TOC and copy to clipboard :) -->
+
 - [Installation](#installation)
 - [Basic Usage](#basic-usage)
 - [Options / Defaults](#options--defaults)
 - [API](#api)
-	- [`Drift#disable`](#driftdisable)
-	- [`Drift#enable`](#driftenable)
-	- [`Drift#setZoomImageURL(imageURL)`](#driftsetzoomimageurlimageurl)
+    * [`Drift#disable`](#drift%23disable)
+    * [`Drift#enable`](#drift%23enable)
+    * [`Drift#setZoomImageURL(imageURL)`](#drift%23setzoomimageurlimageurl)
 - [Theming](#theming)
+- [FAQs/Examples](#faqsexamples)
+    * [Disabling on Mobile](#disabling-on-mobile)
+        + [CSS Solution (Recommended)](#css-solution-recommended)
+        + [JS Solution](#js-solution)
 - [Browser Support](#browser-support)
-- [Contributors ✨](#contributors-%e2%9c%a8)
+- [Contributors ✨](#contributors-%E2%9C%A8)
 - [Meta](#meta)
 
 ## Installation
@@ -193,6 +199,66 @@ setInterval(function() {
 By default, Drift injects an extremely basic set of styles into the page. You will almost certainly want to extend these basic styles for a prettier, more usable experience that matches your site. There is an included basic theme that may meet your needs, or at least give a good example of how to build out your own custom styles. The `namespace` option can be used as a way to easily apply different themes to specific instances of Drift.
 
 If you need to do something very out of the ordinary, or just prefer to include the default styles in CSS yourself, you can pass `injectBaseStyles: false` when instantiating a new instance of Drift. Please note that if you disable the included base styles, you will still need to provide an animation for `.drift-window.drift-opening` and `.drift-window.drift-closing` (this can be a "noop" style animation, as seen in the base styles source).
+
+## FAQs/Examples
+
+In this section we answer common questions about Drift.
+
+### Disabling on Mobile
+
+If you would like the touch events not to fire on mobile for one reason or another, these two solutions should work for you.
+
+#### CSS Solution (Recommended)
+
+This solution places a transparent element over the image on mobiles to block touch events. Replace `1024px` in the media query with your mobile breakpoint.
+
+```css
+.zoom-image {
+	position: relative;
+}
+
+.zoom-image::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: transparent;
+}
+
+@media only screen and (min-width: 1024px) {
+	.zoom-image::before {
+		display: none;
+	}
+}
+```
+
+#### JS Solution
+
+This solution creates and destroys the Drift instance when the browser size changes. It depends on the library [responsive.js](http://www.responsivejs.com/) but can easily be altered to use vanilla JS.
+
+```js
+const driftOptions = {
+	paneContainer: paneContainer,
+	inlinePane: false,
+	handleTouch: false
+};
+
+const handleChange = () => {
+	requestAnimationFrame(() => {
+		if (Responsive.is('mobile') && !!window.productZoom) {
+			window.productZoom.destroy();
+		} else {
+			window.productZoom = new Drift(img, driftOptions);
+		}
+	})
+}
+
+window.addEventListener('resize', handleChange);
+window.addEventListener('load', handleChange);
+
+```
 
 ## Browser Support
 
