@@ -29,7 +29,7 @@ Drift adds easy "zoom on hover" functionality to your site's images, all with li
         + [JS Solution](#js-solution)
     * [Use Drift with Multiple Images on the Same Page](#use-drift-with-multiple-images-on-the-same-page)
 - [Browser Support](#browser-support)
-- [Contributors ✨](#contributors-%E2%9C%A8)
+- [Contributors ✨](#contributors-)
 - [Meta](#meta)
 
 ## Installation
