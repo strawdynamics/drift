@@ -21,7 +21,7 @@ export default class Trigger {
       touchBoundingBox = throwIfMissing(),
       namespace = null,
       zoomFactor = throwIfMissing(),
-      boundingBoxContainer = throwIfMissing()
+      boundingBoxContainer = throwIfMissing(),
     } = options;
 
     this.settings = {
@@ -37,14 +37,14 @@ export default class Trigger {
       touchBoundingBox,
       namespace,
       zoomFactor,
-      boundingBoxContainer
+      boundingBoxContainer,
     };
 
     if (this.settings.hoverBoundingBox || this.settings.touchBoundingBox) {
       this.boundingBox = new BoundingBox({
         namespace: this.settings.namespace,
         zoomFactor: this.settings.zoomFactor,
-        containerEl: this.settings.boundingBoxContainer
+        containerEl: this.settings.boundingBoxContainer,
       });
     }
 

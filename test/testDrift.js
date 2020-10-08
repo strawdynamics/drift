@@ -2,7 +2,7 @@ import Drift from "../src/js/Drift";
 
 import { defaultDriftConfig } from "./helpers";
 
-beforeEach(function() {
+beforeEach(function () {
   const anchor = document.createElement("a");
   anchor.classList.add("test-anchor");
   anchor.setAttribute("href", "http://assets.imgix.net/test.png&w=400");
@@ -10,7 +10,7 @@ beforeEach(function() {
   document.body.appendChild(anchor);
 });
 
-afterEach(function() {
+afterEach(function () {
   const anchor = document.querySelector(".test-anchor");
 
   document.body.removeChild(anchor);
@@ -137,7 +137,7 @@ describe("Drift", () => {
     });
 
     describe("#destroy", () => {
-      it("should hide and unbind events", function() {
+      it("should hide and unbind events", function () {
         const anchor = document.querySelector(".test-anchor");
         const drift = new Drift(anchor);
 

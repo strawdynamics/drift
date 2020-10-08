@@ -97,7 +97,7 @@ export default class Drift {
       touchDelay,
       hoverBoundingBox,
       touchBoundingBox,
-      boundingBoxContainer
+      boundingBoxContainer,
     };
 
     if (this.settings.injectBaseStyles) {
@@ -133,7 +133,7 @@ export default class Drift {
       namespace: this.settings.namespace,
       inlineOffsetX: this.settings.inlineOffsetX,
       inlineOffsetY: this.settings.inlineOffsetY,
-      inlineContainer: this.settings.inlineContainer
+      inlineContainer: this.settings.inlineContainer,
     });
   }
 
@@ -151,7 +151,7 @@ export default class Drift {
       touchBoundingBox: this.settings.touchBoundingBox,
       namespace: this.settings.namespace,
       zoomFactor: this.settings.zoomFactor,
-      boundingBoxContainer: this.settings.boundingBoxContainer
+      boundingBoxContainer: this.settings.boundingBoxContainer,
     });
   }
 
@@ -176,17 +176,17 @@ export default class Drift {
 // Public API
 /* eslint-disable no-self-assign */
 Object.defineProperty(Drift.prototype, "isShowing", {
-  get: function() {
+  get: function () {
     return this.isShowing;
-  }
+  },
 });
 Object.defineProperty(Drift.prototype, "zoomFactor", {
-  get: function() {
+  get: function () {
     return this.zoomFactor;
   },
-  set: function(value) {
+  set: function (value) {
     this.zoomFactor = value;
-  }
+  },
 });
 Drift.prototype["setZoomImageURL"] = Drift.prototype.setZoomImageURL;
 Drift.prototype["disable"] = Drift.prototype.disable;

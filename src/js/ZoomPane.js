@@ -25,7 +25,7 @@ export default class ZoomPane {
       containInline = throwIfMissing(),
       inlineOffsetX = 0,
       inlineOffsetY = 0,
-      inlineContainer = document.body
+      inlineContainer = document.body,
     } = options;
 
     this.settings = {
@@ -37,7 +37,7 @@ export default class ZoomPane {
       containInline,
       inlineOffsetX,
       inlineOffsetY,
-      inlineContainer
+      inlineContainer,
     };
 
     this.openClasses = this._buildClasses("open");

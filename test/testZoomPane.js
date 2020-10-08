@@ -87,12 +87,12 @@ describe("ZoomPane", () => {
     expect(zoomPane.el.classList.toString()).toContain("drift-loading");
 
     zoomPane.hide();
-    setTimeout(function() {
+    setTimeout(function () {
       expect(zoomPane.el.classList.toString()).not.toContain("drift-loading");
     }, 1000);
 
     zoomPane.show(testSrc, triggerWidth);
-    setTimeout(function() {
+    setTimeout(function () {
       expect(zoomPane.el.classList.toString()).not.toContain("drift-loading");
     }, 1000);
   });
