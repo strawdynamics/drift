@@ -1,7 +1,7 @@
 import ZoomPane from "../src/js/ZoomPane";
 
 export const mockEvent = {
-  preventDefault: function() {}
+  preventDefault: function () {},
 };
 
 export function defaultDriftConfig() {
@@ -24,7 +24,7 @@ export function defaultDriftConfig() {
     touchDelay: 0,
     hoverBoundingBox: false,
     touchBoundingBox: false,
-    boundingBoxContainer: document.body
+    boundingBoxContainer: document.body,
   };
 }
 
@@ -37,7 +37,7 @@ export function zoomPaneOptions() {
     showWhitespaceAtEdges: false,
     containInline: false,
     inlineOffsetX: 0,
-    inlineOffsetY: 0
+    inlineOffsetY: 0,
   };
 }
 
@@ -55,7 +55,7 @@ export function triggerOptions() {
     touchBoundingBox: false,
     namespace: null,
     zoomFactor: 3,
-    boundingBoxContainer: document.body
+    boundingBoxContainer: document.body,
   };
 }
 
@@ -63,6 +63,6 @@ export function boundingBoxOptions() {
   return {
     namespace: null,
     zoomFactor: 3,
-    containerEl: document.querySelector(".test-anchor").offsetParent
+    containerEl: document.querySelector(".test-anchor").offsetParent,
   };
 }

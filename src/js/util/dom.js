@@ -9,13 +9,13 @@ export function isDOMElement(obj) {
 }
 
 export function addClasses(el, classNames) {
-  classNames.forEach(function(className) {
+  classNames.forEach(function (className) {
     el.classList.add(className);
   });
 }
 
 export function removeClasses(el, classNames) {
-  classNames.forEach(function(className) {
+  classNames.forEach(function (className) {
     el.classList.remove(className);
   });
 }

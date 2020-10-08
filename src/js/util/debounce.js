@@ -7,7 +7,7 @@ export default function debounce(func, wait, immediate) {
   let timestamp;
   let result;
 
-  const later = function() {
+  const later = function () {
     const last = Date.now() - timestamp;
 
     if (last < wait && last >= 0) {
@@ -25,7 +25,7 @@ export default function debounce(func, wait, immediate) {
     }
   };
 
-  return function() {
+  return function () {
     context = this;
     args = arguments;
     timestamp = Date.now();
