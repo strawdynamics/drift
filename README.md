@@ -58,10 +58,10 @@ new Drift(…);
 
 ## Basic Usage
 
-Once you've installed Drift via one of the above methods, you're ready to get started. There are no dependencies, so you can just start making cool stuff. Check out the [announcement blog post](http://blog.imgix.com/2016/01/06/better-lightbox-zoom-viewer-with-imgix.html), or take a peek at [our demo](https://imgix.github.io/drift). Here's an example of a basic implementation:
+Once you've installed Drift via one of the above methods, you're ready to get started. There are no dependencies, so you can just start making cool stuff. Check out the [announcement blog post](https://blog.imgix.com/2016/01/06/better-lightbox-zoom-viewer-with-imgix?utm_medium=referral&utm_source=github&utm_campaign=drift), or take a peek at [our demo](https://imgix.github.io/drift). Here's an example of a basic implementation:
 
 ```html
-<img src="http://assets.imgix.net/dog.png?w=400" data-zoom="http://assets.imgix.net/dog.png?w=1200">
+<img src="https://assets.imgix.net/dog.png?w=400" data-zoom="https://assets.imgix.net/dog.png?w=1200">
 
 <p>This is a simple description of the dog picture.</p>
 ```
@@ -237,7 +237,7 @@ This solution places a transparent element over the image on mobiles to block to
 
 #### JS Solution
 
-This solution creates and destroys the Drift instance when the browser size changes. It depends on the library [responsive.js](http://www.responsivejs.com/) but can easily be altered to use vanilla JS.
+This solution creates and destroys the Drift instance when the browser size changes. It depends on the library [responsive.js](https://www.responsivejs.com/) but can easily be altered to use vanilla JS.
 
 ```js
 const driftOptions = {
@@ -303,4 +303,4 @@ This project follows the [all-contributors](https://github.com/all-contributors/
 
 ## Meta
 
-Drift was made by [imgix](http://imgix.com). It's licensed under the BSD 2-Clause license (see the [license file](https://github.com/imgix/drift/blob/main/LICENSE.md) for more info). Any contribution is absolutely welcome, but please review the [contribution guidelines](https://github.com/imgix/drift/blob/main/CONTRIBUTING.md) before getting started.
+Drift was made by [imgix](https://imgix.com?utm_medium=referral&utm_source=github&utm_campaign=drift). It's licensed under the BSD 2-Clause license (see the [license file](https://github.com/imgix/drift/blob/main/LICENSE.md) for more info). Any contribution is absolutely welcome, but please review the [contribution guidelines](https://github.com/imgix/drift/blob/main/CONTRIBUTING.md) before getting started.
