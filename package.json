@@ -71,7 +71,7 @@
     "jasmine-core": "3.6.0",
     "karma": "5.2.3",
     "karma-chrome-launcher": "3.1.0",
-    "karma-firefox-launcher": "2.0.0",
+    "karma-firefox-launcher": "2.1.0",
     "karma-jasmine": "4.0.1",
     "karma-webpack": "4.0.2",
     "npm-run-all": "4.1.5",
