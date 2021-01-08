@@ -58,7 +58,7 @@ new Drift(…);
 
 ## Basic Usage
 
-Once you've installed Drift via one of the above methods, you're ready to get started. There are no dependencies, so you can just start making cool stuff. Check out the [announcement blog post](https://blog.imgix.com/2016/01/06/better-lightbox-zoom-viewer-with-imgix?utm_medium=referral&utm_source=github&utm_campaign=drift), or take a peek at [our demo](https://imgix.github.io/drift). Here's an example of a basic implementation:
+Once you've installed Drift via one of the above methods, you're ready to get started. There are no dependencies, so you can just start making cool stuff. Check out the [announcement blog post](https://blog.imgix.com/2016/01/06/better-lightbox-zoom-viewer-with-imgix?utm_medium=referral&utm_source=github&utm_campaign=drift), or take a peek at [our demo](https://codepen.io/imgix/pen/WrRmLb). Here's an example of a basic implementation:
 
 ```html
 <img src="https://assets.imgix.net/dog.png?w=400" data-zoom="https://assets.imgix.net/dog.png?w=1200">
