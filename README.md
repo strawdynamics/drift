@@ -9,6 +9,7 @@ Drift adds easy "zoom on hover" functionality to your site's images, all with li
 [![License](https://img.shields.io/github/license/imgix/drift)](https://github.com/imgix/drift/blob/main/LICENSE.md)
 [![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 [![All Contributors](https://img.shields.io/badge/all_contributors-4-orange.svg?style=flat-square)](#contributors-)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fimgix%2Fdrift.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fimgix%2Fdrift?ref=badge_shield)
 
 ---
 <!-- /ix-docs-ignore -->
@@ -31,6 +32,7 @@ Drift adds easy "zoom on hover" functionality to your site's images, all with li
 - [Browser Support](#browser-support)
 - [Contributors ✨](#contributors-)
 - [Meta](#meta)
+- [License](#license)
 
 ## Installation
 
@@ -304,3 +306,6 @@ This project follows the [all-contributors](https://github.com/all-contributors/
 ## Meta
 
 Drift was made by [imgix](https://imgix.com?utm_medium=referral&utm_source=github&utm_campaign=drift). It's licensed under the BSD 2-Clause license (see the [license file](https://github.com/imgix/drift/blob/main/LICENSE.md) for more info). Any contribution is absolutely welcome, but please review the [contribution guidelines](https://github.com/imgix/drift/blob/main/CONTRIBUTING.md) before getting started.
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fimgix%2Fdrift.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fimgix%2Fdrift?ref=badge_large)
