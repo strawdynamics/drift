@@ -57,10 +57,11 @@ export default function injectBaseStylesheet() {
 
   const styleEl = document.createElement("style");
   styleEl.type = "text/css";
-  styleEl.classList.add("drift-base-styles");
+  styleEl.classList = "drift-base-styles";
 
-  styleEl.appendChild(document.createTextNode(RULES));
-
+  styleEl.textContent = RULES;
   const head = document.head;
-  head.insertBefore(styleEl, head.firstChild);
+
+  const allHeadElements = head.getElementsByTagName("*");
+  allHeadElements.innerHTML = styleEl + allHeadElements.innerHTML;
 }
