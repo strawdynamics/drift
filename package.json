@@ -17,7 +17,7 @@
     "build:js:dist:prod": "webpack --env build && cp dist/Drift.min.js dist/Drift.js",
     "build:js:lib:commonjs": "cross-env BABEL_ENV=commonjs babel src/js --out-dir lib --source-maps",
     "build:js:lib:es": "cross-env BABEL_ENV=es babel src/js --out-dir es --source-maps",
-    "build:watch": "webpack --progress --colors --watch --env dev",
+    "build:watch": "webpack --progress --color --watch --env dev",
     "clean": "rimraf lib es dist",
     "dev": "npm run build:watch",
     "format:check": "prettier --list-different \"{src,test}/**/*.js\"",
