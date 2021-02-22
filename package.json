@@ -4,7 +4,8 @@
   "description": "Easily add \"zoom on hover\" functionality to your site's images. Lightweight, no-dependency JavaScript.",
   "contributors": [
     "Frederick Fogerty <frederick.fogerty@gmail.com> (https://github.com/frederickfogerty)",
-    "Sherwin Heydarbeygi <sherwin@imgix.com> (https://github.com/sherwinski)"
+    "Sherwin Heydarbeygi <sherwin@imgix.com> (https://github.com/sherwinski)",
+    "Luis Ball <lball@imgix.com> (https://github.com/luqven)"
   ],
   "main": "lib/Drift.js",
   "module": "es/Drift.js",

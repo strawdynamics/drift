@@ -55,13 +55,14 @@ export default function injectBaseStylesheet() {
     return;
   }
 
+  // create the injected styles
   const styleEl = document.createElement("style");
-  styleEl.type = "text/css";
   styleEl.classList = "drift-base-styles";
-
   styleEl.textContent = RULES;
-  const head = document.head;
 
+  // prepend them to the document head's first child
+  const head = document.head;
   const allHeadElements = head.getElementsByTagName("*");
-  allHeadElements.innerHTML = styleEl + allHeadElements.innerHTML;
+  const firstItem = allHeadElements.item(0);
+  firstItem.outerHTML = styleEl.outerHTML + firstItem.outerHTML;
 }
