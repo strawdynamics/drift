@@ -154,6 +154,8 @@ To install all development dependencies, in the project's root directory, run
 npm install
 ```
 
+> Please note: the build process assumes Java is installed locally.
+
 Once you're configured, building the JavaScript from the command line is easy:
 
 ```
