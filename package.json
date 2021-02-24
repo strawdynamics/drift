@@ -83,7 +83,7 @@
     "webpack-cli": "4.3.1",
     "webpack-closure-compiler": "2.1.6",
     "yargs": "16.2.0",
-    "postcss": "^8.1.0"
+    "postcss": "8.2.6"
   },
   "dependencies": {},
   "browserslist": [
