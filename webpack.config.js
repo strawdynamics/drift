@@ -1,7 +1,8 @@
-const webpack = require("webpack");
 const path = require("path");
 const env = require("yargs").argv.env; // use --env with webpack 2
-const ClosureCompilerPlugin = require("webpack-closure-compiler");
+const ClosurePlugin = require("closure-webpack-plugin");
+
+const isProduction = env === "build";
 
 let libraryName = "Drift";
 
@@ -26,27 +27,29 @@ function buildWithEnv(mode, outputFile) {
     devtool: "source-map",
     output: {
       path: __dirname + "/dist",
-      filename: outputFile
+      filename: outputFile,
     },
     resolve: {
       modules: [path.resolve("./node_modules"), path.resolve("./src")],
-      extensions: [".json", ".js"]
+      extensions: [".json", ".js"],
     },
     module: {
-      rules: []
+      rules: [],
     },
-    plugins: [
-      new ClosureCompilerPlugin({
-        compiler: {
-          language_in: "ECMASCRIPT6",
-          language_out: "ECMASCRIPT5",
-          compilation_level: "ADVANCED",
-          create_source_map: true
-        },
-        test: /^(?!.*tests\.webpack).*$/,
-        concurrency: 3
-      })
-    ]
+    plugins: [],
+    optimization: {
+      concatenateModules: false,
+      minimize: isProduction,
+      minimizer: [
+        new ClosurePlugin(
+          {
+            mode: "AGGRESSIVE_BUNDLE",
+            test: /^(?!.*tests\.webpack).*$/,
+          },
+          { languageIn: "ECMASCRIPT6", languageOut: "ECMASCRIPT5" }
+        ),
+      ],
+    },
   };
 
   return config;
