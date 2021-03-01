@@ -288,15 +288,20 @@ We support the latest version of Google Chrome (which [automatically updates](ht
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-<!-- prettier-ignore -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
 <table>
   <tr>
-    <td align="center"><a href="https://paulstraw.com"><img src="https://avatars2.githubusercontent.com/u/117288?v=4" width="100px;" alt="Paul Straw"/><br /><sub><b>Paul Straw</b></sub></a><br /><a href="https://github.com/imgix/drift/commits?author=paulstraw" title="Documentation">📖</a> <a href="https://github.com/imgix/drift/commits?author=paulstraw" title="Code">💻</a> <a href="#maintenance-paulstraw" title="Maintenance">🚧</a></td>
-    <td align="center"><a href="https://github.com/sherwinski"><img src="https://avatars3.githubusercontent.com/u/15919091?v=4" width="100px;" alt="sherwinski"/><br /><sub><b>sherwinski</b></sub></a><br /><a href="https://github.com/imgix/drift/commits?author=sherwinski" title="Code">💻</a> <a href="https://github.com/imgix/drift/commits?author=sherwinski" title="Documentation">📖</a> <a href="#maintenance-sherwinski" title="Maintenance">🚧</a></td>
-    <td align="center"><a href="https://github.com/frederickfogerty"><img src="https://avatars0.githubusercontent.com/u/615334?v=4" width="100px;" alt="Frederick Fogerty"/><br /><sub><b>Frederick Fogerty</b></sub></a><br /><a href="https://github.com/imgix/drift/commits?author=frederickfogerty" title="Code">💻</a> <a href="https://github.com/imgix/drift/commits?author=frederickfogerty" title="Documentation">📖</a> <a href="#maintenance-frederickfogerty" title="Maintenance">🚧</a></td>
-    <td align="center"><a href="http://jayeb.com"><img src="https://avatars2.githubusercontent.com/u/609840?v=4" width="100px;" alt="Jason Eberle"/><br /><sub><b>Jason Eberle</b></sub></a><br /><a href="https://github.com/imgix/drift/commits?author=jayeb" title="Code">💻</a> <a href="https://github.com/imgix/drift/commits?author=jayeb" title="Documentation">📖</a> <a href="#maintenance-jayeb" title="Maintenance">🚧</a></td>
+    <td align="center"><a href="https://paulstraw.com"><img src="https://avatars2.githubusercontent.com/u/117288?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Paul Straw</b></sub></a><br /><a href="https://github.com/imgix/drift/commits?author=paulstraw" title="Documentation">📖</a> <a href="https://github.com/imgix/drift/commits?author=paulstraw" title="Code">💻</a> <a href="#maintenance-paulstraw" title="Maintenance">🚧</a></td>
+    <td align="center"><a href="https://github.com/sherwinski"><img src="https://avatars3.githubusercontent.com/u/15919091?v=4?s=100" width="100px;" alt=""/><br /><sub><b>sherwinski</b></sub></a><br /><a href="https://github.com/imgix/drift/commits?author=sherwinski" title="Code">💻</a> <a href="https://github.com/imgix/drift/commits?author=sherwinski" title="Documentation">📖</a> <a href="#maintenance-sherwinski" title="Maintenance">🚧</a></td>
+    <td align="center"><a href="https://github.com/frederickfogerty"><img src="https://avatars0.githubusercontent.com/u/615334?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Frederick Fogerty</b></sub></a><br /><a href="https://github.com/imgix/drift/commits?author=frederickfogerty" title="Code">💻</a> <a href="https://github.com/imgix/drift/commits?author=frederickfogerty" title="Documentation">📖</a> <a href="#maintenance-frederickfogerty" title="Maintenance">🚧</a></td>
+    <td align="center"><a href="http://jayeb.com"><img src="https://avatars2.githubusercontent.com/u/609840?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Jason Eberle</b></sub></a><br /><a href="https://github.com/imgix/drift/commits?author=jayeb" title="Code">💻</a> <a href="https://github.com/imgix/drift/commits?author=jayeb" title="Documentation">📖</a> <a href="#maintenance-jayeb" title="Maintenance">🚧</a></td>
+    <td align="center"><a href="http://www.luisball.com"><img src="https://avatars.githubusercontent.com/u/16711614?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Luis H. Ball Jr.</b></sub></a><br /><a href="#maintenance-luqven" title="Maintenance">🚧</a></td>
   </tr>
 </table>
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 <!-- /ix-docs-ignore -->
