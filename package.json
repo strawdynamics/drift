@@ -67,7 +67,7 @@
     "eslint": "7.21.0",
     "eslint-config-google": "0.14.0",
     "eslint-config-prettier": "8.1.0",
-    "google-closure-compiler": "20200920.0.0",
+    "google-closure-compiler": "20210202.0.0",
     "google-closure-compiler-js": "20200719.0.0",
     "jasmine-core": "3.6.0",
     "karma": "6.1.1",
