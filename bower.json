@@ -1,6 +1,6 @@
 {
   "name": "drift",
-  "version": "1.4.2",
+  "version": "1.4.3",
   "description": "Easily add \"zoom on hover\" functionality to your site's images. Lightweight, no-dependency JavaScript.",
   "main": [
     "dist/Drift.min.js",
