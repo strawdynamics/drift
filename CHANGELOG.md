@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.4.3](https://github.com/imgix/drift/compare/v1.4.2...v1.4.3) (2021-03-02)
+
+
+### Bug Fixes
+
+* add postcss dependency to fix build error ([#606](https://github.com/imgix/drift/issues/606)) ([a48f0ac](https://github.com/imgix/drift/commit/a48f0ac3e88fac5d4ced75636b70097167d8a9c9))
+* revert "refactor: favor directly modifying DOM attributes over setAttribute" ([#614](https://github.com/imgix/drift/issues/614)) ([2da753d](https://github.com/imgix/drift/commit/2da753d28adee1f6a213437484babe0b8adcbf18))
+
 ### [1.4.2](https://github.com/imgix/drift/compare/v1.4.1...v1.4.2) (2021-02-18)
 
 
