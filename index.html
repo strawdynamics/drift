@@ -7,7 +7,11 @@
     <meta name="developer" content="imgix" />
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,maximum-scale=1" />
     <meta http-equiv="Accept-CH" content="DPR, Width, Viewport-Width" />
-
+    <!-- If CSP style policies, ensure SHA, nonce, or unsafe-inline are enabled -->
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="style-src 'self' 'sha256-OdI56ZW769BKGaLghLr3uZVaaWfqyRwyccMiu8gXf0w=' 'sha256-D2blx2qCCtVP48luzhEjUKKIcmHy77Ma+9/c6fv8UGM=' 'sha256-W+PadZMOYbQi3EzR/NC+KcPx3bNLCz0OtfWwp+LK9b4='"
+    />
     <title>Drift Playground</title>
     <link rel="stylesheet" media="screen, projection" href="./dist/drift-basic.css" />
     <style type="text/css">
