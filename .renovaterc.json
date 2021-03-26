@@ -1,0 +1,3 @@
+{
+  "extends": ["github>imgix/renovate-config"]
+}
