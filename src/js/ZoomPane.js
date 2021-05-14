@@ -243,7 +243,8 @@ export default class ZoomPane {
     removeClasses(this.el, this.closingClasses);
     removeClasses(this.el, this.inlineClasses);
 
-    this.el.style = "";
+    this.el.style.left = "";
+    this.el.style.top = "";
 
     // The window could have been resized above or below `inline`
     // limits since the ZoomPane was shown. Because of this, we
