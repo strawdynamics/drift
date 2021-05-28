@@ -166,14 +166,3 @@ npm run test:local    # run the test against local browsers only (Chrome, Safari
 ```
 
 Please note: in order to run tests in-browser (with `npm run test:local`), Chrome and Firefox should be installed locally.
-
-### Cutting a release
-
-Ensure all commits and PR titles are correctly described using the [Conventional Commits Specification](https://conventionalcommits.org/). Update src/Drift.js with new version number (can be found using `npm run release -- --dry-run`)
-
-```sh
-npm install                             # update dependencies to latest
-npm run release                         # build code, bump package version according to commit messages, and generate changelog
-git push --follow-tags origin main    # push to github and publish
-npm publish                             # publish to npm
-```
