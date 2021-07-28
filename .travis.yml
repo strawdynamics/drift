@@ -16,3 +16,10 @@ addons:
       - ubuntu-toolchain-r-test
     packages:
       - g++-4.8
+deploy:
+  provider: script
+  skip_cleanup: true
+  script:
+    - npx semantic-release
+  on:
+    branch: next

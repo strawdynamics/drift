@@ -28,7 +28,9 @@
     "test:watch": "karma start config/karma/karma-local.config.js",
     "test:local": "karma start config/karma/karma-local.config.js --singleRun",
     "test:ci": "karma start config/karma/karma-ci.config.js --singleRun",
-    "test": "npm run test:local"
+    "test": "npm run test:local",
+    "release:dryRun": "npx node-env-run --exec 'semantic-release --dryRun'",
+    "release:publish": "sematic-release"
   },
   "files": [
     "lib",
@@ -56,6 +58,9 @@
     "@babel/core": "7.14.6",
     "@babel/plugin-proposal-class-properties": "7.14.5",
     "@babel/preset-env": "7.14.7",
+    "@google/semantic-release-replace-plugin": "^1.0.2",
+    "@semantic-release/changelog": "^5.0.1",
+    "@semantic-release/git": "^9.0.0",
     "babel-eslint": "10.1.0",
     "babel-loader": "8.2.2",
     "babel-preset-env": "7.0.0-beta.3",
@@ -80,6 +85,7 @@
     "postcss-cli": "8.3.1",
     "prettier": "2.2.1",
     "rimraf": "3.0.2",
+    "semantic-release": "^17.4.4",
     "standard-version": "9.1.1",
     "webpack": "4.46.0",
     "webpack-cli": "4.6.0",
@@ -93,5 +99,86 @@
     "last 2 Safari versions",
     "last 2 iOS versions",
     "last 2 Android versions"
-  ]
+  ],
+  "release": {
+    "branches": [
+      "main",
+      {
+        "name": "next",
+        "prerelease": "rc"
+      },
+      {
+        "name": "beta",
+        "prerelease": true
+      },
+      {
+        "name": "alpha",
+        "prerelease": true
+      }
+    ],
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator",
+      [
+        "@google/semantic-release-replace-plugin",
+        {
+          "replacements": [
+            {
+              "files": [
+                "src/Drift.js"
+              ],
+              "from": "this.VERSION = '.*'",
+              "to": "this.VERSION = '${nextRelease.version}'",
+              "results": [
+                {
+                  "file": "src/Drift.js",
+                  "hasChanged": true,
+                  "numMatches": 1,
+                  "numReplacements": 1
+                }
+              ],
+              "countMatches": true
+            }
+          ]
+        }
+      ],
+      "@semantic-release/changelog",
+      "@semantic-release/npm",
+      [
+        "@semantic-release/git",
+        {
+          "assets": [
+            "src/**",
+            "dist/**",
+            "package.json",
+            "changelog.md"
+          ],
+          "message": "chore(release): ${nextRelease.version}\n\n${nextRelease.notes} [skip ci]"
+        }
+      ],
+      [
+        "@semantic-release/github",
+        {
+          "assets": [
+            {
+              "path": "dist/Drift.js",
+              "label": "Standard build"
+            },
+            {
+              "path": "dist/Drift.min.js",
+              "label": "Minified build"
+            },
+            {
+              "path": "dist/drift-basic.css",
+              "label": "Drift css"
+            },
+            {
+              "path": "dist/drift-basic.min.css",
+              "label": "Minified Drift css"
+            }
+          ]
+        }
+      ]
+    ]
+  }
 }
