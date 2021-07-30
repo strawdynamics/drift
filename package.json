@@ -30,7 +30,7 @@
     "test:ci": "karma start config/karma/karma-ci.config.js --singleRun",
     "test": "npm run test:local",
     "release:dryRun": "npx node-env-run --exec 'semantic-release --dryRun'",
-    "release:publish": "sematic-release"
+    "release:publish": "semantic-release"
   },
   "files": [
     "lib",
