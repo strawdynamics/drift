@@ -22,4 +22,4 @@ deploy:
   script:
     - npx semantic-release
   on:
-    branch: next
+    all_branches: true
