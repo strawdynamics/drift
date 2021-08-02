@@ -125,13 +125,13 @@
           "replacements": [
             {
               "files": [
-                "src/Drift.js"
+                "src/js/Drift.js"
               ],
-              "from": "this.VERSION = '.*'",
-              "to": "this.VERSION = '${nextRelease.version}'",
+              "from": "this.VERSION = \".*\"",
+              "to": "this.VERSION = \"${nextRelease.version}\"",
               "results": [
                 {
-                  "file": "src/Drift.js",
+                  "file": "src/js/Drift.js",
                   "hasChanged": true,
                   "numMatches": 1,
                   "numReplacements": 1
