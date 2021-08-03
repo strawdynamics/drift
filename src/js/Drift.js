@@ -6,7 +6,7 @@ import ZoomPane from "./ZoomPane";
 
 export default class Drift {
   constructor(triggerEl, options = {}) {
-    this.VERSION = "1.4.4";
+    this.VERSION = "1.4.5";
     this.triggerEl = triggerEl;
 
     this.destroy = this.destroy.bind(this);
