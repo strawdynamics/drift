@@ -113,4 +113,27 @@ describe("Trigger", () => {
     trigger.settings.el.dispatchEvent(event);
     expect(spy).not.toHaveBeenCalled();
   });
+
+  it("uses passive listeners for touchstart on mobile when passive is set to true", () => {
+    const opts = triggerOptions();
+    opts.passive = true;
+
+    const trigger = new Trigger(opts);
+
+    const event = new Event("touchstart", { cancelable: true });
+
+    trigger.settings.el.dispatchEvent(event);
+    expect(event.defaultPrevented).toBeFalse();
+  });
+
+  it("does not use passive listeners for touchstart on mobile when passive is set to false", () => {
+    const opts = triggerOptions();
+    opts.passive = false;
+
+    const trigger = new Trigger(opts);
+    const event = new Event("touchstart", { cancelable: true });
+
+    trigger.settings.el.dispatchEvent(event);
+    expect(event.defaultPrevented).toBeTrue();
+  });
 });
