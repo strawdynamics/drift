@@ -25,6 +25,7 @@ export function defaultDriftConfig() {
     hoverBoundingBox: false,
     touchBoundingBox: false,
     boundingBoxContainer: document.body,
+    passive: false,
   };
 }
 
