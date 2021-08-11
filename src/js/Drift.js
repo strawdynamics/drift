@@ -70,6 +70,9 @@ export default class Drift {
     const touchBoundingBox = options["touchBoundingBox"] || false;
     // A DOM element to append the bounding box to.
     const boundingBoxContainer = options["boundingBoxContainer"] || document.body;
+    // If true, the events related to handleTouch use passive listeners in
+    // order to improve performance for touch devices.
+    const passive = options["passive"] || false;
 
     if (inlinePane !== true && !isDOMElement(paneContainer)) {
       throw new TypeError("`paneContainer` must be a DOM element when `inlinePane !== true`");
@@ -98,6 +101,7 @@ export default class Drift {
       hoverBoundingBox,
       touchBoundingBox,
       boundingBoxContainer,
+      passive,
     };
 
     if (this.settings.injectBaseStyles) {
@@ -152,6 +156,7 @@ export default class Drift {
       namespace: this.settings.namespace,
       zoomFactor: this.settings.zoomFactor,
       boundingBoxContainer: this.settings.boundingBoxContainer,
+      passive: this.settings.passive,
     });
   }
 
