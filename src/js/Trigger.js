@@ -22,6 +22,7 @@ export default class Trigger {
       namespace = null,
       zoomFactor = throwIfMissing(),
       boundingBoxContainer = throwIfMissing(),
+      passive = false,
     } = options;
 
     this.settings = {
@@ -38,6 +39,7 @@ export default class Trigger {
       namespace,
       zoomFactor,
       boundingBoxContainer,
+      passive,
     };
 
     if (this.settings.hoverBoundingBox || this.settings.touchBoundingBox) {
@@ -76,14 +78,15 @@ export default class Trigger {
     this.settings.el.addEventListener("mouseleave", this._hide, false);
     this.settings.el.addEventListener("mousemove", this._handleMovement, false);
 
+    const isPassive = { passive: this.settings.passive };
     if (this.settings.handleTouch) {
-      this.settings.el.addEventListener("touchstart", this._handleEntry, false);
+      this.settings.el.addEventListener("touchstart", this._handleEntry, isPassive);
       this.settings.el.addEventListener("touchend", this._hide, false);
-      this.settings.el.addEventListener("touchmove", this._handleMovement, false);
+      this.settings.el.addEventListener("touchmove", this._handleMovement, isPassive);
     } else {
-      this.settings.el.addEventListener("touchstart", this._preventDefault, false);
+      this.settings.el.addEventListener("touchstart", this._preventDefault, isPassive);
       this.settings.el.addEventListener("touchend", this._preventDefault, false);
-      this.settings.el.addEventListener("touchmove", this._preventDefault, false);
+      this.settings.el.addEventListener("touchmove", this._preventDefault, isPassive);
     }
   }
 
