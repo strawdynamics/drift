@@ -56,6 +56,7 @@ export function triggerOptions() {
     namespace: null,
     zoomFactor: 3,
     boundingBoxContainer: document.body,
+    passive: false,
   };
 }
 
