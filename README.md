@@ -138,7 +138,7 @@ var options = {
 	boundingBoxContainer: document.body,
 	// If true, the events related to handleTouch use passive listeners in
 	// order to improve performance for touch devices.
-	handleTouch: false,
+	passive: false,
 };
 
 new Drift(document.querySelector('img'), options);
