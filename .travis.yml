@@ -1,6 +1,8 @@
 language: node_js
-node_js:
-  - stable
+jobs:
+  include:
+  - node: stable
+    env: NODE_OPTIONS=--openssl-legacy-provider
 install:
   - npm install
 script:
