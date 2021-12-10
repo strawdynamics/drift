@@ -86,7 +86,7 @@
     "prettier": "2.4.1",
     "rimraf": "3.0.2",
     "semantic-release": "17.4.7",
-    "standard-version": "9.1.1",
+    "standard-version": "9.3.2",
     "webpack": "4.46.0",
     "webpack-cli": "4.6.0",
     "yargs": "16.2.0"
