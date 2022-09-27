@@ -1,8 +1,8 @@
 language: node_js
 jobs:
   include:
-  - node: stable
-    env: NODE_OPTIONS=--openssl-legacy-provider
+    - node: 17
+      env: NODE_OPTIONS=--openssl-legacy-provider
 install:
   - npm install
 script:
