@@ -1,150 +1,111 @@
-# Contribution Guide
+# Contributing Guide
 
-Please take a moment to review this document in order to make the contribution
-process easy and effective for everyone involved.
+Thank you for investing your time in contributing to this project! Please take a moment to review this document in order to streamline the contribution process for you and any reviewers involved.
 
-Following these guidelines helps to communicate that you respect the time of
-the developers managing and developing this open source project. In return,
-they should reciprocate that respect in addressing your issue or assessing
-patches and features.
+Read our [Code of Conduct](./CODE_OF_CONDUCT.md) to keep our community approachable and respectable.
 
-## Using the issue tracker
+In this guide you will get an overview of the contribution workflow from opening an issue, creating a PR, reviewing, and merging the PR.
 
-The issue tracker is the preferred channel for [bug reports](#bugs),
-[features requests](#features), questions, and [submitting pull
-requests](#pull-requests), but please respect the following restrictions:
+## New contributor guide
 
-- Please **do not** derail or troll issues. Keep the discussion on topic and
-  respect the opinions of others.
+To get an overview of the project, read the [README](README.md). Here are some resources to help you get started with open source contributions:
 
-<a name="bugs"></a>
+- [Finding ways to contribute to open source on GitHub](https://docs.github.com/en/get-started/exploring-projects-on-github/finding-ways-to-contribute-to-open-source-on-github)
+- [Set up Git](https://docs.github.com/en/get-started/quickstart/set-up-git)
+- [GitHub flow](https://docs.github.com/en/get-started/quickstart/github-flow)
+- [Collaborating with pull requests](https://docs.github.com/en/github/collaborating-with-pull-requests)
 
-## Bug reports
+## Opening a Pull Request
 
-A bug is a _demonstrable problem_ that is caused by the code in the repository.
-Good bug reports are extremely helpful - thank you!
+_To help the project's maintainers and community quickly understand the nature of your pull request, please be sure to do the following:_
 
-Guidelines for bug reports:
+1. Include a descriptive Pull Request title.
+2. Provide a detailed description that explains the nature of the change(s) introduced. This is not only helpful for your reviewer, but also for future users who may need to revisit your Pull Request for context purposes. Screenshots/video captures are helpful here!
+3. Make incremental, modular changes, with a clean commit history. This helps reviewers understand your contribution more easily and maintain project quality.
 
-1.  **Use the GitHub issue search** &mdash; check if the issue has already been
-    reported.
+### Checklist
 
-2.  **Check if the issue has been fixed** &mdash; try to reproduce it using the
-    latest `main` or development branch in the repository.
+Check to see that you have completed each of the following before requesting a review of your Pull Request:
 
-3.  **Isolate the problem** &mdash; create a [reduced test
-    case](http://css-tricks.com/6263-reduced-test-cases/) and a live example.
+- [ ] All existing unit tests are still passing (if applicable)
+- [ ] Add new passing unit tests to cover the code introduced by your PR
+- [ ] Update the README
+- [ ] Update or add any necessary API documentation
+- [ ] All commits in the branch adhere to the [conventional commit](#conventional-commit-spec) format: e.g. `fix: bug #issue-number`
 
-A good bug report shouldn't leave others needing to chase you up for more
-information. Please try to be as detailed as possible in your report. What is
-your environment? What steps will reproduce the issue? What browser(s) and OS
-experience the problem? What would you expect to be the outcome? All these
-details will help people to fix any potential bugs.
+## Conventional Commit Spec
 
-Example:
+Commits should be in the format `<type>(<scope>): <description>`. This allows our team to leverage tooling for automatic releases and changelog generation. An example of a commit in this format might be: `docs(readme): fix typo in documentation`
 
-> Short and descriptive example bug report title
->
-> A summary of the issue and the browser/OS environment in which it occurs. If
-> suitable, include the steps required to reproduce the bug.
->
-> 1.  This is the first step
-> 2.  This is the second step
-> 3.  Further steps, etc.
->
-> `<url>` - a link to the reduced test case
->
-> Any other information you want to share that is relevant to the issue being
-> reported. This might include the lines of code that you have identified as
-> causing the bug, and potential solutions (and your opinions on their
-> merits).
+`type` can be any of the follow:
 
-<a name="features"></a>
+- `feat`: a feature, or breaking change
+- `fix`: a bug-fix
+- `test`: Adding missing tests or correcting existing tests
+- `docs`: documentation only changes (readme, changelog, contributing guide)
+- `refactor`: a code change that neither fixes a bug nor adds a feature
+- `chore`: reoccurring tasks for project maintainability (example scopes: release, deps)
+- `config`: changes to tooling configurations used in the project
+- `build`: changes that affect the build system or external dependencies (example scopes: npm, bundler, gradle)
+- `ci`: changes to CI configuration files and scripts (example scopes: travis)
+- `perf`: a code change that improves performance
+- `style`: changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)
 
-## Feature requests
+`scope` is optional, and can be anything.
+`description` should be a short description of the change, written in the imperative-mood.
 
-Feature requests are welcome. But take a moment to find out whether your idea
-fits with the scope and aims of the project. It's up to _you_ to make a strong
-case to convince the project's developers of the merits of this feature. Please
-provide as much detail and context as possible.
-
-<a name="pull-requests"></a>
-
-## Pull requests
-
-Good pull requests - patches, improvements, new features - are a fantastic
-help. They should remain focused in scope and avoid containing unrelated
-commits.
-
-**Please ask first** before embarking on any significant pull request (e.g.
-implementing features, refactoring code, porting to a different language),
-otherwise you risk spending a lot of time working on something that the
-project's developers might not want to merge into the project.
-
-Please adhere to the coding conventions used throughout a project (indentation,
-accurate comments, etc.) and any other requirements (such as test coverage).
+### Example workflow
 
 Follow this process if you'd like your work considered for inclusion in the
 project:
 
-1.  [Fork](http://help.github.com/fork-a-repo/) the project, clone your fork,
-    and configure the remotes:
+1. [Fork](http://help.github.com/fork-a-repo/) the project, clone your fork,
+   and configure the remotes:
 
-    ```bash
-    # Clone your fork of the repo into the current directory
-    git clone git@github.com:<YOUR_USERNAME>/drift.git
-    # Navigate to the newly cloned directory
-    cd drift
-    # Assign the original repo to a remote called "upstream"
-    git remote add upstream https://github.com/imgix/drift
-    ```
+   ```bash
+   # Clone your fork of the repo into the current directory
+   git clone git@github.com:<YOUR_USERNAME>/drift.git
+   # Navigate to the newly cloned directory
+   cd drift
+   # Assign the original repo to a remote called "upstream"
+   git remote add upstream https://github.com/imgix/drift
+   ```
 
-2.  If you cloned a while ago, get the latest changes from upstream:
+2. If you cloned a while ago, get the latest changes from upstream:
 
-    ```bash
-    git checkout <dev-branch>
-    git pull upstream <dev-branch>
-    ```
+   ```bash
+   git checkout <dev-branch>
+   git pull upstream <dev-branch>
+   ```
 
-3.  Create a new topic branch (off the main project development branch) to
-    contain your feature, change, or fix:
+3. Create a new topic branch (off the main project development branch) to
+   contain your feature, change, or fix:
 
-    ```bash
-    git checkout -b <topic-branch-name>
-    ```
+   ```bash
+   git checkout -b <topic-branch-name>
+   ```
 
-4.  Commit your changes in logical chunks. Please adhere to these [git commit
-    message guidelines](http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html)
-    or your code is unlikely be merged into the main project. Use Git's
-    [interactive rebase](https://help.github.com/articles/interactive-rebase)
-    feature to tidy up your commits before making them public.
+4. Commit your changes in logical chunks. Use Git's
+   [interactive rebase](https://help.github.com/articles/interactive-rebase)
+   feature to tidy up your commits before making them public.
 
-5.  Locally merge (or rebase) the upstream development branch into your topic branch:
+5. Locally merge (or rebase) the upstream development branch into your topic branch:
 
-    ```bash
-    git pull [--rebase] upstream <dev-branch>
-    ```
+   ```bash
+   git pull [--rebase] upstream <dev-branch>
+   ```
 
-6.  Push your topic branch up to your fork:
+6. Push your topic branch up to your fork:
 
-    ```bash
-    git push origin <topic-branch-name>
-    ```
+   ```bash
+   git push origin <topic-branch-name>
+   ```
 
-7.  [Open a Pull Request](https://help.github.com/articles/using-pull-requests/)
-    with a clear title and description.
+7. [Open a Pull Request](https://help.github.com/articles/using-pull-requests/)
+   with a clear title and description.
 
 **IMPORTANT**: By submitting a patch, you agree to allow the project owner to
 license your work under the same license as that used by the project.
-
-<a name="pull-requests"></a>
-
-## Code Conventions
-
-1.  Make all changes to files under `./src`, **not** `./dist`.
-2.  Use [Prettier](https://prettier.io/) for code formatting. Code will automatically be formatted upon submitting a PR.
-
-<a name="npm-scripts"></a>
 
 ### Using ES6 and NPM scripts
 
