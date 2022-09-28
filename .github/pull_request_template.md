@@ -33,4 +33,4 @@ You're not submitting a bugfix or feature, delete that part of the checklist.
 - [ ] Add some [steps](#steps-to-test) so we can test your bug fix or feature (if applicable).
 - [ ] Add new passing unit tests to cover the code introduced by your PR (if applicable).
 - [ ] Any breaking changes are specified on the commit on which they are introduced with `BREAKING CHANGE` in the body of the commit.
-- [ ] If this is a big feature with breaking changes, consider [opening an issue][issues] to discuss first. This is completely up to you, but please keep in mind that your PR might not be accepted.
+- [ ] If this is a big feature with breaking changes, consider opening an issue to discuss first. This is completely up to you, but please keep in mind that your PR might not be accepted.
