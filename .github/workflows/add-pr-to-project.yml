@@ -12,5 +12,5 @@ jobs:
     steps:
       - uses: actions/add-to-project@RELEASE_VERSION
         with:
-          project-url: https://github.com/orgs/<orgName>/projects/<projectNumber>
-          github-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
+          project-url: https://github.com/orgs/imgix/projects/4
+          github-token: ${{ secrets.GH_TOKEN }}
