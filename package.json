@@ -89,7 +89,7 @@
     "standard-version": "9.3.2",
     "webpack": "4.46.0",
     "webpack-cli": "4.9.2",
-    "yargs": "16.2.0"
+    "yargs": "17.5.1"
   },
   "browserslist": [
     "ie 11",
