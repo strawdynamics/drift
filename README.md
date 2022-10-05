@@ -75,7 +75,7 @@ new Drift(document.querySelector("img"), {
   paneContainer: document.querySelector("p")
 });
 ```
-## Demo
+## Demo :computer::computer::computer:
 Our [Demo Video](https://codepen.io/imgix/pen/WrRmLb)
 
 ## Options / Defaults
