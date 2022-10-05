@@ -18,6 +18,12 @@ jobs:
       - checkout
       - browser-tools/install-browser-tools:
           install-geckodriver: false
+      - when:
+          condition:
+            equal: ["17.9", <<parameters.version>>]
+          steps:
+            # Prevents build error on stable node version
+            - run: echo 'export NODE_OPTIONS=--openssl-legacy-provider' >> $BASH_ENV
       - run: npm install
       - node/install-packages:
           pkg-manager: npm
@@ -41,7 +47,7 @@ workflows:
           matrix:
             parameters:
               version:
-                - "current"
+                - "17.9"
                 - "lts"
 
       - deploy:
