@@ -15,6 +15,7 @@ jobs:
     resource_class: large
     steps:
       - checkout
+      - run: npm install
       - node/install-packages:
           pkg-manager: npm
       - run:
