@@ -170,10 +170,10 @@ export default class ZoomPane {
   }
 
   _removeListenersAndResetClasses() {
-    this.el.removeEventListener("animationend", this._completeShow, false);
-    this.el.removeEventListener("animationend", this._completeHide, false);
-    this.el.removeEventListener("webkitAnimationEnd", this._completeShow, false);
-    this.el.removeEventListener("webkitAnimationEnd", this._completeHide, false);
+    this.el.removeEventListener("animationend", this._completeShow);
+    this.el.removeEventListener("animationend", this._completeHide);
+    this.el.removeEventListener("webkitAnimationEnd", this._completeShow);
+    this.el.removeEventListener("webkitAnimationEnd", this._completeHide);
     removeClasses(this.el, this.openClasses);
     removeClasses(this.el, this.closingClasses);
   }
@@ -186,7 +186,7 @@ export default class ZoomPane {
 
     if (this.imgEl.getAttribute("src") != imageURL) {
       addClasses(this.el, this.loadingClasses);
-      this.imgEl.addEventListener("load", this._handleLoad, false);
+      this.imgEl.addEventListener("load", this._handleLoad);
       this._setImageURL(imageURL);
     }
 
@@ -199,8 +199,8 @@ export default class ZoomPane {
     }
 
     if (this.HAS_ANIMATION) {
-      this.el.addEventListener("animationend", this._completeShow, false);
-      this.el.addEventListener("webkitAnimationEnd", this._completeShow, false);
+      this.el.addEventListener("animationend", this._completeShow);
+      this.el.addEventListener("webkitAnimationEnd", this._completeShow);
       addClasses(this.el, this.openingClasses);
     }
   }
@@ -219,8 +219,8 @@ export default class ZoomPane {
     this.isShowing = false;
 
     if (this.HAS_ANIMATION) {
-      this.el.addEventListener("animationend", this._completeHide, false);
-      this.el.addEventListener("webkitAnimationEnd", this._completeHide, false);
+      this.el.addEventListener("animationend", this._completeHide);
+      this.el.addEventListener("webkitAnimationEnd", this._completeHide);
       addClasses(this.el, this.closingClasses);
     } else {
       removeClasses(this.el, this.openClasses);
@@ -229,15 +229,15 @@ export default class ZoomPane {
   }
 
   _completeShow() {
-    this.el.removeEventListener("animationend", this._completeShow, false);
-    this.el.removeEventListener("webkitAnimationEnd", this._completeShow, false);
+    this.el.removeEventListener("animationend", this._completeShow);
+    this.el.removeEventListener("webkitAnimationEnd", this._completeShow);
 
     removeClasses(this.el, this.openingClasses);
   }
 
   _completeHide() {
-    this.el.removeEventListener("animationend", this._completeHide, false);
-    this.el.removeEventListener("webkitAnimationEnd", this._completeHide, false);
+    this.el.removeEventListener("animationend", this._completeHide);
+    this.el.removeEventListener("webkitAnimationEnd", this._completeHide);
 
     removeClasses(this.el, this.openClasses);
     removeClasses(this.el, this.closingClasses);
@@ -257,7 +257,7 @@ export default class ZoomPane {
   }
 
   _handleLoad() {
-    this.imgEl.removeEventListener("load", this._handleLoad, false);
+    this.imgEl.removeEventListener("load", this._handleLoad);
     removeClasses(this.el, this.loadingClasses);
   }
 }

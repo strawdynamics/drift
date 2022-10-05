@@ -74,35 +74,35 @@ export default class Trigger {
   }
 
   _bindEvents() {
-    this.settings.el.addEventListener("mouseenter", this._handleEntry, false);
-    this.settings.el.addEventListener("mouseleave", this._hide, false);
-    this.settings.el.addEventListener("mousemove", this._handleMovement, false);
+    this.settings.el.addEventListener("mouseenter", this._handleEntry);
+    this.settings.el.addEventListener("mouseleave", this._hide);
+    this.settings.el.addEventListener("mousemove", this._handleMovement);
 
     const isPassive = { passive: this.settings.passive };
     if (this.settings.handleTouch) {
       this.settings.el.addEventListener("touchstart", this._handleEntry, isPassive);
-      this.settings.el.addEventListener("touchend", this._hide, false);
+      this.settings.el.addEventListener("touchend", this._hide);
       this.settings.el.addEventListener("touchmove", this._handleMovement, isPassive);
     } else {
       this.settings.el.addEventListener("touchstart", this._preventDefault, isPassive);
-      this.settings.el.addEventListener("touchend", this._preventDefault, false);
+      this.settings.el.addEventListener("touchend", this._preventDefault);
       this.settings.el.addEventListener("touchmove", this._preventDefault, isPassive);
     }
   }
 
   _unbindEvents() {
-    this.settings.el.removeEventListener("mouseenter", this._handleEntry, false);
-    this.settings.el.removeEventListener("mouseleave", this._hide, false);
-    this.settings.el.removeEventListener("mousemove", this._handleMovement, false);
+    this.settings.el.removeEventListener("mouseenter", this._handleEntry);
+    this.settings.el.removeEventListener("mouseleave", this._hide);
+    this.settings.el.removeEventListener("mousemove", this._handleMovement);
 
     if (this.settings.handleTouch) {
-      this.settings.el.removeEventListener("touchstart", this._handleEntry, false);
-      this.settings.el.removeEventListener("touchend", this._hide, false);
-      this.settings.el.removeEventListener("touchmove", this._handleMovement, false);
+      this.settings.el.removeEventListener("touchstart", this._handleEntry);
+      this.settings.el.removeEventListener("touchend", this._hide);
+      this.settings.el.removeEventListener("touchmove", this._handleMovement);
     } else {
-      this.settings.el.removeEventListener("touchstart", this._preventDefault, false);
-      this.settings.el.removeEventListener("touchend", this._preventDefault, false);
-      this.settings.el.removeEventListener("touchmove", this._preventDefault, false);
+      this.settings.el.removeEventListener("touchstart", this._preventDefault);
+      this.settings.el.removeEventListener("touchend", this._preventDefault);
+      this.settings.el.removeEventListener("touchmove", this._preventDefault);
     }
   }
 
