@@ -34,9 +34,10 @@ jobs:
 
   deploy:
     docker:
-      - image: cimg/node:current
+      - image: cimg/node:17.9
     steps:
       - checkout
+      - run: echo 'export NODE_OPTIONS=--openssl-legacy-provider' >> $BASH_ENV
       - run: npm install
       - node/install-packages
       - run: npm run build
