@@ -2,6 +2,7 @@ version: 2.1
 
 orbs:
   node: circleci/node@5.0.2
+  browser-tools: circleci/browser-tools@1.2.4
 
 jobs:
   test:
@@ -15,6 +16,8 @@ jobs:
     resource_class: large
     steps:
       - checkout
+      - browser-tools/install-browser-tools:
+          install-geckodriver: false
       - run: npm install
       - node/install-packages:
           pkg-manager: npm
