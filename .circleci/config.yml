@@ -37,7 +37,7 @@ workflows:
           matrix:
             parameters:
               version:
-                - "17"
+                - "17.9"
                 - "lts"
 
       - deploy:
