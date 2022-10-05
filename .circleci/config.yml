@@ -16,6 +16,7 @@ jobs:
     steps:
       - checkout
       - node/install-packages
+        override-ci-command: npm install
       - run:
           name: "Test that build is successful"
           command: npm run build      
