@@ -16,6 +16,7 @@ Drift adds easy "zoom on hover" functionality to your site's images, all with li
 
 <!-- NB: Run `npx markdown-toc README.md --maxdepth 4 | sed -e 's/[[:space:]]\{2\}/    /g' | pbcopy` to generate TOC and copy to clipboard :) -->
 
+- [Demo](https://codepen.io/imgix/pen/WrRmLb)
 - [Installation](#installation)
 - [Basic Usage](#basic-usage)
 - [Options / Defaults](#options--defaults)
@@ -34,6 +35,7 @@ Drift adds easy "zoom on hover" functionality to your site's images, all with li
 - [Meta](#meta)
 - [License](#license)
 
+## [Demo](https://codepen.io/imgix/pen/WrRmLb)
 ## Installation
 
 - **NPM**: `npm install drift-zoom`
