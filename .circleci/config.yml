@@ -39,7 +39,7 @@ jobs:
       - checkout
       - run: npm install
       - node/install-packages
-      - run: npm build
+      - run: npm run build
       - run: npx semantic-release
 
 workflows:
