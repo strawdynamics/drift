@@ -1,12 +1,12 @@
 version: 2.1
 
-orbs: 
+orbs:
   node: circleci/node@5.0.2
 
 jobs:
   test:
     parameters:
-      version: 
+      version:
         default: "stable"
         description: Node.JS version to install
         type: string
@@ -15,11 +15,11 @@ jobs:
     resource_class: large
     steps:
       - checkout
-      - node/install-packages
+      - node/install-packages:
         override-ci-command: npm install
       - run:
           name: "Test that build is successful"
-          command: npm run build      
+          command: npm run build
       - run: npm run test:ci
 
   deploy:
@@ -38,8 +38,8 @@ workflows:
             parameters:
               version:
                 - "current"
-                - "lts" 
-      
+                - "lts"
+
       - deploy:
           requires:
             - test
