@@ -37,6 +37,7 @@ jobs:
       - image: cimg/node:current
     steps:
       - checkout
+      - run: npm install
       - node/install-packages
       - run: npx semantic-release
 
