@@ -76,7 +76,7 @@ new Drift(document.querySelector("img"), {
 });
 ```
 ## Demo :computer::computer::computer:
-Our [Demo Video](https://codepen.io/imgix/pen/WrRmLb)
+Our [Demo Video](https://codepen.io/imgix/pen/WrRmLb).
 
 ## Options / Defaults
 
