@@ -18,7 +18,7 @@ Drift adds easy "zoom on hover" functionality to your site's images, all with li
 
 - [Installation](#installation)
 - [Basic Usage](#basic-usage)
-- [Demo](#demo)
+- [Demo](#demo-)
 - [Options / Defaults](#options--defaults)
 - [API](#api)
     * [`Drift#disable`](#drift%23disable)
@@ -75,8 +75,9 @@ new Drift(document.querySelector("img"), {
   paneContainer: document.querySelector("p")
 });
 ```
-## Demo :computer::computer::computer:
-Our [Demo Video](https://codepen.io/imgix/pen/WrRmLb).
+
+## Demo 💻💻💻
+Take a peek at our [Demo Site](https://codepen.io/imgix/pen/WrRmLb).
 
 ## Options / Defaults
 
