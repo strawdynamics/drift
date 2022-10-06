@@ -136,4 +136,15 @@ describe("Trigger", () => {
     trigger.settings.el.dispatchEvent(event);
     expect(event.defaultPrevented).toBeTrue();
   });
+
+  it("does not use passive event listeners on mouse events", () => {
+    const opts = triggerOptions();
+    opts.passive = false;
+
+    const trigger = new Trigger(opts);
+    const event = new Event("mouseenter", { cancelable: true });
+
+    trigger.settings.el.dispatchEvent(event);
+    expect(event.defaultPrevented).toBeTrue();
+  });
 });
