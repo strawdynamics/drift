@@ -23,6 +23,8 @@
     "format:check": "prettier --list-different \"{src,test}/**/*.js\"",
     "format": "prettier --write \"{src,test}/**/*.js\"",
     "lint": "eslint \"{src,test}/**/*.js\"",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm run build",
     "release": "npm run build && git add dist src/js/Drift.js && standard-version -a",
     "start": "npm run dev",
     "test:watch": "karma start config/karma/karma-local.config.js",
