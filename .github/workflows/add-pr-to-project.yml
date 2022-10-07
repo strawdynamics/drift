@@ -1,4 +1,4 @@
-name: Add needs-review and size/XL pull requests to projects
+name: Add PR to project
 
 on:
   pull_request:
@@ -7,7 +7,7 @@ on:
 
 jobs:
   add-to-project:
-    name: Add issue to project
+    name: Add PR to project
     runs-on: ubuntu-latest
     steps:
       - uses: actions/add-to-project@v0.3.0
