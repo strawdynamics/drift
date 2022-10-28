@@ -8,7 +8,7 @@ jobs:
   test:
     parameters:
       version:
-        default: "stable"
+        default: "current"
         description: Node.JS version to install
         type: string
     docker:
@@ -18,12 +18,7 @@ jobs:
       - checkout
       - browser-tools/install-browser-tools:
           install-geckodriver: false
-      - when:
-          condition:
-            equal: ["17.9", <<parameters.version>>]
-          steps:
-            # Prevents build error on stable node version
-            - run: echo 'export NODE_OPTIONS=--openssl-legacy-provider' >> $BASH_ENV
+      - run: echo 'export NODE_OPTIONS=--openssl-legacy-provider' >> $BASH_ENV
       - run: npm install
       - node/install-packages:
           pkg-manager: npm
@@ -35,7 +30,7 @@ jobs:
 
   deploy:
     docker:
-      - image: cimg/node:17.9
+      - image: cimg/node:current
     steps:
       - checkout
       - run: echo 'export NODE_OPTIONS=--openssl-legacy-provider' >> $BASH_ENV
@@ -50,7 +45,7 @@ workflows:
           matrix:
             parameters:
               version:
-                - "17.9"
+                - "current"
                 - "lts"
 
       - deploy:
