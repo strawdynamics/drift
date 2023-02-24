@@ -64,7 +64,7 @@
     "@semantic-release/changelog": "5.0.1",
     "@semantic-release/git": "9.0.1",
     "babel-eslint": "10.1.0",
-    "babel-loader": "8.2.5",
+    "babel-loader": "8.3.0",
     "babel-preset-env": "7.0.0-beta.3",
     "chai": "4.3.7",
     "closure-webpack-plugin": "2.6.1",
