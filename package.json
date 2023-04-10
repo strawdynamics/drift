@@ -57,9 +57,9 @@
   "homepage": "https://github.com/imgix/drift",
   "devDependencies": {
     "@babel/cli": "7.21.0",
-    "@babel/core": "7.21.3",
+    "@babel/core": "7.21.4",
     "@babel/plugin-proposal-class-properties": "7.18.6",
-    "@babel/preset-env": "7.20.2",
+    "@babel/preset-env": "7.21.4",
     "@google/semantic-release-replace-plugin": "1.2.0",
     "@semantic-release/changelog": "5.0.1",
     "@semantic-release/git": "9.0.1",
