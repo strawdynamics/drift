@@ -70,6 +70,7 @@ export default class ZoomPane {
     this.el.appendChild(loaderEl);
 
     this.imgEl = document.createElement("img");
+    this.imgEl.setAttribute("crossorigin", "anonymous");
     this.el.appendChild(this.imgEl);
   }
 
