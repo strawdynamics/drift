@@ -70,7 +70,7 @@
     "closure-webpack-plugin": "2.6.1",
     "cross-env": "7.0.3",
     "cssnano": "6.0.1",
-    "cssnano-preset-advanced": "5.3.10",
+    "cssnano-preset-advanced": "6.0.1",
     "eslint": "7.32.0",
     "eslint-config-google": "0.14.0",
     "eslint-config-prettier": "8.8.0",
