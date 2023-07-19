@@ -1,4 +1,9 @@
 <!-- ix-docs-ignore -->
+
+# This repository is no longer actively maintained.
+See [#703](https://github.com/imgix/drift/issues/703) for details.
+
+---
 ![imgix logo](https://assets.imgix.net/sdk-imgix-logo.svg)
 
 Drift adds easy "zoom on hover" functionality to your site's images, all with lightweight, no-dependency JavaScript.
