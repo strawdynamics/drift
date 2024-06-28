@@ -1,3 +1,5 @@
+# Drift
+
 Drift adds easy "zoom on hover" functionality to your site's images, all with lightweight, no-dependency JavaScript.
 
 [![npm version](https://img.shields.io/npm/v/drift-zoom.svg)](https://www.npmjs.com/package/drift-zoom)
