@@ -1,11 +1,3 @@
-<!-- ix-docs-ignore -->
-
-# This repository is no longer actively maintained.
-See [#703](https://github.com/imgix/drift/issues/703) for details.
-
----
-![imgix logo](https://assets.imgix.net/sdk-imgix-logo.svg)
-
 Drift adds easy "zoom on hover" functionality to your site's images, all with lightweight, no-dependency JavaScript.
 
 [![npm version](https://img.shields.io/npm/v/drift-zoom.svg)](https://www.npmjs.com/package/drift-zoom)
@@ -17,7 +9,6 @@ Drift adds easy "zoom on hover" functionality to your site's images, all with li
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fimgix%2Fdrift.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fimgix%2Fdrift?ref=badge_shield)
 
 ---
-<!-- /ix-docs-ignore -->
 
 <!-- NB: Run `npx markdown-toc README.md --maxdepth 4 | sed -e 's/[[:space:]]\{2\}/    /g' | pbcopy` to generate TOC and copy to clipboard :) -->
 
