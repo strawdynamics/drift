@@ -77,7 +77,7 @@
     "google-closure-compiler": "20230502.0.0",
     "google-closure-compiler-js": "20200719.0.0",
     "jasmine-core": "5.0.1",
-    "karma": "6.4.2",
+    "karma": "6.4.3",
     "karma-chrome-launcher": "3.2.0",
     "karma-firefox-launcher": "2.1.2",
     "karma-jasmine": "5.1.0",
